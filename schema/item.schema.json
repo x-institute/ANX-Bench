@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/item.schema.json",
+  "title": "ANX-Bench Item Schema",
+  "description": "Validation schema for a single ANX-Bench benchmark instrument item.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "item_id",
+    "version",
+    "domain",
+    "construct",
+    "scenario_text",
+    "response_scale",
+    "scoring",
+    "population",
+    "administration_mode",
+    "ethics_flags"
+  ],
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$",
+      "description": "Stable, lowercase, snake_case identifier. Once released, the identifier must not be reused for a different item."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic version of this item record."
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "economic_vocational",
+        "epistemic",
+        "relational",
+        "existential_identity",
+        "autonomy_surveillance",
+        "safety_catastrophic",
+        "somatic_ambient"
+      ],
+      "description": "Primary ANX-Bench domain taxonomy assignment."
+    },
+    "construct": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "construct_id",
+        "label",
+        "definition",
+        "subconstruct"
+      ],
+      "properties": {
+        "construct_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 3
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 40
+        },
+        "subconstruct": {
+          "type": "string",
+          "minLength": 3
+        }
+      }
+    },
+    "scenario_text": {
+      "type": "string",
+      "minLength": 80,
+      "description": "Participant-facing item stem. It should be concrete, domain-specific, and comprehensible without technical expertise unless the target population requires expertise."
+    },
+    "response_scale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scale_type",
+        "points",
+        "anchors",
+        "prompt"
+      ],
+      "properties": {
+        "scale_type": {
+          "const": "5_point_likert"
+        },
+        "points": {
+          "type": "integer",
+          "const": 5
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 20
+        },
+        "anchors": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "value",
+              "label"
+            ],
+            "properties": {
+              "value": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "label": {
+                "type": "string",
+                "minLength": 3
+              }
+            }
+          }
+        }
+      }
+    },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score_variable",
+        "score_range",
+        "reverse_coded",
+        "scoring_key",
+        "missing_response_rule",
+        "exclusion_criteria",
+        "interpretation_bands"
+      ],
+      "properties": {
+        "score_variable": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+        },
+        "score_range": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "min",
+            "max"
+          ],
+          "properties": {
+            "min": {
+              "type": "integer",
+              "const": 1
+            },
+            "max": {
+              "type": "integer",
+              "const": 5
+            }
+          }
+        },
+        "reverse_coded": {
+          "type": "boolean",
+          "description": "True when higher raw responses indicate lower anxiety and must be reversed before aggregation."
+        },
+        "scoring_key": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "minProperties": 5,
+          "maxProperties": 5,
+          "propertyNames": {
+            "pattern": "^[1-5]$"
+          }
+        },
+        "missing_response_rule": {
+          "type": "string",
+          "minLength": 20
+        },
+        "exclusion_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 10
+          }
+        },
+        "interpretation_bands": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "min_score",
+              "max_score",
+              "interpretation"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "minLength": 3
+              },
+              "min_score": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "max_score": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "interpretation": {
+                "type": "string",
+                "minLength": 30
+              }
+            }
+          }
+        }
+      }
+    },
+    "population": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_population",
+        "eligible_respondents",
+        "stratification_variables",
+        "minimum_age",
+        "exclusion_criteria"
+      ],
+      "properties": {
+        "target_population": {
+          "type": "string",
+          "minLength": 10
+        },
+        "eligible_respondents": {
+          "type": "string",
+          "minLength": 20
+        },
+        "stratification_variables": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 2
+          }
+        },
+        "minimum_age": {
+          "type": "integer",
+          "minimum": 18
+        },
+        "exclusion_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 10
+          }
+        }
+      }
+    },
+    "administration_mode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "estimated_completion_seconds",
+        "instructions",
+        "randomization",
+        "longitudinal_use"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "online_self_administered",
+            "interviewer_administered",
+            "laboratory",
+            "mixed"
+          ]
+        },
+        "estimated_completion_seconds": {
+          "type": "integer",
+          "minimum": 10
+        },
+        "instructions": {
+          "type": "string",
+          "minLength": 30
+        },
+        "randomization": {
+          "type": "string",
+          "minLength": 20
+        },
+        "longitudinal_use": {
+          "type": "string",
+          "minLength": 30
+        }
+      }
+    },
+    "ethics_flags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risk_level",
+        "sensitive_content",
+        "distress_protocol_required",
+        "debrief_required",
+        "data_protection_notes",
+        "irb_notes"
+      ],
+      "properties": {
+        "risk_level": {
+          "type": "string",
+          "enum": [
+            "minimal",
+            "low",
+            "moderate",
+            "high"
+          ]
+        },
+        "sensitive_content": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "distress_protocol_required": {
+          "type": "boolean"
+        },
+        "debrief_required": {
+          "type": "boolean"
+        },
+        "data_protection_notes": {
+          "type": "string",
+          "minLength": 30
+        },
+        "irb_notes": {
+          "type": "string",
+          "minLength": 30
+        }
+      }
+    }
+  }
+}
