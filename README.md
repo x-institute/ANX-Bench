@@ -12,8 +12,10 @@ Every ANX-Bench release is a fixed package of:
 - A JSON Schema for benchmark item records.
 - A versioned item directory containing all items admitted to that release.
 - Methodology documentation specifying scoring, aggregation, longitudinal comparability, and release rules.
+- A preregistration protocol for longitudinal waves and event-study claims.
+- A psychometric validation protocol defining the evidence required before items become benchmark-scored.
 
-Items are not part of a benchmark release until they validate against `schema/item.schema.json` and are placed under the appropriate versioned item directory.
+Items are not part of a benchmark-scored release until they validate against `schema/item.schema.json`, satisfy the psychometric validation gate in `docs/psychometric_validation_protocol.md`, and are placed under the appropriate versioned item directory. Schema-valid items may exist as exemplars or development candidates, but schema validity alone does not mean an item is psychometrically validated or eligible for official ANX-Bench scoring.
 
 ## Stable Directory Structure
 
@@ -24,6 +26,8 @@ ANX-Bench/
     claude.md
   docs/
     methodology.md
+    psychometric_validation_protocol.md
+    preregistration_event_study.md
   schema/
     item.schema.json
   items/
@@ -36,7 +40,7 @@ Directory meanings:
 
 - `schema/`: Machine-readable validation contracts for benchmark artifacts.
 - `items/`: Versioned benchmark items, grouped first by release line and then by domain.
-- `docs/`: Methodology, scoring, aggregation, and longitudinal comparability rules.
+- `docs/`: Methodology, scoring, aggregation, psychometric validation, longitudinal comparability rules, and preregistration protocols.
 - `doc/`: Project notes and conceptual background.
 
 Future benchmark versions must preserve this structure. New releases may add directories, but they must not move, rename, or reinterpret existing released item files.
@@ -53,7 +57,9 @@ The `items/v0.1/` directory is the canonical item set for the `0.1.x` release li
 
 ## Required Item Validation
 
-Every future item must validate against `schema/item.schema.json` before inclusion in a benchmark release. Validation is a release-blocking requirement. Items that fail schema validation, lack a 5-point Likert response scale, omit scoring metadata, omit exclusion criteria, or lack interpretation bands cannot be included in the released benchmark item set.
+Every future item must validate against `schema/item.schema.json` before inclusion in a benchmark release. Schema validation is a release-blocking requirement, but it is only the first gate. Items that fail schema validation, lack a 5-point Likert response scale, omit scoring metadata, omit exclusion criteria, or lack interpretation bands cannot be included in the released benchmark item set.
+
+Every item must also satisfy `docs/psychometric_validation_protocol.md` before it can move from exemplar or development status to benchmark-scored status. The protocol requires a development pilot, independent confirmation sample, refresh or bridge sample for revised items, EFA and CFA evidence, reliability targets, IRT calibration, DIF checks, measurement-invariance thresholds, and item retention rules. Items that are schema-valid but have not passed this gate are not psychometrically validated and must not contribute to official item-level, construct, domain, overall, longitudinal, or event-study scoring.
 
 ## Initial Exemplar
 

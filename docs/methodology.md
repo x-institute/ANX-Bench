@@ -13,7 +13,9 @@ Released item files are immutable except for patch-level corrections that do not
 
 Any change to scenario wording, response anchors, scoring direction, exclusion criteria, target population, or interpretation bands requires a new item version. If the change affects longitudinal comparability, the modified item must either receive a new `item_id` or be explicitly linked to the prior item through a documented bridge study.
 
-Items must be validated against `schema/item.schema.json` before inclusion in a benchmark release. Schema validation is necessary but not sufficient: inclusion also requires substantive review for construct validity, ethical risk, clarity, reading level, and consistency with the domain taxonomy.
+Items must be validated against `schema/item.schema.json` before inclusion in a benchmark release. Schema validation is necessary but not sufficient: inclusion also requires substantive review for construct validity, ethical risk, clarity, reading level, consistency with the domain taxonomy, and completion of the psychometric validation gate in `docs/psychometric_validation_protocol.md`.
+
+Schema-valid items may be stored as exemplar or development items while they are being drafted, piloted, or revised. They must not be treated as benchmark-scored items, included in construct, domain, or overall ANX aggregation, or used as confirmatory longitudinal or event-study outcomes until the psychometric validation dossier approves the item version for scored release.
 
 ## Domain Taxonomy
 
@@ -73,11 +75,32 @@ Longitudinal comparability is a primary benchmark requirement. A score from one 
 
 If wording or administration changes are necessary, the release must document whether the change is patch-level, minor, or breaking. Breaking changes require a new benchmark major version and should be analyzed as a new time series unless calibration evidence supports continuity.
 
+## Longitudinal and Event-Study Preregistration Gate
+
+Any ANX-Bench release, report, dashboard, manuscript, or public artifact that makes a longitudinal wave comparison or event-study claim must include a completed preregistration file following `docs/preregistration_event_study.md`. This requirement is release-blocking. A wave may be fielded for instrument development without a completed preregistration, but its results must not be presented as a confirmatory longitudinal estimate, event-study estimate, benchmark trend, or capability-shock response.
+
+The completed preregistration must identify the wave ID, benchmark version, item versions, target population, sampling frame, weighting plan, exclusion rules, analysis freeze date, event definition if applicable, primary outcomes, and statistical plan before response outcomes are inspected. If the file is missing, incomplete, finalized after outcome inspection, or inconsistent with the administered item versions, the release must either be blocked or the affected analyses must be labeled exploratory and excluded from confirmatory benchmark claims.
+
+## Psychometric Validation Gate
+
+Before an item moves from exemplar or development status to benchmark-scored status, maintainers must complete the validation protocol in `docs/psychometric_validation_protocol.md`. This gate is release-blocking for any item that will contribute to item-level scored reporting, construct scores, domain scores, the overall ANX score, longitudinal comparisons, or event-study outcomes.
+
+The validation dossier must show, at minimum, that:
+
+- The item version was evaluated in a development pilot with adequate sample size for exploratory factor analysis, preliminary reliability review, response-distribution checks, and early DIF screening.
+- The retained item version was evaluated in an independent confirmation sample for confirmatory factor analysis, reliability, IRT calibration, preregistered DIF checks, and final item retention.
+- Any revised, translated, re-anchored, re-scored, or mode-changed item has a refresh or bridge sample sufficient to support the claimed continuity with the prior released item version.
+- The item satisfies the protocol's retention rules for primary factor loading, cross-loading, corrected item-total correlation, ceiling or floor concentration, missing or non-substantive response, local dependence, and unstable DIF.
+- Measurement invariance or a documented linking alternative supports every intended comparison across populations, languages, modes, and waves.
+
+An item that fails this gate may remain in the repository only as an exemplar or development item if its status is explicit and it is excluded from benchmark scoring. A schema-valid item that lacks psychometric approval is not a released benchmark-scored item.
+
 ## Benchmark Release Gate
 
 Before an item can be included in a benchmark release, maintainers must verify that:
 
 - The item validates against `schema/item.schema.json`.
+- The item has completed the psychometric validation gate in `docs/psychometric_validation_protocol.md`, unless it is explicitly labeled exemplar or development and excluded from benchmark scoring.
 - The item belongs to exactly one approved domain.
 - The scenario text is concrete, comprehensible, and ethically acceptable for the target population.
 - The item has a 5-point Likert scale, reverse-coding flag, scoring key, exclusion criteria, and interpretation bands.
@@ -85,3 +108,5 @@ Before an item can be included in a benchmark release, maintainers must verify t
 - The release notes state whether the item is new, patched, bridged, or breaking.
 
 Failure to satisfy any release gate blocks inclusion in the released ANX-Bench item set.
+
+Before any longitudinal wave or event-study claim can be included in a benchmark release, maintainers must also verify that the completed preregistration file required by `docs/preregistration_event_study.md` exists and was frozen before response data inspection. Failure to satisfy this preregistration gate blocks the longitudinal or event-study claim even if the underlying item set is valid.
