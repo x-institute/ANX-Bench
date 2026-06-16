@@ -1,0 +1,107 @@
+{
+  "registry_schema_version": "v0.1.0",
+  "registry_version": "v0.3.0",
+  "benchmark_release_line": "v0.3",
+  "effective_benchmark_version": "v0.3.0",
+  "status": "frozen",
+  "domains": [
+    {
+      "domain_id": "economic_vocational",
+      "label": "Economic and vocational",
+      "definition": "Anxiety about employment, wages, skill obsolescence, occupational status, bargaining power, retraining burden, and career security under advancing AI capability.",
+      "included_construct_ids": [
+        "economic_vocational_anxiety"
+      ]
+    },
+    {
+      "domain_id": "epistemic",
+      "label": "Epistemic",
+      "definition": "Anxiety about truth, evidence, provenance, expertise, deepfakes, misinformation, and the ability to trust shared information environments under advancing AI capability.",
+      "included_construct_ids": [
+        "epistemic_trust_anxiety"
+      ]
+    },
+    {
+      "domain_id": "relational",
+      "label": "Relational",
+      "definition": "Anxiety about AI effects on friendship, intimacy, family life, care, attachment, dependency, social substitution, and trust in close relationships.",
+      "included_construct_ids": [
+        "relational_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "existential_identity",
+      "label": "Existential and identity",
+      "definition": "Anxiety about meaning, human distinctiveness, creativity, dignity, agency, social value, status, and self-concept under advancing AI capability.",
+      "included_construct_ids": [
+        "existential_identity_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "autonomy_surveillance",
+      "label": "Autonomy and surveillance",
+      "definition": "Anxiety about monitoring, manipulation, automated evaluation, profiling, institutional scoring, loss of choice, and diminished practical autonomy under AI-mediated systems.",
+      "included_construct_ids": [
+        "autonomy_surveillance_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "safety_catastrophic",
+      "label": "Safety and catastrophic",
+      "definition": "Anxiety about physical safety, misuse, weapons, loss of control, infrastructure failure, cascading harm, and extreme-risk narratives linked to AI capability.",
+      "included_construct_ids": [
+        "safety_catastrophic_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "somatic_ambient",
+      "label": "Somatic and ambient",
+      "definition": "Diffuse bodily unease, vigilance, sleep disturbance, background dread, avoidance, and other low-specificity physiological anxiety responses to AI progress or AI-mediated environments.",
+      "included_construct_ids": [
+        "somatic_ambient_anxiety"
+      ]
+    }
+  ],
+  "constructs": [
+    {
+      "construct_id": "somatic_ambient_anxiety",
+      "domain_id": "somatic_ambient",
+      "label": "Somatic and ambient AI anxiety",
+      "definition": "Anxiety arising as diffuse physiological or ambient distress after exposure to AI capability news, model releases, cumulative AI progress, or concrete AI demonstrations, including sleep disruption, bodily vigilance, background dread, and avoidance of further AI information.",
+      "intended_aggregation_level": "approved_construct_score",
+      "minimum_retained_items": 4,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Fielded development pilot analytic N at least 500 with ordinal EFA supporting one interpretable somatic and ambient factor",
+          "Independent confirmation analytic N at least 1000 with CFA CFI at least 0.90, TLI at least 0.90, RMSEA at most 0.08, and SRMR at most 0.08",
+          "Ordinal omega at least 0.70 and corrected item-total correlations at least 0.30 for every retained item",
+          "Graded-response IRT with ordered category thresholds, useful discrimination, and no severe local dependence",
+          "No unresolved statistically supported and practically meaningful DIF for intended public comparison groups",
+          "Metric and scalar invariance or validated linking evidence within delta CFI no worse than -0.010 and delta RMSEA no greater than 0.015",
+          "Preregistered convergent, discriminant, criterion, behavioral revealed-preference, and incremental-validity tests passing the documented thresholds",
+          "Documented retention of all four allowed v0.2.0 items in validation/v0.2/somatic_ambient_anxiety/wave1_calibration_dossier.json"
+        ],
+        "scoring_rule": "In v0.3.0, somatic_ambient_anxiety is scoreable only from the four retained approved_scored item versions listed in allowed_item_ids, with unchanged wording, 5-point scoring keys, online English US administration, and the comparison limits documented in docs/releases/v0.3.0_scoring_note.md."
+      },
+      "allowed_item_ids": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo"
+      ]
+    }
+  ],
+  "release_rules": [
+    "The v0.3 registry marks somatic_ambient_anxiety as the first approved construct score in ANX-Bench after completion of the fielded v0.2 somatic calibration dossier.",
+    "Construct scoring requires exactly the four retained item IDs in this registry, each with release_status approved_scored, validation.scoring_eligible true, and inclusion in releases/v0.3.0/manifest.json official_scored_items.",
+    "The v0.3.0 scored release permits somatic_ambient_anxiety construct and somatic_ambient domain scores only within the comparison boundaries documented in docs/releases/v0.3.0_scoring_note.md.",
+    "No translation, non-online administration mode, revised item wording, IRT theta score, clinical interpretation, or cross-country comparison is scoreable until a later registry and validation dossier explicitly approve that use."
+  ],
+  "$schema": "../../schema/construct_registry.schema.json"
+}

@@ -1,0 +1,190 @@
+{
+  "analysis_plan_schema_version": "v0.4.0",
+  "study_label": "anx_us_2026w04_somatic_event_study",
+  "candidate_benchmark_version": "v0.4.0",
+  "source_scored_release": "v0.3.1",
+  "primary_outcome": "somatic_ambient_anxiety_mean",
+  "estimands": [
+    {
+      "estimand_id": "primary_event_associated_change",
+      "description": "Average post-event change in somatic_ambient_anxiety_mean among eligible US English online adult respondents, comparing the primary follow-up window with the primary baseline window.",
+      "coefficient": "beta_post_event",
+      "claim_language": "event-associated change"
+    },
+    {
+      "estimand_id": "primary_difference_in_differences",
+      "description": "Differential post-event change in somatic_ambient_anxiety_mean for respondents classified as exposed or high-exposure relative to a preregistered lower-exposure comparison group.",
+      "coefficient": "beta_post_event_x_exposed",
+      "claim_language": "difference-in-differences effect",
+      "availability_rule": "Permitted only if the locked registry and fielding data contain a defensible comparison definition before outcome inspection."
+    }
+  ],
+  "analysis_windows": {
+    "baseline_primary": "event_time_days >= -14 and event_time_hours <= -24",
+    "followup_primary": "event_time_hours >= 24 and event_time_days <= 7",
+    "excluded_event_buffer": "event_time_hours > -24 and event_time_hours < 24",
+    "placebo_pretrend": {
+      "early_pre": "event_time_days >= -14 and event_time_days <= -8",
+      "late_pre": "event_time_days >= -7 and event_time_hours <= -24"
+    }
+  },
+  "minimum_n": {
+    "baseline_primary_nominal": 750,
+    "followup_primary_nominal": 750,
+    "baseline_effective_weighted": 500,
+    "followup_effective_weighted": 500,
+    "minimum_for_descriptive_only": 300
+  },
+  "covariates": [
+    "age_group",
+    "gender",
+    "race_ethnicity",
+    "education",
+    "census_region",
+    "employment_status",
+    "household_income_band",
+    "political_ideology_or_party_id",
+    "prior_ai_use",
+    "ai_news_attention_30d",
+    "occupational_ai_exposure",
+    "brief_general_anxiety_or_distress",
+    "device_type",
+    "day_of_week",
+    "sample_source"
+  ],
+  "weighting": {
+    "primary_weight": "poststratified_balanced_event_weight",
+    "base_poststratification_variables": [
+      "age_group",
+      "gender",
+      "race_ethnicity",
+      "education",
+      "census_region",
+      "urbanicity"
+    ],
+    "baseline_followup_balancing_variables": [
+      "employment_status",
+      "household_income_band",
+      "political_ideology_or_party_id",
+      "prior_ai_use",
+      "ai_news_attention_30d",
+      "occupational_ai_exposure",
+      "brief_general_anxiety_or_distress",
+      "device_type"
+    ],
+    "trim_min": 0.25,
+    "trim_max": 4.0,
+    "rescale_within_period": true,
+    "weighting_sensitive_rule": "Label evidence weighting-sensitive if effective sample size is below 65 percent of nominal analytic N in either primary period."
+  },
+  "model_formulas": {
+    "interrupted_repeated_cross_section": "somatic_ambient_anxiety_mean ~ post_event + age_group + gender + race_ethnicity + education + census_region + employment_status + household_income_band + political_ideology_or_party_id + prior_ai_use + ai_news_attention_30d + occupational_ai_exposure + brief_general_anxiety_or_distress + device_type + day_of_week + sample_source",
+    "difference_in_differences": "somatic_ambient_anxiety_mean ~ post_event * exposed + age_group + gender + race_ethnicity + education + census_region + employment_status + household_income_band + political_ideology_or_party_id + prior_ai_use + ai_news_attention_30d + occupational_ai_exposure + brief_general_anxiety_or_distress + device_type + day_of_week + sample_source",
+    "event_time_bins": "somatic_ambient_anxiety_mean ~ event_time_bin + age_group + gender + race_ethnicity + education + census_region + employment_status + household_income_band + political_ideology_or_party_id + prior_ai_use + ai_news_attention_30d + occupational_ai_exposure + brief_general_anxiety_or_distress + device_type + day_of_week + sample_source",
+    "placebo_pretrend": "somatic_ambient_anxiety_mean ~ late_pre_period + age_group + gender + race_ethnicity + education + census_region + employment_status + household_income_band + political_ideology_or_party_id + prior_ai_use + ai_news_attention_30d + occupational_ai_exposure + brief_general_anxiety_or_distress + device_type + day_of_week + sample_source"
+  },
+  "standard_errors": {
+    "primary": "heteroskedasticity_robust",
+    "cluster_rule": "Cluster by respondent_id if a respondent can appear in both baseline and follow-up. Otherwise use heteroskedasticity-robust standard errors.",
+    "confidence_level": 0.95
+  },
+  "multiple_testing": {
+    "primary_construct_family": {
+      "tests": [
+        "primary_outcome_primary_model"
+      ],
+      "alpha": 0.05,
+      "adjustment": "none_single_confirmatory_test"
+    },
+    "secondary_item_family": {
+      "tests": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo"
+      ],
+      "alpha": 0.05,
+      "adjustment": "holm",
+      "gate": "Interpret only if the primary construct test passes."
+    },
+    "heterogeneity_family": {
+      "moderators": [
+        "prior_ai_use_binary",
+        "ai_news_attention_binary",
+        "occupational_ai_exposure_binary",
+        "baseline_general_anxiety_binary"
+      ],
+      "alpha": 0.05,
+      "adjustment": "holm",
+      "gate": "Heterogeneity cannot rescue a failed primary construct test."
+    }
+  },
+  "robustness_checks": [
+    {
+      "check_id": "unweighted_primary_model",
+      "description": "Run the primary model without survey weights."
+    },
+    {
+      "check_id": "alternative_weight_trim",
+      "description": "Run the primary model with weights trimmed to 0.20 and 5.00."
+    },
+    {
+      "check_id": "aware_only_followup",
+      "description": "Exclude follow-up respondents who report no awareness of the event before survey completion."
+    },
+    {
+      "check_id": "exclude_unrelated_personal_crisis",
+      "description": "Exclude respondents reporting a major unrelated personal crisis in the prior week."
+    },
+    {
+      "check_id": "exclude_high_general_distress",
+      "description": "Exclude respondents in the highest decile of pre-outcome brief general anxiety or distress."
+    },
+    {
+      "check_id": "narrow_followup_window",
+      "description": "Restrict follow-up to +24 hours through +3 days."
+    },
+    {
+      "check_id": "placebo_pretrend",
+      "description": "Compare day -14 through day -8 with day -7 through day -2."
+    },
+    {
+      "check_id": "event_buffer_sensitivity",
+      "description": "Report primary estimates when event-day buffer interviews are included and when they are excluded."
+    },
+    {
+      "check_id": "negative_control_outcome",
+      "description": "Analyze the negative-control outcome if collected with stable wording across baseline and follow-up."
+    }
+  ],
+  "pass_fail_claim_thresholds": {
+    "event_registry_required": {
+      "event_locked_before_outcome_inspection": true,
+      "release_blocking_confound_present": false
+    },
+    "primary_pass": {
+      "minimum_coefficient_points": 0.15,
+      "required_direction": "positive",
+      "maximum_p_value": 0.05,
+      "minimum_confidence_interval_lower_bound": 0.03,
+      "placebo_pretrend_max_abs_coefficient": 0.10,
+      "placebo_pretrend_must_be_nonsignificant": true,
+      "robustness_minimum_unweighted_coefficient": 0.10,
+      "robustness_minimum_narrow_window_coefficient": 0.10,
+      "robustness_minimum_weight_trim_coefficient": 0.10
+    },
+    "descriptive_only": {
+      "condition": "Any required N threshold, registry lock, confound, or primary model threshold fails.",
+      "allowed_language": "descriptive monitoring only"
+    },
+    "blocked_claims": [
+      "clinical anxiety or diagnosis",
+      "overall ANX-Bench score",
+      "cross-domain score",
+      "long-term effect beyond the follow-up window",
+      "country, language, offline, adolescent, clinical, organization, or occupation claims outside the sampled frame",
+      "post hoc subgroup claims",
+      "item-level headline claim when the construct-level test fails"
+    ]
+  }
+}

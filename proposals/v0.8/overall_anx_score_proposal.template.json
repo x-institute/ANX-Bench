@@ -1,0 +1,283 @@
+{
+  "$schema": "../../schema/aggregate_score_proposal.schema.json",
+  "proposal_schema_version": "v0.1.0",
+  "proposal_id": "overall_anx_score_v0_8_preregistered_template",
+  "proposal_status": "preregistered_template",
+  "benchmark_version_target": "v0.8",
+  "proposal_date": "2026-06-16",
+  "preregistration_date": "2026-06-16",
+  "source_bridge_evidence": {
+    "bridge_evidence_path": "validation/v0.7/cross_domain_bridge/wave7_bridge_evidence.json",
+    "bridge_evidence_id": null,
+    "required_bridge_decision": "bridge_supported_for_overall_readiness_review",
+    "observed_bridge_required": true,
+    "bridge_evidence_status": null,
+    "bridge_decision": null,
+    "bridge_scoring_authorized": null,
+    "bridge_evidence_is_authorization": false
+  },
+  "contributing_constructs": [
+    {
+      "construct_id": "somatic_ambient_anxiety",
+      "domain_id": "somatic_ambient",
+      "source_release": null,
+      "source_construct_approval": {
+        "approval_status": null,
+        "approved_for_aggregate_source": null,
+        "approval_artifact_path": null,
+        "approval_date": null
+      },
+      "included_item_ids": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo"
+      ],
+      "bridge_role": "source-scored somatic anchor construct from the Wave 7 bridge packet; aggregate-source approval remains unset in this template",
+      "minimum_items_required": 4
+    },
+    {
+      "construct_id": "economic_vocational_anxiety",
+      "domain_id": "economic_vocational",
+      "source_release": null,
+      "source_construct_approval": {
+        "approval_status": null,
+        "approved_for_aggregate_source": null,
+        "approval_artifact_path": null,
+        "approval_date": null
+      },
+      "included_item_ids": [
+        "skill_obsolescence_software",
+        "wage_pressure_customer_support",
+        "retraining_pressure_accounting",
+        "status_loss_creative_work"
+      ],
+      "bridge_role": "candidate economic-vocational construct from the Wave 7 bridge packet; scored source approval remains unset in this template",
+      "minimum_items_required": 3
+    },
+    {
+      "construct_id": "epistemic_trust_anxiety",
+      "domain_id": "epistemic",
+      "source_release": null,
+      "source_construct_approval": {
+        "approval_status": null,
+        "approved_for_aggregate_source": null,
+        "approval_artifact_path": null,
+        "approval_date": null
+      },
+      "included_item_ids": [
+        "deepfake_evidence_trust",
+        "synthetic_news_provenance",
+        "ai_expert_claim_conflict",
+        "personalized_misinformation_targeting"
+      ],
+      "bridge_role": "candidate epistemic-trust construct from the Wave 7 bridge packet; scored source approval remains unset in this template",
+      "minimum_items_required": 3
+    }
+  ],
+  "contributing_items": [
+    {
+      "item_id": "sleep_disruption_ai_news",
+      "item_version": "v0.2.0",
+      "construct_id": "somatic_ambient_anxiety",
+      "domain_id": "somatic_ambient",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "body_vigilance_model_release",
+      "item_version": "v0.2.0",
+      "construct_id": "somatic_ambient_anxiety",
+      "domain_id": "somatic_ambient",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "background_dread_ai_progress",
+      "item_version": "v0.2.0",
+      "construct_id": "somatic_ambient_anxiety",
+      "domain_id": "somatic_ambient",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "avoidance_after_ai_capability_demo",
+      "item_version": "v0.2.0",
+      "construct_id": "somatic_ambient_anxiety",
+      "domain_id": "somatic_ambient",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "skill_obsolescence_software",
+      "item_version": "v0.1.0",
+      "construct_id": "economic_vocational_anxiety",
+      "domain_id": "economic_vocational",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "wage_pressure_customer_support",
+      "item_version": "v0.1.0",
+      "construct_id": "economic_vocational_anxiety",
+      "domain_id": "economic_vocational",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "retraining_pressure_accounting",
+      "item_version": "v0.1.0",
+      "construct_id": "economic_vocational_anxiety",
+      "domain_id": "economic_vocational",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "status_loss_creative_work",
+      "item_version": "v0.1.0",
+      "construct_id": "economic_vocational_anxiety",
+      "domain_id": "economic_vocational",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "deepfake_evidence_trust",
+      "item_version": "v0.1.0",
+      "construct_id": "epistemic_trust_anxiety",
+      "domain_id": "epistemic",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "synthetic_news_provenance",
+      "item_version": "v0.1.0",
+      "construct_id": "epistemic_trust_anxiety",
+      "domain_id": "epistemic",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "ai_expert_claim_conflict",
+      "item_version": "v0.1.0",
+      "construct_id": "epistemic_trust_anxiety",
+      "domain_id": "epistemic",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    },
+    {
+      "item_id": "personalized_misinformation_targeting",
+      "item_version": "v0.1.0",
+      "construct_id": "epistemic_trust_anxiety",
+      "domain_id": "epistemic",
+      "source_item_status": null,
+      "scoring_key_version_locked": null
+    }
+  ],
+  "scoring_model": {
+    "model_family": "Construct-first observed-score mean model. Each contributing construct is scored as the arithmetic mean of its approved non-reverse-coded 1 to 5 item scores, then the overall ANX candidate score is the arithmetic mean of the approved somatic, economic, and epistemic construct means. No IRT theta, factor-score, empirical Bayes, rank-normalized, residualized, or post hoc optimized scoring is used for the primary estimand.",
+    "estimand": "The v0.8 candidate overall ANX estimand is the population mean of a respondent-level construct-balanced observed-score index across approved somatic ambient anxiety, economic vocational anxiety, and epistemic trust anxiety source constructs. For respondent i, Overall ANX_i = mean(Somatic_i, Economic_i, Epistemic_i) when all three approved construct means satisfy retained-item rules. The target quantity for a release estimate is the survey-weighted population mean of Overall ANX_i among eligible respondents in the release-defined population, subject to invariance and DIF claim limits.",
+    "score_scale": "Observed-score 1 to 5 scale, where 1 is the minimum possible observed item response and 5 is the maximum possible observed item response. Construct means and the overall candidate score remain on this 1 to 5 metric. Scores are not transformed to theta, z scores, percentiles, clinical categories, prevalence categories, or risk strata for the primary scoring model.",
+    "aggregation_sequence": [
+      "Validate that each source construct has independent approval for aggregate-source use in a later citable release; this template alone does not grant that approval.",
+      "For each eligible respondent, score approved ANX items on their locked 1 to 5 observed-response keys.",
+      "Within each approved construct, compute the respondent construct mean from retained item scores only when the construct-specific minimum retained-item rule is met.",
+      "Compute the respondent-level candidate overall ANX score as an equal-weight arithmetic mean of the retained somatic_ambient_anxiety, economic_vocational_anxiety, and epistemic_trust_anxiety construct means.",
+      "Estimate release-level population quantities from respondent-level overall scores using the preregistered survey design and population weights when such weights are available and release-approved.",
+      "Report sensitivity estimates using unweighted and reliability-weighted variants without replacing the equal-domain primary estimand."
+    ],
+    "source_score_inputs": [
+      "somatic_ambient_anxiety construct mean from approved somatic_ambient source items only",
+      "economic_vocational_anxiety construct mean from approved economic_vocational source items only",
+      "epistemic_trust_anxiety construct mean from approved epistemic source items only"
+    ],
+    "release_authorization": {
+      "release_approval_required": true,
+      "release_manifest_path": null,
+      "scoring_authorized": false
+    }
+  },
+  "weights": {
+    "construct_weighting": "Primary respondent-level scoring uses equal construct weights: one third somatic_ambient_anxiety, one third economic_vocational_anxiety, and one third epistemic_trust_anxiety. Because the v0.8 candidate uses one approved construct per domain, construct weights and domain weights are identical in the primary model. No construct weight may be estimated from observed outcome associations, subgroup differences, reliability alone, factor loadings, or predictive performance for the primary estimand.",
+    "domain_weighting": "Primary domain weighting is equal across the three approved domains: somatic_ambient, economic_vocational, and epistemic each contribute one third of the respondent-level candidate overall score. Equal domain weights encode the construct-balanced estimand and prevent domains with more items or stronger covariance from dominating the overall value.",
+    "population_weighting": "Population estimates, including means, subgroup contrasts, longitudinal contrasts, and event-study outcomes if later authorized, must use release-approved survey weights that target the named population and account for selection, nonresponse, and poststratification or calibration variables specified before outcome inspection. Respondent-level scale construction remains equal-domain; population weights apply only at the estimation stage.",
+    "sensitivity_weights": [
+      "Unweighted estimate using the same respondent-level equal-domain overall score, reported to assess dependence on population survey weights.",
+      "Reliability-weighted sensitivity estimate in which construct weights are proportional to preregistered source-construct reliability estimates from the approved release evidence, normalized to sum to one, reported only as a sensitivity analysis and never as the primary estimand.",
+      "Complete-case weighted sensitivity estimate restricted to respondents with all contributing items observed, reported to assess effects of item-level missingness rules."
+    ]
+  },
+  "missingness_rules": {
+    "unit_missingness_rule": "A respondent is eligible for the primary candidate overall score only if the respondent passes all release-defined quality, consent, attention, duplicate, and completion exclusions and has scoreable construct means for all three contributing constructs. In addition, the respondent must have at least 10 of the 12 contributing ANX item scores retained, which is at least 80 percent of the item battery. Respondents failing these rules are excluded from the primary overall-score analytic N but remain counted in excluded N.",
+    "item_missingness_rule": "Item responses are retained only when the raw response maps to a valid 1 to 5 scored value under the locked item key and the respondent is otherwise eligible. Skipped items, technical failures, breakoff-missing items, prefer-not-to-answer values if offered, nonadministered items, and responses invalidated by quality exclusions are coded missing for scoring and are not replaced in the primary model.",
+    "construct_missingness_rule": "A construct mean is scoreable only when the construct-specific retained-item minimum is met: 4 of 4 retained somatic_ambient_anxiety items, at least 3 of 4 retained economic_vocational_anxiety items, and at least 3 of 4 retained epistemic_trust_anxiety items. If a construct does not meet its retained-item minimum, that construct mean is missing and the respondent is excluded from primary overall-score estimation.",
+    "imputation_rule": "No primary imputation is permitted for item scores, construct means, respondent overall scores, population means, subgroup contrasts, longitudinal contrasts, or event-study outcomes. Any imputation, multiple imputation, inverse-probability adjustment beyond the release-approved survey weights, or model-assisted missingness analysis must be labeled exploratory or sensitivity-only and may not replace the preregistered primary estimate.",
+    "missingness_reporting": "Every release using this candidate estimand must report, overall and for each planned subgroup or time point, fielded N, eligible respondent N before ANX missingness exclusions, analytic N, excluded N, item-level missing counts and rates by item, construct-level missing counts and rates by construct, the number of retained items contributing to each reported construct and overall estimate, and whether missingness differs across release-defined design cells or analysis groups."
+  },
+  "uncertainty_reporting": {
+    "standard_error_method": "Primary standard errors for population estimates must be design-based and must use the release-approved sampling design, strata, clusters, finite population corrections when applicable, and population weights. For simple nonprobability calibration waves without a defensible population sampling design, standard errors must be labeled descriptive uncertainty only and population claims remain blocked.",
+    "confidence_interval_method": "Primary interval estimates are two-sided 95 percent confidence intervals computed from the design-based standard error using the release-specified degrees of freedom or a normal approximation when design degrees of freedom are not applicable. Subgroup, longitudinal, and event-study intervals must use the same preregistered design object as their point estimates.",
+    "design_effect_reporting": "Each release estimate must report the design effect for the overall ANX mean when survey design information supports it. When design effects cannot be computed, the release must state why and must not imply simple-random-sample precision. Effective sample size should be reported when weights are used.",
+    "bootstrap_or_replication_plan": "If analytic design-based variance estimation is unavailable or unreliable for the approved survey design, the fallback is a preregistered bootstrap or replicate-weight variance estimator that respects clustering, stratification, weighting, and calibration. Bootstrap or replicate-weight specifications, including replicate count, resampling unit, replicate-weight construction, and random seed handling, must be fixed before outcome inspection.",
+    "minimum_reported_fields": [
+      "point_estimate",
+      "standard_error",
+      "ci_95_lower",
+      "ci_95_upper",
+      "variance_method",
+      "design_effect",
+      "effective_sample_size_when_weighted",
+      "analytic_n",
+      "excluded_n",
+      "fielded_n",
+      "weighting_status",
+      "contributing_construct_count",
+      "contributing_item_count",
+      "retained_item_count_distribution",
+      "construct_missingness_counts",
+      "item_missingness_counts"
+    ]
+  },
+  "invariance_dif_limits": {
+    "required_invariance_level": "Scalar invariance for continuous observed-score means, or threshold invariance for ordered-categorical measurement models, is required before making subgroup mean-difference, longitudinal trend, or event-study contrast claims with the candidate overall ANX score. Configural and metric evidence alone may support structural diagnostics but is insufficient for mean, trend, or contrast claims.",
+    "failed_comparison_rule": "Any subgroup, time-point, language, mode, or event-window comparison that fails the required scalar or threshold invariance test must be named explicitly in the release artifact and excluded from primary comparative claims. Passing comparisons may be reported only if their required source constructs and items are not implicated by unresolved material DIF that affects the comparison.",
+    "unresolved_dif_rule": "Unresolved material DIF in any contributing item or construct blocks claims for every overall-score comparison that depends on that item or construct unless a preregistered, release-approved mitigation removes the affected source from the estimand and redefines the claim scope before outcome inspection. Material DIF may not be averaged away by equal domain weighting.",
+    "affected_claim_limitation": "When invariance fails or material DIF remains unresolved, the affected release must name the failed comparisons and limit claims to descriptive within-group estimates or psychometric diagnostics for those affected groups or time points. It may not claim validated subgroup differences, longitudinal change, event effects, or population contrasts for the affected comparison.",
+    "observed_unresolved_material_dif_item_count": null,
+    "observed_failed_key_invariance_comparison_count": null
+  },
+  "claim_scope": {
+    "population_scope": "Candidate estimand for release-defined adult survey populations only when the release sampling, weighting, and documentation support that population. Without an approved population design, claims are limited to the observed eligible analytic sample.",
+    "construct_scope": "Overall ANX is a construct-balanced summary of approved somatic ambient anxiety, economic vocational anxiety, and epistemic trust anxiety source construct means. It is not a clinical anxiety diagnosis, not a general mental-health score, not a complete measure of all AI-related affect, and not a replacement for domain-specific ANX estimates.",
+    "time_scope": "Cross-sectional release estimates are permitted only for the fielding window named in the later release. Longitudinal, trend, and event-study claims require preregistered timing, repeated-measure or repeated-cross-section design documentation, and passing longitudinal scalar or threshold invariance for the exact comparison.",
+    "permitted_claims": [
+      "A later citable release may describe this artifact as the frozen v0.8 candidate overall ANX estimand.",
+      "After observed bridge evidence, source-construct approvals, psychometric review, and release authorization, a release may report the candidate overall ANX mean on the 1 to 5 observed-score scale within the named claim scope.",
+      "After the relevant invariance and DIF requirements pass, a release may report preregistered subgroup, longitudinal, or event-study contrasts within the named claim scope.",
+      "A release may report unweighted and reliability-weighted sensitivity estimates as sensitivity analyses only."
+    ],
+    "explicit_claim_limits": [
+      "This preregistered template defines candidate methodology only and does not calculate, authorize, or publish an overall ANX score.",
+      "Observed bridge evidence is necessary for proposal review but is not score authorization.",
+      "A later release manifest must separately approve aggregate scoring before any official score is computed."
+    ],
+    "prohibited_claims_acknowledged": true
+  },
+  "blocked_uses": [
+    "clinical diagnosis, screening, triage, or treatment allocation",
+    "individual-level classification, ranking, targeting, or eligibility decisions",
+    "policy-decision ranking of institutions, regions, occupations, demographic groups, or vendors",
+    "employment, education, insurance, credit, housing, benefits, or legal decision use",
+    "national prevalence claims before a sampling and weighting design supports that estimand",
+    "longitudinal trend claims before longitudinal invariance and a preregistered time-series design pass",
+    "event-study claims before an event registry, exposure definition, baseline window, follow-up window, and causal estimand pass",
+    "cross-national, multilingual, or cultural comparison claims without separate validation"
+  ],
+  "scoring_authorized": false,
+  "reviewer_signoff": {
+    "psychometric_reviewer": null,
+    "release_reviewer": null,
+    "signed_date": null,
+    "decision": null,
+    "signoff_statement": null
+  }
+}

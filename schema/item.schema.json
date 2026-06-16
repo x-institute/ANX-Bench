@@ -8,11 +8,13 @@
   "required": [
     "item_id",
     "version",
+    "release_status",
     "domain",
     "construct",
     "scenario_text",
     "response_scale",
     "scoring",
+    "validation",
     "population",
     "administration_mode",
     "ethics_flags"
@@ -27,6 +29,17 @@
       "type": "string",
       "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
       "description": "Semantic version of this item record."
+    },
+    "release_status": {
+      "type": "string",
+      "enum": [
+        "exemplar",
+        "development_only",
+        "approved_item_level_only",
+        "approved_scored",
+        "blocked"
+      ],
+      "description": "Lifecycle status for the item version. Only approved_scored items may contribute to construct, domain, or overall ANX scoring."
     },
     "domain": {
       "type": "string",
@@ -218,6 +231,58 @@
               }
             }
           }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "psychometric_decision",
+        "decision_date",
+        "dossier_path",
+        "preregistration_path",
+        "scoring_eligible"
+      ],
+      "properties": {
+        "psychometric_decision": {
+          "type": "string",
+          "enum": [
+            "not_reviewed",
+            "development_only",
+            "approved_item_level_only",
+            "approved_scored",
+            "blocked"
+          ],
+          "description": "Current psychometric release decision for this item version."
+        },
+        "decision_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date",
+          "description": "ISO 8601 date when the current psychometric decision was recorded, or null if no review decision has been made."
+        },
+        "dossier_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "description": "Repository-relative path to the validation dossier for this item version, not_available when no dossier exists, or null before dossier assignment."
+        },
+        "preregistration_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "description": "Repository-relative path to the relevant preregistration record, not_available when no preregistration exists, or null before preregistration assignment."
+        },
+        "scoring_eligible": {
+          "type": "boolean",
+          "description": "True only when the item is approved for ANX scoring. This must be false unless release_status and psychometric_decision are approved_scored."
         }
       }
     },

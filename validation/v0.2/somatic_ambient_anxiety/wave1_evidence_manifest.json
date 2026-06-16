@@ -1,0 +1,167 @@
+{
+  "$schema": "../../../schema/psychometric_evidence_manifest.schema.json",
+  "evidence_manifest_schema_version": "v0.1.0",
+  "manifest_id": "somatic_ambient_anxiety_wave1_evidence_manifest",
+  "benchmark_version": "v0.3.1",
+  "construct_id": "somatic_ambient_anxiety",
+  "validation_dossier_path": "validation/v0.2/somatic_ambient_anxiety/wave1_calibration_dossier.json",
+  "preregistration_path": "docs/preregistrations/anx_us_2026w02_somatic_calibration.md",
+  "analysis_plan_path": "analysis/v0.2/somatic_ambient/wave1_analysis_plan.json",
+  "raw_restricted_dataset_hash": {
+    "algorithm": "SHA-256",
+    "sha256": "9b7f6e143cacd1e8c0f0db2bf47a561f9e78936a30e5f1bf2d40f2a63b3c9a10",
+    "artifact": "vendor_restricted/anx_us_2026w02_somatic/wave_response.jsonl"
+  },
+  "analysis_script_hash": {
+    "algorithm": "SHA-256",
+    "sha256": "7031af3b49f976e01aa10047c7af9300ab9e6efaf1c9c96fb64d1d20a37287af",
+    "artifact": "analysis/v0.2/somatic_ambient/run_wave1_validation.R"
+  },
+  "software_session_lock": {
+    "lock_artifact": "restricted_outputs/anx_us_2026w02_somatic/sessionInfo.txt",
+    "runtime": "R 4.4.3",
+    "packages": [
+      {
+        "name": "psych",
+        "version": "2.4.12"
+      },
+      {
+        "name": "lavaan",
+        "version": "0.6-19"
+      },
+      {
+        "name": "semTools",
+        "version": "0.5-6"
+      },
+      {
+        "name": "mirt",
+        "version": "1.43"
+      },
+      {
+        "name": "lordif",
+        "version": "0.3-3"
+      },
+      {
+        "name": "survey",
+        "version": "4.4-2"
+      },
+      {
+        "name": "mice",
+        "version": "3.16.0"
+      }
+    ],
+    "session_info_sha256": "67b52b387ac5904bc0d49cc6cb5a12b6957f5c5bec77d62de305fc1d47f6a4cd",
+    "reproducibility_rule": "Reproduction requires the frozen restricted wave response file, unchanged analysis plan, unchanged runner script, and package versions recorded in this session lock; any rerun must produce the same pass-fail decisions or file a dated addendum before release use."
+  },
+  "run_timestamp_utc": "2026-06-16T14:22:11Z",
+  "analyst": {
+    "name": "ANX-Bench psychometrics analyst of record",
+    "role": "Primary reproducibility analyst",
+    "affiliation": "ANX-Bench methods team",
+    "independence_statement": "The analyst executed the frozen analysis runner and did not alter thresholds, item allowlists, or promotion decisions after observing wave outcomes."
+  },
+  "output_artifact_hashes": [
+    {
+      "artifact_id": "observed_wave1_results",
+      "path": "validation/v0.2/somatic_ambient_anxiety/observed_wave1_results.json",
+      "sha256": "81a1d2d94c734c768433f637d4c0a5eabda1197956aadd4e55ad5f5bbf16a7d6",
+      "description": "Canonical machine-readable statistic source for the somatic Wave 1 dossier, including exclusions, scoring, EFA, CFA, omega, IRT, DIF, invariance, external validity, retention, gate outcomes, and session information."
+    },
+    {
+      "artifact_id": "wave1_validation_tables",
+      "path": "restricted_outputs/anx_us_2026w02_somatic/wave1_validation_tables.json",
+      "sha256": "45f2d6e8bd3871d7bfc39b6d07b8e3b8c6fb8ed0156e93f83ed06165bb7d4f30",
+      "description": "Restricted statistic table bundle emitted by the frozen Wave 1 validation runner."
+    },
+    {
+      "artifact_id": "wave1_session_info",
+      "path": "restricted_outputs/anx_us_2026w02_somatic/sessionInfo.txt",
+      "sha256": "67b52b387ac5904bc0d49cc6cb5a12b6957f5c5bec77d62de305fc1d47f6a4cd",
+      "description": "Session information text emitted by the frozen validation run."
+    }
+  ],
+  "reported_statistic_map": [
+    {
+      "statistic_id": "analytic_n",
+      "dossier_json_pointer": "/results/analytic_n",
+      "analysis_family": "retention",
+      "reported_value": "1109",
+      "artifact_id": "observed_wave1_results",
+      "artifact_json_pointer": "/scoring/analytic_n_confirmation_sample",
+      "reproduction_command": "Rscript analysis/v0.2/somatic_ambient/run_wave1_validation.R"
+    },
+    {
+      "statistic_id": "retained_item_count",
+      "dossier_json_pointer": "/results/retained_item_count",
+      "analysis_family": "retention",
+      "reported_value": "4",
+      "artifact_id": "observed_wave1_results",
+      "artifact_json_pointer": "/retention/retained_item_count",
+      "reproduction_command": "Rscript analysis/v0.2/somatic_ambient/run_wave1_validation.R"
+    },
+    {
+      "statistic_id": "efa_primary_loading",
+      "dossier_json_pointer": "/retention_table",
+      "analysis_family": "efa",
+      "reported_value": "range .62 to .77",
+      "artifact_id": "observed_wave1_results",
+      "artifact_json_pointer": "/efa/primary_loadings",
+      "reproduction_command": "Rscript analysis/v0.2/somatic_ambient/run_wave1_validation.R"
+    },
+    {
+      "statistic_id": "cfa_fit",
+      "dossier_json_pointer": "/results/cfa_fit",
+      "analysis_family": "cfa",
+      "reported_value": "CFI .962; TLI .954; RMSEA .046; SRMR .037",
+      "artifact_id": "observed_wave1_results",
+      "artifact_json_pointer": "/cfa/fit",
+      "reproduction_command": "Rscript analysis/v0.2/somatic_ambient/run_wave1_validation.R"
+    },
+    {
+      "statistic_id": "reliability",
+      "dossier_json_pointer": "/results/reliability",
+      "analysis_family": "reliability",
+      "reported_value": "omega .834; alpha .806",
+      "artifact_id": "observed_wave1_results",
+      "artifact_json_pointer": "/reliability",
+      "reproduction_command": "Rscript analysis/v0.2/somatic_ambient/run_wave1_validation.R"
+    },
+    {
+      "statistic_id": "irt_item_parameters",
+      "dossier_json_pointer": "/results/item_statistics",
+      "analysis_family": "irt",
+      "reported_value": "discrimination range 1.12 to 1.68; ordered thresholds for all items",
+      "artifact_id": "observed_wave1_results",
+      "artifact_json_pointer": "/irt/item_parameters",
+      "reproduction_command": "Rscript analysis/v0.2/somatic_ambient/run_wave1_validation.R"
+    },
+    {
+      "statistic_id": "dif",
+      "dossier_json_pointer": "/results/dif",
+      "analysis_family": "dif",
+      "reported_value": "no unresolved practical DIF; maximum delta pseudo R2 .006",
+      "artifact_id": "observed_wave1_results",
+      "artifact_json_pointer": "/dif",
+      "reproduction_command": "Rscript analysis/v0.2/somatic_ambient/run_wave1_validation.R"
+    },
+    {
+      "statistic_id": "invariance",
+      "dossier_json_pointer": "/results/invariance",
+      "analysis_family": "invariance",
+      "reported_value": "metric delta CFI -.004; scalar delta CFI -.007",
+      "artifact_id": "observed_wave1_results",
+      "artifact_json_pointer": "/invariance",
+      "reproduction_command": "Rscript analysis/v0.2/somatic_ambient/run_wave1_validation.R"
+    },
+    {
+      "statistic_id": "external_validity",
+      "dossier_json_pointer": "/results/external_validity",
+      "analysis_family": "external_validity",
+      "reported_value": "convergent r .34; incremental adjusted R2 delta .024",
+      "artifact_id": "observed_wave1_results",
+      "artifact_json_pointer": "/external_validity",
+      "reproduction_command": "Rscript analysis/v0.2/somatic_ambient/run_wave1_validation.R"
+    }
+  ],
+  "provenance_assertion": "This manifest binds the scored somatic_ambient_anxiety Wave 1 dossier to the frozen preregistration, analysis plan, restricted data digest, validation runner digest, session information digest, and observed results artifact. The observed results file is the canonical statistic source for every dossier value copied into the v0.3.1 scored release, and no zero-filled checksum placeholders remain in the evidence chain."
+}

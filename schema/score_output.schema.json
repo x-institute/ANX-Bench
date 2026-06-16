@@ -1,0 +1,508 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/score_output.schema.json",
+  "title": "ANX-Bench Wave Score Output Schema",
+  "description": "Canonical output contract for tools/score_wave.py. The object records item, construct, domain, and overall scoring results, confidence interval fields, exclusion and missingness counts, and the release-manifest gate for aggregate scoring.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "benchmark_version",
+    "wave_ids",
+    "manifest_path",
+    "input_path",
+    "aggregate_scoring_permitted",
+    "official_scored_item_count",
+    "row_count",
+    "unique_respondent_count",
+    "included_row_count",
+    "scoring_ineligible_row_count",
+    "missingness_counts",
+    "exclusion_counts",
+    "item_scores",
+    "construct_scores",
+    "domain_scores",
+    "overall_score"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "v0.1.0"
+    },
+    "benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "wave_ids": {
+      "type": "array",
+      "minItems": 0,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^anx_[a-z]{2,3}_[0-9]{4}w[0-9]{2}(_[a-z0-9]+)*$"
+      }
+    },
+    "manifest_path": {
+      "$ref": "#/$defs/repository_path"
+    },
+    "input_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "aggregate_scoring_permitted": {
+      "type": "boolean"
+    },
+    "official_scored_item_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "row_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "unique_respondent_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "included_row_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "scoring_ineligible_row_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "missingness_counts": {
+      "$ref": "#/$defs/counts"
+    },
+    "exclusion_counts": {
+      "$ref": "#/$defs/counts"
+    },
+    "item_scores": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/item_score"
+      }
+    },
+    "construct_scores": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/aggregate_score"
+      }
+    },
+    "domain_scores": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/aggregate_score"
+      }
+    },
+    "overall_score": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/overall_score"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "repository_path": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/\\-]+$"
+    },
+    "snake_case_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "ci_fields": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "point_estimate",
+        "standard_error",
+        "confidence_level",
+        "ci_lower",
+        "ci_upper",
+        "ci_method"
+      ],
+      "properties": {
+        "point_estimate": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "standard_error": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "confidence_level": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "ci_lower": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "ci_upper": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "ci_method": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "large_sample_weighted_mean",
+            "equal_weighted_lower_level_scores",
+            null
+          ]
+        }
+      }
+    },
+    "base_score_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "row_count",
+        "unique_respondent_count",
+        "included_row_count",
+        "included_unique_respondent_count",
+        "missingness_counts",
+        "exclusion_counts",
+        "scoring_ineligible_row_count",
+        "contributing_weight_sum"
+      ],
+      "properties": {
+        "row_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unique_respondent_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "included_row_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "included_unique_respondent_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missingness_counts": {
+          "$ref": "#/$defs/counts"
+        },
+        "exclusion_counts": {
+          "$ref": "#/$defs/counts"
+        },
+        "scoring_ineligible_row_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "contributing_weight_sum": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "item_score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "item_version",
+        "domain",
+        "construct_id",
+        "official_scored",
+        "scoring_eligible",
+        "included_in_aggregate",
+        "row_count",
+        "unique_respondent_count",
+        "included_row_count",
+        "included_unique_respondent_count",
+        "missingness_counts",
+        "exclusion_counts",
+        "scoring_ineligible_row_count",
+        "contributing_weight_sum",
+        "point_estimate",
+        "standard_error",
+        "confidence_level",
+        "ci_lower",
+        "ci_upper",
+        "ci_method"
+      ],
+      "properties": {
+        "item_id": {
+          "$ref": "#/$defs/snake_case_id"
+        },
+        "item_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "domain": {
+          "$ref": "#/$defs/snake_case_id"
+        },
+        "construct_id": {
+          "$ref": "#/$defs/snake_case_id"
+        },
+        "official_scored": {
+          "type": "boolean"
+        },
+        "scoring_eligible": {
+          "type": "boolean"
+        },
+        "included_in_aggregate": {
+          "type": "boolean"
+        },
+        "row_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unique_respondent_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "included_row_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "included_unique_respondent_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missingness_counts": {
+          "$ref": "#/$defs/counts"
+        },
+        "exclusion_counts": {
+          "$ref": "#/$defs/counts"
+        },
+        "scoring_ineligible_row_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "contributing_weight_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "point_estimate": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "standard_error": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "confidence_level": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "ci_lower": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "ci_upper": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "ci_method": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "large_sample_weighted_mean",
+            null
+          ]
+        }
+      }
+    },
+    "aggregate_score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "domain",
+        "contributing_n",
+        "contributing_weight_sum",
+        "contributing_item_count",
+        "contributing_construct_count",
+        "point_estimate",
+        "standard_error",
+        "confidence_level",
+        "ci_lower",
+        "ci_upper",
+        "ci_method"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/snake_case_id"
+        },
+        "domain": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/snake_case_id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "contributing_n": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "contributing_weight_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "contributing_item_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "contributing_construct_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "point_estimate": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "standard_error": {
+          "type": "number",
+          "minimum": 0
+        },
+        "confidence_level": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "ci_lower": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "ci_upper": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "ci_method": {
+          "const": "equal_weighted_lower_level_scores"
+        }
+      }
+    },
+    "overall_score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contributing_n",
+        "contributing_weight_sum",
+        "contributing_domain_count",
+        "contributing_construct_count",
+        "contributing_item_count",
+        "point_estimate",
+        "standard_error",
+        "confidence_level",
+        "ci_lower",
+        "ci_upper",
+        "ci_method"
+      ],
+      "properties": {
+        "contributing_n": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "contributing_weight_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "contributing_domain_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "contributing_construct_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "contributing_item_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "point_estimate": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "standard_error": {
+          "type": "number",
+          "minimum": 0
+        },
+        "confidence_level": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "ci_lower": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "ci_upper": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "ci_method": {
+          "const": "equal_weighted_lower_level_scores"
+        }
+      }
+    }
+  }
+}

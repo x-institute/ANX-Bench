@@ -2,13 +2,18 @@
 
 This protocol defines the release-blocking psychometric validation gate for ANX-Bench items. It applies to every item before the item can move from exemplar or development status into benchmark-scored status. Schema-valid items may be used for drafting, cognitive interviewing, and pilot administration, but they are not released benchmark-scored items until the evidence required here has been completed, reviewed, versioned, and archived.
 
-The purpose of the gate is to make ANX-Bench a reproducible measurement instrument rather than a collection of plausible survey prompts. The protocol requires independent development and confirmation samples, explicit dimensionality checks, reliability evidence, item response modeling, differential item functioning review, and measurement-invariance evidence for intended comparisons across waves, populations, languages, and administration modes.
+The purpose of the gate is to make ANX-Bench a reproducible measurement instrument rather than a collection of plausible survey prompts. The protocol requires independent development and confirmation samples, explicit dimensionality checks, reliability evidence, item response modeling, differential item functioning review, measurement-invariance evidence for intended comparisons across waves, populations, languages, and administration modes, and criterion-validity evidence that includes at least one preregistered behavioral or revealed-preference test for any score seeking `approved_scored` status.
 
 ## Validation Artifacts
 
-Each item or item set submitted for benchmark-scored release must have a validation dossier stored with the release materials. The dossier must include:
+Each item or item set submitted for benchmark-scored release must have a validation dossier stored with the release materials. Scored approval requires a machine-readable dossier that validates against `schema/validation_dossier.schema.json`; a narrative protocol, preregistration, spreadsheet, or analysis notebook alone is not sufficient for `approved_item_level_only` or `approved_scored` status. The item record must reference the dossier through `validation.dossier_path`, and the dossier must name the exact item IDs, item versions, preregistration path, validation samples, evidence components, retention decisions, approval decision, and reviewer signoff used for the release decision.
+
+Before a validation dossier may recommend `approved_scored`, the item set must also have a completed content-validity dossier that validates against `schema/content_validity_dossier.schema.json` and satisfies `docs/content_validity_protocol.md`. The content-validity dossier must show at least three independent reviewers, item-level CVI of at least 0.78 for every retained item, scale-level CVI of at least 0.90, required facet coverage, no unresolved construct-overlap flag, no unresolved reading-level flag, and no unresolved harm or ethics flag. EFA, CFA, reliability, IRT, DIF, invariance, or external-validity results cannot justify `approved_scored` when this prerequisite is missing or failed.
+
+The dossier must include:
 
 - The benchmark version, item IDs, item versions, domain assignments, construct assignments, and response scale.
+- The completed content-validity dossier path, content-validity protocol version or checksum, and content-validity decision for any item set seeking `approved_scored`.
 - The development pilot sampling plan, fielding dates, recruitment source, exclusions, and analytic sample.
 - The independent confirmation sampling plan, fielding dates, recruitment source, exclusions, and analytic sample.
 - The refresh or bridge sampling plan for any revised item, translated item, changed administration mode, or new population used for longitudinal comparison.
@@ -17,6 +22,21 @@ Each item or item set submitted for benchmark-scored release must have a validat
 - A reviewer signoff stating whether the item is approved for benchmark-scored status, approved only for exploratory development use, or blocked.
 
 The dossier is part of the benchmark contract. A release may include exemplar or development items without a completed dossier only if they are clearly labeled as non-scored and excluded from benchmark scoring, longitudinal comparison, and event-study outcomes.
+
+## Content-Validity Prerequisite
+
+The content-validity blueprint gate is release-blocking for `approved_scored`. It must be completed before maintainers inspect confirmatory psychometric results for promotion decisions. The gate documents whether the proposed item set covers its required domain facets, remains distinct from neighboring constructs and general distress, is readable by the intended population, and clears participant-harm and ethics review.
+
+The required machine-readable artifact is a content-validity dossier. It must be frozen with the same release packet or validation materials as the psychometric dossier and must name the reviewed construct, item IDs, item versions, facets, reviewer panel, independent ratings, item-level CVI, scale-level CVI, revision decisions, unresolved flags, and signoff. A scored-promotion recommendation is invalid unless the content-validity dossier records all of the following:
+
+- At least three independent reviewers.
+- Item-level CVI at least 0.78 for every retained item.
+- Scale-level CVI at least 0.90 for the retained item set.
+- Every required facet covered by at least one retained item that passes the item-level CVI threshold.
+- No retained item with an unresolved construct-overlap flag.
+- No retained item with an unresolved reading-level, harm, ethics, or stigmatization flag.
+
+An item that fails the blueprint gate may remain `development_only`, may be revised and re-reviewed, or may be excluded. It must not be promoted through favorable EFA or CFA fit, reliability, IRT information, DIF results, invariance results, or external-validity associations alone. If an item is substantively revised to resolve a content-validity concern, the revised wording requires a new item version and renewed content-validity review before it enters the psychometric promotion pipeline.
 
 ## Minimum Calibration Samples
 
@@ -48,6 +68,8 @@ Development pilot analyses may be exploratory. However, item retention decisions
 ## EFA and CFA Split
 
 Dimensionality evidence must be separated between exploratory and confirmatory samples.
+
+EFA and CFA results can support `approved_scored` only after the content-validity prerequisite has passed for the exact retained item set and item versions under review. If the content-validity dossier is missing, incomplete, below threshold, or contains an unresolved construct-overlap, reading-level, harm, or ethics flag, factor-analysis results may be reported only as development diagnostics.
 
 Exploratory factor analysis must be conducted on the development pilot. The analysis must use an ordinal correlation approach appropriate for Likert responses, such as polychoric correlations, unless a different method is justified in the dossier. The number of factors must be evaluated using parallel analysis, scree inspection, theoretical interpretability, and domain coverage. Oblique rotation is required unless the dossier justifies an orthogonal structure.
 
@@ -146,11 +168,33 @@ The bridge study must include:
 
 If bridge evidence is inadequate, the revised item may be released only as a new non-comparable item version or new item ID. It must not be pooled with prior responses in longitudinal or event-study estimates.
 
+## External Validity
+
+External validity evidence is release-blocking for `approved_scored` status. A validation dossier may recommend `development_only` or `approved_item_level_only` without completed external validity evidence if the limitation is explicit, but no item set may contribute to construct, domain, overall, longitudinal, or event-study scoring until the dossier documents convergent, discriminant, criterion, behavioral or revealed-preference criterion, and incremental validity evidence in the independent confirmation sample or in a preregistered validation sample linked to the same item versions.
+
+External validity analyses must be preregistered before outcome inspection and must use validation variables whose wording, response anchors, public or restricted data status, missingness rules, and scoring direction are frozen in the fielding instrument and codebook. Comparator measures must appear after the ANX item block unless the preregistration justifies a different order and evaluates order effects. Behavioral or revealed-preference criteria must define the consequential choice, randomization, incentive status, exclusion rules, missingness handling, and score derivation before outcome inspection. The dossier must report weighted and unweighted estimates when public interpretation depends on population representativeness.
+
+The required evidence components are:
+
+| Component | Required evidence | Default pass threshold for `approved_scored` |
+| --- | --- | --- |
+| Convergent validity | Association between the relevant ANX score and AI-specific or technology-specific anxiety, concern, or threat measures that are theoretically adjacent but not identical to ANX-Bench scenario anxiety. | Direction matches the preregistered hypothesis and the absolute association is moderate, normally `r` or standardized beta from 0.30 to 0.60, with the confidence interval excluding zero. Associations above 0.80 require reviewer justification that the ANX score is not redundant with the comparator. |
+| Discriminant validity | Evidence that separable ANX constructs, especially economic and epistemic constructs, are empirically distinguishable from each other and from broad affective distress. | Latent or corrected construct correlation is below 0.80, a constrained one-factor alternative fits materially worse, and each construct retains stronger item loadings on its intended factor than on the comparator factor. |
+| Criterion validity | Association between ANX scores and preregistered external criteria such as AI avoidance intention, AI adoption intention, AI regulation support, policy preference, or behavioral validation outcomes. | Direction matches the preregistered theory, the estimate is practically interpretable, and the confidence interval excludes a trivially small effect when a directional criterion claim is made. |
+| Behavioral or revealed-preference criterion validity | Association between ANX scores and at least one preregistered behavioral outcome, revealed-preference allocation, willingness-to-pay choice, effort allocation, or other consequential choice that is not merely another self-report agreement, intention, or attitude item. | Direction matches the preregistered theory, the primary model satisfies its preregistered exclusion and covariate rules, and the effect is practically interpretable under a threshold fixed before outcome inspection. For the standard review allocation task, higher ANX should predict higher `revealed_anxiety_score`. |
+| Incremental validity | Prediction of criterion variables after demographics, AI exposure, and general anxiety are included as covariates. | The ANX score adds statistically and practically meaningful prediction beyond the covariate block, reported as change in adjusted `R^2`, pseudo-`R^2`, likelihood-ratio improvement, or standardized incremental coefficient. A default minimum is change in adjusted `R^2` of 0.01 for continuous criteria or an odds ratio of at least 1.20 per standard deviation for ordinal or binary criteria, unless a stricter preregistered threshold is used. |
+
+General anxiety or distress screeners are controls and discriminant comparators, not substitutes for ANX-specific convergent evidence. ANX-Bench should show weaker association with general anxiety than with AI-specific or technology-specific anxiety unless the dossier provides a construct-level reason for a different pattern. If general anxiety explains nearly all ANX-criterion associations, the reviewer must block `approved_scored` status until the item set is revised, narrowed in interpretation, or supported by new external validation evidence.
+
+Self-report criterion variables, including avoidance intention, adoption intention, regulation support, perceived risk, or policy preference items, are not sufficient by themselves for `approved_scored` status. At least one preregistered behavioral or revealed-preference criterion-validity test must pass for the score being proposed, or the dossier must recommend no more than `approved_item_level_only` until such evidence is collected. The behavioral test may be the standardized bonus-allocation task in `docs/behavioral_validation_protocol.md` or another preregistered consequential task with an equally explicit data contract and scoring rule.
+
+External validity failure blocks `approved_scored` status for the affected score. The item version may remain eligible for `approved_item_level_only` only when item-level evidence is otherwise adequate and release notes state that construct, domain, overall, longitudinal, and event-study scoring are not approved.
+
 ## Release Decision
 
 The psychometric validation gate has four possible decisions:
 
-- `approved_scored`: The item version satisfies this protocol and may contribute to construct, domain, overall, longitudinal, and event-study scoring according to the release notes.
+- `approved_scored`: The item version satisfies this protocol, including at least one passed preregistered behavioral or revealed-preference criterion-validity test for the relevant score, and may contribute to construct, domain, overall, longitudinal, and event-study scoring according to the release notes.
 - `approved_item_level_only`: The item version may be reported as a standalone scored item but must not contribute to construct, domain, or overall aggregation.
 - `development_only`: The item version is schema-valid and may be used in pilots or exemplars, but it is excluded from benchmark scoring.
 - `blocked`: The item version must not be fielded as part of an ANX-Bench release until revised and revalidated.

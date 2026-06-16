@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/release.schema.json",
+  "title": "ANX-Bench Release Manifest Schema",
+  "description": "Machine-readable validation schema for an ANX-Bench benchmark release manifest. A valid manifest fixes the benchmark version, item schema version, methodology documents, frozen item set, scoring eligibility, and SHA-256 checksums required for reproducible use.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_schema_version",
+    "benchmark_version",
+    "release_date",
+    "release_status",
+    "release_label",
+    "item_schema",
+    "methodology_documents",
+    "frozen_item_set",
+    "official_scored_items",
+    "scoring_eligibility",
+    "checksums"
+  ],
+  "properties": {
+    "manifest_schema_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic version of this release manifest schema contract."
+    },
+    "benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic ANX-Bench release version defined by this manifest."
+    },
+    "release_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Calendar date on which this benchmark release is published."
+    },
+    "release_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "frozen_candidate",
+        "citable",
+        "deprecated"
+      ],
+      "description": "Manifest-level lifecycle state. Only citable manifests may support official ANX-Bench benchmark claims."
+    },
+    "release_label": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Human-readable release label."
+    },
+    "item_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "schema_version",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "schema_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "methodology_documents": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "document_type",
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "document_type": {
+            "type": "string",
+            "enum": [
+              "methodology",
+              "psychometric_validation_protocol",
+              "preregistration_event_study"
+            ]
+          },
+          "path": {
+            "$ref": "#/$defs/repository_path"
+          },
+          "sha256": {
+            "$ref": "#/$defs/sha256"
+          }
+        }
+      }
+    },
+    "frozen_item_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_directory",
+        "item_count",
+        "items"
+      ],
+      "properties": {
+        "item_directory": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "item_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "item_id",
+              "item_version",
+              "domain",
+              "construct",
+              "release_status",
+              "validation",
+              "sha256"
+            ],
+            "properties": {
+              "path": {
+                "$ref": "#/$defs/repository_path"
+              },
+              "item_id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+              },
+              "item_version": {
+                "type": "string",
+                "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+              },
+              "domain": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+              },
+              "construct": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+              },
+              "release_status": {
+                "type": "string",
+                "enum": [
+                  "exemplar",
+                  "development_only",
+                  "approved_item_level_only",
+                  "approved_scored",
+                  "blocked"
+                ]
+              },
+              "validation": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "scoring_eligible"
+                ],
+                "properties": {
+                  "scoring_eligible": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "sha256": {
+                "$ref": "#/$defs/sha256"
+              }
+            }
+          }
+        }
+      }
+    },
+    "official_scored_items": {
+      "type": "array",
+      "description": "Item IDs eligible for official construct, domain, overall, longitudinal, or event-study scoring in this release. Empty means the release contains no benchmark-scored items.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+      }
+    },
+    "scoring_eligibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "official_scored_item_count",
+        "eligibility_rule",
+        "aggregate_scoring_permitted"
+      ],
+      "properties": {
+        "official_scored_item_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eligibility_rule": {
+          "type": "string",
+          "minLength": 40
+        },
+        "aggregate_scoring_permitted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "checksums": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "coverage",
+        "files"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "SHA-256"
+        },
+        "coverage": {
+          "type": "string",
+          "minLength": 40
+        },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "properties": {
+              "path": {
+                "$ref": "#/$defs/repository_path"
+              },
+              "sha256": {
+                "$ref": "#/$defs/sha256"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "repository_path": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/\\-]+$",
+      "description": "Repository-relative path using forward slashes."
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

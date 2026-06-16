@@ -1,0 +1,156 @@
+{
+  "$schema": "../../schema/release.schema.json",
+  "manifest_schema_version": "v0.1.0",
+  "benchmark_version": "v0.5.0",
+  "release_date": "2026-06-16",
+  "release_status": "frozen_candidate",
+  "release_label": "ANX-Bench v0.5.0 frozen economic-vocational calibration packet",
+  "item_schema": {
+    "path": "schema/item.schema.json",
+    "schema_version": "v0.1.0",
+    "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+  },
+  "methodology_documents": [
+    {
+      "document_type": "methodology",
+      "path": "docs/methodology.md",
+      "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+    },
+    {
+      "document_type": "psychometric_validation_protocol",
+      "path": "docs/psychometric_validation_protocol.md",
+      "sha256": "c8f7860b730279d1f772e1c87fe09d3732676c765461b8cdb3b68bc8648d0358"
+    },
+    {
+      "document_type": "preregistration_event_study",
+      "path": "docs/preregistration_event_study.md",
+      "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+    }
+  ],
+  "frozen_item_set": {
+    "item_directory": "items/v0.1/economic_vocational",
+    "item_count": 4,
+    "items": [
+      {
+        "path": "items/v0.1/economic_vocational/skill_obsolescence_software.json",
+        "item_id": "skill_obsolescence_software",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "b08e3f205a990199cf790540fb6b54d2f0d2a40424d12cf37e4797e5c175d92d"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/wage_pressure_customer_support.json",
+        "item_id": "wage_pressure_customer_support",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "6f696f1fead12e79e2564b54d24c462ca9add0911327549915f82914a116c142"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/retraining_pressure_accounting.json",
+        "item_id": "retraining_pressure_accounting",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "36412be8662d7284bfc9804b1e26364b9def046a30777d6e17ffa73dcdbc62fc"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/status_loss_creative_work.json",
+        "item_id": "status_loss_creative_work",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "14dd4d6772c145fbdeca21920d65b46d667936ad015559e56e2505287e0edcfe"
+      }
+    ]
+  },
+  "official_scored_items": [],
+  "scoring_eligibility": {
+    "official_scored_item_count": 0,
+    "eligibility_rule": "ANX-Bench v0.5.0 is a frozen economic-vocational calibration packet only. It freezes the four development-only economic_vocational_anxiety items, Wave 5 instrument, codebook, no-event registry, preregistration, and machine-readable analysis plan before outcome inspection. Economic item-level, construct, domain, overall, longitudinal, and event-study scoring are not authorized in this release. Scoring awaits observed validation, a completed validation dossier, reviewer approval, updated item metadata, and a later citable release manifest that explicitly lists official scored economic items.",
+    "aggregate_scoring_permitted": false
+  },
+  "checksums": {
+    "algorithm": "SHA-256",
+    "coverage": "Checksums cover the v0.5.0 frozen economic-vocational calibration packet: item and release schemas, the psychometric analysis-plan schema, standing methodology documents, the four administered economic item files, the Wave 5 preregistration, frozen fielding instrument, frozen codebook, no-event registry, and machine-readable analysis plan. Observed validation evidence is intentionally absent, official_scored_items is empty, aggregate scoring is prohibited, and any economic scoring must await observed validation and a later citable release.",
+    "files": [
+      {
+        "path": "schema/item.schema.json",
+        "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+      },
+      {
+        "path": "schema/release.schema.json",
+        "sha256": "f4d347b6c0bfbee787f1346e56eee16835782cab62bd1987a23dc65bab7e520b"
+      },
+      {
+        "path": "schema/psychometric_analysis_plan.schema.json",
+        "sha256": "246546836a13da1b85ea6d14ab7406069353ae9327bd8bb4496a46721141341e"
+      },
+      {
+        "path": "docs/methodology.md",
+        "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+      },
+      {
+        "path": "docs/psychometric_validation_protocol.md",
+        "sha256": "c8f7860b730279d1f772e1c87fe09d3732676c765461b8cdb3b68bc8648d0358"
+      },
+      {
+        "path": "docs/preregistration_event_study.md",
+        "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/skill_obsolescence_software.json",
+        "sha256": "b08e3f205a990199cf790540fb6b54d2f0d2a40424d12cf37e4797e5c175d92d"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/wage_pressure_customer_support.json",
+        "sha256": "6f696f1fead12e79e2564b54d24c462ca9add0911327549915f82914a116c142"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/retraining_pressure_accounting.json",
+        "sha256": "36412be8662d7284bfc9804b1e26364b9def046a30777d6e17ffa73dcdbc62fc"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/status_loss_creative_work.json",
+        "sha256": "14dd4d6772c145fbdeca21920d65b46d667936ad015559e56e2505287e0edcfe"
+      },
+      {
+        "path": "docs/preregistrations/anx_us_2026w05_economic_calibration.md",
+        "sha256": "64bd6a8d5aca8169f1f039925320d44700dd90783d4d77f6f32c36fa516606d5"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w05_economic_instrument.md",
+        "sha256": "6401967046569cf3f478b588991a7d2dd31c68420c94b858bfe66f0bb9fe925f"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w05_economic_codebook.md",
+        "sha256": "0f6132984f5c6e3dd8b64a911c179d4a73dee6812252168d976427d0e468cc5f"
+      },
+      {
+        "path": "events/v0.5/anx_us_2026w05_economic_event_registry.json",
+        "sha256": "f25690324bd5ad9529633d3d6ebd1e3308aea7c2d7c7462342649583a48042d5"
+      },
+      {
+        "path": "analysis/v0.5/economic_vocational/wave5_analysis_plan.json",
+        "sha256": "64dbb9dd8214c216dde8a5539ea227276ce4f201dda24f055a28c59993d6a5c9"
+      }
+    ]
+  }
+}

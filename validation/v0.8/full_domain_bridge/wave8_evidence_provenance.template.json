@@ -1,0 +1,430 @@
+{
+  "$schema": "schema/evidence_provenance.schema.json",
+  "provenance_schema_version": "v0.8.1",
+  "provenance_id": "anx_us_2026w08_full_domain_bridge_evidence_provenance_template",
+  "validation_dossier_path": "validation/v0.8/full_domain_bridge/wave8_full_domain_bridge_evidence.json",
+  "benchmark_version": "v0.8.0",
+  "construct_id": "full_domain_bridge",
+  "evidence_status": "planned_or_placeholder",
+  "validation_date": "2026-06-16",
+  "fielding_windows": [
+    {
+      "sample": "wave8_full_domain_bridge_sample",
+      "status": "planned_or_placeholder",
+      "planned_start_date": "2026-06-01",
+      "planned_end_date": "2026-06-30",
+      "observed_start_date": null,
+      "observed_end_date": null,
+      "fielding_date_source": "Planned fielding dates are locked from the Wave 8 preregistration and must be replaced by restricted fielding disposition timestamps before citation."
+    }
+  ],
+  "validation_statistics": [
+    {
+      "statistic_id": "sample_exclusions_gate",
+      "dossier_json_pointer": "/analytic_n",
+      "analysis_family": "sample_exclusions",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_full_domain_bridge_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://wave8/respondent_item_responses.csv",
+          "sha256": null,
+          "description": "Restricted raw respondent by item matrix used to compute started, eligible, excluded, and final analytic sample counts."
+        },
+        {
+          "path": "restricted://wave8/fielding_disposition.csv",
+          "sha256": null,
+          "description": "Restricted consent, eligibility, completion, quality-flag, exclusion, and vendor-disposition file for respondent-flow reconstruction."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/respondent_flow_and_exclusions.Rmd",
+          "sha256": null,
+          "description": "Preregistered respondent-flow notebook that applies Wave 8 exclusion rules before any psychometric outcome inspection."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "fielding_custodian",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. Replace null hashes and unsigned fields with observed restricted-data, script, output, analyst, and reviewer evidence before this gate can be cited."
+    },
+    {
+      "statistic_id": "split_assignment_gate",
+      "dossier_json_pointer": "/split_sample",
+      "analysis_family": "split_assignment",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_full_domain_bridge_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://wave8/eligible_respondent_frame.csv",
+          "sha256": null,
+          "description": "Restricted eligible respondent frame used as the sole input to preregistered EFA and CFA split assignment."
+        },
+        {
+          "path": "restricted://wave8/split_assignment.csv",
+          "sha256": null,
+          "description": "Restricted split-assignment file recording EFA and CFA allocation, stratification variables, seed, and creation timestamp."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/create_efa_cfa_split.R",
+          "sha256": null,
+          "description": "Split-assignment script that must run before outcome inspection using sample source, device category, and domain-block order strata."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "data_custodian",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. Split validity is not observed until the restricted split file hash, script hash, seed, and pre-inspection timestamp are recorded."
+    },
+    {
+      "statistic_id": "efa_gate",
+      "dossier_json_pointer": "/efa",
+      "analysis_family": "efa",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_efa_split"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://wave8/respondent_item_responses.csv",
+          "sha256": null,
+          "description": "Restricted item-response matrix joined to the locked EFA split indicator for ordinal exploratory factor analysis."
+        },
+        {
+          "path": "restricted://wave8/split_assignment.csv",
+          "sha256": null,
+          "description": "Restricted EFA and CFA split assignment required to prove the EFA model was not estimated on the confirmatory split."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/ordinal_efa_wave8.Rmd",
+          "sha256": null,
+          "description": "Preregistered ordinal EFA notebook producing factor-count, loading, cross-loading, threshold, and residual local-dependence outputs."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "psychometric_reviewer",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. EFA statistics are planned placeholders until restricted input hashes, notebook hash, software lock, and output hash are complete."
+    },
+    {
+      "statistic_id": "cfa_gate",
+      "dossier_json_pointer": "/cfa",
+      "analysis_family": "cfa",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_cfa_split"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://wave8/respondent_item_responses.csv",
+          "sha256": null,
+          "description": "Restricted item-response matrix joined to the locked CFA split indicator for seven-factor confirmatory model estimation."
+        },
+        {
+          "path": "restricted://wave8/split_assignment.csv",
+          "sha256": null,
+          "description": "Restricted split-assignment file proving CFA was estimated on the independent confirmatory split."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/seven_domain_cfa_wave8.Rmd",
+          "sha256": null,
+          "description": "Preregistered CFA notebook producing CFI, TLI, RMSEA, SRMR, standardized loading, residual correlation, and comparator-model outputs."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "psychometric_reviewer",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. CFA fit cannot be cited until the independent split, model output, software session, analyst, and reviewer records are checksum-bound."
+    },
+    {
+      "statistic_id": "omega_gate",
+      "dossier_json_pointer": "/omega",
+      "analysis_family": "omega",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_full_domain_bridge_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://wave8/respondent_item_responses.csv",
+          "sha256": null,
+          "description": "Restricted item-response matrix used to estimate ordinal omega for each retained Wave 8 domain."
+        },
+        {
+          "path": "restricted://wave8/split_assignment.csv",
+          "sha256": null,
+          "description": "Restricted split-assignment file used to report whether omega estimates were computed on splits or descriptively on the full analytic sample."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/domain_omega_wave8.Rmd",
+          "sha256": null,
+          "description": "Preregistered reliability notebook producing domain omega estimates, confidence intervals, and threshold decisions."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "psychometric_reviewer",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. Omega evidence remains planned until retained-item inputs, reliability outputs, software lock, and reviewer signoff are present."
+    },
+    {
+      "statistic_id": "irt_gate",
+      "dossier_json_pointer": "/irt",
+      "analysis_family": "irt",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_full_domain_bridge_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://wave8/respondent_item_responses.csv",
+          "sha256": null,
+          "description": "Restricted retained-item response matrix used for graded-response IRT calibration and information diagnostics."
+        },
+        {
+          "path": "restricted://wave8/split_assignment.csv",
+          "sha256": null,
+          "description": "Restricted split-assignment file used to document model-development and confirmatory calibration boundaries for IRT diagnostics."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/irt_diagnostics_wave8.Rmd",
+          "sha256": null,
+          "description": "Preregistered IRT notebook producing convergence, discrimination, threshold-ordering, local-dependence, information, and linking-SE outputs."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "psychometric_reviewer",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. IRT diagnostics are not observed evidence until calibration output and the exact runtime session are checksum-bound."
+    },
+    {
+      "statistic_id": "dif_gate",
+      "dossier_json_pointer": "/dif",
+      "analysis_family": "dif",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_full_domain_bridge_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://wave8/respondent_item_responses.csv",
+          "sha256": null,
+          "description": "Restricted retained-item response matrix for ordinal DIF screening across preregistered subgroups."
+        },
+        {
+          "path": "restricted://wave8/respondent_covariates.csv",
+          "sha256": null,
+          "description": "Restricted subgroup, exposure, device, and weighting covariates required for DIF models and sensitivity checks."
+        },
+        {
+          "path": "restricted://wave8/split_assignment.csv",
+          "sha256": null,
+          "description": "Restricted split-assignment file used to document whether DIF screening is confirmatory or descriptive for each analysis."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/dif_screening_wave8.Rmd",
+          "sha256": null,
+          "description": "Preregistered DIF notebook producing FDR-adjusted flags, pseudo-R2 deltas, expected-score differences, and interpretation blocks."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "psychometric_reviewer",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. DIF evidence is not citable until subgroup covariates, model outputs, multiplicity decisions, and reviewer adjudication are recorded."
+    },
+    {
+      "statistic_id": "invariance_gate",
+      "dossier_json_pointer": "/invariance",
+      "analysis_family": "invariance",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_full_domain_bridge_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://wave8/respondent_item_responses.csv",
+          "sha256": null,
+          "description": "Restricted retained-item response matrix used in multigroup configural, metric, and threshold invariance checks."
+        },
+        {
+          "path": "restricted://wave8/respondent_covariates.csv",
+          "sha256": null,
+          "description": "Restricted subgroup and weighting covariates defining the preregistered invariance comparisons."
+        },
+        {
+          "path": "restricted://wave8/split_assignment.csv",
+          "sha256": null,
+          "description": "Restricted split-assignment file used to document development and confirmatory boundaries for invariance diagnostics."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/invariance_wave8.Rmd",
+          "sha256": null,
+          "description": "Preregistered invariance notebook producing convergence, delta-CFI, delta-RMSEA, partial-invariance, and domain-ordering outputs."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "psychometric_reviewer",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. Invariance evidence must remain uncited until all comparison definitions, outputs, and reviewer decisions are checksum-bound."
+    },
+    {
+      "statistic_id": "latent_correlations_gate",
+      "dossier_json_pointer": "/latent_correlations",
+      "analysis_family": "latent_correlations",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_cfa_split",
+        "wave8_full_domain_bridge_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://wave8/respondent_item_responses.csv",
+          "sha256": null,
+          "description": "Restricted item-response matrix used to estimate seven-domain latent correlations and aggregate-readiness diagnostics."
+        },
+        {
+          "path": "restricted://wave8/split_assignment.csv",
+          "sha256": null,
+          "description": "Restricted split-assignment file used to separate confirmatory latent-correlation evidence from full-sample descriptive sensitivity checks."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/latent_correlations_wave8.Rmd",
+          "sha256": null,
+          "description": "Preregistered latent-correlation notebook producing pairwise correlations, confidence intervals, sensitivity checks, and aggregate-readiness summaries."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "psychometric_reviewer",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. Latent-correlation evidence cannot support aggregate claims until output hashes and claim-boundary review are complete."
+    },
+    {
+      "statistic_id": "somatic_anchor_drift_gate",
+      "dossier_json_pointer": "/somatic_anchor_drift",
+      "analysis_family": "somatic_anchor_drift",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_full_domain_bridge_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://wave8/respondent_item_responses.csv",
+          "sha256": null,
+          "description": "Restricted Wave 8 item-response matrix containing the repeated somatic-anchor indicators."
+        },
+        {
+          "path": "restricted://wave8/source_anchor_linkage.csv",
+          "sha256": null,
+          "description": "Restricted linkage and anchor metadata file required to compare Wave 8 somatic anchors with prior-source calibration anchors."
+        },
+        {
+          "path": "restricted://wave8/split_assignment.csv",
+          "sha256": null,
+          "description": "Restricted split-assignment file used to document whether drift estimates are confirmatory or descriptive."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/somatic_anchor_drift_wave8.Rmd",
+          "sha256": null,
+          "description": "Preregistered anchor-drift notebook producing mean absolute drift, maximum single-item drift, and source-anchor-use decisions."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "psychometric_reviewer",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. Somatic-anchor drift evidence is uncitable until source-anchor linkage, drift outputs, and reviewer decision are complete."
+    },
+    {
+      "statistic_id": "final_bridge_decision_gate",
+      "dossier_json_pointer": "/final_decision",
+      "analysis_family": "final_bridge_decision",
+      "evidence_status": "planned_or_placeholder",
+      "fielding_samples": [
+        "wave8_full_domain_bridge_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "validation/v0.8/full_domain_bridge/observed_wave8_results.json",
+          "sha256": null,
+          "description": "Observed-results ledger that must pass validation before the bridge decision can be reviewed or cited."
+        },
+        {
+          "path": "validation/v0.8/full_domain_bridge/content_validity_dossier.json",
+          "sha256": null,
+          "description": "Completed content-validity dossier required before psychometric bridge evidence can support promotion language."
+        },
+        {
+          "path": "restricted://wave8/analysis_outputs/wave8_full_domain_bridge_outputs.zip",
+          "sha256": null,
+          "description": "Restricted complete output archive for all Wave 8 bridge gates, including model logs and sensitivity outputs."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.8/full_domain_bridge/build_bridge_decision_artifact.Rmd",
+          "sha256": null,
+          "description": "Preregistered decision-build notebook that maps all observed gates to the final bridge decision while leaving scoring unauthorized."
+        }
+      ],
+      "signoff": {
+        "signer": null,
+        "role": "release_reviewer",
+        "signed_date": null,
+        "signature_status": "unsigned_placeholder"
+      },
+      "provenance_note": "Template record only. The final bridge decision is not observed or citable until all gate outputs, content-validity evidence, analyst signoff, reviewer signoff, and release checksums are complete."
+    }
+  ],
+  "provenance_assertion": "This Wave 8 provenance file is a planned_or_placeholder template only. It records the required restricted inputs, split file, analysis scripts, software/session evidence, outputs, analyst roles, and reviewer roles, but it contains no observed citable evidence and cannot support bridge-readiness or scoring claims."
+}

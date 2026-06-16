@@ -1,0 +1,211 @@
+{
+  "bridge_evidence_schema_version": "v0.1.0",
+  "evidence_id": "anx_us_2026w07_cross_domain_bridge_evidence_template",
+  "evidence_status": "preregistered_template",
+  "study_id": "anx_us_2026w07_cross_domain_bridge",
+  "wave_id": "anx_us_2026w07_cross_domain_bridge",
+  "benchmark_version": "v0.7.0",
+  "evidence_date": "2026-06-16",
+  "preregistration_path": "docs/preregistrations/anx_us_2026w07_cross_domain_bridge.md",
+  "manifest_path": "releases/v0.7.0/manifest.json",
+  "analysis_plan_path": "analysis/v0.7/cross_domain_bridge/wave7_analysis_plan.json",
+  "event_registry_path": "events/v0.7/anx_us_2026w07_cross_domain_bridge_event_registry.json",
+  "event_id": "no_event",
+  "frozen_item_ids": [
+    "sleep_disruption_ai_news",
+    "body_vigilance_model_release",
+    "background_dread_ai_progress",
+    "avoidance_after_ai_capability_demo",
+    "skill_obsolescence_software",
+    "wage_pressure_customer_support",
+    "retraining_pressure_accounting",
+    "status_loss_creative_work",
+    "deepfake_evidence_trust",
+    "synthetic_news_provenance",
+    "ai_expert_claim_conflict",
+    "personalized_misinformation_targeting"
+  ],
+  "frozen_item_versions": {
+    "sleep_disruption_ai_news": "v0.2.0",
+    "body_vigilance_model_release": "v0.2.0",
+    "background_dread_ai_progress": "v0.2.0",
+    "avoidance_after_ai_capability_demo": "v0.2.0",
+    "skill_obsolescence_software": "v0.1.0",
+    "wage_pressure_customer_support": "v0.1.0",
+    "retraining_pressure_accounting": "v0.1.0",
+    "status_loss_creative_work": "v0.1.0",
+    "deepfake_evidence_trust": "v0.1.0",
+    "synthetic_news_provenance": "v0.1.0",
+    "ai_expert_claim_conflict": "v0.1.0",
+    "personalized_misinformation_targeting": "v0.1.0"
+  },
+  "analytic_n": {
+    "target_n": 1500,
+    "minimum_n": 1200,
+    "achieved_eligible_n": null,
+    "final_analytic_n": null,
+    "independent_from_wave5_wave6": null,
+    "decision": null
+  },
+  "exclusion_flow": {
+    "started_n": null,
+    "consented_eligible_n": null,
+    "excluded_under_18_n": null,
+    "excluded_non_us_n": null,
+    "excluded_non_english_or_assisted_n": null,
+    "excluded_duplicate_n": null,
+    "excluded_vendor_fraud_n": null,
+    "excluded_attention_check_n": null,
+    "excluded_cross_domain_attribution_check_n": null,
+    "excluded_scenario_comprehension_n": null,
+    "excluded_fast_completion_n": null,
+    "excluded_excessive_anx_missingness_n": null,
+    "excluded_straightline_plus_quality_failure_n": null,
+    "excluded_withdrawal_n": null,
+    "excluded_nonunderstanding_n": null,
+    "total_excluded_n": null,
+    "non_exclusion_sensitivity_flags_retained": null,
+    "reported_by_required_subgroups": null,
+    "decision": null
+  },
+  "thresholds": {
+    "minimum_analytic_n": 1200,
+    "factor_model": {
+      "minimum_primary_loading": 0.5,
+      "maximum_secondary_loading": 0.3,
+      "minimum_correlated_three_factor_cfi": 0.95,
+      "maximum_correlated_three_factor_rmsea": 0.06,
+      "minimum_standardized_loading": 0.5
+    },
+    "omega": {
+      "minimum_domain_omega": 0.7,
+      "minimum_headline_domain_omega": 0.8
+    },
+    "irt_linking": {
+      "minimum_discrimination": 0.65,
+      "maximum_threshold_ordering_violations": 0,
+      "maximum_local_dependence_abs": 0.2,
+      "maximum_anchor_drift_abs_mean_sd": 0.2,
+      "maximum_linking_se_central_80": 0.15
+    },
+    "dif": {
+      "fdr_q_material_below": 0.05,
+      "pseudo_r2_delta_material_at_or_above": 0.02,
+      "expected_score_difference_sd_material_at_or_above": 0.1
+    },
+    "invariance": {
+      "minimum_metric_delta_cfi": -0.01,
+      "maximum_metric_delta_rmsea": 0.015,
+      "minimum_scalar_delta_cfi": -0.01,
+      "maximum_scalar_delta_rmsea": 0.015
+    },
+    "latent_correlations": {
+      "minimum_abs_pairwise": 0.3,
+      "maximum_abs_pairwise": 0.75
+    },
+    "general_factor": {
+      "minimum_omega_hierarchical": 0.5,
+      "minimum_explained_common_variance": 0.5,
+      "domain_specific_variance_required": true
+    }
+  },
+  "factor_model_fit": {
+    "efa_primary_loading_min": null,
+    "efa_secondary_loading_abs_max": null,
+    "efa_parallel_analysis_factor_count": null,
+    "three_factor_interpretable": null,
+    "correlated_three_factor_cfi": null,
+    "correlated_three_factor_rmsea": null,
+    "standardized_loading_min": null,
+    "unidimensional_model_not_sufficient": null,
+    "decision": null
+  },
+  "omega": {
+    "somatic_ambient_anxiety": null,
+    "economic_vocational_anxiety": null,
+    "epistemic_trust_anxiety": null,
+    "minimum_domain_omega": null,
+    "all_domains_at_or_above_0_70": null,
+    "all_domains_at_or_above_0_80": null,
+    "decision": null
+  },
+  "irt_linking": {
+    "model_converged": null,
+    "discrimination_min": null,
+    "threshold_ordering_violations": null,
+    "local_dependence_abs_max": null,
+    "anchor_drift_abs_mean_sd": null,
+    "linking_se_central_80_max": null,
+    "official_theta_scoring_introduced": false,
+    "decision": null
+  },
+  "dif": {
+    "screened_group_variables": [
+      "age_group",
+      "gender",
+      "race_ethnicity",
+      "education",
+      "census_region",
+      "employment_status",
+      "occupation_group",
+      "prior_ai_exposure",
+      "ai_news_exposure",
+      "baseline_general_anxiety",
+      "domain_block_order",
+      "device_type",
+      "language_administration_compliance"
+    ],
+    "max_fdr_q_for_flagged_items": null,
+    "max_pseudo_r2_delta": null,
+    "max_expected_score_difference_sd": null,
+    "rank_order_impact_detected": null,
+    "material_unresolved_dif_item_count": null,
+    "decision": null
+  },
+  "invariance": {
+    "configural_all_converged": null,
+    "minimum_metric_delta_cfi": null,
+    "maximum_metric_delta_rmsea": null,
+    "minimum_scalar_delta_cfi": null,
+    "maximum_scalar_delta_rmsea": null,
+    "failed_key_comparison_count": null,
+    "irt_fallback_used": null,
+    "irt_fallback_reviewer_approved": null,
+    "decision": null
+  },
+  "latent_correlations": {
+    "somatic_economic": null,
+    "somatic_epistemic": null,
+    "economic_epistemic": null,
+    "minimum_abs_pairwise": null,
+    "maximum_abs_pairwise": null,
+    "confidence_intervals_reported": null,
+    "weight_and_exclusion_sensitivity_stable": null,
+    "decision": null
+  },
+  "bifactor_second_order_readiness": {
+    "model_converged": null,
+    "omega_hierarchical": null,
+    "explained_common_variance": null,
+    "domain_specific_factors_retain_interpretable_variance": null,
+    "overall_readiness_decision": null
+  },
+  "scoring_authorization": {
+    "official_scored_items": [],
+    "aggregate_scoring_permitted": false,
+    "cross_domain_score_authorized": false,
+    "overall_anx_score_authorized": false,
+    "domain_combined_score_authorized": false,
+    "event_study_claim_permitted": false,
+    "trend_claim_permitted": false,
+    "individual_level_use_permitted": false,
+    "policy_decision_ranking_permitted": false
+  },
+  "final_decision": {
+    "bridge_decision": null,
+    "release_blocking": null,
+    "later_proposal_permitted": null,
+    "scoring_authorized": null,
+    "decision_rationale": "Preregistered template only. Observed Wave 7 evidence must replace null fields and pass tools/validate_cross_domain_bridge_evidence.py before any overall ANX, cross-domain, or domain-combined score proposal can be considered."
+  }
+}

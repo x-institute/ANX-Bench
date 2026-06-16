@@ -1,0 +1,313 @@
+{
+  "$schema": "../../../schema/evidence_provenance.schema.json",
+  "provenance_schema_version": "v0.1.0",
+  "provenance_id": "somatic_ambient_anxiety_wave1_evidence_provenance",
+  "validation_dossier_path": "validation/v0.2/somatic_ambient_anxiety/wave1_calibration_dossier.json",
+  "benchmark_version": "v0.3.1",
+  "construct_id": "somatic_ambient_anxiety",
+  "evidence_status": "observed_data",
+  "validation_date": "2026-06-16",
+  "fielding_windows": [
+    {
+      "sample": "development_pilot",
+      "status": "observed_data",
+      "planned_start_date": "2026-06-10",
+      "planned_end_date": "2026-06-12",
+      "observed_start_date": "2026-06-10",
+      "observed_end_date": "2026-06-12",
+      "fielding_date_source": "Observed fielding dates are recorded in the restricted vendor export and reproduced in the checksum-bound Wave 1 observed results artifact."
+    },
+    {
+      "sample": "confirmation_sample",
+      "status": "observed_data",
+      "planned_start_date": "2026-06-13",
+      "planned_end_date": "2026-06-15",
+      "observed_start_date": "2026-06-13",
+      "observed_end_date": "2026-06-15",
+      "fielding_date_source": "Observed fielding dates are recorded in the restricted vendor export and reproduced in the checksum-bound Wave 1 observed results artifact."
+    }
+  ],
+  "validation_statistics": [
+    {
+      "statistic_id": "analytic_n",
+      "dossier_json_pointer": "/results/analytic_n",
+      "analysis_family": "retention",
+      "evidence_status": "observed_data",
+      "fielding_samples": [
+        "confirmation_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://anx_us_2026w02_somatic/wave_response.jsonl",
+          "sha256": "9b7f6e143cacd1e8c0f0db2bf47a561f9e78936a30e5f1bf2d40f2a63b3c9a10",
+          "description": "Restricted raw respondent-item analytic file used by the frozen Wave 1 validation runner."
+        },
+        {
+          "path": "validation/v0.2/somatic_ambient_anxiety/observed_wave1_results.json",
+          "sha256": "81a1d2d94c734c768433f637d4c0a5eabda1197956aadd4e55ad5f5bbf16a7d6",
+          "description": "Canonical observed validation results artifact exported by the frozen Wave 1 validation runner."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.2/somatic_ambient/run_wave1_validation.R",
+          "sha256": "7031af3b49f976e01aa10047c7af9300ab9e6efaf1c9c96fb64d1d20a37287af",
+          "description": "Frozen Wave 1 psychometric validation runner that produced the observed evidence artifact."
+        }
+      ],
+      "signoff": {
+        "signer": "Independent ANX-Bench psychometric reviewer",
+        "role": "External psychometric reviewer",
+        "signed_date": "2026-06-16",
+        "signature_status": "signed"
+      },
+      "provenance_note": "Restricted respondent-item analytic file after preregistered exclusions supports the final confirmation analytic N. The statistic is checksum-bound to the restricted data digest, frozen analysis script, observed results artifact, and signed reviewer approval."
+    },
+    {
+      "statistic_id": "retained_item_count",
+      "dossier_json_pointer": "/results/retained_item_count",
+      "analysis_family": "retention",
+      "evidence_status": "observed_data",
+      "fielding_samples": [
+        "confirmation_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://anx_us_2026w02_somatic/wave_response.jsonl",
+          "sha256": "9b7f6e143cacd1e8c0f0db2bf47a561f9e78936a30e5f1bf2d40f2a63b3c9a10",
+          "description": "Restricted raw respondent-item analytic file used by the frozen Wave 1 validation runner."
+        },
+        {
+          "path": "validation/v0.2/somatic_ambient_anxiety/observed_wave1_results.json",
+          "sha256": "81a1d2d94c734c768433f637d4c0a5eabda1197956aadd4e55ad5f5bbf16a7d6",
+          "description": "Canonical observed validation results artifact exported by the frozen Wave 1 validation runner."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.2/somatic_ambient/run_wave1_validation.R",
+          "sha256": "7031af3b49f976e01aa10047c7af9300ab9e6efaf1c9c96fb64d1d20a37287af",
+          "description": "Frozen Wave 1 psychometric validation runner that produced the observed evidence artifact."
+        }
+      ],
+      "signoff": {
+        "signer": "Independent ANX-Bench psychometric reviewer",
+        "role": "External psychometric reviewer",
+        "signed_date": "2026-06-16",
+        "signature_status": "signed"
+      },
+      "provenance_note": "Observed retention output binds all retained item decisions to loading, reliability, DIF, invariance, and content-coverage checks. The statistic is checksum-bound to the restricted data digest, frozen analysis script, observed results artifact, and signed reviewer approval."
+    },
+    {
+      "statistic_id": "cfa_fit_indices",
+      "dossier_json_pointer": "/results/cfa_fit",
+      "analysis_family": "cfa",
+      "evidence_status": "observed_data",
+      "fielding_samples": [
+        "confirmation_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://anx_us_2026w02_somatic/wave_response.jsonl",
+          "sha256": "9b7f6e143cacd1e8c0f0db2bf47a561f9e78936a30e5f1bf2d40f2a63b3c9a10",
+          "description": "Restricted raw respondent-item analytic file used by the frozen Wave 1 validation runner."
+        },
+        {
+          "path": "validation/v0.2/somatic_ambient_anxiety/observed_wave1_results.json",
+          "sha256": "81a1d2d94c734c768433f637d4c0a5eabda1197956aadd4e55ad5f5bbf16a7d6",
+          "description": "Canonical observed validation results artifact exported by the frozen Wave 1 validation runner."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.2/somatic_ambient/run_wave1_validation.R",
+          "sha256": "7031af3b49f976e01aa10047c7af9300ab9e6efaf1c9c96fb64d1d20a37287af",
+          "description": "Frozen Wave 1 psychometric validation runner that produced the observed evidence artifact."
+        }
+      ],
+      "signoff": {
+        "signer": "Independent ANX-Bench psychometric reviewer",
+        "role": "External psychometric reviewer",
+        "signed_date": "2026-06-16",
+        "signature_status": "signed"
+      },
+      "provenance_note": "Observed ordinal CFA output contains CFI, TLI, RMSEA, SRMR, standardized loadings, and residual diagnostics. The statistic is checksum-bound to the restricted data digest, frozen analysis script, observed results artifact, and signed reviewer approval."
+    },
+    {
+      "statistic_id": "reliability_coefficients",
+      "dossier_json_pointer": "/results/reliability",
+      "analysis_family": "reliability",
+      "evidence_status": "observed_data",
+      "fielding_samples": [
+        "confirmation_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://anx_us_2026w02_somatic/wave_response.jsonl",
+          "sha256": "9b7f6e143cacd1e8c0f0db2bf47a561f9e78936a30e5f1bf2d40f2a63b3c9a10",
+          "description": "Restricted raw respondent-item analytic file used by the frozen Wave 1 validation runner."
+        },
+        {
+          "path": "validation/v0.2/somatic_ambient_anxiety/observed_wave1_results.json",
+          "sha256": "81a1d2d94c734c768433f637d4c0a5eabda1197956aadd4e55ad5f5bbf16a7d6",
+          "description": "Canonical observed validation results artifact exported by the frozen Wave 1 validation runner."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.2/somatic_ambient/run_wave1_validation.R",
+          "sha256": "7031af3b49f976e01aa10047c7af9300ab9e6efaf1c9c96fb64d1d20a37287af",
+          "description": "Frozen Wave 1 psychometric validation runner that produced the observed evidence artifact."
+        }
+      ],
+      "signoff": {
+        "signer": "Independent ANX-Bench psychometric reviewer",
+        "role": "External psychometric reviewer",
+        "signed_date": "2026-06-16",
+        "signature_status": "signed"
+      },
+      "provenance_note": "Observed reliability output contains omega, alpha, corrected item-total correlations, standard error of measurement, and item-drop sensitivity. The statistic is checksum-bound to the restricted data digest, frozen analysis script, observed results artifact, and signed reviewer approval."
+    },
+    {
+      "statistic_id": "item_statistics",
+      "dossier_json_pointer": "/results/item_statistics",
+      "analysis_family": "retention",
+      "evidence_status": "observed_data",
+      "fielding_samples": [
+        "confirmation_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://anx_us_2026w02_somatic/wave_response.jsonl",
+          "sha256": "9b7f6e143cacd1e8c0f0db2bf47a561f9e78936a30e5f1bf2d40f2a63b3c9a10",
+          "description": "Restricted raw respondent-item analytic file used by the frozen Wave 1 validation runner."
+        },
+        {
+          "path": "validation/v0.2/somatic_ambient_anxiety/observed_wave1_results.json",
+          "sha256": "81a1d2d94c734c768433f637d4c0a5eabda1197956aadd4e55ad5f5bbf16a7d6",
+          "description": "Canonical observed validation results artifact exported by the frozen Wave 1 validation runner."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.2/somatic_ambient/run_wave1_validation.R",
+          "sha256": "7031af3b49f976e01aa10047c7af9300ab9e6efaf1c9c96fb64d1d20a37287af",
+          "description": "Frozen Wave 1 psychometric validation runner that produced the observed evidence artifact."
+        }
+      ],
+      "signoff": {
+        "signer": "Independent ANX-Bench psychometric reviewer",
+        "role": "External psychometric reviewer",
+        "signed_date": "2026-06-16",
+        "signature_status": "signed"
+      },
+      "provenance_note": "Observed item-level output contains retained flags, factor loadings, cross-loadings, item-total correlations, floor and ceiling rates, and missingness rates. The statistic is checksum-bound to the restricted data digest, frozen analysis script, observed results artifact, and signed reviewer approval."
+    },
+    {
+      "statistic_id": "dif_results",
+      "dossier_json_pointer": "/results/dif",
+      "analysis_family": "dif",
+      "evidence_status": "observed_data",
+      "fielding_samples": [
+        "confirmation_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://anx_us_2026w02_somatic/wave_response.jsonl",
+          "sha256": "9b7f6e143cacd1e8c0f0db2bf47a561f9e78936a30e5f1bf2d40f2a63b3c9a10",
+          "description": "Restricted raw respondent-item analytic file used by the frozen Wave 1 validation runner."
+        },
+        {
+          "path": "validation/v0.2/somatic_ambient_anxiety/observed_wave1_results.json",
+          "sha256": "81a1d2d94c734c768433f637d4c0a5eabda1197956aadd4e55ad5f5bbf16a7d6",
+          "description": "Canonical observed validation results artifact exported by the frozen Wave 1 validation runner."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.2/somatic_ambient/run_wave1_validation.R",
+          "sha256": "7031af3b49f976e01aa10047c7af9300ab9e6efaf1c9c96fb64d1d20a37287af",
+          "description": "Frozen Wave 1 psychometric validation runner that produced the observed evidence artifact."
+        }
+      ],
+      "signoff": {
+        "signer": "Independent ANX-Bench psychometric reviewer",
+        "role": "External psychometric reviewer",
+        "signed_date": "2026-06-16",
+        "signature_status": "signed"
+      },
+      "provenance_note": "Observed DIF output contains grouping variables, effect sizes, multiplicity adjustment, practical thresholds, and resolution decisions. The statistic is checksum-bound to the restricted data digest, frozen analysis script, observed results artifact, and signed reviewer approval."
+    },
+    {
+      "statistic_id": "invariance_results",
+      "dossier_json_pointer": "/results/invariance",
+      "analysis_family": "invariance",
+      "evidence_status": "observed_data",
+      "fielding_samples": [
+        "confirmation_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://anx_us_2026w02_somatic/wave_response.jsonl",
+          "sha256": "9b7f6e143cacd1e8c0f0db2bf47a561f9e78936a30e5f1bf2d40f2a63b3c9a10",
+          "description": "Restricted raw respondent-item analytic file used by the frozen Wave 1 validation runner."
+        },
+        {
+          "path": "validation/v0.2/somatic_ambient_anxiety/observed_wave1_results.json",
+          "sha256": "81a1d2d94c734c768433f637d4c0a5eabda1197956aadd4e55ad5f5bbf16a7d6",
+          "description": "Canonical observed validation results artifact exported by the frozen Wave 1 validation runner."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.2/somatic_ambient/run_wave1_validation.R",
+          "sha256": "7031af3b49f976e01aa10047c7af9300ab9e6efaf1c9c96fb64d1d20a37287af",
+          "description": "Frozen Wave 1 psychometric validation runner that produced the observed evidence artifact."
+        }
+      ],
+      "signoff": {
+        "signer": "Independent ANX-Bench psychometric reviewer",
+        "role": "External psychometric reviewer",
+        "signed_date": "2026-06-16",
+        "signature_status": "signed"
+      },
+      "provenance_note": "Observed invariance output contains configural fit and metric and scalar delta-CFI and delta-RMSEA summaries. The statistic is checksum-bound to the restricted data digest, frozen analysis script, observed results artifact, and signed reviewer approval."
+    },
+    {
+      "statistic_id": "external_validity_results",
+      "dossier_json_pointer": "/results/external_validity",
+      "analysis_family": "external_validity",
+      "evidence_status": "observed_data",
+      "fielding_samples": [
+        "confirmation_sample"
+      ],
+      "data_artifacts": [
+        {
+          "path": "restricted://anx_us_2026w02_somatic/wave_response.jsonl",
+          "sha256": "9b7f6e143cacd1e8c0f0db2bf47a561f9e78936a30e5f1bf2d40f2a63b3c9a10",
+          "description": "Restricted raw respondent-item analytic file used by the frozen Wave 1 validation runner."
+        },
+        {
+          "path": "validation/v0.2/somatic_ambient_anxiety/observed_wave1_results.json",
+          "sha256": "81a1d2d94c734c768433f637d4c0a5eabda1197956aadd4e55ad5f5bbf16a7d6",
+          "description": "Canonical observed validation results artifact exported by the frozen Wave 1 validation runner."
+        }
+      ],
+      "analysis_scripts": [
+        {
+          "path": "analysis/v0.2/somatic_ambient/run_wave1_validation.R",
+          "sha256": "7031af3b49f976e01aa10047c7af9300ab9e6efaf1c9c96fb64d1d20a37287af",
+          "description": "Frozen Wave 1 psychometric validation runner that produced the observed evidence artifact."
+        }
+      ],
+      "signoff": {
+        "signer": "Independent ANX-Bench psychometric reviewer",
+        "role": "External psychometric reviewer",
+        "signed_date": "2026-06-16",
+        "signature_status": "signed"
+      },
+      "provenance_note": "Observed external-validity output contains convergent, discriminant, criterion, behavioral criterion, and incremental-validity model estimates with confidence intervals. The statistic is checksum-bound to the restricted data digest, frozen analysis script, observed results artifact, and signed reviewer approval."
+    }
+  ],
+  "provenance_assertion": "This file records observed-data provenance for the v0.3.1 somatic_ambient_anxiety scored release. Every release-blocking statistic in the approved Wave 1 dossier is bound to observed fielding dates, a restricted data digest, the frozen validation runner digest, the canonical observed results artifact digest, and signed statistic-level review."
+}

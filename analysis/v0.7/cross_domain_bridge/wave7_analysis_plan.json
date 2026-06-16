@@ -1,0 +1,694 @@
+{
+  "$schema": "../../../schema/psychometric_analysis_plan.schema.json",
+  "analysis_plan_schema_version": "v0.1.0",
+  "plan_id": "anx_us_2026w07_cross_domain_bridge_analysis_plan",
+  "benchmark_version": "v0.7.0",
+  "study_id": "anx_us_2026w07_cross_domain_bridge",
+  "registration": {
+    "preregistration_path": "docs/preregistrations/anx_us_2026w07_cross_domain_bridge.md",
+    "analysis_plan_path": "analysis/v0.7/cross_domain_bridge/wave7_analysis_plan.json",
+    "authoritative_contract": true,
+    "outcome_inspection_status": "not_inspected"
+  },
+  "required_inputs": [
+    {
+      "input_id": "wave_response_file",
+      "path": "vendor_restricted/anx_us_2026w07_cross_domain_bridge/wave_response.jsonl",
+      "role": "Respondent-item file for the 12 co-administered bridge items, validated against schema/wave_response.schema.json before distributions, factor models, linking, or correlations are estimated.",
+      "required_fields": [
+        "wave_id",
+        "benchmark_version",
+        "item_id",
+        "item_version",
+        "respondent_id_hash",
+        "raw_response",
+        "scored_value",
+        "missingness_code",
+        "event_id",
+        "survey_weight"
+      ],
+      "validation_rule": "All rows must use wave_id anx_us_2026w07_cross_domain_bridge, benchmark_version v0.7.0, event_id no_event, and exactly the frozen somatic, economic, and epistemic item IDs listed in the preregistration."
+    },
+    {
+      "input_id": "respondent_covariate_file",
+      "path": "vendor_restricted/anx_us_2026w07_cross_domain_bridge/respondent_covariates.csv",
+      "role": "Respondent-level analytic file containing eligibility, exclusions, weights, demographics, employment variables, information-environment variables, AI exposure, baseline anxiety, block order, item order, and paradata.",
+      "required_fields": [
+        "respondent_id_hash",
+        "analytic_eligible",
+        "age_group",
+        "gender",
+        "race_ethnicity",
+        "education",
+        "census_region",
+        "employment_status",
+        "occupation_group",
+        "prior_ai_exposure_frequency",
+        "ai_news_exposure_30d",
+        "baseline_general_anxiety_2item_mean",
+        "domain_block_order",
+        "final_weight"
+      ],
+      "validation_rule": "Each eligible respondent must join to 12 administered item rows unless item missingness is explicitly coded, and all preregistered exclusion variables must be present before outcome inspection."
+    },
+    {
+      "input_id": "frozen_item_files",
+      "path": "items",
+      "role": "Frozen item wording, response anchors, scoring keys, construct metadata, exclusion metadata, and validation metadata for the co-administered somatic, economic, and epistemic bridge item pools.",
+      "required_fields": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo",
+        "skill_obsolescence_software",
+        "wage_pressure_customer_support",
+        "retraining_pressure_accounting",
+        "status_loss_creative_work",
+        "deepfake_evidence_trust",
+        "synthetic_news_provenance",
+        "ai_expert_claim_conflict",
+        "personalized_misinformation_targeting"
+      ],
+      "validation_rule": "The analysis allowlist is exactly the 12 bridge item IDs, with somatic item_version v0.2.0 and economic and epistemic item_version v0.1.0."
+    }
+  ],
+  "software_environment": {
+    "language": "R",
+    "runtime_version": "R 4.4.3",
+    "packages": [
+      {
+        "name": "psych",
+        "version": "2.4.12",
+        "purpose": "Polychoric correlations, ordinal EFA, corrected item-total correlations, omega summaries, and descriptive diagnostics."
+      },
+      {
+        "name": "GPArotation",
+        "version": "2024.3-1",
+        "purpose": "Oblique exploratory rotations for cross-domain factor-structure diagnostics."
+      },
+      {
+        "name": "lavaan",
+        "version": "0.6-19",
+        "purpose": "Ordered-categorical CFA, correlated-factor models, bifactor sensitivity models, and multi-group invariance using WLSMV."
+      },
+      {
+        "name": "semTools",
+        "version": "0.5-6",
+        "purpose": "Ordinal reliability, measurement-invariance summaries, and CFA comparison tables."
+      },
+      {
+        "name": "mirt",
+        "version": "1.43",
+        "purpose": "Multidimensional graded-response IRT calibration, linking, item information, local dependence, and DIF sensitivity models."
+      },
+      {
+        "name": "lordif",
+        "version": "0.3-3",
+        "purpose": "Ordinal logistic DIF screening with practical effect-size diagnostics."
+      },
+      {
+        "name": "survey",
+        "version": "4.4-2",
+        "purpose": "Weighted descriptive distributions, weight diagnostics, and sensitivity estimates."
+      }
+    ],
+    "version_lock_rule": "Analyses must archive sessionInfo output and package versions exactly; any substitution requires a preregistered addendum showing unchanged confirmatory pass-fail decisions."
+  },
+  "randomization_and_seeds": {
+    "global_seed": 20260716,
+    "procedure_seeds": {
+      "block_order_audit": 20260717,
+      "efa_parallel_analysis": 20260718,
+      "cfa_start_values": 20260719,
+      "omega_bootstrap": 20260720,
+      "irt_linking": 20260721,
+      "dif_resampling": 20260722,
+      "invariance_start_values": 20260723,
+      "cross_domain_correlation_bootstrap": 20260724
+    },
+    "seed_policy": "Seeds are fixed before outcome inspection, set immediately before stochastic procedures, and written to the bridge dossier with the exact R session lock."
+  },
+  "sample_splits": [
+    {
+      "split_id": "bridge_sample",
+      "role": "bridge_or_refresh",
+      "target_n": 1500,
+      "overlap_rule": "The bridge sample must be independent of prior Wave 5 and Wave 6 calibration respondents when panel identifiers or protected linkage evidence are available.",
+      "allowed_analyses": [
+        "item_distributions",
+        "efa",
+        "cfa",
+        "omega",
+        "irt_linking",
+        "dif",
+        "invariance",
+        "cross_domain_correlations",
+        "overall_readiness_review"
+      ]
+    }
+  ],
+  "eligibility_and_exclusions": {
+    "eligibility_rules": [
+      {
+        "rule_id": "adult_us_english_consent",
+        "rule": "Respondent is age 18 or older, resides in the United States, can complete the survey in English without assistance, and provided informed consent.",
+        "target_field": "sample_provenance/exclusion_flow/eligibility"
+      },
+      {
+        "rule_id": "independent_bridge_sample",
+        "rule": "Respondents should not overlap with prior economic or epistemic calibration samples when protected panel linkage is available.",
+        "target_field": "sample_provenance/exclusion_flow/eligibility"
+      }
+    ],
+    "exclusion_rules": [
+      {
+        "rule_id": "failed_attention_check",
+        "rule": "Exclude respondents who fail the instructed-response attention check.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "failed_cross_domain_attribution_check",
+        "rule": "Exclude respondents who fail the check confirming that the survey asks about AI-related anxiety across bodily, work, and information scenarios.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "speeding",
+        "rule": "Exclude respondents whose completion time is below one-third of the same-sample median after clear breakoffs are removed.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "straightline_plus_quality_failure",
+        "rule": "Exclude respondents who give the same substantive response to all 12 ANX items and also fail an attention or minimum-reading-time check.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "excessive_anx_missingness",
+        "rule": "Exclude respondents missing or giving non-substantive responses on more than 25 percent of administered ANX items.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "duplicate_or_unusable_record",
+        "rule": "Exclude confirmed duplicate respondents, non-consenting respondents, protocol-ineligible respondents, breakoffs without usable item data, vendor-confirmed fraud, and records unusable after audit.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      }
+    ],
+    "non_exclusion_flags": [
+      {
+        "rule_id": "single_low_item_time",
+        "rule": "A single item response time below one-third of the sample median item time is retained as a sensitivity flag and does not exclude by itself.",
+        "target_field": "evidence/item_response_time_sensitivity"
+      },
+      {
+        "rule_id": "occupation_or_anxiety_status",
+        "rule": "Unemployment, career transition, high AI exposure, and high baseline general anxiety are retained for DIF or validity analyses and do not exclude by themselves.",
+        "target_field": "evidence/dif_and_invariance"
+      }
+    ],
+    "flow_table_target_field": "sample_provenance/exclusion_flow"
+  },
+  "weighting_policy": {
+    "primary_estimation": "Primary EFA, CFA, omega, IRT linking, DIF, invariance, and cross-domain correlation pass-fail decisions are unweighted unless the estimator has a validated survey-weight implementation.",
+    "descriptive_estimation": "Weighted and unweighted item distributions, missingness rates, sample characteristics, exclusion rates, and domain-block-order checks must all be reported.",
+    "weight_construction": "Construct post-stratification or raking weights using age group, gender, race and ethnicity, education, Census region, employment status, occupation group, and stable AI exposure margins when available.",
+    "trimming": {
+      "minimum": 0.3,
+      "maximum": 3.0,
+      "exception_rule": "Weights outside 0.30 to 3.00 must be trimmed unless a documented sensitivity analysis shows a wider range is necessary and leaves bridge decisions unchanged."
+    },
+    "sensitivity_required": true,
+    "target_field": "sample_provenance/weighting"
+  },
+  "missing_data_handling": {
+    "item_distributions": "Report observed, skipped, breakoff, technical failure, and quality-control missingness separately for each item before respondent exclusions and after analytic exclusions.",
+    "factor_models": "EFA and CFA use observed ordered responses from analytically eligible respondents; pairwise polychoric correlations are allowed for EFA diagnostics, while CFA uses the estimator default for ordered categorical missingness without imputing ANX responses.",
+    "reliability": "Ordinal omega and corrected item-total correlations are computed from eligible respondents with sufficient observed retained items; no ANX item response is imputed for pass-fail reliability gates.",
+    "irt": "Graded-response IRT linking uses observed ordered item responses only; respondents with missing retained items contribute according to the package likelihood implementation and missingness must be reported.",
+    "external_validity": "Cross-domain correlations and readiness models use complete observed retained item summaries; missing non-ANX covariates may use explicit missing categories for sensitivity only.",
+    "imputation_policy": "Do not impute ANX item responses, item scores, latent bridge scores, exclusion flags, sample membership, or event fields; covariate-only handling cannot rescue a failed primary gate.",
+    "target_field": "evidence/missingness"
+  },
+  "models": {
+    "efa": {
+      "sample": "bridge_sample",
+      "estimator": "Ordinal EFA on polychoric correlations with oblique rotation and parallel-analysis support across the 12-item bridge pool.",
+      "primary_statistics": [
+        "primary_loading_min",
+        "secondary_loading_max",
+        "parallel_analysis_factor_count",
+        "three_factor_interpretability"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "efa_primary_loading",
+          "statistic": "primary_loading_min",
+          "operator": ">=",
+          "threshold": 0.5,
+          "pass_action": "Retain item for confirmatory bridge modeling.",
+          "fail_action": "Flag item for bridge failure or domain-specific revision.",
+          "target_field": "evidence/efa/item_loadings"
+        },
+        {
+          "gate_id": "efa_secondary_loading",
+          "statistic": "secondary_loading_max",
+          "operator": "<=",
+          "threshold": 0.3,
+          "pass_action": "No material secondary loading is detected.",
+          "fail_action": "Require written construct interpretation and block simple aggregation.",
+          "target_field": "evidence/efa/cross_loadings"
+        },
+        {
+          "gate_id": "efa_factor_count",
+          "statistic": "parallel_analysis_factor_count",
+          "operator": "in",
+          "threshold": [
+            2,
+            3
+          ],
+          "pass_action": "Retain interpretable multidomain factor structure for CFA.",
+          "fail_action": "Block cross-domain bridge readiness.",
+          "target_field": "evidence/efa/factor_count"
+        }
+      ],
+      "target_fields": [
+        "evidence/efa/item_loadings",
+        "evidence/efa/factor_count",
+        "decision/item_retention"
+      ]
+    },
+    "cfa": {
+      "sample": "bridge_sample",
+      "estimator": "Ordered-categorical WLSMV CFA comparing correlated three-factor, unidimensional, bifactor, and second-order bridge models.",
+      "primary_statistics": [
+        "correlated_three_factor_cfi",
+        "correlated_three_factor_tli",
+        "correlated_three_factor_rmsea",
+        "correlated_three_factor_srmr",
+        "standardized_loading_min",
+        "unidimensional_delta_cfi"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "cfa_cfi",
+          "statistic": "correlated_three_factor_cfi",
+          "operator": ">=",
+          "threshold": 0.95,
+          "pass_action": "Correlated three-factor CFI meets strong bridge fit support.",
+          "fail_action": "If below 0.90 block bridge readiness; if 0.90 to 0.949 require caution.",
+          "target_field": "evidence/cfa/fit"
+        },
+        {
+          "gate_id": "cfa_rmsea",
+          "statistic": "correlated_three_factor_rmsea",
+          "operator": "<=",
+          "threshold": 0.06,
+          "pass_action": "Correlated three-factor RMSEA meets strong bridge fit support.",
+          "fail_action": "If above 0.080 block bridge readiness; if 0.061 to 0.080 require caution.",
+          "target_field": "evidence/cfa/fit"
+        },
+        {
+          "gate_id": "cfa_loading",
+          "statistic": "standardized_loading_min",
+          "operator": ">=",
+          "threshold": 0.5,
+          "pass_action": "All retained items meet loading threshold.",
+          "fail_action": "Block bridge readiness if fewer than three items remain in any domain.",
+          "target_field": "evidence/cfa/item_loadings"
+        },
+        {
+          "gate_id": "unidimensional_rejection",
+          "statistic": "unidimensional_delta_cfi",
+          "operator": "<=",
+          "threshold": -0.01,
+          "pass_action": "Unidimensional model fits materially worse than the domain-stratified model.",
+          "fail_action": "Require caution because domain separability is not established.",
+          "target_field": "evidence/cfa/model_comparison"
+        }
+      ],
+      "target_fields": [
+        "evidence/cfa/fit",
+        "evidence/cfa/model_comparison",
+        "evidence/cfa/item_loadings"
+      ]
+    },
+    "omega": {
+      "sample": "bridge_sample",
+      "estimator": "Ordinal omega for each domain plus omega hierarchical and explained common variance for bifactor or second-order readiness review.",
+      "primary_statistics": [
+        "domain_omega_min",
+        "omega_hierarchical",
+        "explained_common_variance",
+        "corrected_item_total_min"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "domain_omega",
+          "statistic": "domain_omega_min",
+          "operator": ">=",
+          "threshold": 0.7,
+          "pass_action": "All domains meet early reliability threshold.",
+          "fail_action": "Block cross-domain bridge readiness.",
+          "target_field": "evidence/reliability/omega"
+        },
+        {
+          "gate_id": "overall_omega_hierarchical",
+          "statistic": "omega_hierarchical",
+          "operator": ">=",
+          "threshold": 0.5,
+          "pass_action": "General-factor reliability is sufficient for later overall-readiness review.",
+          "fail_action": "Block overall ANX proposal while allowing domain-only bridge review.",
+          "target_field": "evidence/reliability/general_factor"
+        },
+        {
+          "gate_id": "explained_common_variance",
+          "statistic": "explained_common_variance",
+          "operator": ">=",
+          "threshold": 0.5,
+          "pass_action": "General factor explains enough common variance for later proposal review.",
+          "fail_action": "Block overall ANX proposal.",
+          "target_field": "evidence/reliability/general_factor"
+        }
+      ],
+      "target_fields": [
+        "evidence/reliability/omega",
+        "evidence/reliability/general_factor"
+      ]
+    },
+    "irt": {
+      "sample": "bridge_sample",
+      "estimator": "Multidimensional graded-response IRT linking with somatic anchor items and domain-specific candidate dimensions.",
+      "primary_statistics": [
+        "discrimination_min",
+        "threshold_ordering_violations",
+        "local_dependence_abs_max",
+        "anchor_drift_abs_mean",
+        "linking_standard_error_central"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "irt_discrimination",
+          "statistic": "discrimination_min",
+          "operator": ">=",
+          "threshold": 0.65,
+          "pass_action": "All retained items show minimally useful discrimination.",
+          "fail_action": "Flag weak item for revision or bridge blocking.",
+          "target_field": "evidence/irt/discrimination"
+        },
+        {
+          "gate_id": "irt_threshold_ordering",
+          "statistic": "threshold_ordering_violations",
+          "operator": "=",
+          "threshold": 0,
+          "pass_action": "Response categories function in ordered severity sequence.",
+          "fail_action": "Block linking readiness if threshold disordering is unresolved.",
+          "target_field": "evidence/irt/thresholds"
+        },
+        {
+          "gate_id": "irt_local_dependence",
+          "statistic": "local_dependence_abs_max",
+          "operator": "<",
+          "threshold": 0.2,
+          "pass_action": "No severe residual local dependence is detected.",
+          "fail_action": "Block simple cross-domain linking or revise redundant items.",
+          "target_field": "evidence/irt/local_dependence"
+        },
+        {
+          "gate_id": "irt_anchor_drift",
+          "statistic": "anchor_drift_abs_mean",
+          "operator": "<=",
+          "threshold": 0.2,
+          "pass_action": "Somatic anchor drift is within bridge tolerance.",
+          "fail_action": "Block using somatic items as stable cross-domain anchors.",
+          "target_field": "evidence/irt/linking"
+        }
+      ],
+      "target_fields": [
+        "evidence/irt/discrimination",
+        "evidence/irt/thresholds",
+        "evidence/irt/local_dependence",
+        "evidence/irt/linking"
+      ]
+    },
+    "dif": {
+      "sample": "bridge_sample",
+      "estimator": "Ordinal logistic DIF with Benjamini-Hochberg FDR control within domain families plus IRT DIF sensitivity where subgroup sizes permit.",
+      "primary_statistics": [
+        "dif_fdr_q",
+        "dif_pseudo_r2_delta_max",
+        "expected_score_difference_sd_max",
+        "rank_order_impact_flag"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "dif_fdr",
+          "statistic": "dif_fdr_q",
+          "operator": ">=",
+          "threshold": 0.05,
+          "pass_action": "No statistically flagged DIF remains after family control.",
+          "fail_action": "Evaluate practical DIF before bridge decision.",
+          "target_field": "evidence/dif/statistical_screen"
+        },
+        {
+          "gate_id": "dif_pseudo_r2",
+          "statistic": "dif_pseudo_r2_delta_max",
+          "operator": "<",
+          "threshold": 0.02,
+          "pass_action": "Practical DIF by pseudo R-squared is below threshold.",
+          "fail_action": "Block combined-score proposal unless immateriality is justified and disclosed.",
+          "target_field": "evidence/dif/practical_impact"
+        },
+        {
+          "gate_id": "dif_expected_score",
+          "statistic": "expected_score_difference_sd_max",
+          "operator": "<",
+          "threshold": 0.1,
+          "pass_action": "Expected score impact is below material threshold.",
+          "fail_action": "Block or limit affected subgroup and aggregate claims.",
+          "target_field": "evidence/dif/practical_impact"
+        }
+      ],
+      "target_fields": [
+        "evidence/dif/statistical_screen",
+        "evidence/dif/practical_impact",
+        "decision/subgroup_claims"
+      ]
+    },
+    "invariance": {
+      "sample": "bridge_sample",
+      "estimator": "Multi-group ordered-categorical CFA for configural, metric, and scalar or threshold invariance, with IRT linking fallback when CFA is unstable.",
+      "primary_statistics": [
+        "configural_converged",
+        "metric_delta_cfi",
+        "metric_delta_rmsea",
+        "scalar_delta_cfi",
+        "scalar_delta_rmsea"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "invariance_configural",
+          "statistic": "configural_converged",
+          "operator": "=",
+          "threshold": true,
+          "pass_action": "Proceed to metric and scalar invariance comparisons.",
+          "fail_action": "Block subgroup comparability claims for affected grouping variable.",
+          "target_field": "evidence/invariance/configural"
+        },
+        {
+          "gate_id": "invariance_metric_cfi",
+          "statistic": "metric_delta_cfi",
+          "operator": ">=",
+          "threshold": -0.01,
+          "pass_action": "Metric invariance CFI threshold passes.",
+          "fail_action": "Flag metric non-invariance for the grouping variable.",
+          "target_field": "evidence/invariance/metric"
+        },
+        {
+          "gate_id": "invariance_scalar_cfi",
+          "statistic": "scalar_delta_cfi",
+          "operator": ">=",
+          "threshold": -0.01,
+          "pass_action": "Scalar or threshold invariance CFI threshold passes.",
+          "fail_action": "Block mean-comparison and combined-score claims for affected grouping variable.",
+          "target_field": "evidence/invariance/scalar"
+        },
+        {
+          "gate_id": "invariance_scalar_rmsea",
+          "statistic": "scalar_delta_rmsea",
+          "operator": "<=",
+          "threshold": 0.015,
+          "pass_action": "Scalar or threshold invariance RMSEA threshold passes.",
+          "fail_action": "Block mean-comparison and combined-score claims for affected grouping variable.",
+          "target_field": "evidence/invariance/scalar"
+        }
+      ],
+      "target_fields": [
+        "evidence/invariance/configural",
+        "evidence/invariance/metric",
+        "evidence/invariance/scalar",
+        "decision/subgroup_claims"
+      ]
+    },
+    "external_validity": {
+      "sample": "bridge_sample",
+      "estimator": "Latent cross-domain correlations, disattenuated construct correlations, and adjusted partial correlations after baseline general anxiety and AI exposure covariates.",
+      "primary_statistics": [
+        "latent_correlation_min",
+        "latent_correlation_max",
+        "partial_correlation_min",
+        "general_anxiety_correlation_max"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "cross_domain_correlation_lower",
+          "statistic": "latent_correlation_min",
+          "operator": ">=",
+          "threshold": 0.3,
+          "pass_action": "Domains share enough common ANX variance for family-level readiness.",
+          "fail_action": "Block overall ANX proposal because common-family evidence is too weak.",
+          "target_field": "evidence/cross_domain_correlations/latent"
+        },
+        {
+          "gate_id": "cross_domain_correlation_upper",
+          "statistic": "latent_correlation_max",
+          "operator": "<=",
+          "threshold": 0.75,
+          "pass_action": "Domains remain sufficiently discriminable for stratified reporting.",
+          "fail_action": "Block simple aggregation because discriminant validity is insufficient.",
+          "target_field": "evidence/cross_domain_correlations/latent"
+        },
+        {
+          "gate_id": "general_anxiety_discriminant",
+          "statistic": "general_anxiety_correlation_max",
+          "operator": "<=",
+          "threshold": 0.7,
+          "pass_action": "ANX domains remain distinguishable from baseline general anxiety.",
+          "fail_action": "Block overall ANX readiness unless incremental AI-specific variance is demonstrated.",
+          "target_field": "evidence/cross_domain_correlations/discriminant"
+        }
+      ],
+      "target_fields": [
+        "evidence/cross_domain_correlations/latent",
+        "evidence/cross_domain_correlations/partial",
+        "evidence/cross_domain_correlations/discriminant"
+      ]
+    }
+  },
+  "validation_gates": [
+    {
+      "gate_id": "minimum_eligible_n",
+      "statistic": "eligible_n",
+      "operator": ">=",
+      "threshold": 1200,
+      "pass_action": "Proceed with bridge pass-fail decisions.",
+      "fail_action": "Label all bridge decisions underpowered and block readiness claims.",
+      "target_field": "sample_provenance/analytic_n"
+    },
+    {
+      "gate_id": "aggregate_scoring_block",
+      "statistic": "aggregate_scoring_permitted",
+      "operator": "=",
+      "threshold": false,
+      "pass_action": "Preserve v0.7.0 as bridge evidence only.",
+      "fail_action": "Invalidate the packet because scoring was enabled prematurely.",
+      "target_field": "decision/release_scoring_status"
+    },
+    {
+      "gate_id": "event_study_block",
+      "statistic": "event_id",
+      "operator": "=",
+      "threshold": "no_event",
+      "pass_action": "Preserve no-event bridge interpretation.",
+      "fail_action": "Block event-study, trend, and capability-shock claims.",
+      "target_field": "decision/event_claims"
+    },
+    {
+      "gate_id": "overall_readiness_threshold",
+      "statistic": "overall_readiness_decision",
+      "operator": "in",
+      "threshold": [
+        "blocked",
+        "bridge_supported_domain_only",
+        "bridge_supported_for_overall_readiness_review"
+      ],
+      "pass_action": "Write one preregistered readiness label to the bridge dossier.",
+      "fail_action": "Reject unregistered readiness labels and block aggregate claims.",
+      "target_field": "decision/overall_readiness"
+    }
+  ],
+  "sensitivity_analyses": [
+    {
+      "analysis_id": "weighted_descriptive_sensitivity",
+      "description": "Compare weighted and unweighted item distributions, missingness, and latent correlation summaries.",
+      "primary_comparison": "Primary unweighted pass-fail labels must be reported beside weighted descriptive estimates.",
+      "target_field": "evidence/sensitivity/weights"
+    },
+    {
+      "analysis_id": "block_order_sensitivity",
+      "description": "Estimate whether domain block order changes item thresholds, latent means, or cross-domain correlations.",
+      "primary_comparison": "Bridge conclusions must remain stable after including block order indicators.",
+      "target_field": "evidence/sensitivity/block_order"
+    },
+    {
+      "analysis_id": "general_anxiety_adjustment",
+      "description": "Re-estimate cross-domain correlations after adjusting for baseline general anxiety and AI exposure.",
+      "primary_comparison": "Adjusted correlations should remain inside the preregistered 0.30 to 0.75 readiness band.",
+      "target_field": "evidence/sensitivity/general_anxiety"
+    }
+  ],
+  "dossier_output": {
+    "dossier_path": "validation/v0.7/cross_domain_bridge/wave7_bridge_dossier.json",
+    "required_fields": [
+      "sample_provenance/exclusion_flow",
+      "sample_provenance/analytic_n",
+      "sample_provenance/weighting",
+      "evidence/efa/item_loadings",
+      "evidence/cfa/fit",
+      "evidence/reliability/omega",
+      "evidence/irt/linking",
+      "evidence/dif/practical_impact",
+      "evidence/invariance/scalar",
+      "evidence/cross_domain_correlations/latent",
+      "decision/overall_readiness",
+      "decision/release_scoring_status",
+      "decision/event_claims"
+    ],
+    "write_policy": "The observed dossier must be written only after fielding and analysis; v0.7.0 remains a frozen candidate packet until a later evidence-bound review."
+  },
+  "statistic_to_dossier_field": [
+    {
+      "statistic_id": "eligible_n",
+      "analysis": "sample_flow",
+      "target_field": "sample_provenance/analytic_n",
+      "decision_use": "Determines whether bridge pass-fail decisions have adequate sample size."
+    },
+    {
+      "statistic_id": "domain_omega_min",
+      "analysis": "omega",
+      "target_field": "evidence/reliability/omega",
+      "decision_use": "Blocks readiness when any co-administered domain lacks reliability."
+    },
+    {
+      "statistic_id": "anchor_drift_abs_mean",
+      "analysis": "irt",
+      "target_field": "evidence/irt/linking",
+      "decision_use": "Determines whether somatic anchor items remain stable in cross-domain administration."
+    },
+    {
+      "statistic_id": "latent_correlation_min",
+      "analysis": "external_validity",
+      "target_field": "evidence/cross_domain_correlations/latent",
+      "decision_use": "Blocks overall readiness when domains do not share enough common ANX variance."
+    },
+    {
+      "statistic_id": "latent_correlation_max",
+      "analysis": "external_validity",
+      "target_field": "evidence/cross_domain_correlations/latent",
+      "decision_use": "Blocks simple aggregation when domains are not sufficiently discriminable."
+    },
+    {
+      "statistic_id": "overall_readiness_decision",
+      "analysis": "overall_readiness_review",
+      "target_field": "decision/overall_readiness",
+      "decision_use": "Records the only allowed bridge-readiness label and cannot authorize scoring by itself."
+    }
+  ]
+}

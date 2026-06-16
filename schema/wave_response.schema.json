@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/wave_response.schema.json",
+  "title": "ANX-Bench Wave Response Row Schema",
+  "description": "Canonical validation schema for a single respondent-item response row from an ANX-Bench fielded wave. Each row records one respondent's raw answer to one item version in one benchmark wave, the scored value derived from the item scoring key, and the minimum provenance needed for reproducible longitudinal and event-study analysis.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "wave_id",
+    "benchmark_version",
+    "item_id",
+    "item_version",
+    "respondent_id_hash",
+    "raw_response",
+    "scored_value",
+    "response_timestamp",
+    "administration_mode",
+    "language",
+    "survey_weight",
+    "exclusion_flags",
+    "missingness_code"
+  ],
+  "properties": {
+    "wave_id": {
+      "type": "string",
+      "pattern": "^anx_[a-z]{2,3}_[0-9]{4}w[0-9]{2}(_[a-z0-9]+)*$",
+      "description": "Stable wave identifier with study family, country or population code, calendar year, wave number, and optional qualifier, for example anx_us_2026w01 or anx_jpn_2027w03_refresh."
+    },
+    "benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic ANX-Bench release version that governed the administered item set and scoring rules."
+    },
+    "item_id": {
+      "$ref": "#/$defs/snake_case_id",
+      "description": "Stable benchmark item identifier."
+    },
+    "item_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic version of the administered item record."
+    },
+    "respondent_id_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 or stronger salted, study-scoped pseudonymous respondent identifier. Direct identifiers are prohibited."
+    },
+    "raw_response": {
+      "description": "Unscored response as captured before application of the item scoring key. For missing responses this must be null and missingness_code must explain why.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "scored_value": {
+      "description": "Numeric item score after applying the released item scoring key. Must be null when missingness_code is not observed or when an exclusion prevents scoring.",
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 5
+    },
+    "response_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp at which the respondent submitted the item response or the item response was finalized by the fielding system."
+    },
+    "administration_mode": {
+      "type": "string",
+      "enum": [
+        "web",
+        "mobile_web",
+        "telephone",
+        "in_person",
+        "mail",
+        "mixed_mode",
+        "api_import"
+      ],
+      "description": "Mode through which the respondent-item response was collected."
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(-[A-Z]{2})?$",
+      "description": "BCP 47 language tag for the item text shown to the respondent, for example en, en-US, es, or ja-JP."
+    },
+    "survey_weight": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Final respondent-level analysis weight applicable to this row. Use 1.0 for unweighted analyses, and document the weighting plan in the preregistration or wave methods file."
+    },
+    "exclusion_flags": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Machine-readable reasons this row or respondent is excluded from one or more analyses. Empty array means no exclusion flag has been applied.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "attention_check_failed",
+          "speeding",
+          "straightlining",
+          "duplicate_respondent",
+          "ineligible_population",
+          "consent_withdrawn",
+          "quality_review_failed",
+          "item_not_administered_by_design",
+          "mode_protocol_violation",
+          "language_protocol_violation",
+          "scoring_ineligible_item",
+          "other_preregistered_exclusion"
+        ]
+      }
+    },
+    "missingness_code": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "not_presented_by_design",
+        "skipped_by_respondent",
+        "prefer_not_to_answer",
+        "survey_breakoff",
+        "technical_failure",
+        "removed_by_quality_control",
+        "not_scored_item_ineligible",
+        "not_scored_excluded_respondent"
+      ],
+      "description": "Reason a scored value is present or absent. observed means raw_response and scored_value are both available for scoring unless exclusion_flags remove the row from the analysis."
+    },
+    "event_id": {
+      "$ref": "#/$defs/snake_case_id",
+      "description": "Optional preregistered event identifier for event-study analyses."
+    },
+    "event_exposure_window": {
+      "type": "string",
+      "enum": [
+        "pre_event_baseline",
+        "immediate_post_event",
+        "short_post_event",
+        "extended_post_event",
+        "washout_or_buffer"
+      ],
+      "description": "Optional preregistered exposure window for the response relative to an AI capability event."
+    },
+    "baseline_or_followup": {
+      "type": "string",
+      "enum": [
+        "baseline",
+        "followup",
+        "same_wave_event_only"
+      ],
+      "description": "Optional role of this response in a longitudinal or event-study comparison."
+    },
+    "fielding_time_relative_to_event_hours": {
+      "type": "number",
+      "description": "Optional signed number of hours from the preregistered event timestamp to response_timestamp. Negative values indicate pre-event fielding."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "missingness_code": {
+            "const": "observed"
+          }
+        },
+        "required": [
+          "missingness_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "raw_response": {
+            "not": {
+              "type": "null"
+            }
+          },
+          "scored_value": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 5
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "missingness_code": {
+            "not": {
+              "const": "observed"
+            }
+          }
+        },
+        "required": [
+          "missingness_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "scored_value": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "snake_case_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    }
+  }
+}

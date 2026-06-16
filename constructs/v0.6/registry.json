@@ -1,0 +1,58 @@
+{
+  "$schema": "../../schema/construct_registry.schema.json",
+  "registry_schema_version": "v0.1.0",
+  "registry_version": "v0.6.0",
+  "benchmark_release_line": "v0.6",
+  "effective_benchmark_version": "v0.6.0",
+  "status": "frozen",
+  "domains": [
+    {
+      "domain_id": "epistemic",
+      "label": "Epistemic",
+      "definition": "Anxiety about truth, evidence, provenance, expertise, deepfakes, misinformation, source authenticity, personalized information manipulation, and the ability to trust shared information environments under advancing AI capability.",
+      "included_construct_ids": [
+        "epistemic_trust_anxiety"
+      ]
+    }
+  ],
+  "constructs": [
+    {
+      "construct_id": "epistemic_trust_anxiety",
+      "domain_id": "epistemic",
+      "label": "Epistemic trust anxiety",
+      "definition": "Anxiety arising from the belief that advancing AI systems may make ordinary evidence, testimony, media records, expert claims, provenance signals, targeted information, or institutional fact-finding harder to trust.",
+      "intended_aggregation_level": "multi_item_construct_candidate",
+      "minimum_retained_items": 3,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Exploratory factor analysis in the preregistered development pilot",
+          "Confirmatory factor analysis in an independent confirmation sample",
+          "Ordinal omega and corrected item-total evidence after retention decisions",
+          "Graded-response IRT calibration with threshold ordering, discrimination, information, and local-dependence diagnostics",
+          "DIF and measurement-invariance review for preregistered demographic, AI-exposure, news-exposure, media-literacy, institutional-trust, information-role, baseline-anxiety, and device groups",
+          "External-validity, behavioral criterion-validity, and incremental-validity evidence using preregistered comparator variables",
+          "Documented item retention decision leaving at least three retained items before construct scoring can be considered"
+        ],
+        "scoring_rule": "This v0.6 multi-item construct candidate may enter item-level, construct, domain, longitudinal, event-study, cross-domain, or overall ANX-Bench scoring only after preregistered observed validation retains at least three allowed items, a validation dossier passes review, item metadata are updated, and a later citable release explicitly lists official scored epistemic items."
+      },
+      "allowed_item_ids": [
+        "deepfake_evidence_trust",
+        "synthetic_news_provenance",
+        "ai_expert_claim_conflict",
+        "personalized_misinformation_targeting"
+      ]
+    }
+  ],
+  "release_rules": [
+    "The v0.6 registry freezes epistemic_trust_anxiety as a multi-item construct candidate only.",
+    "The four allowed epistemic items remain development-only until observed validation passes preregistered psychometric, DIF, invariance, criterion, behavioral, and incremental-validity gates.",
+    "At least three epistemic items must be retained before construct scoring can be considered.",
+    "Version v0.6.0 does not authorize scored, longitudinal, event-study, cross-domain, clinical, individual-level, or overall ANX claims."
+  ]
+}

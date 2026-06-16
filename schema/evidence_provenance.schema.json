@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/evidence_provenance.schema.json",
+  "title": "ANX-Bench Validation Evidence Provenance Schema",
+  "description": "Machine-readable provenance record for every validation statistic claimed by a psychometric validation dossier. The record distinguishes planned placeholders from observed-data evidence and binds each statistic to fielding windows, data artifacts, analysis scripts, checksums, signer, and signing date.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "provenance_schema_version",
+    "provenance_id",
+    "validation_dossier_path",
+    "benchmark_version",
+    "construct_id",
+    "evidence_status",
+    "validation_date",
+    "fielding_windows",
+    "validation_statistics",
+    "provenance_assertion"
+  ],
+  "properties": {
+    "$schema": {
+      "$ref": "#/$defs/repository_path"
+    },
+    "provenance_schema_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "provenance_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "validation_dossier_path": {
+      "$ref": "#/$defs/repository_path"
+    },
+    "benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "construct_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "evidence_status": {
+      "$ref": "#/$defs/evidence_status"
+    },
+    "validation_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "fielding_windows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/fielding_window"
+      }
+    },
+    "validation_statistics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/statistic_provenance"
+      }
+    },
+    "provenance_assertion": {
+      "type": "string",
+      "minLength": 60
+    }
+  },
+  "$defs": {
+    "repository_path": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/:\\-]+$"
+    },
+    "sha256_or_null": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "observed_data",
+        "planned_or_placeholder",
+        "not_applicable"
+      ]
+    },
+    "fielding_window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sample",
+        "status",
+        "planned_start_date",
+        "planned_end_date",
+        "observed_start_date",
+        "observed_end_date",
+        "fielding_date_source"
+      ],
+      "properties": {
+        "sample": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+        },
+        "status": {
+          "$ref": "#/$defs/evidence_status"
+        },
+        "planned_start_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "planned_end_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "observed_start_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "observed_end_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "fielding_date_source": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "description"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256_or_null"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signer",
+        "role",
+        "signed_date",
+        "signature_status"
+      ],
+      "properties": {
+        "signer": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 3
+        },
+        "role": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 3
+        },
+        "signed_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "signature_status": {
+          "type": "string",
+          "enum": [
+            "signed",
+            "unsigned_placeholder",
+            "not_applicable"
+          ]
+        }
+      }
+    },
+    "statistic_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statistic_id",
+        "dossier_json_pointer",
+        "analysis_family",
+        "evidence_status",
+        "fielding_samples",
+        "data_artifacts",
+        "analysis_scripts",
+        "signoff",
+        "provenance_note"
+      ],
+      "properties": {
+        "statistic_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+        },
+        "dossier_json_pointer": {
+          "type": "string",
+          "pattern": "^/.*$"
+        },
+        "analysis_family": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/evidence_status"
+        },
+        "fielding_samples": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+          }
+        },
+        "data_artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        },
+        "analysis_scripts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        },
+        "signoff": {
+          "$ref": "#/$defs/signature"
+        },
+        "provenance_note": {
+          "type": "string",
+          "minLength": 40
+        }
+      }
+    }
+  }
+}

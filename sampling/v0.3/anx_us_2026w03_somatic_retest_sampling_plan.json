@@ -1,0 +1,355 @@
+{
+  "$schema": "../../schema/sampling_plan.schema.json",
+  "sampling_plan_schema_version": "v0.1.0",
+  "plan_id": "anx_us_2026w03_somatic_retest_sampling_plan",
+  "benchmark_version": "v0.3.2",
+  "wave_id": "anx_us_2026w03_somatic_retest",
+  "registration": {
+    "sampling_plan_path": "sampling/v0.3/anx_us_2026w03_somatic_retest_sampling_plan.json",
+    "preregistration_path": "docs/preregistrations/anx_us_2026w03_somatic_retest.md",
+    "authoritative_contract": true,
+    "freeze_status": "frozen_before_fielding",
+    "outcome_inspection_status": "not_inspected"
+  },
+  "target_population": {
+    "population_id": "wave2_eligible_recontact_panel",
+    "description": "Wave 2 eligible English-language online adult respondents who completed the somatic and ambient calibration instrument, consented to recontact when asked, and remain reachable for a 14-day retest administration.",
+    "geography": "United States and District of Columbia",
+    "age_range": {
+      "minimum": 18,
+      "maximum": null
+    },
+    "language": "English",
+    "inclusion_criteria": [
+      "Eligible usable Wave 2 complete with the v0.3.1 somatic and ambient item set.",
+      "No Wave 2 exclusion that invalidates score construction or respondent linkage.",
+      "Available protected panel identifier for deterministic Wave 2 to Wave 3 linkage.",
+      "Completes the retest survey in English within the preregistered retest window."
+    ],
+    "exclusion_criteria": [
+      "Missing or nonlinkable Wave 2 respondent identifier.",
+      "Wave 2 record excluded after quality review or consent withdrawal.",
+      "Wave 3 duplicate, vendor-confirmed fraud, breakoff before usable item data, failed preregistered attention check, or completion outside the allowable retest window.",
+      "Evidence of study discussion, repeated unauthorized access, or other vendor-documented panel integrity violation."
+    ],
+    "coverage_limits": [
+      "The analytic retest panel covers retained Wave 2 respondents only and does not cover new adults who were not part of the Wave 2 calibration frame.",
+      "Respondents lost to attrition, unreachable at recontact, or excluded by Wave 3 quality controls are outside the paired retest analytic sample.",
+      "Wave 3 supports repeatability and panel-conditioning checks for the v0.3.1 somatic score; it must not be used for standalone population prevalence, national trend, or event-study claims."
+    ]
+  },
+  "sampling_frame": {
+    "frame_id": "wave2_recontact_panel",
+    "frame_type": "nonprobability_online_panel",
+    "frame_description": "The retained recontact frame consists of Wave 2 eligible completes from the professional online panel with protected respondent linkage, Wave 2 final weights, item-level responses, consent status, and vendor reachability indicators.",
+    "known_undercoverage": [
+      "Wave 2 nonrespondents and screenouts are not eligible for the retest frame.",
+      "Wave 2 completes without recontact permission or stable protected identifiers are excluded.",
+      "Attriters and unreachable respondents can differ from retained respondents on anxiety, AI exposure, and survey-engagement variables.",
+      "Refreshment respondents, if monitored, are not part of paired repeatability estimation."
+    ],
+    "deduplication_rule": "Use protected Wave 2 panel identifier as the primary linkage key, reject multiple Wave 3 completions for the same identifier except the first valid complete by timestamp, and remove vendor-confirmed fraud or duplicate device records before paired analysis."
+  },
+  "recruitment_source": {
+    "source_type": "nonprobability",
+    "vendor_or_panel": "Wave 2 professional online panel recontact sample",
+    "recruitment_mode": "Direct recontact invitation to eligible Wave 2 completes, fielded approximately 14 days after Wave 2 completion with no new AI capability event prompt.",
+    "eligibility_screening": "Screening confirms protected Wave 2 linkage, continued adult and US residence eligibility, English self-administration ability, consent, and completion within the preregistered retest window.",
+    "nonresponse_tracking": "Archive invited Wave 2 eligible respondents, undeliverable contacts, starts, refusals, breakoffs, completed retests, timing-window exclusions, quality exclusions, paired analytic cases, and attrition summaries by Wave 2 weighting and outcome covariates."
+  },
+  "quota_variables": [
+    {
+      "variable_id": "wave2_completion_cohort",
+      "source_field": "wave2_completion_cohort",
+      "quota_role": "hard_quota",
+      "categories": [
+        "wave2_eligible_complete"
+      ],
+      "margin_source": "Wave 2 eligible analytic respondent roster frozen before Wave 3 recontact",
+      "minimum_cell_n": 900
+    },
+    {
+      "variable_id": "age_group",
+      "source_field": "age_group",
+      "quota_role": "monitor_only",
+      "categories": [
+        "18_29",
+        "30_44",
+        "45_59",
+        "60_plus"
+      ],
+      "margin_source": "Wave 2 weighted and unweighted retained-panel margins",
+      "minimum_cell_n": 75
+    },
+    {
+      "variable_id": "gender",
+      "source_field": "gender",
+      "quota_role": "monitor_only",
+      "categories": [
+        "woman",
+        "man",
+        "nonbinary_or_another_identity"
+      ],
+      "margin_source": "Wave 2 weighted and unweighted retained-panel margins",
+      "minimum_cell_n": 40
+    },
+    {
+      "variable_id": "race_ethnicity",
+      "source_field": "race_ethnicity",
+      "quota_role": "monitor_only",
+      "categories": [
+        "hispanic_any_race",
+        "white_non_hispanic",
+        "black_non_hispanic",
+        "asian_non_hispanic",
+        "other_or_multiple_non_hispanic"
+      ],
+      "margin_source": "Wave 2 weighted and unweighted retained-panel margins",
+      "minimum_cell_n": 60
+    },
+    {
+      "variable_id": "education",
+      "source_field": "education",
+      "quota_role": "monitor_only",
+      "categories": [
+        "high_school_or_less",
+        "some_college_or_associate",
+        "bachelors_or_higher"
+      ],
+      "margin_source": "Wave 2 weighted and unweighted retained-panel margins",
+      "minimum_cell_n": 90
+    },
+    {
+      "variable_id": "wave2_score_quartile",
+      "source_field": "wave2_score_quartile",
+      "quota_role": "monitor_only",
+      "categories": [
+        "q1_lowest",
+        "q2",
+        "q3",
+        "q4_highest"
+      ],
+      "margin_source": "Wave 2 somatic_ambient_anxiety_mean quartiles computed before Wave 3 outcome inspection",
+      "minimum_cell_n": 75
+    },
+    {
+      "variable_id": "retest_interval_days",
+      "source_field": "retest_interval_days",
+      "quota_role": "monitor_only",
+      "categories": [
+        "10_13_days",
+        "14_17_days",
+        "18_21_days"
+      ],
+      "margin_source": "Preregistered retest timing window distribution observed from fielding timestamps",
+      "minimum_cell_n": 75
+    }
+  ],
+  "planned_n_by_split": [
+    {
+      "split_id": "retained_panel",
+      "target_n": 1000,
+      "minimum_usable_n": 800,
+      "role": "Paired retained-panel retest sample for 14-day repeatability estimation.",
+      "claim_role": "followup"
+    },
+    {
+      "split_id": "refreshment_monitor",
+      "target_n": 200,
+      "minimum_usable_n": 150,
+      "role": "Optional nonpaired refreshment monitor for panel-conditioning checks only, excluded from ICC estimation.",
+      "claim_role": "refreshment"
+    }
+  ],
+  "weighting_method": {
+    "status": "planned",
+    "method": "calibration_weighting",
+    "construction_steps": [
+      "Start from the Wave 2 final_weight for every linked retained-panel respondent as the base carryover weight.",
+      "Estimate a preregistered retention adjustment using Wave 2 demographic variables, Wave 2 score quartile, AI exposure, completion timestamp, and vendor reachability variables available before Wave 3 outcome inspection.",
+      "Calibrate retained-panel weights back to Wave 2 eligible analytic margins for age group, gender, race and ethnicity, education, Census region, and Wave 2 score quartile.",
+      "Do not use Wave 3 outcome responses to construct, trim, or diagnose weights before primary repeatability estimates are locked.",
+      "Assign refreshment monitor respondents separate refreshment weights for conditioning diagnostics only; never merge refreshment cases into paired ICC, mean-change, or item-stability estimates.",
+      "Trim retained-panel weights to the frozen bounds, rescale to mean one within the paired analytic sample, and map retest_final_weight to survey_weight on respondent-item rows."
+    ],
+    "raking_variables": [
+      "age_group",
+      "gender",
+      "race_ethnicity",
+      "education",
+      "census_region",
+      "wave2_score_quartile"
+    ],
+    "base_weight_variable": "wave2_final_weight",
+    "final_weight_variable": "retest_final_weight",
+    "survey_weight_mapping": {
+      "wave_response_field": "survey_weight",
+      "source_variable": "retest_final_weight",
+      "mapping_rule": "Copy paired respondent-level retest_final_weight to survey_weight on every Wave 3 respondent-item row after retention adjustment, calibration, trimming, and mean-one rescaling."
+    },
+    "diagnostics": [
+      "Wave 2 to Wave 3 retention rate overall and by each quota, monitoring, and Wave 2 score-quartile variable.",
+      "Attrition model coefficients, predicted-retention distribution, and covariate balance before and after retention adjustment.",
+      "Weight minimum, maximum, mean, median, coefficient of variation, effective sample size, design effect, and percent trimmed for paired retest cases.",
+      "Weighted and unweighted retained-panel distributions compared with the Wave 2 eligible analytic roster.",
+      "Refreshment monitor comparisons against retained-panel Wave 3 responses for panel-conditioning evidence, reported separately from repeatability estimates."
+    ]
+  },
+  "trim_bounds": {
+    "lower": 0.25,
+    "upper": 4.0,
+    "scale": "mean_one",
+    "exception_rule": "Retest weights outside 0.25 to 4.00 are trimmed before rescaling; any wider bounds require a frozen addendum before Wave 3 outcome inspection and cannot be selected based on repeatability results."
+  },
+  "variance_design": {
+    "estimator": "bootstrap",
+    "primary_standard_error": "Respondent-level bootstrap resampling of paired retained respondents with retest_final_weight for ICC, mean-change, item-stability, attrition-adjusted sensitivity, and conditioning diagnostics.",
+    "strata_variable": null,
+    "cluster_variable": "respondent_id",
+    "replicate_weight_variables": [],
+    "finite_population_correction": null,
+    "software": "R psych, lme4, survey, and boot packages, versions locked in the Wave 3 retest analysis plan"
+  },
+  "subgroup_cells": [
+    {
+      "cell_id": "wave2_score_quartile",
+      "variables": [
+        "wave2_score_quartile"
+      ],
+      "planned_minimum_n": 75,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Report quartile-specific retention and repeatability descriptively only when each quartile has at least 75 paired respondents after exclusions."
+    },
+    {
+      "cell_id": "age_group",
+      "variables": [
+        "age_group"
+      ],
+      "planned_minimum_n": 75,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Suppress age-specific repeatability summaries with fewer than 75 paired respondents or effective sample size below 50."
+    },
+    {
+      "cell_id": "gender",
+      "variables": [
+        "gender"
+      ],
+      "planned_minimum_n": 40,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Suppress sparse gender categories with fewer than 40 paired respondents and prohibit confirmatory subgroup difference claims."
+    },
+    {
+      "cell_id": "retest_interval_days",
+      "variables": [
+        "retest_interval_days"
+      ],
+      "planned_minimum_n": 75,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Report timing-window sensitivity only when each timing cell has at least 75 paired respondents; otherwise pool timing windows."
+    },
+    {
+      "cell_id": "refreshment_conditioning_check",
+      "variables": [
+        "wave2_completion_cohort",
+        "retest_interval_days"
+      ],
+      "planned_minimum_n": 150,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Use refreshment monitor cases only for conditioning diagnostics and never for paired repeatability or population prevalence estimates."
+    }
+  ],
+  "claim_limits": [
+    {
+      "claim_type": "sample_description",
+      "status": "allowed",
+      "allowed_scope": "Description of the retained Wave 2 to Wave 3 paired retest panel, attrition flow, refreshment monitor, and conditioning diagnostics.",
+      "required_metadata": [
+        "Wave 2 eligible roster",
+        "recontact dispositions",
+        "attrition diagnostics",
+        "retention-adjusted weight diagnostics"
+      ],
+      "limit_rationale": "Retest interpretation requires transparent description of who was retained, lost, refreshed, or excluded."
+    },
+    {
+      "claim_type": "population_estimate",
+      "status": "blocked",
+      "allowed_scope": "No standalone Wave 3 population prevalence or national level estimate is authorized.",
+      "required_metadata": [
+        "independent population sampling frame",
+        "population calibration margins",
+        "standalone variance design"
+      ],
+      "limit_rationale": "Wave 3 is a retained-panel retest of Wave 2 respondents and is designed for repeatability evidence, not a new cross-sectional population estimate."
+    },
+    {
+      "claim_type": "subgroup_comparison",
+      "status": "descriptive_only",
+      "allowed_scope": "Descriptive repeatability summaries by prespecified retention, timing, and Wave 2 score strata when suppression rules and effective sample size checks pass.",
+      "required_metadata": [
+        "subgroup_cells",
+        "paired_cell_n",
+        "effective_n",
+        "retention_adjustment",
+        "bootstrap_standard_errors"
+      ],
+      "limit_rationale": "Subgroup summaries support robustness assessment for repeatability only and are not powered or designed for confirmatory subgroup difference testing."
+    },
+    {
+      "claim_type": "longitudinal_change",
+      "status": "blocked",
+      "allowed_scope": "No population trend, longitudinal increase, longitudinal decrease, or repeated-cross-section change claim is authorized.",
+      "required_metadata": [
+        "trend_sampling_plan",
+        "independent refreshment design",
+        "time-varying population margins"
+      ],
+      "limit_rationale": "The retest wave repeats the same construct over a short interval to assess measurement stability; observed mean change is a repeatability diagnostic only."
+    },
+    {
+      "claim_type": "event_study_effect",
+      "status": "blocked",
+      "allowed_scope": "No event-window, model-release shock, or causal event-study claim is authorized.",
+      "required_metadata": [
+        "locked_event_registry",
+        "event exposure timing",
+        "baseline_sampling_plan",
+        "followup_sampling_plan"
+      ],
+      "limit_rationale": "The Wave 3 event registry is no_event and the design intentionally avoids interpreting retest differences as event effects."
+    },
+    {
+      "claim_type": "causal_effect",
+      "status": "blocked",
+      "allowed_scope": "No causal effect claim is authorized from the retained-panel retest.",
+      "required_metadata": [
+        "identification_strategy",
+        "assignment_or_exposure_rule",
+        "causal_variance_design"
+      ],
+      "limit_rationale": "Wave 3 contains no randomized or quasi-experimental exposure assignment and only estimates repeatability under recontact."
+    },
+    {
+      "claim_type": "clinical_or_diagnostic",
+      "status": "blocked",
+      "allowed_scope": "No clinical, diagnostic, screening, treatment, or individual-risk interpretation is authorized.",
+      "required_metadata": [
+        "clinical_validation",
+        "diagnostic_thresholds",
+        "individual_decision_protocol"
+      ],
+      "limit_rationale": "Retest reliability evidence does not convert ANX-Bench into a clinical or diagnostic measure."
+    },
+    {
+      "claim_type": "individual_level_decision",
+      "status": "blocked",
+      "allowed_scope": "No respondent-level decision, ranking, eligibility, employment, clinical, or policy action may use Wave 3 scores.",
+      "required_metadata": [
+        "individual_decision_protocol",
+        "fairness_audit",
+        "appeals_process"
+      ],
+      "limit_rationale": "The retained-panel retest supports aggregate repeatability evidence only and cannot authorize decisions about individual respondents."
+    }
+  ]
+}

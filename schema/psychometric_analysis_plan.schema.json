@@ -1,0 +1,625 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/psychometric_analysis_plan.schema.json",
+  "title": "ANX-Bench Psychometric Analysis Plan Schema",
+  "description": "Machine-readable preregistered analysis contract for ANX-Bench calibration waves. The plan fixes inputs, sample splits, exclusions, software versions, seeds, weighting, missing-data handling, psychometric models, validation thresholds, sensitivity analyses, and validation-dossier output fields before outcome inspection.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "analysis_plan_schema_version",
+    "plan_id",
+    "benchmark_version",
+    "study_id",
+    "registration",
+    "required_inputs",
+    "software_environment",
+    "randomization_and_seeds",
+    "sample_splits",
+    "eligibility_and_exclusions",
+    "weighting_policy",
+    "missing_data_handling",
+    "models",
+    "validation_gates",
+    "sensitivity_analyses",
+    "dossier_output",
+    "statistic_to_dossier_field"
+  ],
+  "properties": {
+    "$schema": {
+      "$ref": "#/$defs/repository_path"
+    },
+    "analysis_plan_schema_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "plan_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "study_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "registration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "preregistration_path",
+        "analysis_plan_path",
+        "authoritative_contract",
+        "outcome_inspection_status"
+      ],
+      "properties": {
+        "preregistration_path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "analysis_plan_path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "authoritative_contract": {
+          "type": "boolean"
+        },
+        "outcome_inspection_status": {
+          "type": "string",
+          "enum": [
+            "not_inspected",
+            "inspected_after_freeze"
+          ]
+        }
+      }
+    },
+    "required_inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "input_id",
+          "path",
+          "role",
+          "required_fields",
+          "validation_rule"
+        ],
+        "properties": {
+          "input_id": {
+            "$ref": "#/$defs/id"
+          },
+          "path": {
+            "$ref": "#/$defs/repository_path_or_external"
+          },
+          "role": {
+            "type": "string",
+            "minLength": 12
+          },
+          "required_fields": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "validation_rule": {
+            "type": "string",
+            "minLength": 20
+          }
+        }
+      }
+    },
+    "software_environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "runtime_version",
+        "packages",
+        "version_lock_rule"
+      ],
+      "properties": {
+        "language": {
+          "type": "string",
+          "enum": [
+            "R",
+            "Python"
+          ]
+        },
+        "runtime_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "packages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "version",
+              "purpose"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "purpose": {
+                "type": "string",
+                "minLength": 8
+              }
+            }
+          }
+        },
+        "version_lock_rule": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "randomization_and_seeds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "global_seed",
+        "procedure_seeds",
+        "seed_policy"
+      ],
+      "properties": {
+        "global_seed": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "procedure_seeds": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minProperties": 1
+        },
+        "seed_policy": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "sample_splits": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "split_id",
+          "role",
+          "target_n",
+          "overlap_rule",
+          "allowed_analyses"
+        ],
+        "properties": {
+          "split_id": {
+            "$ref": "#/$defs/id"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "development_pilot",
+              "confirmation_sample",
+              "bridge_or_refresh"
+            ]
+          },
+          "target_n": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "overlap_rule": {
+            "type": "string",
+            "minLength": 20
+          },
+          "allowed_analyses": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          }
+        }
+      }
+    },
+    "eligibility_and_exclusions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eligibility_rules",
+        "exclusion_rules",
+        "non_exclusion_flags",
+        "flow_table_target_field"
+      ],
+      "properties": {
+        "eligibility_rules": {
+          "$ref": "#/$defs/rule_list"
+        },
+        "exclusion_rules": {
+          "$ref": "#/$defs/rule_list"
+        },
+        "non_exclusion_flags": {
+          "$ref": "#/$defs/rule_list"
+        },
+        "flow_table_target_field": {
+          "$ref": "#/$defs/dossier_field"
+        }
+      }
+    },
+    "weighting_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_estimation",
+        "descriptive_estimation",
+        "weight_construction",
+        "trimming",
+        "sensitivity_required",
+        "target_field"
+      ],
+      "properties": {
+        "primary_estimation": {
+          "type": "string",
+          "minLength": 20
+        },
+        "descriptive_estimation": {
+          "type": "string",
+          "minLength": 20
+        },
+        "weight_construction": {
+          "type": "string",
+          "minLength": 20
+        },
+        "trimming": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum",
+            "maximum",
+            "exception_rule"
+          ],
+          "properties": {
+            "minimum": {
+              "type": "number"
+            },
+            "maximum": {
+              "type": "number"
+            },
+            "exception_rule": {
+              "type": "string",
+              "minLength": 20
+            }
+          }
+        },
+        "sensitivity_required": {
+          "type": "boolean"
+        },
+        "target_field": {
+          "$ref": "#/$defs/dossier_field"
+        }
+      }
+    },
+    "missing_data_handling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_distributions",
+        "factor_models",
+        "reliability",
+        "irt",
+        "external_validity",
+        "imputation_policy",
+        "target_field"
+      ],
+      "properties": {
+        "item_distributions": {
+          "type": "string",
+          "minLength": 20
+        },
+        "factor_models": {
+          "type": "string",
+          "minLength": 20
+        },
+        "reliability": {
+          "type": "string",
+          "minLength": 20
+        },
+        "irt": {
+          "type": "string",
+          "minLength": 20
+        },
+        "external_validity": {
+          "type": "string",
+          "minLength": 20
+        },
+        "imputation_policy": {
+          "type": "string",
+          "minLength": 20
+        },
+        "target_field": {
+          "$ref": "#/$defs/dossier_field"
+        }
+      }
+    },
+    "models": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "efa",
+        "cfa",
+        "omega",
+        "irt",
+        "dif",
+        "invariance",
+        "external_validity"
+      ],
+      "properties": {
+        "efa": {
+          "$ref": "#/$defs/model_plan"
+        },
+        "cfa": {
+          "$ref": "#/$defs/model_plan"
+        },
+        "omega": {
+          "$ref": "#/$defs/model_plan"
+        },
+        "irt": {
+          "$ref": "#/$defs/model_plan"
+        },
+        "dif": {
+          "$ref": "#/$defs/model_plan"
+        },
+        "invariance": {
+          "$ref": "#/$defs/model_plan"
+        },
+        "external_validity": {
+          "$ref": "#/$defs/model_plan"
+        }
+      }
+    },
+    "validation_gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/gate"
+      }
+    },
+    "sensitivity_analyses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/sensitivity"
+      }
+    },
+    "dossier_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dossier_path",
+        "required_fields",
+        "write_policy"
+      ],
+      "properties": {
+        "dossier_path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "required_fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/dossier_field"
+          }
+        },
+        "write_policy": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "statistic_to_dossier_field": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "statistic_id",
+          "analysis",
+          "target_field",
+          "decision_use"
+        ],
+        "properties": {
+          "statistic_id": {
+            "$ref": "#/$defs/id"
+          },
+          "analysis": {
+            "$ref": "#/$defs/id"
+          },
+          "target_field": {
+            "$ref": "#/$defs/dossier_field"
+          },
+          "decision_use": {
+            "type": "string",
+            "minLength": 20
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "repository_path": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/\\-]+$"
+    },
+    "repository_path_or_external": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/:\\-]+$"
+    },
+    "dossier_field": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/\\[\\]\\-]+$"
+    },
+    "rule_list": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rule_id",
+          "rule",
+          "target_field"
+        ],
+        "properties": {
+          "rule_id": {
+            "$ref": "#/$defs/id"
+          },
+          "rule": {
+            "type": "string",
+            "minLength": 20
+          },
+          "target_field": {
+            "$ref": "#/$defs/dossier_field"
+          }
+        }
+      }
+    },
+    "model_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sample",
+        "estimator",
+        "primary_statistics",
+        "pass_fail_thresholds",
+        "target_fields"
+      ],
+      "properties": {
+        "sample": {
+          "$ref": "#/$defs/id"
+        },
+        "estimator": {
+          "type": "string",
+          "minLength": 10
+        },
+        "primary_statistics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "pass_fail_thresholds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/gate"
+          }
+        },
+        "target_fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/dossier_field"
+          }
+        }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gate_id",
+        "statistic",
+        "operator",
+        "threshold",
+        "pass_action",
+        "fail_action",
+        "target_field"
+      ],
+      "properties": {
+        "gate_id": {
+          "$ref": "#/$defs/id"
+        },
+        "statistic": {
+          "$ref": "#/$defs/id"
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "<",
+            "<=",
+            "=",
+            ">=",
+            ">",
+            "in",
+            "none"
+          ]
+        },
+        "threshold": {
+          "type": [
+            "number",
+            "integer",
+            "string",
+            "boolean",
+            "array"
+          ]
+        },
+        "pass_action": {
+          "type": "string",
+          "minLength": 12
+        },
+        "fail_action": {
+          "type": "string",
+          "minLength": 12
+        },
+        "target_field": {
+          "$ref": "#/$defs/dossier_field"
+        }
+      }
+    },
+    "sensitivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "analysis_id",
+        "description",
+        "primary_comparison",
+        "target_field"
+      ],
+      "properties": {
+        "analysis_id": {
+          "$ref": "#/$defs/id"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 20
+        },
+        "primary_comparison": {
+          "type": "string",
+          "minLength": 20
+        },
+        "target_field": {
+          "$ref": "#/$defs/dossier_field"
+        }
+      }
+    }
+  }
+}

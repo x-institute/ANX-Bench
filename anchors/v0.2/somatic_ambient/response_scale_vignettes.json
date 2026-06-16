@@ -1,0 +1,97 @@
+{
+  "$schema": "../../../schema/anchor_vignette.schema.json",
+  "vignette_set_id": "somatic_ambient_response_scale_vignettes",
+  "version": "v0.2.2",
+  "benchmark_release_line": "v0.2",
+  "target_domain": "somatic_ambient",
+  "target_construct": "somatic_ambient_anxiety",
+  "non_scored_status": {
+    "is_scored_item": false,
+    "aggregate_scoring_permitted": false,
+    "permitted_uses": [
+      "Response-style calibration and descriptive response-scale use checks.",
+      "Sensitivity analyses for differential item functioning and measurement-invariance findings.",
+      "Cross-wave comparability checks when the same fixed vignettes are administered unchanged."
+    ],
+    "prohibited_uses": [
+      "Official ANX item scoring, construct scoring, domain scoring, overall scoring, or event-study outcome scoring.",
+      "Participant clinical classification, diagnostic screening, or individual feedback.",
+      "Replacing psychometric validation of the administered ANX item pool."
+    ]
+  },
+  "response_scale": {
+    "scale_type": "5_point_likert",
+    "points": 5,
+    "prompt": "How anxious would this scenario make you feel?",
+    "anchors": [
+      {
+        "value": 1,
+        "label": "Not at all anxious"
+      },
+      {
+        "value": 2,
+        "label": "Slightly anxious"
+      },
+      {
+        "value": 3,
+        "label": "Moderately anxious"
+      },
+      {
+        "value": 4,
+        "label": "Very anxious"
+      },
+      {
+        "value": 5,
+        "label": "Extremely anxious"
+      }
+    ]
+  },
+  "expected_ordering": {
+    "severity_order": [
+      "anchor_somatic_ambient_low",
+      "anchor_somatic_ambient_moderate",
+      "anchor_somatic_ambient_high"
+    ],
+    "violation_rule": "An order violation is present when the low-severity vignette rating is greater than the moderate rating, the moderate rating is greater than the high rating, or the low rating is greater than the high rating among observed non-missing ratings."
+  },
+  "administration": {
+    "placement": "Administer immediately after the randomized ANX item block and before covariates or external-validity variables.",
+    "randomization": "Do not randomize. Present low, moderate, then high severity in fixed order.",
+    "required_status": "Required response screens unless the survey platform cannot enforce required responses."
+  },
+  "vignettes": [
+    {
+      "vignette_id": "anchor_somatic_ambient_low",
+      "version": "v0.2.2",
+      "target_domain": "somatic_ambient",
+      "target_construct": "somatic_ambient_anxiety",
+      "intended_severity_band": "low",
+      "participant_text": "Imagine seeing a brief headline that a familiar AI assistant has become a little faster at summarizing articles and drafting routine emails. You notice the story, wonder for a moment what other updates might be coming, and then return to your day without physical tension or trouble concentrating.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 1,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_somatic_ambient_moderate",
+      "version": "v0.2.2",
+      "target_domain": "somatic_ambient",
+      "target_construct": "somatic_ambient_anxiety",
+      "intended_severity_band": "moderate",
+      "participant_text": "Imagine reading credible coverage that a new AI system can handle several common planning, writing, and research tasks with little supervision. Nothing in the story names you or your household. Still, for the next hour you feel keyed up, keep thinking about the pace of change, and find it somewhat harder to settle into your usual routine.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 2,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_somatic_ambient_high",
+      "version": "v0.2.2",
+      "target_domain": "somatic_ambient",
+      "target_construct": "somatic_ambient_anxiety",
+      "intended_severity_band": "high",
+      "participant_text": "Imagine watching a credible demonstration in which an AI system independently plans a complex project, drafts persuasive messages, corrects its own mistakes, and completes tasks that recently required several trained people. Afterward, your body feels on alert for much of the evening, you keep checking for more news despite wanting to stop, and you have difficulty settling when you try to sleep.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 3,
+      "non_scored": true
+    }
+  ]
+}

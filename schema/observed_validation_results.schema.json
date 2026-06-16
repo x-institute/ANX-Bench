@@ -1,0 +1,925 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/observed_validation_results.schema.json",
+  "title": "ANX-Bench Observed Validation Results Schema",
+  "description": "Release-blocking output contract for preregistered observed psychometric validation runs. The artifact binds frozen items and versions to checksum-identified inputs, preregistered analysis code, respondent exclusions, psychometric model results, retention decisions, validation gates, and session provenance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "observed_results_schema_version",
+    "result_id",
+    "generated_at_utc",
+    "analysis_plan_path",
+    "analysis_plan_sha256",
+    "input_data_path",
+    "input_data_sha256",
+    "benchmark_version",
+    "promotion_target_version",
+    "study_id",
+    "construct_id",
+    "frozen_item_ids",
+    "frozen_item_versions",
+    "contract_checks",
+    "exclusions",
+    "scoring",
+    "efa",
+    "cfa",
+    "reliability",
+    "irt",
+    "dif",
+    "invariance",
+    "external_validity",
+    "item_statistics",
+    "retention",
+    "validation_gates",
+    "decision",
+    "session_info"
+  ],
+  "properties": {
+    "observed_results_schema_version": {
+      "const": "v0.1.0"
+    },
+    "result_id": {
+      "$ref": "#/$defs/id"
+    },
+    "generated_at_utc": {
+      "$ref": "#/$defs/utc_timestamp"
+    },
+    "analysis_plan_path": {
+      "$ref": "#/$defs/repository_path"
+    },
+    "analysis_plan_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "input_data_path": {
+      "$ref": "#/$defs/repository_path_or_restricted"
+    },
+    "input_data_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "benchmark_version": {
+      "$ref": "#/$defs/version"
+    },
+    "promotion_target_version": {
+      "$ref": "#/$defs/version"
+    },
+    "study_id": {
+      "$ref": "#/$defs/id"
+    },
+    "construct_id": {
+      "$ref": "#/$defs/id"
+    },
+    "frozen_item_ids": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "frozen_item_versions": {
+      "type": "object",
+      "minProperties": 3,
+      "additionalProperties": {
+        "$ref": "#/$defs/version"
+      }
+    },
+    "contract_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "declared_inputs_only",
+        "required_fields_present",
+        "item_allowlist_exact",
+        "item_versions_exact",
+        "benchmark_version_exact",
+        "event_id_all_no_event"
+      ],
+      "properties": {
+        "declared_inputs_only": {
+          "const": true
+        },
+        "required_fields_present": {
+          "const": true
+        },
+        "item_allowlist_exact": {
+          "const": true
+        },
+        "item_versions_exact": {
+          "const": true
+        },
+        "benchmark_version_exact": {
+          "const": true
+        },
+        "event_id_all_no_event": {
+          "const": true
+        },
+        "no_output_written_before_contract_pass": {
+          "const": true
+        }
+      }
+    },
+    "exclusions": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "total_respondents",
+        "excluded_respondents",
+        "analytic_respondents",
+        "by_sample"
+      ],
+      "properties": {
+        "total_respondents": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "excluded_respondents": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "analytic_respondents": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "by_sample": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "total",
+              "excluded",
+              "analytic"
+            ],
+            "properties": {
+              "total": {
+                "$ref": "#/$defs/nonnegative_integer"
+              },
+              "excluded": {
+                "$ref": "#/$defs/nonnegative_integer"
+              },
+              "analytic": {
+                "$ref": "#/$defs/nonnegative_integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "score_name",
+        "score_rule",
+        "analytic_n_development_pilot",
+        "analytic_n_confirmation_sample"
+      ],
+      "properties": {
+        "score_name": {
+          "$ref": "#/$defs/id"
+        },
+        "score_rule": {
+          "type": "string",
+          "minLength": 40
+        },
+        "analytic_n_development_pilot": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "analytic_n_confirmation_sample": {
+          "$ref": "#/$defs/nonnegative_integer"
+        }
+      }
+    },
+    "efa": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "sample",
+        "parallel_analysis_factor_count",
+        "primary_loadings",
+        "cross_loadings",
+        "communalities",
+        "factor_determinacy"
+      ],
+      "properties": {
+        "sample": {
+          "$ref": "#/$defs/id"
+        },
+        "parallel_analysis_factor_count": {
+          "type": [
+            "integer",
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "primary_loadings": {
+          "$ref": "#/$defs/item_number_map"
+        },
+        "cross_loadings": {
+          "$ref": "#/$defs/item_number_map"
+        },
+        "communalities": {
+          "$ref": "#/$defs/item_number_map"
+        },
+        "factor_determinacy": {
+          "$ref": "#/$defs/nullable_number"
+        }
+      }
+    },
+    "cfa": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "sample",
+        "model",
+        "fit",
+        "standardized_loadings"
+      ],
+      "properties": {
+        "sample": {
+          "$ref": "#/$defs/id"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 10
+        },
+        "fit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cfi",
+            "tli",
+            "rmsea",
+            "srmr"
+          ],
+          "properties": {
+            "cfi": {
+              "$ref": "#/$defs/nullable_number"
+            },
+            "tli": {
+              "$ref": "#/$defs/nullable_number"
+            },
+            "rmsea": {
+              "$ref": "#/$defs/nullable_number"
+            },
+            "srmr": {
+              "$ref": "#/$defs/nullable_number"
+            }
+          }
+        },
+        "standardized_loadings": {
+          "$ref": "#/$defs/item_number_map"
+        }
+      }
+    },
+    "reliability": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "sample",
+        "omega",
+        "alpha",
+        "corrected_item_total_correlation",
+        "standard_error_of_measurement"
+      ],
+      "properties": {
+        "sample": {
+          "$ref": "#/$defs/id"
+        },
+        "omega": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "alpha": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "corrected_item_total_correlation": {
+          "$ref": "#/$defs/item_number_map"
+        },
+        "standard_error_of_measurement": {
+          "$ref": "#/$defs/nullable_number"
+        }
+      }
+    },
+    "irt": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "sample",
+        "item_parameters",
+        "local_dependence",
+        "response_pattern_fit"
+      ],
+      "properties": {
+        "sample": {
+          "$ref": "#/$defs/id"
+        },
+        "item_parameters": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "$ref": "#/$defs/item_statistic"
+          }
+        },
+        "local_dependence": {
+          "type": "object"
+        },
+        "response_pattern_fit": {
+          "type": "string",
+          "minLength": 10
+        }
+      }
+    },
+    "dif": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "status",
+        "analyses",
+        "unresolved_practical_dif"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "analyses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+              "item_id",
+              "grouping_variable",
+              "n",
+              "group_sample_sizes",
+              "p_value",
+              "pseudo_r_squared_change",
+              "expected_score_difference",
+              "direction_of_dif",
+              "rank_order_impact"
+            ],
+            "properties": {
+              "item_id": {
+                "$ref": "#/$defs/id"
+              },
+              "grouping_variable": {
+                "$ref": "#/$defs/id"
+              },
+              "n": {
+                "$ref": "#/$defs/nonnegative_integer"
+              },
+              "group_sample_sizes": {
+                "type": "object"
+              },
+              "p_value": {
+                "$ref": "#/$defs/nullable_number"
+              },
+              "adjusted_p_value": {
+                "$ref": "#/$defs/nullable_number"
+              },
+              "pseudo_r_squared_change": {
+                "$ref": "#/$defs/nullable_number"
+              },
+              "expected_score_difference": {
+                "$ref": "#/$defs/nullable_number"
+              },
+              "direction_of_dif": {
+                "type": "string",
+                "minLength": 3
+              },
+              "rank_order_impact": {
+                "type": "string",
+                "minLength": 3
+              },
+              "practical_significance": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "unresolved_practical_dif": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "invariance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "grouping_variable": {
+          "$ref": "#/$defs/id"
+        },
+        "group_sample_sizes": {
+          "type": "object"
+        },
+        "configural_fit": {
+          "type": "object"
+        },
+        "metric_delta_cfi": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "metric_delta_rmsea": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "scalar_delta_cfi": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "scalar_delta_rmsea": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 10
+        }
+      }
+    },
+    "external_validity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "convergent",
+        "discriminant",
+        "criterion",
+        "incremental_validity"
+      ],
+      "properties": {
+        "convergent": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/association_result"
+          }
+        },
+        "discriminant": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/association_result"
+          }
+        },
+        "criterion": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "$ref": "#/$defs/status"
+              },
+              "n": {
+                "$ref": "#/$defs/nonnegative_integer"
+              },
+              "odds_ratio": {
+                "$ref": "#/$defs/nullable_number"
+              },
+              "ci": {
+                "$ref": "#/$defs/number_pair"
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "incremental_validity": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "status": {
+              "$ref": "#/$defs/status"
+            },
+            "n": {
+              "$ref": "#/$defs/nonnegative_integer"
+            },
+            "covariate_block": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/id"
+              }
+            },
+            "adjusted_r_squared_change": {
+              "$ref": "#/$defs/nullable_number"
+            },
+            "standardized_coefficient": {
+              "$ref": "#/$defs/nullable_number"
+            },
+            "p_value": {
+              "$ref": "#/$defs/nullable_number"
+            },
+            "reason": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "item_statistics": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "$ref": "#/$defs/item_statistic"
+      }
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "retained_item_count",
+        "retained_item_ids",
+        "item_decisions"
+      ],
+      "properties": {
+        "retained_item_count": {
+          "type": "integer",
+          "minimum": 3
+        },
+        "retained_item_ids": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "item_decisions": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "item_id",
+              "decision"
+            ],
+            "properties": {
+              "item_id": {
+                "$ref": "#/$defs/id"
+              },
+              "decision": {
+                "type": "string",
+                "minLength": 5
+              }
+            }
+          }
+        }
+      }
+    },
+    "validation_gates": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "required": [
+        "cfa_cfi",
+        "cfa_tli",
+        "cfa_rmsea",
+        "cfa_srmr",
+        "omega",
+        "minimum_retained_items",
+        "no_unresolved_meaningful_dif"
+      ]
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "psychometric_decision",
+        "scoring_eligible",
+        "manual_dossier_promotion_permitted",
+        "rationale"
+      ],
+      "properties": {
+        "psychometric_decision": {
+          "type": "string",
+          "enum": [
+            "observed_evidence_ready_for_manual_review",
+            "observed_evidence_does_not_authorize_promotion"
+          ]
+        },
+        "scoring_eligible": {
+          "const": false
+        },
+        "manual_dossier_promotion_permitted": {
+          "const": false
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 80
+        }
+      }
+    },
+    "session_info": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime",
+        "text_sha256",
+        "packages",
+        "session_info_text"
+      ],
+      "properties": {
+        "runtime": {
+          "type": "string",
+          "minLength": 3
+        },
+        "text_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "packages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "version"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "session_info_text": {
+          "type": "string",
+          "minLength": 40
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "repository_path": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/\\-]+$"
+    },
+    "repository_path_or_restricted": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._:/\\-]+$"
+    },
+    "utc_timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "nonnegative_integer": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "nullable_number": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "not_estimable",
+        "not_available"
+      ]
+    },
+    "item_number_map": {
+      "type": "object",
+      "minProperties": 3,
+      "additionalProperties": {
+        "$ref": "#/$defs/nullable_number"
+      }
+    },
+    "number_pair": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/nullable_number"
+      }
+    },
+    "association_result": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "n",
+        "coefficient",
+        "ci"
+      ],
+      "properties": {
+        "n": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "coefficient": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "ci": {
+          "$ref": "#/$defs/number_pair"
+        }
+      }
+    },
+    "item_statistic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "item_version",
+        "retained",
+        "response_distribution",
+        "primary_loading",
+        "cross_loading",
+        "communality",
+        "standardized_loading",
+        "corrected_item_total_correlation",
+        "irt_discrimination",
+        "irt_category_thresholds",
+        "thresholds_ordered",
+        "item_information"
+      ],
+      "properties": {
+        "item_id": {
+          "$ref": "#/$defs/id"
+        },
+        "item_version": {
+          "$ref": "#/$defs/version"
+        },
+        "retained": {
+          "type": "boolean"
+        },
+        "response_distribution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "item_id",
+            "n_observed",
+            "missing_n",
+            "missing_rate",
+            "counts",
+            "proportions",
+            "single_category_concentration",
+            "two_adjacent_category_concentration"
+          ],
+          "properties": {
+            "item_id": {
+              "$ref": "#/$defs/id"
+            },
+            "n_observed": {
+              "$ref": "#/$defs/nonnegative_integer"
+            },
+            "missing_n": {
+              "$ref": "#/$defs/nonnegative_integer"
+            },
+            "missing_rate": {
+              "$ref": "#/$defs/nullable_number"
+            },
+            "counts": {
+              "$ref": "#/$defs/likert_count_map"
+            },
+            "proportions": {
+              "$ref": "#/$defs/likert_number_map"
+            },
+            "single_category_concentration": {
+              "$ref": "#/$defs/nullable_number"
+            },
+            "two_adjacent_category_concentration": {
+              "$ref": "#/$defs/nullable_number"
+            }
+          }
+        },
+        "primary_loading": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "cross_loading": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "communality": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "standardized_loading": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "corrected_item_total_correlation": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "irt_discrimination": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "irt_category_thresholds": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "$ref": "#/$defs/nullable_number"
+          }
+        },
+        "thresholds_ordered": {
+          "type": "boolean"
+        },
+        "item_information": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "theta_grid",
+            "note"
+          ],
+          "properties": {
+            "theta_grid": {
+              "type": "array",
+              "minItems": 3,
+              "items": {
+                "$ref": "#/$defs/nullable_number"
+              }
+            },
+            "note": {
+              "type": "string",
+              "minLength": 20
+            }
+          }
+        }
+      }
+    },
+    "likert_count_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "properties": {
+        "1": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "2": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "3": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "4": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "5": {
+          "$ref": "#/$defs/nonnegative_integer"
+        }
+      }
+    },
+    "likert_number_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "properties": {
+        "1": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "2": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "3": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "4": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "5": {
+          "$ref": "#/$defs/nullable_number"
+        }
+      }
+    }
+  }
+}

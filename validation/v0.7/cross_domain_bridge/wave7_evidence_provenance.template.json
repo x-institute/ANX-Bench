@@ -1,0 +1,150 @@
+{
+  "$schema": "validation/v0.7/cross_domain_bridge/wave7_evidence_provenance.template.schema.json",
+  "template_schema_note": "Canonical v0.7.1 bridge provenance template. Replace placeholder hashes and null signoff fields before release.",
+  "provenance_template_version": "v0.7.1",
+  "provenance_id": "anx_us_2026w07_cross_domain_bridge_evidence_provenance_template",
+  "study_id": "anx_us_2026w07_cross_domain_bridge",
+  "wave_id": "anx_us_2026w07_cross_domain_bridge",
+  "benchmark_version": "v0.7.0",
+  "promotion_target_version": "v0.7.1",
+  "event_id": "no_event",
+  "evidence_status": "template_pending_observed_data",
+  "validation_date": null,
+  "outcome_inspection_timing": {
+    "rules_locked_before_outcome_inspection": true,
+    "first_outcome_inspection_at_utc": null,
+    "outcome_inspection_record_sha256": null,
+    "no_post_inspection_threshold_changes": true,
+    "no_post_inspection_exclusion_changes": true,
+    "no_post_inspection_item_retention_changes": true,
+    "no_post_inspection_claim_expansion": true
+  },
+  "fielding_windows": [
+    {
+      "sample": "wave7_bridge_sample",
+      "planned_start_date": null,
+      "planned_end_date": null,
+      "observed_start_date": null,
+      "observed_end_date": null,
+      "fielding_date_source": "restricted://wave7/fielding_disposition.csv",
+      "fielding_date_source_sha256": null
+    }
+  ],
+  "statistic_provenance": [
+    {
+      "statistic_id": "analytic_n",
+      "bridge_evidence_json_pointer": "/analytic_n/final_analytic_n",
+      "analysis_family": "sample_integrity",
+      "source_artifacts": [
+        {
+          "path": "restricted://wave7/respondent_item_responses.csv",
+          "sha256": null,
+          "role": "respondent item file"
+        },
+        {
+          "path": "restricted://wave7/fielding_disposition.csv",
+          "sha256": null,
+          "role": "fielding disposition file"
+        }
+      ],
+      "analysis_artifact": {
+        "path": "analysis/v0.7/cross_domain_bridge/wave7_analysis_plan.json",
+        "sha256": null,
+        "command": "Run the preregistered respondent-flow checks before psychometric modeling."
+      },
+      "review_required": true
+    },
+    {
+      "statistic_id": "factor_model_fit",
+      "bridge_evidence_json_pointer": "/factor_model_fit",
+      "analysis_family": "factor_structure",
+      "source_artifacts": [
+        {
+          "path": "restricted://wave7/respondent_item_responses.csv",
+          "sha256": null,
+          "role": "respondent item file"
+        }
+      ],
+      "analysis_artifact": {
+        "path": "restricted://wave7/analysis_outputs/factor_model_fit.json",
+        "sha256": null,
+        "command": "Run preregistered ordinal EFA and correlated-domain CFA checks."
+      },
+      "review_required": true
+    },
+    {
+      "statistic_id": "omega_irt_dif_invariance",
+      "bridge_evidence_json_pointer": "/omega",
+      "analysis_family": "psychometric_bridge",
+      "source_artifacts": [
+        {
+          "path": "restricted://wave7/respondent_item_responses.csv",
+          "sha256": null,
+          "role": "respondent item file"
+        },
+        {
+          "path": "restricted://wave7/respondent_covariates.csv",
+          "sha256": null,
+          "role": "covariate and subgroup file"
+        }
+      ],
+      "analysis_artifact": {
+        "path": "restricted://wave7/analysis_outputs/psychometric_bridge_outputs.json",
+        "sha256": null,
+        "command": "Run preregistered omega, multidimensional IRT linking, DIF, and invariance checks."
+      },
+      "review_required": true
+    },
+    {
+      "statistic_id": "latent_correlations_general_factor",
+      "bridge_evidence_json_pointer": "/latent_correlations",
+      "analysis_family": "aggregate_readiness",
+      "source_artifacts": [
+        {
+          "path": "restricted://wave7/respondent_item_responses.csv",
+          "sha256": null,
+          "role": "respondent item file"
+        }
+      ],
+      "analysis_artifact": {
+        "path": "restricted://wave7/analysis_outputs/aggregate_readiness_outputs.json",
+        "sha256": null,
+        "command": "Run preregistered latent-correlation and bifactor or second-order readiness checks."
+      },
+      "review_required": true
+    }
+  ],
+  "bundle_artifact_checksums": {
+    "observed_wave7_results": {
+      "path": "validation/v0.7/cross_domain_bridge/observed_wave7_results.json",
+      "sha256": null
+    },
+    "content_validity_dossier": {
+      "path": "validation/v0.7/cross_domain_bridge/content_validity_dossier.json",
+      "sha256": null
+    },
+    "wave7_bridge_evidence": {
+      "path": "validation/v0.7/cross_domain_bridge/wave7_bridge_evidence.json",
+      "sha256": null
+    },
+    "wave7_evidence_manifest": {
+      "path": "validation/v0.7/cross_domain_bridge/wave7_evidence_manifest.json",
+      "sha256": null
+    }
+  },
+  "analyst_signoff": {
+    "name": null,
+    "role": "analysis_lead",
+    "signed_at_utc": null,
+    "signature_status": "unsigned_template",
+    "statement": "The analyst binds each reported Wave 7 bridge statistic to the frozen inputs, restricted data hashes, analysis outputs, and preregistered commands listed in this provenance record."
+  },
+  "reviewer_signoff": {
+    "name": null,
+    "role": "release_reviewer",
+    "signed_at_utc": null,
+    "signature_status": "unsigned_template",
+    "statement": "The reviewer confirms that every observed bridge statistic is checksum-bound, independently reviewable, and limited to bridge-evidence claims with scoring explicitly unauthorized."
+  }
+}
+

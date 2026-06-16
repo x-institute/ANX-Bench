@@ -1,0 +1,597 @@
+{
+  "$schema": "../../../schema/psychometric_analysis_plan.schema.json",
+  "analysis_plan_schema_version": "v0.1.0",
+  "plan_id": "anx_us_2026w03_somatic_retest_analysis_plan",
+  "benchmark_version": "v0.3.1",
+  "study_id": "anx_us_2026w03_somatic_retest",
+  "registration": {
+    "preregistration_path": "docs/preregistrations/anx_us_2026w03_somatic_retest.md",
+    "analysis_plan_path": "analysis/v0.3/somatic_ambient_retest/wave3_retest_analysis_plan.json",
+    "authoritative_contract": true,
+    "outcome_inspection_status": "not_inspected"
+  },
+  "required_inputs": [
+    {
+      "input_id": "retest_wave_response_file",
+      "path": "vendor_restricted/anx_us_2026w03_somatic_retest/wave_response.jsonl",
+      "role": "Respondent-item retest file validated against schema/wave_response.schema.json before paired analyses that evaluate repeatability of the existing citable v0.3.1 somatic_ambient_anxiety score.",
+      "required_fields": [
+        "wave_id",
+        "benchmark_version",
+        "item_id",
+        "item_version",
+        "respondent_id_hash",
+        "raw_response",
+        "scored_value",
+        "event_id",
+        "baseline_or_followup",
+        "survey_weight"
+      ],
+      "validation_rule": "All rows must use wave_id anx_us_2026w03_somatic_retest, event_id no_event, baseline_or_followup followup, and exactly the four v0.2.0 item IDs."
+    },
+    {
+      "input_id": "paired_retest_file",
+      "path": "vendor_restricted/anx_us_2026w03_somatic_retest/paired_retest_analysis.csv",
+      "role": "Respondent-level paired file containing Wave 1 scores, retest scores, linkage status, timing windows, QC flags, conditioning variables, and attrition weights.",
+      "required_fields": [
+        "pair_id_hash",
+        "linkage_match_status",
+        "retest_interval_days",
+        "primary_retest_window_eligible",
+        "wave1_somatic_ambient_anxiety_mean",
+        "retest_somatic_ambient_anxiety_mean",
+        "retest_attrition_adjusted_weight_trimmed_rescaled",
+        "panel_conditioning_sensitivity_exclusion"
+      ],
+      "validation_rule": "Primary paired analyses must fail closed unless each retained pair has unique linkage, 13 to before 16 day timing, four valid Wave 1 item scores, and four valid retest item scores."
+    },
+    {
+      "input_id": "retest_codebook",
+      "path": "docs/instruments/anx_us_2026w03_somatic_retest_codebook.md",
+      "role": "Frozen variable definitions for linkage fields, timing-window fields, exclusion flags, panel-conditioning variables, weights, and JSONL mapping.",
+      "required_fields": [
+        "primary_retest_window_start_days",
+        "primary_retest_window_end_days",
+        "sensitivity_retest_window_start_days",
+        "sensitivity_retest_window_end_days",
+        "conditioning_prior_question_memory",
+        "conditioning_ai_news_attention_change",
+        "conditioning_ai_news_avoidance_change",
+        "retest_attrition_adjusted_weight_trimmed_rescaled"
+      ],
+      "validation_rule": "Analysis scripts must reject recoded, absent, or renamed linkage, timing, conditioning, exclusion, and weight variables unless a dated preregistration addendum exists."
+    },
+    {
+      "input_id": "item_files",
+      "path": "items/v0.2/somatic_ambient",
+      "role": "Frozen v0.3.1 scored item wording, response anchors, scoring keys, and construct metadata for the four retested items.",
+      "required_fields": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo"
+      ],
+      "validation_rule": "The analysis allowlist is exactly the four item IDs and v0.2.0 item versions named in the v0.3.1 manifest and retest preregistration."
+    }
+  ],
+  "software_environment": {
+    "language": "R",
+    "runtime_version": "R 4.4.3",
+    "packages": [
+      {
+        "name": "irr",
+        "version": "0.84.1",
+        "purpose": "Two-way absolute-agreement intraclass correlation estimates for the paired construct score."
+      },
+      {
+        "name": "boot",
+        "version": "1.3-31",
+        "purpose": "Respondent-resampling bootstrap intervals for ICC and sensitivity estimates."
+      },
+      {
+        "name": "survey",
+        "version": "4.4-2",
+        "purpose": "Attrition-adjusted weighted means, robust standard errors, agreement summaries, and weight trimming checks."
+      },
+      {
+        "name": "psych",
+        "version": "2.4.12",
+        "purpose": "Polychoric or Spearman item stability correlations and descriptive psychometric summaries."
+      },
+      {
+        "name": "lavaan",
+        "version": "0.6-19",
+        "purpose": "Ordered-categorical longitudinal CFA and measurement-invariance models using WLSMV."
+      },
+      {
+        "name": "semTools",
+        "version": "0.5-6",
+        "purpose": "Longitudinal invariance helpers and fit-index comparison tables."
+      }
+    ],
+    "version_lock_rule": "Analyses must archive sessionInfo output and package versions exactly; any package substitution requires an addendum showing unchanged confirmatory pass-fail decisions."
+  },
+  "randomization_and_seeds": {
+    "global_seed": 20260316,
+    "procedure_seeds": {
+      "icc_bootstrap": 20260317,
+      "weighted_resampling_sensitivity": 20260318,
+      "longitudinal_invariance_start_values": 20260319,
+      "attrition_model_cross_validation": 20260320
+    },
+    "seed_policy": "Seeds are fixed before outcome inspection and must be set immediately before stochastic procedures, then written to the retest evidence report."
+  },
+  "sample_splits": [
+    {
+      "split_id": "primary_retest_pairs",
+      "role": "bridge_or_refresh",
+      "target_n": 500,
+      "overlap_rule": "Each primary pair must link exactly one eligible anx_us_2026w02_somatic respondent to exactly one complete primary-window retest record.",
+      "allowed_analyses": [
+        "icc",
+        "mean_change",
+        "attrition",
+        "panel_conditioning",
+        "item_stability",
+        "longitudinal_invariance"
+      ]
+    }
+  ],
+  "eligibility_and_exclusions": {
+    "eligibility_rules": [
+      {
+        "rule_id": "eligible_wave1_recontact",
+        "rule": "Respondent passed Wave 1 exclusions, completed all four approved somatic items, gave recontact permission, and has a protected linkage token.",
+        "target_field": "sample_provenance/retest/exclusion_summary"
+      },
+      {
+        "rule_id": "primary_window",
+        "rule": "Retest completion is at least 13 completed days and less than 16 completed days after Wave 1 completion.",
+        "target_field": "sample_provenance/retest/exclusion_summary"
+      }
+    ],
+    "exclusion_rules": [
+      {
+        "rule_id": "failed_retest_consent_or_eligibility",
+        "rule": "Exclude retest records without informed consent or with failed United States adult English self-administration confirmation.",
+        "target_field": "sample_provenance/retest/exclusion_summary"
+      },
+      {
+        "rule_id": "nonunique_linkage",
+        "rule": "Exclude records without a unique one-to-one protected linkage between a Wave 1 analytic record and a retest record.",
+        "target_field": "sample_provenance/retest/exclusion_summary"
+      },
+      {
+        "rule_id": "failed_retest_qc",
+        "rule": "Exclude respondents failing the retest attention check, scenario-comprehension check, somatic-attribution check, speed check, duplicate check, vendor quality review, or self-reported understanding check.",
+        "target_field": "sample_provenance/retest/exclusion_summary"
+      },
+      {
+        "rule_id": "missing_retest_item",
+        "rule": "Exclude respondents from primary construct analyses if any of the four retest ANX item responses is missing, refused, non-substantive, or outside the 1 to 5 scale.",
+        "target_field": "sample_provenance/retest/exclusion_summary"
+      }
+    ],
+    "non_exclusion_flags": [
+      {
+        "rule_id": "conditioning_memory",
+        "rule": "Self-reported memory of the prior survey is retained for sensitivity analysis and does not exclude respondents from the primary estimate by itself.",
+        "target_field": "evidence/retest/panel_conditioning"
+      }
+    ],
+    "flow_table_target_field": "sample_provenance/retest/exclusion_summary"
+  },
+  "weighting_policy": {
+    "primary_estimation": "The primary ICC is unweighted; weighted mean change and descriptive estimates use attrition-adjusted Wave 1 weights.",
+    "descriptive_estimation": "Reports must show both unweighted psychometric diagnostics and attrition-adjusted weighted descriptive estimates.",
+    "weight_construction": "The primary weight equals the final Wave 1 post-stratification weight multiplied by inverse predicted retest completion propensity, trimmed and rescaled to the complete-pair analytic sample size.",
+    "trimming": {
+      "minimum": 0.3,
+      "maximum": 3.0,
+      "exception_rule": "Weights outside 0.30 to 3.00 require trimming; any exception requires an addendum showing unchanged repeatability decisions."
+    },
+    "sensitivity_required": true,
+    "target_field": "sample_provenance/retest/weighting"
+  },
+  "missing_data_handling": {
+    "item_distributions": "Missing retest item responses are reported by item and by eligibility stage before primary paired exclusions.",
+    "factor_models": "Longitudinal CFA uses complete paired responses to all four Wave 1 and retest items; no outcome imputation is permitted.",
+    "reliability": "Construct-level ICC requires complete valid Wave 1 and retest scores for all four items; incomplete retests are not imputed.",
+    "irt": "IRT-style linking is fallback only for invariance if CFA is unstable; it uses observed paired item responses with no imputed item scores.",
+    "external_validity": "No external-validity endpoint is confirmatory in this retest; attrition covariate missingness may use explicit missing categories or missing indicators.",
+    "imputation_policy": "Do not impute ANX item responses or construct scores; covariate handling for attrition models must be documented before model fitting.",
+    "target_field": "evidence/retest/missingness"
+  },
+  "models": {
+    "efa": {
+      "sample": "primary_retest_pairs",
+      "estimator": "Not run as confirmatory retest endpoint; one-factor structure is inherited from v0.3.1.",
+      "primary_statistics": [
+        "not_applicable_retest_efa"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "efa_not_applicable",
+          "statistic": "not_applicable_retest_efa",
+          "operator": "=",
+          "threshold": true,
+          "pass_action": "Document that no exploratory factor claim is made.",
+          "fail_action": "Stop if exploratory factor results are used as confirmatory evidence.",
+          "target_field": "evidence/retest/factor_structure"
+        }
+      ],
+      "target_fields": [
+        "evidence/retest/factor_structure"
+      ]
+    },
+    "cfa": {
+      "sample": "primary_retest_pairs",
+      "estimator": "Ordered-categorical longitudinal CFA using WLSMV or a documented ordinal equivalent.",
+      "primary_statistics": [
+        "configural_converged",
+        "metric_delta_cfi",
+        "metric_delta_rmsea",
+        "scalar_delta_cfi",
+        "scalar_delta_rmsea"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "configural_convergence",
+          "statistic": "configural_converged",
+          "operator": "=",
+          "threshold": true,
+          "pass_action": "Proceed to metric and scalar invariance tests.",
+          "fail_action": "Label longitudinal_invariance_failed_configural and prohibit construct reliability claims.",
+          "target_field": "evidence/retest/longitudinal_invariance"
+        },
+        {
+          "gate_id": "metric_delta_cfi",
+          "statistic": "metric_delta_cfi",
+          "operator": ">=",
+          "threshold": -0.01,
+          "pass_action": "Metric invariance CFI threshold passes.",
+          "fail_action": "Label longitudinal_invariance_failed_metric.",
+          "target_field": "evidence/retest/longitudinal_invariance"
+        },
+        {
+          "gate_id": "metric_delta_rmsea",
+          "statistic": "metric_delta_rmsea",
+          "operator": "<=",
+          "threshold": 0.015,
+          "pass_action": "Metric invariance RMSEA threshold passes.",
+          "fail_action": "Label longitudinal_invariance_failed_metric.",
+          "target_field": "evidence/retest/longitudinal_invariance"
+        },
+        {
+          "gate_id": "scalar_delta_cfi",
+          "statistic": "scalar_delta_cfi",
+          "operator": ">=",
+          "threshold": -0.01,
+          "pass_action": "Scalar or threshold invariance CFI threshold passes.",
+          "fail_action": "Label weighted mean change as measurement-non-invariant.",
+          "target_field": "evidence/retest/longitudinal_invariance"
+        },
+        {
+          "gate_id": "scalar_delta_rmsea",
+          "statistic": "scalar_delta_rmsea",
+          "operator": "<=",
+          "threshold": 0.015,
+          "pass_action": "Scalar or threshold invariance RMSEA threshold passes.",
+          "fail_action": "Label weighted mean change as measurement-non-invariant.",
+          "target_field": "evidence/retest/longitudinal_invariance"
+        }
+      ],
+      "target_fields": [
+        "evidence/retest/longitudinal_invariance"
+      ]
+    },
+    "omega": {
+      "sample": "primary_retest_pairs",
+      "estimator": "Retest repeatability is evaluated with ICC rather than internal-consistency omega.",
+      "primary_statistics": [
+        "icc_2_1",
+        "icc_2_1_ci_lower"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "icc_estimate",
+          "statistic": "icc_2_1",
+          "operator": ">=",
+          "threshold": 0.7,
+          "pass_action": "Construct repeatability ICC estimate passes.",
+          "fail_action": "Fail construct repeatability threshold.",
+          "target_field": "evidence/retest/reliability"
+        },
+        {
+          "gate_id": "icc_ci_lower",
+          "statistic": "icc_2_1_ci_lower",
+          "operator": ">=",
+          "threshold": 0.6,
+          "pass_action": "Construct repeatability ICC lower confidence bound passes.",
+          "fail_action": "Fail construct repeatability confidence threshold.",
+          "target_field": "evidence/retest/reliability"
+        }
+      ],
+      "target_fields": [
+        "evidence/retest/reliability"
+      ]
+    },
+    "irt": {
+      "sample": "primary_retest_pairs",
+      "estimator": "Fallback ordinal item-response or alignment-based linking only if longitudinal CFA is unidentified or unstable.",
+      "primary_statistics": [
+        "maximum_expected_score_drift",
+        "same_item_residual_correlation_abs_max"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "expected_score_drift",
+          "statistic": "maximum_expected_score_drift",
+          "operator": "<=",
+          "threshold": 0.1,
+          "pass_action": "Item parameter drift is small enough for mean-score interpretation.",
+          "fail_action": "Label partial or failed longitudinal invariance.",
+          "target_field": "evidence/retest/longitudinal_invariance"
+        },
+        {
+          "gate_id": "residual_local_dependence",
+          "statistic": "same_item_residual_correlation_abs_max",
+          "operator": "<=",
+          "threshold": 0.2,
+          "pass_action": "Repeated same-item residual dependence remains below review threshold.",
+          "fail_action": "Flag repeated-administration local dependence for reviewer decision.",
+          "target_field": "evidence/retest/longitudinal_invariance"
+        }
+      ],
+      "target_fields": [
+        "evidence/retest/longitudinal_invariance"
+      ]
+    },
+    "dif": {
+      "sample": "primary_retest_pairs",
+      "estimator": "Attrition comparison using standardized mean differences and weighted percentage-point differences.",
+      "primary_statistics": [
+        "max_attrition_smd",
+        "max_attrition_weighted_pp_diff",
+        "construct_attrition_difference_points",
+        "construct_attrition_difference_sd"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "construct_attrition_points",
+          "statistic": "construct_attrition_difference_points",
+          "operator": "<=",
+          "threshold": 0.15,
+          "pass_action": "Attrition construct difference in score points stays within threshold.",
+          "fail_action": "Label repeatability evidence attrition-sensitive unless weighted decision still passes.",
+          "target_field": "evidence/retest/attrition"
+        },
+        {
+          "gate_id": "construct_attrition_sd",
+          "statistic": "construct_attrition_difference_sd",
+          "operator": "<=",
+          "threshold": 0.2,
+          "pass_action": "Attrition construct difference in standard deviation units stays within threshold.",
+          "fail_action": "Label repeatability evidence attrition-sensitive unless weighted decision still passes.",
+          "target_field": "evidence/retest/attrition"
+        }
+      ],
+      "target_fields": [
+        "evidence/retest/attrition"
+      ]
+    },
+    "invariance": {
+      "sample": "primary_retest_pairs",
+      "estimator": "Decision synthesis from longitudinal CFA, fallback linking, and residual local-dependence checks.",
+      "primary_statistics": [
+        "longitudinal_invariance_pass"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "longitudinal_invariance_pass",
+          "statistic": "longitudinal_invariance_pass",
+          "operator": "=",
+          "threshold": true,
+          "pass_action": "Permit construct-level ICC and weighted mean-change interpretation within the retest scope.",
+          "fail_action": "Apply the preregistered longitudinal-invariance failure label.",
+          "target_field": "evidence/retest/longitudinal_invariance"
+        }
+      ],
+      "target_fields": [
+        "evidence/retest/longitudinal_invariance"
+      ]
+    },
+    "external_validity": {
+      "sample": "primary_retest_pairs",
+      "estimator": "No external-validity claim is tested; panel-conditioning and item-stability checks provide retest validity safeguards.",
+      "primary_statistics": [
+        "panel_conditioning_mean_change_shift",
+        "conditioning_excluded_icc"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "conditioning_excluded_icc",
+          "statistic": "conditioning_excluded_icc",
+          "operator": ">=",
+          "threshold": 0.65,
+          "pass_action": "Conditioning-excluded ICC remains above sensitivity threshold.",
+          "fail_action": "Label repeatability evidence panel-conditioning-sensitive.",
+          "target_field": "evidence/retest/panel_conditioning"
+        },
+        {
+          "gate_id": "conditioning_mean_change_shift",
+          "statistic": "panel_conditioning_mean_change_shift",
+          "operator": "<=",
+          "threshold": 0.1,
+          "pass_action": "Conditioning exclusion does not materially change mean change.",
+          "fail_action": "Label repeatability evidence panel-conditioning-sensitive.",
+          "target_field": "evidence/retest/panel_conditioning"
+        }
+      ],
+      "target_fields": [
+        "evidence/retest/panel_conditioning"
+      ]
+    }
+  },
+  "validation_gates": [
+    {
+      "gate_id": "complete_pair_n",
+      "statistic": "complete_pair_analytic_n",
+      "operator": ">=",
+      "threshold": 500,
+      "pass_action": "Permit confirmatory repeatability claims if all psychometric gates also pass.",
+      "fail_action": "If below 400 report descriptively only; otherwise report with sample-size caution.",
+      "target_field": "sample_provenance/retest/exclusion_summary"
+    },
+    {
+      "gate_id": "absolute_weighted_mean_change",
+      "statistic": "absolute_weighted_mean_change",
+      "operator": "<=",
+      "threshold": 0.15,
+      "pass_action": "Construct mean change stays within the preregistered negligible-change threshold.",
+      "fail_action": "Fail construct mean-change threshold.",
+      "target_field": "evidence/retest/mean_change"
+    },
+    {
+      "gate_id": "mean_change_ci_lower",
+      "statistic": "weighted_mean_change_ci_lower",
+      "operator": ">=",
+      "threshold": -0.25,
+      "pass_action": "Lower confidence bound stays within equivalence range.",
+      "fail_action": "Fail construct mean-change equivalence threshold.",
+      "target_field": "evidence/retest/mean_change"
+    },
+    {
+      "gate_id": "mean_change_ci_upper",
+      "statistic": "weighted_mean_change_ci_upper",
+      "operator": "<=",
+      "threshold": 0.25,
+      "pass_action": "Upper confidence bound stays within equivalence range.",
+      "fail_action": "Fail construct mean-change equivalence threshold.",
+      "target_field": "evidence/retest/mean_change"
+    },
+    {
+      "gate_id": "absolute_standardized_response_mean",
+      "statistic": "absolute_standardized_response_mean",
+      "operator": "<=",
+      "threshold": 0.2,
+      "pass_action": "Standardized response mean is within negligible-change threshold.",
+      "fail_action": "Fail standardized mean-change threshold.",
+      "target_field": "evidence/retest/mean_change"
+    },
+    {
+      "gate_id": "item_stability_correlation",
+      "statistic": "minimum_item_stability_correlation",
+      "operator": ">=",
+      "threshold": 0.5,
+      "pass_action": "All items meet the minimum stability-correlation threshold.",
+      "fail_action": "Apply item-level caution or construct failure according to number of failed items.",
+      "target_field": "evidence/retest/item_stability"
+    },
+    {
+      "gate_id": "item_absolute_mean_change",
+      "statistic": "maximum_item_absolute_weighted_mean_change",
+      "operator": "<=",
+      "threshold": 0.2,
+      "pass_action": "All items meet the weighted item mean-change threshold.",
+      "fail_action": "Apply item-level caution or construct failure according to number of failed items.",
+      "target_field": "evidence/retest/item_stability"
+    },
+    {
+      "gate_id": "item_large_movement_share",
+      "statistic": "maximum_item_two_or_more_category_move_share",
+      "operator": "<=",
+      "threshold": 0.15,
+      "pass_action": "All items keep large category movement within threshold.",
+      "fail_action": "Apply item-level caution or construct failure according to number of failed items.",
+      "target_field": "evidence/retest/item_stability"
+    },
+    {
+      "gate_id": "item_missing_unusable_rate",
+      "statistic": "maximum_item_missing_or_unusable_rate",
+      "operator": "<=",
+      "threshold": 0.1,
+      "pass_action": "All items meet the missing or unusable retest response threshold.",
+      "fail_action": "Apply item-level caution or construct failure according to number of failed items.",
+      "target_field": "evidence/retest/item_stability"
+    }
+  ],
+  "sensitivity_analyses": [
+    {
+      "analysis_id": "conditioning_exclusion",
+      "description": "Repeat ICC and mean-change endpoints after excluding respondents who remembered the prior item block and changed AI-news attention or avoidance because of it.",
+      "primary_comparison": "Label panel-conditioning-sensitive if conditioning-excluded ICC is below 0.65 or weighted mean change shifts by more than 0.10 points.",
+      "target_field": "evidence/retest/panel_conditioning"
+    },
+    {
+      "analysis_id": "timing_window",
+      "description": "Repeat core estimates in the broader 10 to before 21 day timing-sensitivity window.",
+      "primary_comparison": "Compare direction and pass-fail decisions with the primary 13 to before 16 day retest window.",
+      "target_field": "evidence/retest/reliability"
+    },
+    {
+      "analysis_id": "attrition_weighting",
+      "description": "Compare unweighted and attrition-adjusted weighted estimates and flag bias using preregistered attrition thresholds.",
+      "primary_comparison": "Repeatability evidence is attrition-sensitive if construct differences exceed 0.15 points or 0.20 SD and weighted decisions do not preserve the pass classification.",
+      "target_field": "evidence/retest/attrition"
+    }
+  ],
+  "dossier_output": {
+    "dossier_path": "validation/v0.3/somatic_ambient_anxiety/wave3_retest_dossier.json",
+    "required_fields": [
+      "sample_provenance/retest/exclusion_summary",
+      "sample_provenance/retest/weighting",
+      "evidence/retest/reliability",
+      "evidence/retest/mean_change",
+      "evidence/retest/attrition",
+      "evidence/retest/panel_conditioning",
+      "evidence/retest/item_stability",
+      "evidence/retest/longitudinal_invariance"
+    ],
+    "write_policy": "Every confirmatory statistic, threshold decision, exclusion count, and sensitivity label in this plan must be written before any public retest evidence claim."
+  },
+  "statistic_to_dossier_field": [
+    {
+      "statistic_id": "icc_2_1",
+      "analysis": "icc",
+      "target_field": "evidence/retest/reliability",
+      "decision_use": "Primary construct repeatability estimate must be at least 0.70."
+    },
+    {
+      "statistic_id": "icc_2_1_ci_lower",
+      "analysis": "icc",
+      "target_field": "evidence/retest/reliability",
+      "decision_use": "Bootstrap 95 percent confidence interval lower bound must be at least 0.60."
+    },
+    {
+      "statistic_id": "absolute_weighted_mean_change",
+      "analysis": "mean_change",
+      "target_field": "evidence/retest/mean_change",
+      "decision_use": "Absolute weighted construct mean change must be no greater than 0.15 points."
+    },
+    {
+      "statistic_id": "max_attrition_smd",
+      "analysis": "attrition",
+      "target_field": "evidence/retest/attrition",
+      "decision_use": "Standardized mean differences greater than 0.10 must be flagged in the attrition table."
+    },
+    {
+      "statistic_id": "conditioning_excluded_icc",
+      "analysis": "panel_conditioning",
+      "target_field": "evidence/retest/panel_conditioning",
+      "decision_use": "Conditioning-excluded ICC below 0.65 triggers the panel-conditioning-sensitive label."
+    },
+    {
+      "statistic_id": "minimum_item_stability_correlation",
+      "analysis": "item_stability",
+      "target_field": "evidence/retest/item_stability",
+      "decision_use": "Each item must have an unweighted stability correlation of at least 0.50."
+    },
+    {
+      "statistic_id": "longitudinal_invariance_pass",
+      "analysis": "longitudinal_invariance",
+      "target_field": "evidence/retest/longitudinal_invariance",
+      "decision_use": "Construct-level reliability and mean-change interpretation require longitudinal measurement comparability."
+    }
+  ]
+}

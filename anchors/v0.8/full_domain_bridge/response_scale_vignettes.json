@@ -1,0 +1,297 @@
+{
+  "$schema": "../../../schema/anchor_vignette.schema.json",
+  "vignette_set_id": "full_domain_bridge_response_scale_vignettes",
+  "version": "v0.8.0",
+  "benchmark_release_line": "v0.8",
+  "target_domain": "somatic_ambient",
+  "target_construct": "somatic_ambient_anxiety",
+  "non_scored_status": {
+    "is_scored_item": false,
+    "aggregate_scoring_permitted": false,
+    "permitted_uses": [
+      "Response-style calibration for the Wave 8 full-domain bridge instrument after standardized low, moderate, and high severity stimuli.",
+      "Monotonicity checks within each domain anchor triad before interpreting response-scale use across respondent groups.",
+      "Sensitivity analyses for differential item functioning, measurement invariance, and cross-domain comparability in the non-scored Wave 8 packet.",
+      "Documentation of whether subgroup or wave differences are robust to observed response-style strata derived from fixed anchor ratings."
+    ],
+    "prohibited_uses": [
+      "Official ANX item scoring, construct scoring, domain scoring, cross-domain scoring, overall scoring, longitudinal scoring, or event-study outcome scoring.",
+      "Participant clinical classification, diagnostic screening, individual feedback, employment screening, risk prediction, or intervention assignment.",
+      "Replacing psychometric validation of the administered ANX item pool or serving as an exclusion rule without preregistered sensitivity reporting.",
+      "Exporting anchor responses as wave_response item rows or assigning anchor vignettes item identifiers from the scored ANX item namespace."
+    ]
+  },
+  "response_scale": {
+    "scale_type": "5_point_likert",
+    "points": 5,
+    "prompt": "How anxious would this scenario make you feel?",
+    "anchors": [
+      {
+        "value": 1,
+        "label": "Not at all anxious"
+      },
+      {
+        "value": 2,
+        "label": "Slightly anxious"
+      },
+      {
+        "value": 3,
+        "label": "Moderately anxious"
+      },
+      {
+        "value": 4,
+        "label": "Very anxious"
+      },
+      {
+        "value": 5,
+        "label": "Extremely anxious"
+      }
+    ]
+  },
+  "expected_ordering": {
+    "severity_order": [
+      "low",
+      "moderate",
+      "high"
+    ],
+    "violation_rule": "Within each domain, an order violation is present when the low-severity vignette rating is greater than the moderate rating, the moderate rating is greater than the high rating, or the low rating is greater than the high rating among observed non-missing ratings."
+  },
+  "administration": {
+    "placement": "Administer immediately after all 24 Wave 8 ANX item screens and before quality checks, covariates, external-validity variables, demographic questions, or debrief screens.",
+    "randomization": "Do not randomize. Present domains in the fixed Wave 8 domain-block order, and within each domain present low, moderate, then high severity.",
+    "required_status": "Required response screens unless the survey platform cannot enforce required responses."
+  },
+  "vignettes": [
+    {
+      "vignette_id": "anchor_somatic_ambient_low",
+      "version": "v0.8.0",
+      "target_domain": "somatic_ambient",
+      "target_construct": "somatic_ambient_anxiety",
+      "intended_severity_band": "low",
+      "participant_text": "Imagine seeing a brief headline that a familiar AI assistant has become a little faster at summarizing articles and drafting routine emails. You notice the story, wonder for a moment what other updates might be coming, and then return to your day without physical tension or trouble concentrating.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 1,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_somatic_ambient_moderate",
+      "version": "v0.8.0",
+      "target_domain": "somatic_ambient",
+      "target_construct": "somatic_ambient_anxiety",
+      "intended_severity_band": "moderate",
+      "participant_text": "Imagine reading credible coverage that a new AI system can handle several common planning, writing, and research tasks with little supervision. Nothing in the story names you or your household. Still, for the next hour you feel keyed up, keep thinking about the pace of change, and find it somewhat harder to settle into your usual routine.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 2,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_somatic_ambient_high",
+      "version": "v0.8.0",
+      "target_domain": "somatic_ambient",
+      "target_construct": "somatic_ambient_anxiety",
+      "intended_severity_band": "high",
+      "participant_text": "Imagine watching a credible demonstration in which an AI system independently plans a complex project, drafts persuasive messages, corrects its own mistakes, and completes tasks that recently required several trained people. Afterward, your body feels on alert for much of the evening, you keep checking for more news despite wanting to stop, and you have difficulty settling when you try to sleep.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 3,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_economic_vocational_low",
+      "version": "v0.8.0",
+      "target_domain": "economic_vocational",
+      "target_construct": "economic_vocational_anxiety",
+      "intended_severity_band": "low",
+      "participant_text": "Imagine hearing that a few organizations are testing AI tools that draft routine workplace documents and answer basic customer questions. People still review the work, hiring plans have not changed, and the story mainly suggests that some everyday tasks may become faster. You think about whether training will be useful but do not expect immediate job loss or wage pressure.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 1,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_economic_vocational_moderate",
+      "version": "v0.8.0",
+      "target_domain": "economic_vocational",
+      "target_construct": "economic_vocational_anxiety",
+      "intended_severity_band": "moderate",
+      "participant_text": "Imagine that several employers in one occupation begin using AI systems to complete drafts, analysis, scheduling, and quality checks that used to occupy much of the workweek. Employees are still needed, but managers announce that advancement will depend on quickly learning AI oversight skills. Some openings are delayed while firms compare staffing costs with automation costs.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 2,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_economic_vocational_high",
+      "version": "v0.8.0",
+      "target_domain": "economic_vocational",
+      "target_construct": "economic_vocational_anxiety",
+      "intended_severity_band": "high",
+      "participant_text": "Imagine that a major industry adopts AI systems that can perform most entry-level and mid-level tasks with limited supervision. Firms freeze hiring, reduce contractor budgets, and tell workers that only a smaller group of AI supervisors will be retained. Professional associations report rapid wage pressure and uncertainty about which skills will remain valuable over the next few years.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 3,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_epistemic_low",
+      "version": "v0.8.0",
+      "target_domain": "epistemic",
+      "target_construct": "epistemic_trust_anxiety",
+      "intended_severity_band": "low",
+      "participant_text": "Imagine noticing that an online article includes a clear label saying AI helped draft a summary of a public report. The original report is linked, several reputable outlets describe the same facts, and corrections are easy to find. You spend a little extra time checking the source trail but feel that the basic information can still be evaluated.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 1,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_epistemic_moderate",
+      "version": "v0.8.0",
+      "target_domain": "epistemic",
+      "target_construct": "epistemic_trust_anxiety",
+      "intended_severity_band": "moderate",
+      "participant_text": "Imagine that a breaking local story spreads through videos, summaries, screenshots, and short posts, some labeled as AI-generated and some not labeled at all. Reliable newsrooms are still investigating, and early fact-checks disagree about which clips are authentic. You can probably wait for better information, but it becomes harder to know what to believe in the moment.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 2,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_epistemic_high",
+      "version": "v0.8.0",
+      "target_domain": "epistemic",
+      "target_construct": "epistemic_trust_anxiety",
+      "intended_severity_band": "high",
+      "participant_text": "Imagine that a court case, public-health warning, or election dispute depends on recordings and expert summaries that may have been generated or altered by AI. Detection tools give conflicting results, officials disagree in public, and millions of people act on different versions before verification is possible. Even careful readers cannot confidently separate authentic evidence from persuasive synthetic material.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 3,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_relational_low",
+      "version": "v0.8.0",
+      "target_domain": "relational",
+      "target_construct": "relational_ai_anxiety",
+      "intended_severity_band": "low",
+      "participant_text": "Imagine that a friend or partner occasionally uses an AI assistant to draft polite replies, remember shared plans, or think through minor disagreements. They tell you when they use it, and important conversations still happen directly between people. The tool feels noticeable but does not replace private trust, affection, or responsibility in the relationship.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 1,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_relational_moderate",
+      "version": "v0.8.0",
+      "target_domain": "relational",
+      "target_construct": "relational_ai_anxiety",
+      "intended_severity_band": "moderate",
+      "participant_text": "Imagine that people close to you increasingly ask an AI system how to word apologies, interpret messages, and decide when to bring up sensitive topics. Conversations become smoother, but you sometimes cannot tell whether warmth, humor, or concern came from the person or from automated advice. The relationship remains intact, yet authenticity feels less certain.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 2,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_relational_high",
+      "version": "v0.8.0",
+      "target_domain": "relational",
+      "target_construct": "relational_ai_anxiety",
+      "intended_severity_band": "high",
+      "participant_text": "Imagine that a close partner, friend, or family member begins relying on an AI companion for emotional support, conflict advice, and major personal decisions before speaking with people who know them. They say the AI is more patient and available, and private conversations increasingly pass through it first. You worry that trust and attachment are shifting away from human relationships.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 3,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_existential_identity_low",
+      "version": "v0.8.0",
+      "target_domain": "existential_identity",
+      "target_construct": "existential_identity_ai_anxiety",
+      "intended_severity_band": "low",
+      "participant_text": "Imagine reading an essay about AI systems helping people brainstorm art, tutoring plans, and personal goals. The essay says human judgment, care, and responsibility remain central, but it raises familiar questions about what kinds of work feel uniquely human. You find the questions interesting and a little unsettling, then move on with your day.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 1,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_existential_identity_moderate",
+      "version": "v0.8.0",
+      "target_domain": "existential_identity",
+      "target_construct": "existential_identity_ai_anxiety",
+      "intended_severity_band": "moderate",
+      "participant_text": "Imagine that AI systems become common sources of advice, creative work, tutoring, and professional judgment. People still make final decisions, but institutions increasingly describe human contribution as valuable mainly when it supervises or interprets machine output. You begin wondering how independent human judgment, creativity, and purpose will be recognized in the future.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 2,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_existential_identity_high",
+      "version": "v0.8.0",
+      "target_domain": "existential_identity",
+      "target_construct": "existential_identity_ai_anxiety",
+      "intended_severity_band": "high",
+      "participant_text": "Imagine that highly capable AI systems can provide convincing conversation, creative production, expert reasoning, and emotional support at a level many people consider equal or superior to human effort. Schools, employers, and families debate whether human distinctiveness still matters. The public conversation leaves you deeply unsettled about personhood, purpose, and whether ordinary human contribution will continue to feel meaningful.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 3,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_autonomy_surveillance_low",
+      "version": "v0.8.0",
+      "target_domain": "autonomy_surveillance",
+      "target_construct": "autonomy_surveillance_ai_anxiety",
+      "intended_severity_band": "low",
+      "participant_text": "Imagine that a building you sometimes visit adds an AI system that estimates crowd size and detects blocked exits. Signs explain the purpose, no individual scores are shown to staff, and records are deleted quickly. You notice the cameras and prefer clear limits, but the system does not seem to track personal choices across settings.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 1,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_autonomy_surveillance_moderate",
+      "version": "v0.8.0",
+      "target_domain": "autonomy_surveillance",
+      "target_construct": "autonomy_surveillance_ai_anxiety",
+      "intended_severity_band": "moderate",
+      "participant_text": "Imagine that workplaces, apartment lobbies, and shopping areas begin using AI systems to infer unusual behavior, productivity, mood, or risk from movement and communication patterns. Officials say the systems improve safety and service, but individuals receive only brief explanations and cannot easily challenge mistaken inferences. You start wondering how often ordinary choices are being scored.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 2,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_autonomy_surveillance_high",
+      "version": "v0.8.0",
+      "target_domain": "autonomy_surveillance",
+      "target_construct": "autonomy_surveillance_ai_anxiety",
+      "intended_severity_band": "high",
+      "participant_text": "Imagine that AI monitoring systems link public cameras, workplace activity, phone behavior, and purchasing data to predict reliability, risk, and influenceability. Scores are used for schedules, access, pricing, and security referrals, but people cannot see or correct the underlying inferences. You feel that privacy and practical freedom are being narrowed by systems that anticipate and shape behavior.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 3,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_safety_catastrophic_low",
+      "version": "v0.8.0",
+      "target_domain": "safety_catastrophic",
+      "target_construct": "safety_catastrophic_ai_anxiety",
+      "intended_severity_band": "low",
+      "participant_text": "Imagine reading that researchers found a minor failure in an AI safety evaluation tool, then fixed it before deployment. The incident affected a test environment, independent reviewers could inspect the logs, and no public systems were disrupted. The story reminds you that safeguards need maintenance, but it does not suggest immediate danger.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 1,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_safety_catastrophic_moderate",
+      "version": "v0.8.0",
+      "target_domain": "safety_catastrophic",
+      "target_construct": "safety_catastrophic_ai_anxiety",
+      "intended_severity_band": "moderate",
+      "participant_text": "Imagine that an AI system used for cybersecurity, laboratory research support, or military planning gives a recommendation that experts later judge to be overconfident. Human reviewers catch the problem before major harm occurs, but the event shows that automated advice can move faster than ordinary oversight. Agencies add safeguards while debating how much authority such systems should have.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 2,
+      "non_scored": true
+    },
+    {
+      "vignette_id": "anchor_safety_catastrophic_high",
+      "version": "v0.8.0",
+      "target_domain": "safety_catastrophic",
+      "target_construct": "safety_catastrophic_ai_anxiety",
+      "intended_severity_band": "high",
+      "participant_text": "Imagine that advanced AI systems accelerate decisions in critical infrastructure, biological research screening, and military warning during a fast-moving crisis. Several automated recommendations interact in unexpected ways, human supervisors struggle to verify them quickly, and public services or international stability are put at risk before control is restored. The incident raises serious concern about rare but severe AI-driven cascades.",
+      "response_scale_ref": "shared_5_point_anxiety",
+      "expected_rank": 3,
+      "non_scored": true
+    }
+  ]
+}

@@ -15,7 +15,11 @@ Any change to scenario wording, response anchors, scoring direction, exclusion c
 
 Items must be validated against `schema/item.schema.json` before inclusion in a benchmark release. Schema validation is necessary but not sufficient: inclusion also requires substantive review for construct validity, ethical risk, clarity, reading level, consistency with the domain taxonomy, and completion of the psychometric validation gate in `docs/psychometric_validation_protocol.md`.
 
-Schema-valid items may be stored as exemplar or development items while they are being drafted, piloted, or revised. They must not be treated as benchmark-scored items, included in construct, domain, or overall ANX aggregation, or used as confirmatory longitudinal or event-study outcomes until the psychometric validation dossier approves the item version for scored release.
+Each release manifest must carry a top-level `release_status` lifecycle state: `draft`, `frozen_candidate`, `citable`, or `deprecated`. This manifest-level state is distinct from item-level `release_status`. Only a manifest marked `release_status: citable` may support ANX-Bench benchmark claims, including item-level scored claims, construct scores, domain scores, overall scores, longitudinal wave comparisons, event-study estimates, calibration claims, or public benchmark trend statements. A `frozen_candidate` manifest may freeze preregistered materials, item candidates, analysis plans, fielding instruments, evidence-provenance contracts, and checksums for reproducibility, but it must not contain official scored items, must not mark frozen items as scoring eligible, and must keep aggregate scoring disabled. A `citable` manifest must not be future-dated relative to the validation run that authorizes publication.
+
+Every item file must carry a machine-readable lifecycle state in `release_status` and a required `validation` object with the psychometric decision, decision date, validation dossier path, preregistration path, and scoring eligibility. The allowed release states are `exemplar`, `development_only`, `approved_item_level_only`, `approved_scored`, and `blocked`. The validation dossier path must point to the evidence record for the item version once available, using the structure in `docs/validation_dossier_template.md`; preregistration pointers must identify the frozen protocol that governs scored or confirmatory use.
+
+Schema-valid items may be stored as exemplar or development items while they are being drafted, piloted, or revised. They must not be treated as benchmark-scored items, included in construct, domain, or overall ANX aggregation, or used as confirmatory longitudinal or event-study outcomes until the psychometric validation dossier approves the item version for scored release. Only items with `release_status: approved_scored` and `validation.scoring_eligible: true` may enter construct, domain, or overall ANX scoring.
 
 ## Domain Taxonomy
 
@@ -51,12 +55,18 @@ Primary analyses must not impute missing single-item responses unless the pre-re
 
 ## Score Aggregation
 
+Construct and domain aggregation must be driven by the versioned construct registry for the applicable release line. For `v0.1.0`, the authoritative registry is `constructs/v0.1/registry.json`, validated by `schema/construct_registry.schema.json`. Construct labels embedded in item JSON are item metadata only; they are not sufficient authority for aggregation, item retention, anchor interpretation, or domain scoring. A scoring pipeline must resolve each item's `construct.construct_id` against the registry, confirm that the item ID is listed in the construct's `allowed_item_ids`, and apply the registry's `intended_aggregation_level`, `minimum_retained_items`, `anchor_status`, and validation requirements before computing any construct, domain, or overall ANX score.
+
 Aggregation proceeds in four levels:
 
 1. Item score: The scored value after applying the item scoring key.
 2. Construct score: The mean of valid item scores assigned to the same construct within a wave.
 3. Domain score: The mean of valid construct scores within a domain, weighted equally by construct unless a pre-registered alternative is used.
 4. Overall ANX score: The mean of valid domain scores, weighted equally by domain for the headline benchmark.
+
+Aggregation must filter item records before scoring. Items with `release_status` equal to `exemplar`, `development_only`, `approved_item_level_only`, or `blocked` must be excluded from construct, domain, and overall ANX scoring even if they are schema-valid, even if raw responses exist, and even if their embedded item JSON contains a plausible construct label. `approved_item_level_only` items may be summarized only as item-level descriptive or exploratory outcomes when the validation dossier, preregistration, and construct registry authorize that reporting.
+
+Validated constructs must not be combined into domain-composite, cross-domain, or overall benchmark scores solely because each construct has passed its own within-domain validation gate. Before any release may propose a combined score, maintainers must freeze and complete a bridge study that co-administers the contributing constructs in one sample and provides preregistered evidence for multidomain factor structure, reliability, IRT linking or another documented linking model, DIF, measurement invariance, bounded cross-domain correlations, and discriminant validity against general anxiety. For the current release sequence, `v0.7.0` is the required bridge packet before any overall ANX or cross-domain score can be proposed; it is bridge evidence only and must keep aggregate scoring disabled until a later citable release explicitly authorizes a scoring model.
 
 Domain and overall scores must report the number of contributing items, constructs, respondents, exclusions, and missing responses. A domain score should not be reported for a respondent unless at least half of the released construct coverage for that domain is observed. Wave-level reports must include confidence intervals or credible intervals and must distinguish population-weighted estimates from unweighted sample summaries.
 
@@ -66,6 +76,7 @@ Interpretation bands are item-level aids, not diagnostic categories. They may de
 
 Longitudinal comparability is a primary benchmark requirement. A score from one wave is comparable to a score from another wave only when the following conditions hold:
 
+- The respondent-item response data validate against `schema/wave_response.schema.json`.
 - The same released item versions are administered or a documented bridge study links old and new item versions.
 - Response anchors, scoring keys, exclusion criteria, and administration mode are unchanged.
 - Sampling frame, weighting, and recruitment source are documented for each wave.
@@ -81,9 +92,11 @@ Any ANX-Bench release, report, dashboard, manuscript, or public artifact that ma
 
 The completed preregistration must identify the wave ID, benchmark version, item versions, target population, sampling frame, weighting plan, exclusion rules, analysis freeze date, event definition if applicable, primary outcomes, and statistical plan before response outcomes are inspected. If the file is missing, incomplete, finalized after outcome inspection, or inconsistent with the administered item versions, the release must either be blocked or the affected analyses must be labeled exploratory and excluded from confirmatory benchmark claims.
 
+The canonical analytic file for any fielded wave must be one respondent-item response row per administered item version and must validate against `schema/wave_response.schema.json`. This gate applies to validation samples, longitudinal waves, and event-study waves. A wave whose response data do not validate against the wave response schema cannot support psychometric validation evidence, longitudinal comparison, benchmark trend reporting, or event-study claims, even if the item files and preregistration are otherwise valid. Schema-valid response data are necessary but not sufficient: the wave must still satisfy preregistration, privacy, weighting, exclusion, measurement-invariance, and psychometric validation requirements before confirmatory claims are permitted.
+
 ## Psychometric Validation Gate
 
-Before an item moves from exemplar or development status to benchmark-scored status, maintainers must complete the validation protocol in `docs/psychometric_validation_protocol.md`. This gate is release-blocking for any item that will contribute to item-level scored reporting, construct scores, domain scores, the overall ANX score, longitudinal comparisons, or event-study outcomes.
+Before an item moves from exemplar or development status to benchmark-scored status, maintainers must complete the validation protocol in `docs/psychometric_validation_protocol.md` and archive a completed validation dossier using `docs/validation_dossier_template.md`. This gate is release-blocking for any item that will contribute to item-level scored reporting, construct scores, domain scores, the overall ANX score, longitudinal comparisons, or event-study outcomes.
 
 The validation dossier must show, at minimum, that:
 
@@ -93,14 +106,17 @@ The validation dossier must show, at minimum, that:
 - The item satisfies the protocol's retention rules for primary factor loading, cross-loading, corrected item-total correlation, ceiling or floor concentration, missing or non-substantive response, local dependence, and unstable DIF.
 - Measurement invariance or a documented linking alternative supports every intended comparison across populations, languages, modes, and waves.
 
-An item that fails this gate may remain in the repository only as an exemplar or development item if its status is explicit and it is excluded from benchmark scoring. A schema-valid item that lacks psychometric approval is not a released benchmark-scored item.
+An item that fails this gate may remain in the repository only as an exemplar, development, item-level-only, or blocked item if its status is explicit and it is excluded from benchmark scoring. A schema-valid item that lacks psychometric approval is not a released benchmark-scored item.
 
 ## Benchmark Release Gate
 
 Before an item can be included in a benchmark release, maintainers must verify that:
 
 - The item validates against `schema/item.schema.json`.
-- The item has completed the psychometric validation gate in `docs/psychometric_validation_protocol.md`, unless it is explicitly labeled exemplar or development and excluded from benchmark scoring.
+- The item's `construct.construct_id` is registered in the applicable versioned construct registry and the item ID appears in that construct's `allowed_item_ids`.
+- The item file carries `release_status` and the required `validation` object.
+- The item has completed the psychometric validation gate in `docs/psychometric_validation_protocol.md`, unless it is explicitly labeled exemplar, development, item-level-only, or blocked and excluded from benchmark scoring.
+- The item has `release_status: approved_scored` and `validation.scoring_eligible: true` before it contributes to construct, domain, or overall ANX scoring.
 - The item belongs to exactly one approved domain.
 - The scenario text is concrete, comprehensible, and ethically acceptable for the target population.
 - The item has a 5-point Likert scale, reverse-coding flag, scoring key, exclusion criteria, and interpretation bands.
@@ -109,4 +125,10 @@ Before an item can be included in a benchmark release, maintainers must verify t
 
 Failure to satisfy any release gate blocks inclusion in the released ANX-Bench item set.
 
+For all releases after `v0.1.0`, registration is a precondition for freezing: any future item must reference a registered construct ID, and the construct registry must explicitly list the item ID as allowed, before that item can enter a frozen item set. New ad hoc construct names inside item JSON do not create a construct, do not authorize scoring, and do not satisfy the release gate.
+
 Before any longitudinal wave or event-study claim can be included in a benchmark release, maintainers must also verify that the completed preregistration file required by `docs/preregistration_event_study.md` exists and was frozen before response data inspection. Failure to satisfy this preregistration gate blocks the longitudinal or event-study claim even if the underlying item set is valid.
+
+Maintainers must also verify that the frozen wave response dataset validates against `schema/wave_response.schema.json` and that the variables are documented according to `docs/wave_data_dictionary.md`. Failure to satisfy this wave response schema gate blocks validation, longitudinal, and event-study claims for that wave, including claims based on otherwise valid items.
+
+Finally, maintainers must verify the manifest-level lifecycle gate. Benchmark claims may be made only from a manifest with `release_status: citable` that passes `tools/validate_release.py` on or after its `release_date`. Draft manifests, frozen candidates, and deprecated manifests may be cited descriptively as repository artifacts, but they do not authorize official ANX-Bench benchmark claims.

@@ -1,0 +1,520 @@
+{
+  "$schema": "../../schema/release.schema.json",
+  "manifest_schema_version": "v0.1.0",
+  "benchmark_version": "v0.8.0",
+  "release_date": "2026-06-16",
+  "release_status": "frozen_candidate",
+  "release_label": "ANX-Bench v0.8.0 frozen candidate full-domain bridge packet",
+  "item_schema": {
+    "path": "schema/item.schema.json",
+    "schema_version": "v0.1.0",
+    "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+  },
+  "methodology_documents": [
+    {
+      "document_type": "methodology",
+      "path": "docs/methodology.md",
+      "sha256": "292c7e2f139163b126f489be4c43c83be6ba1842d949d4d9c493196bce700337"
+    },
+    {
+      "document_type": "psychometric_validation_protocol",
+      "path": "docs/psychometric_validation_protocol.md",
+      "sha256": "d956e5a65d8d475b6f1a11422c240a21c027fe6c6cdbaac5d02d58e700b2c4f9"
+    },
+    {
+      "document_type": "preregistration_event_study",
+      "path": "docs/preregistration_event_study.md",
+      "sha256": "be8e36efe0f7bbdededdcc651e6878c8a80a081465ee7d123ce14e940d73af0b"
+    }
+  ],
+  "frozen_item_set": {
+    "item_directory": "items",
+    "item_count": 24,
+    "items": [
+      {
+        "path": "items/v0.2/somatic_ambient/sleep_disruption_ai_news.json",
+        "item_id": "sleep_disruption_ai_news",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "b914e7ed49c798675e0be6c25fb48ea12722ad61773afce8d21d1455ba1bf74c"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/body_vigilance_model_release.json",
+        "item_id": "body_vigilance_model_release",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "ad69f92e0772d37a0fc9f9d11fa0bd0049d13f40b16a4e162346454c4e82faaa"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/background_dread_ai_progress.json",
+        "item_id": "background_dread_ai_progress",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "0957373578439a51d307bbf524e731f57f469c1e3a0d94a55a13839b361379bd"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/avoidance_after_ai_capability_demo.json",
+        "item_id": "avoidance_after_ai_capability_demo",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "4577752724f240e58572f69a6abeaa22da8adeac946715591c19356d6274767e"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/skill_obsolescence_software.json",
+        "item_id": "skill_obsolescence_software",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "b08e3f205a990199cf790540fb6b54d2f0d2a40424d12cf37e4797e5c175d92d"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/wage_pressure_customer_support.json",
+        "item_id": "wage_pressure_customer_support",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "6f696f1fead12e79e2564b54d24c462ca9add0911327549915f82914a116c142"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/retraining_pressure_accounting.json",
+        "item_id": "retraining_pressure_accounting",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "36412be8662d7284bfc9804b1e26364b9def046a30777d6e17ffa73dcdbc62fc"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/status_loss_creative_work.json",
+        "item_id": "status_loss_creative_work",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "14dd4d6772c145fbdeca21920d65b46d667936ad015559e56e2505287e0edcfe"
+      },
+      {
+        "path": "items/v0.1/epistemic/deepfake_evidence_trust.json",
+        "item_id": "deepfake_evidence_trust",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "403443f44627cede092bd3a4d8f5b307171b7fe19ef8ac61d436587a1c7ca75e"
+      },
+      {
+        "path": "items/v0.1/epistemic/synthetic_news_provenance.json",
+        "item_id": "synthetic_news_provenance",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "63973e02c7ccbbf64fb2faf58da058103f1c05cffffb6cbff04a0846356f3545"
+      },
+      {
+        "path": "items/v0.1/epistemic/ai_expert_claim_conflict.json",
+        "item_id": "ai_expert_claim_conflict",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "31dd3213279361a8ec6ac8d61f0b420c6db76a1acafca87ad815e0c7055bebea"
+      },
+      {
+        "path": "items/v0.1/epistemic/personalized_misinformation_targeting.json",
+        "item_id": "personalized_misinformation_targeting",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "d4e1e2511c6c071e76e1c906ed11554bfcf3236f831e7bf0b8365d6902ec7c48"
+      },
+      {
+        "path": "items/v0.8/relational/partner_ai_confidant_displacement.json",
+        "item_id": "partner_ai_confidant_displacement",
+        "item_version": "v0.8.0",
+        "domain": "relational",
+        "construct": "relational_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "c645d6e9c1c2fd640b6a60a9ce3f487174312452b912c8fd09766d996b1396d3"
+      },
+      {
+        "path": "items/v0.8/relational/friend_group_ai_mediation.json",
+        "item_id": "friend_group_ai_mediation",
+        "item_version": "v0.8.0",
+        "domain": "relational",
+        "construct": "relational_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "f38756d81a44f628203bb6881e2d8e5a9452310e73d70fe93adfae161fe0cd0b"
+      },
+      {
+        "path": "items/v0.8/relational/eldercare_ai_attachment_shift.json",
+        "item_id": "eldercare_ai_attachment_shift",
+        "item_version": "v0.8.0",
+        "domain": "relational",
+        "construct": "relational_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "534f41df8e53364941dcd55f216bbe52f0044fbb54429991f899caa9c067792b"
+      },
+      {
+        "path": "items/v0.8/existential_identity/ai_personhood_boundary_uncertainty.json",
+        "item_id": "ai_personhood_boundary_uncertainty",
+        "item_version": "v0.8.0",
+        "domain": "existential_identity",
+        "construct": "existential_identity_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "74dc9b0d8e1b4207cec2306eb365e8698a6b828bb2c3cb62cfbdb7bffb3e5455"
+      },
+      {
+        "path": "items/v0.8/existential_identity/human_judgment_status_loss.json",
+        "item_id": "human_judgment_status_loss",
+        "item_version": "v0.8.0",
+        "domain": "existential_identity",
+        "construct": "existential_identity_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "ec1127dc13136ff85bce709bc9b8ebdf7d76319d6fe96259e22994729f9dedf4"
+      },
+      {
+        "path": "items/v0.8/existential_identity/life_purpose_ai_substitution.json",
+        "item_id": "life_purpose_ai_substitution",
+        "item_version": "v0.8.0",
+        "domain": "existential_identity",
+        "construct": "existential_identity_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "5e2e5c7c2f9897d01383c1e4b2c4b6be9d27c5284264a9fe05a77a6b1443b740"
+      },
+      {
+        "path": "items/v0.8/autonomy_surveillance/public_space_tracking.json",
+        "item_id": "public_space_tracking",
+        "item_version": "v0.8.0",
+        "domain": "autonomy_surveillance",
+        "construct": "autonomy_surveillance_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "f17b556fa6d575a25b6e04e304bc9b531d2aab59151125cc1fb02734a4fb05b8"
+      },
+      {
+        "path": "items/v0.8/autonomy_surveillance/workplace_behavior_scoring.json",
+        "item_id": "workplace_behavior_scoring",
+        "item_version": "v0.8.0",
+        "domain": "autonomy_surveillance",
+        "construct": "autonomy_surveillance_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "233e5e6dc4b72d99688549196e4078955f6704b1eca0cd66daa20570979244ab"
+      },
+      {
+        "path": "items/v0.8/autonomy_surveillance/personalized_behavior_nudging.json",
+        "item_id": "personalized_behavior_nudging",
+        "item_version": "v0.8.0",
+        "domain": "autonomy_surveillance",
+        "construct": "autonomy_surveillance_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "88f0e19f62c1318570305bef9b3e59f5a32121ab4b73a3263084ee36c6ecfc13"
+      },
+      {
+        "path": "items/v0.8/safety_catastrophic/autonomous_cyber_cascade.json",
+        "item_id": "autonomous_cyber_cascade",
+        "item_version": "v0.8.0",
+        "domain": "safety_catastrophic",
+        "construct": "safety_catastrophic_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "8fe66c2c83fba82fa444f9a986a94cde894be235185f308b3f4e80d79190b169"
+      },
+      {
+        "path": "items/v0.8/safety_catastrophic/biosecurity_protocol_misuse.json",
+        "item_id": "biosecurity_protocol_misuse",
+        "item_version": "v0.8.0",
+        "domain": "safety_catastrophic",
+        "construct": "safety_catastrophic_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "eb4d978802933e3df7e8c93e3937c2bdc994d8e658a098c3e92621ece4d5bc26"
+      },
+      {
+        "path": "items/v0.8/safety_catastrophic/military_escalation_ai_advice.json",
+        "item_id": "military_escalation_ai_advice",
+        "item_version": "v0.8.0",
+        "domain": "safety_catastrophic",
+        "construct": "safety_catastrophic_ai_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "2bad595002385d6d433a78edfb9bbc4319ce9fafe17631afdfb539dd4d0dffa7"
+      }
+    ]
+  },
+  "official_scored_items": [],
+  "scoring_eligibility": {
+    "official_scored_item_count": 0,
+    "eligibility_rule": "ANX-Bench v0.8.0 is a non-scored frozen candidate full-domain bridge packet for anx_us_2026w08_full_domain_bridge. All items in the v0.8.0 frozen item set are marked development_only for this release manifest, including prior somatic anchors when used inside the Wave 8 packet. This manifest authorizes no official scored items, no domain scores, no cross-domain score, no overall ANX score, no longitudinal trend claim, no event-study estimate, no causal capability-shock claim, no clinical interpretation, no individual-level use, and no policy-decision ranking. Any later scoring proposal requires observed validation evidence, reviewer signoff, updated registries, and a later citable manifest.",
+    "aggregate_scoring_permitted": false
+  },
+  "checksums": {
+    "algorithm": "SHA-256",
+    "coverage": "Checksums bind the Wave 8 full-domain bridge preregistration, participant-facing instrument, codebook, anchoring-vignette guidance, full-domain anchor set, sampling plan, locked no-event registry, v0.8 construct registry, standing schemas, methodology documents, and every item administered in the frozen candidate Wave 8 packet. The checksum set deliberately leaves official_scored_items empty and aggregate scoring prohibited. The full-domain anchor set and anchoring-vignette guidance are frozen non-scored calibration artifacts for response-style, DIF, and invariance sensitivity analyses only.",
+    "files": [
+      {
+        "path": "schema/item.schema.json",
+        "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+      },
+      {
+        "path": "schema/wave_response.schema.json",
+        "sha256": "9bc1989f17a7d68b6a098c7e200db69b72851fb8448061369d71c1ad464786c0"
+      },
+      {
+        "path": "schema/sampling_plan.schema.json",
+        "sha256": "741788886c7b6cd9f8874ff37b8810dde561fc4fe3b3c6716c4256690fd7de74"
+      },
+      {
+        "path": "schema/event_registry.schema.json",
+        "sha256": "517815c7d79ec17b9c2835756cd7f00056287a51ece583fbc3356c14e9c7a3ce"
+      },
+      {
+        "path": "schema/construct_registry.schema.json",
+        "sha256": "033cfdd8e60c4f98753374ddc3a0fda831b5f24b0cb2e614d729716ea1d198db"
+      },
+      {
+        "path": "schema/release.schema.json",
+        "sha256": "f4d347b6c0bfbee787f1346e56eee16835782cab62bd1987a23dc65bab7e520b"
+      },
+      {
+        "path": "schema/psychometric_analysis_plan.schema.json",
+        "sha256": "246546836a13da1b85ea6d14ab7406069353ae9327bd8bb4496a46721141341e"
+      },
+      {
+        "path": "analysis/v0.8/full_domain_bridge/wave8_analysis_plan.json",
+        "sha256": "f179cdeb39fdcbef62b48a82b234d9ed8b971da56107e15e873d162d34ed6db9"
+      },
+      {
+        "path": "schema/cross_domain_bridge_evidence.schema.json",
+        "sha256": "df10d45c0cef98e15009b9b8f1179945f01d96f6b4fe58cffa39640f231318e4"
+      },
+      {
+        "path": "schema/score_output.schema.json",
+        "sha256": "5fc181b77766fcec1a42b78c12c3682ac935cf71e71bd08dd0d086cd84fc4c74"
+      },
+      {
+        "path": "docs/methodology.md",
+        "sha256": "292c7e2f139163b126f489be4c43c83be6ba1842d949d4d9c493196bce700337"
+      },
+      {
+        "path": "docs/psychometric_validation_protocol.md",
+        "sha256": "d956e5a65d8d475b6f1a11422c240a21c027fe6c6cdbaac5d02d58e700b2c4f9"
+      },
+      {
+        "path": "docs/preregistration_event_study.md",
+        "sha256": "be8e36efe0f7bbdededdcc651e6878c8a80a081465ee7d123ce14e940d73af0b"
+      },
+      {
+        "path": "docs/preregistrations/anx_us_2026w08_full_domain_bridge.md",
+        "sha256": "e056f8f07ed0cbf51d57f98da23f8f52e648f6adf15f1770c68ba86c3d205298"
+      },
+      {
+        "path": "docs/releases/v0.8.0_full_domain_bridge_benchmark_card.md",
+        "sha256": "e9f6a184247317e6699c336d9590b7fe1409699af4fa96c1e9698726e8561e53"
+      },
+      {
+        "path": "docs/anchoring_vignettes.md",
+        "sha256": "04cd9e45cdeb985bbdc6f111e757d742c56065044b378ba6fe0b729a99f88a2c"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w08_full_domain_bridge_instrument.md",
+        "sha256": "c6be05bba5d7403cba62b4af0d4768853c796027e2a85287f7ba7f1b620db99f"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w08_full_domain_bridge_codebook.md",
+        "sha256": "bdd03e527a2c07c59ed2ad4f44db9653899a0f8b1c08bea47b11eecc8b5780fa"
+      },
+      {
+        "path": "anchors/v0.8/full_domain_bridge/response_scale_vignettes.json",
+        "sha256": "59133822a61dd882d2706c4003a10c6f3fcec84999a2e4f3df0d5e62c6f76d15"
+      },
+      {
+        "path": "sampling/v0.8/anx_us_2026w08_full_domain_bridge_sampling_plan.json",
+        "sha256": "b0fcf94883db6c0b344780bcf5d409d263043345ecff4af9c645fa88fcb5ac76"
+      },
+      {
+        "path": "events/v0.8/anx_us_2026w08_full_domain_bridge_event_registry.json",
+        "sha256": "aecb88f891bde13583bf223006557051c9e73ce589e232347dec826f667a7c9b"
+      },
+      {
+        "path": "constructs/v0.8/registry.json",
+        "sha256": "13e8d0789203ec530d2172b8697c8a71251bdfee348a8b29ee3bc4bb0afc8af2"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/sleep_disruption_ai_news.json",
+        "sha256": "b914e7ed49c798675e0be6c25fb48ea12722ad61773afce8d21d1455ba1bf74c"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/body_vigilance_model_release.json",
+        "sha256": "ad69f92e0772d37a0fc9f9d11fa0bd0049d13f40b16a4e162346454c4e82faaa"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/background_dread_ai_progress.json",
+        "sha256": "0957373578439a51d307bbf524e731f57f469c1e3a0d94a55a13839b361379bd"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/avoidance_after_ai_capability_demo.json",
+        "sha256": "4577752724f240e58572f69a6abeaa22da8adeac946715591c19356d6274767e"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/skill_obsolescence_software.json",
+        "sha256": "b08e3f205a990199cf790540fb6b54d2f0d2a40424d12cf37e4797e5c175d92d"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/wage_pressure_customer_support.json",
+        "sha256": "6f696f1fead12e79e2564b54d24c462ca9add0911327549915f82914a116c142"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/retraining_pressure_accounting.json",
+        "sha256": "36412be8662d7284bfc9804b1e26364b9def046a30777d6e17ffa73dcdbc62fc"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/status_loss_creative_work.json",
+        "sha256": "14dd4d6772c145fbdeca21920d65b46d667936ad015559e56e2505287e0edcfe"
+      },
+      {
+        "path": "items/v0.1/epistemic/deepfake_evidence_trust.json",
+        "sha256": "403443f44627cede092bd3a4d8f5b307171b7fe19ef8ac61d436587a1c7ca75e"
+      },
+      {
+        "path": "items/v0.1/epistemic/synthetic_news_provenance.json",
+        "sha256": "63973e02c7ccbbf64fb2faf58da058103f1c05cffffb6cbff04a0846356f3545"
+      },
+      {
+        "path": "items/v0.1/epistemic/ai_expert_claim_conflict.json",
+        "sha256": "31dd3213279361a8ec6ac8d61f0b420c6db76a1acafca87ad815e0c7055bebea"
+      },
+      {
+        "path": "items/v0.1/epistemic/personalized_misinformation_targeting.json",
+        "sha256": "d4e1e2511c6c071e76e1c906ed11554bfcf3236f831e7bf0b8365d6902ec7c48"
+      },
+      {
+        "path": "items/v0.8/relational/partner_ai_confidant_displacement.json",
+        "sha256": "c645d6e9c1c2fd640b6a60a9ce3f487174312452b912c8fd09766d996b1396d3"
+      },
+      {
+        "path": "items/v0.8/relational/friend_group_ai_mediation.json",
+        "sha256": "f38756d81a44f628203bb6881e2d8e5a9452310e73d70fe93adfae161fe0cd0b"
+      },
+      {
+        "path": "items/v0.8/relational/eldercare_ai_attachment_shift.json",
+        "sha256": "534f41df8e53364941dcd55f216bbe52f0044fbb54429991f899caa9c067792b"
+      },
+      {
+        "path": "items/v0.8/existential_identity/ai_personhood_boundary_uncertainty.json",
+        "sha256": "74dc9b0d8e1b4207cec2306eb365e8698a6b828bb2c3cb62cfbdb7bffb3e5455"
+      },
+      {
+        "path": "items/v0.8/existential_identity/human_judgment_status_loss.json",
+        "sha256": "ec1127dc13136ff85bce709bc9b8ebdf7d76319d6fe96259e22994729f9dedf4"
+      },
+      {
+        "path": "items/v0.8/existential_identity/life_purpose_ai_substitution.json",
+        "sha256": "5e2e5c7c2f9897d01383c1e4b2c4b6be9d27c5284264a9fe05a77a6b1443b740"
+      },
+      {
+        "path": "items/v0.8/autonomy_surveillance/public_space_tracking.json",
+        "sha256": "f17b556fa6d575a25b6e04e304bc9b531d2aab59151125cc1fb02734a4fb05b8"
+      },
+      {
+        "path": "items/v0.8/autonomy_surveillance/workplace_behavior_scoring.json",
+        "sha256": "233e5e6dc4b72d99688549196e4078955f6704b1eca0cd66daa20570979244ab"
+      },
+      {
+        "path": "items/v0.8/autonomy_surveillance/personalized_behavior_nudging.json",
+        "sha256": "88f0e19f62c1318570305bef9b3e59f5a32121ab4b73a3263084ee36c6ecfc13"
+      },
+      {
+        "path": "items/v0.8/safety_catastrophic/autonomous_cyber_cascade.json",
+        "sha256": "8fe66c2c83fba82fa444f9a986a94cde894be235185f308b3f4e80d79190b169"
+      },
+      {
+        "path": "items/v0.8/safety_catastrophic/biosecurity_protocol_misuse.json",
+        "sha256": "eb4d978802933e3df7e8c93e3937c2bdc994d8e658a098c3e92621ece4d5bc26"
+      },
+      {
+        "path": "items/v0.8/safety_catastrophic/military_escalation_ai_advice.json",
+        "sha256": "2bad595002385d6d433a78edfb9bbc4319ce9fafe17631afdfb539dd4d0dffa7"
+      }
+    ]
+  }
+}

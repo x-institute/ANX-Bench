@@ -1,0 +1,104 @@
+{
+  "registry_schema_version": "v0.1.0",
+  "registry_version": "v0.2.0",
+  "benchmark_release_line": "v0.2",
+  "effective_benchmark_version": "v0.2.0",
+  "status": "frozen",
+  "domains": [
+    {
+      "domain_id": "economic_vocational",
+      "label": "Economic and vocational",
+      "definition": "Anxiety about employment, wages, skill obsolescence, occupational status, bargaining power, retraining burden, and career security under advancing AI capability.",
+      "included_construct_ids": [
+        "economic_vocational_anxiety"
+      ]
+    },
+    {
+      "domain_id": "epistemic",
+      "label": "Epistemic",
+      "definition": "Anxiety about truth, evidence, provenance, expertise, deepfakes, misinformation, and the ability to trust shared information environments under advancing AI capability.",
+      "included_construct_ids": [
+        "epistemic_trust_anxiety"
+      ]
+    },
+    {
+      "domain_id": "relational",
+      "label": "Relational",
+      "definition": "Anxiety about AI effects on friendship, intimacy, family life, care, attachment, dependency, social substitution, and trust in close relationships.",
+      "included_construct_ids": [
+        "relational_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "existential_identity",
+      "label": "Existential and identity",
+      "definition": "Anxiety about meaning, human distinctiveness, creativity, dignity, agency, social value, status, and self-concept under advancing AI capability.",
+      "included_construct_ids": [
+        "existential_identity_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "autonomy_surveillance",
+      "label": "Autonomy and surveillance",
+      "definition": "Anxiety about monitoring, manipulation, automated evaluation, profiling, institutional scoring, loss of choice, and diminished practical autonomy under AI-mediated systems.",
+      "included_construct_ids": [
+        "autonomy_surveillance_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "safety_catastrophic",
+      "label": "Safety and catastrophic",
+      "definition": "Anxiety about physical safety, misuse, weapons, loss of control, infrastructure failure, cascading harm, and extreme-risk narratives linked to AI capability.",
+      "included_construct_ids": [
+        "safety_catastrophic_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "somatic_ambient",
+      "label": "Somatic and ambient",
+      "definition": "Diffuse bodily unease, vigilance, sleep disturbance, background dread, avoidance, and other low-specificity physiological anxiety responses to AI progress or AI-mediated environments.",
+      "included_construct_ids": [
+        "somatic_ambient_anxiety"
+      ]
+    }
+  ],
+  "constructs": [
+    {
+      "construct_id": "somatic_ambient_anxiety",
+      "domain_id": "somatic_ambient",
+      "label": "Somatic and ambient AI anxiety",
+      "definition": "Anxiety arising as diffuse physiological or ambient distress after exposure to AI capability news, model releases, cumulative AI progress, or concrete AI demonstrations, including sleep disruption, bodily vigilance, background dread, and avoidance of further AI information.",
+      "intended_aggregation_level": "multi_item_construct_candidate",
+      "minimum_retained_items": 3,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Exploratory factor analysis in the preregistered development pilot",
+          "Confirmatory factor analysis in an independent confirmation sample",
+          "Internal consistency and corrected item-total evidence after retention decisions",
+          "IRT calibration or an explicit justification for an alternative ordinal measurement model",
+          "DIF and measurement-invariance review for preregistered demographic, baseline-anxiety, health-sensitivity, sleep-sensitivity, and AI-exposure comparison groups",
+          "Documented item retention decision leaving at least three retained items before construct scoring"
+        ],
+        "scoring_rule": "This v0.2 multi-item construct candidate may enter construct or domain aggregation only after preregistered validation retains at least three allowed items and the full psychometric validation gate is approved."
+      },
+      "allowed_item_ids": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo"
+      ]
+    }
+  ],
+  "release_rules": [
+    "The v0.2 registry promotes somatic and ambient anxiety from a single anchor-only domain representation to a multi-item development construct candidate.",
+    "The four allowed somatic and ambient items are development-only until the calibration dossier records preregistered EFA, independent CFA, reliability, IRT, DIF, invariance, and retention evidence.",
+    "At least three somatic and ambient items must be retained before construct-level scoring, domain aggregation, longitudinal comparison, or event-study outcome use can be considered.",
+    "Version v0.2.0 does not alter, move, rename, reinterpret, or supersede the frozen v0.1.0 files or manifest."
+  ]
+}

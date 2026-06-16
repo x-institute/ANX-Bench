@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/behavioral_response.schema.json",
+  "title": "ANX-Bench Behavioral Response Row Schema",
+  "description": "Canonical validation schema for one respondent's revealed-preference behavioral validation task response. Each row records the randomized high-impact AI decision arm, allocation of a 100-cent review budget between AI-only review and human review, task comprehension, exclusion flags, and the derived revealed anxiety criterion score.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "wave_id",
+    "respondent_id",
+    "task_id",
+    "benchmark_version",
+    "randomized_arm",
+    "allocation_mode",
+    "ai_only_review_cents",
+    "human_review_cents",
+    "allocation_total_cents",
+    "allocation_confirmed",
+    "behavioral_comprehension_response",
+    "behavioral_comprehension_passed",
+    "exclusion_flags",
+    "missingness_code",
+    "revealed_anxiety_score"
+  ],
+  "properties": {
+    "wave_id": {
+      "type": "string",
+      "pattern": "^anx_[a-z]{2,3}_[0-9]{4}w[0-9]{2}(_[a-z0-9]+)*$",
+      "description": "Stable wave identifier with study family, country or population code, calendar year, wave number, and optional qualifier."
+    },
+    "respondent_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "Study-scoped salted pseudonymous respondent identifier. This must match the analytic respondent identifier used for wave response linkage and must not be a raw vendor ID."
+    },
+    "task_id": {
+      "const": "revealed_ai_review_allocation_v1",
+      "description": "Stable identifier for the standardized behavioral validation task."
+    },
+    "benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic ANX-Bench release version governing the administered task and scoring rules."
+    },
+    "randomized_arm": {
+      "type": "string",
+      "enum": [
+        "employment_hiring",
+        "healthcare_triage",
+        "public_benefits",
+        "school_placement"
+      ],
+      "description": "Randomly assigned high-impact AI decision scenario arm shown before the allocation choice."
+    },
+    "allocation_mode": {
+      "type": "string",
+      "enum": [
+        "real_bonus",
+        "bonus_stated"
+      ],
+      "description": "Whether the allocation affected a real bonus or was stated as a research allocation that may not affect compensation."
+    },
+    "ai_only_review_cents": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Number of cents allocated to AI-only review. Must be an integer from 0 to 100 when observed."
+    },
+    "human_review_cents": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Number of cents allocated to human review. Must be an integer from 0 to 100 when observed."
+    },
+    "allocation_total_cents": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "enum": [
+        100,
+        null
+      ],
+      "description": "Total cents allocated across AI-only review and human review. Valid observed rows must equal 100."
+    },
+    "allocation_confirmed": {
+      "type": "boolean",
+      "description": "True only when the respondent actively submitted or confirmed the allocation under the wave's interface rules."
+    },
+    "behavioral_comprehension_response": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Response to the required behavioral task comprehension check. Option 1 is the correct response."
+    },
+    "behavioral_comprehension_passed": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "True only when behavioral_comprehension_response equals 1. Null only when the comprehension check was not administered or not captured."
+    },
+    "exclusion_flags": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Machine-readable reasons this behavioral row or respondent is excluded from one or more behavioral criterion-validity analyses. Empty array means no exclusion flag has been applied.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "behavioral_task_not_presented",
+          "behavioral_allocation_invalid",
+          "behavioral_comprehension_failed",
+          "attention_check_failed",
+          "speeding",
+          "straightlining",
+          "duplicate_respondent",
+          "ineligible_population",
+          "consent_withdrawn",
+          "quality_review_failed",
+          "technical_failure",
+          "other_preregistered_exclusion"
+        ]
+      }
+    },
+    "missingness_code": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "not_presented_by_design",
+        "skipped_by_respondent",
+        "survey_breakoff",
+        "technical_failure",
+        "removed_by_quality_control",
+        "not_scored_excluded_respondent"
+      ],
+      "description": "Reason the revealed anxiety score is present or absent. Observed means the allocation and comprehension data are valid for scoring unless exclusion flags remove the row from a specific analysis."
+    },
+    "revealed_anxiety_score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1,
+      "multipleOf": 0.01,
+      "description": "Derived criterion score equal to human_review_cents divided by 100. Higher values indicate greater revealed preference for human review over AI-only review."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "missingness_code": {
+            "const": "observed"
+          }
+        },
+        "required": [
+          "missingness_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "ai_only_review_cents": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "human_review_cents": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "allocation_total_cents": {
+            "const": 100
+          },
+          "allocation_confirmed": {
+            "const": true
+          },
+          "behavioral_comprehension_response": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          },
+          "behavioral_comprehension_passed": {
+            "const": true
+          },
+          "revealed_anxiety_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "multipleOf": 0.01
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "missingness_code": {
+            "not": {
+              "const": "observed"
+            }
+          }
+        },
+        "required": [
+          "missingness_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "revealed_anxiety_score": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

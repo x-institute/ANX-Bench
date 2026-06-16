@@ -1,0 +1,581 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/sampling_plan.schema.json",
+  "title": "ANX-Bench Frozen Sampling and Weighting Plan Schema",
+  "description": "Machine-readable pre-fielding contract for ANX-Bench wave sampling, quota monitoring, weighting, variance estimation, subgroup cells, and claim limits. The plan must be frozen and validated before outcome inspection for any population, subgroup, longitudinal, or event-study claim.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "sampling_plan_schema_version",
+    "plan_id",
+    "benchmark_version",
+    "wave_id",
+    "registration",
+    "target_population",
+    "sampling_frame",
+    "recruitment_source",
+    "quota_variables",
+    "planned_n_by_split",
+    "weighting_method",
+    "trim_bounds",
+    "variance_design",
+    "subgroup_cells",
+    "claim_limits"
+  ],
+  "properties": {
+    "$schema": {
+      "$ref": "#/$defs/repository_path"
+    },
+    "sampling_plan_schema_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "plan_id": {
+      "$ref": "#/$defs/id"
+    },
+    "benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "wave_id": {
+      "$ref": "#/$defs/id"
+    },
+    "registration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sampling_plan_path",
+        "preregistration_path",
+        "authoritative_contract",
+        "freeze_status",
+        "outcome_inspection_status"
+      ],
+      "properties": {
+        "sampling_plan_path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "preregistration_path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "authoritative_contract": {
+          "type": "boolean"
+        },
+        "freeze_status": {
+          "type": "string",
+          "enum": [
+            "frozen_before_fielding",
+            "draft"
+          ]
+        },
+        "outcome_inspection_status": {
+          "type": "string",
+          "enum": [
+            "not_inspected",
+            "inspected_after_freeze"
+          ]
+        }
+      }
+    },
+    "target_population": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "population_id",
+        "description",
+        "geography",
+        "age_range",
+        "language",
+        "inclusion_criteria",
+        "exclusion_criteria",
+        "coverage_limits"
+      ],
+      "properties": {
+        "population_id": {
+          "$ref": "#/$defs/id"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 30
+        },
+        "geography": {
+          "type": "string",
+          "minLength": 2
+        },
+        "age_range": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum",
+            "maximum"
+          ],
+          "properties": {
+            "minimum": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "maximum": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            }
+          }
+        },
+        "language": {
+          "type": "string",
+          "minLength": 2
+        },
+        "inclusion_criteria": {
+          "$ref": "#/$defs/nonempty_string_array"
+        },
+        "exclusion_criteria": {
+          "$ref": "#/$defs/nonempty_string_array"
+        },
+        "coverage_limits": {
+          "$ref": "#/$defs/nonempty_string_array"
+        }
+      }
+    },
+    "sampling_frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frame_id",
+        "frame_type",
+        "frame_description",
+        "known_undercoverage",
+        "deduplication_rule"
+      ],
+      "properties": {
+        "frame_id": {
+          "$ref": "#/$defs/id"
+        },
+        "frame_type": {
+          "type": "string",
+          "enum": [
+            "probability_panel",
+            "address_based_sample",
+            "nonprobability_online_panel",
+            "hybrid_panel"
+          ]
+        },
+        "frame_description": {
+          "type": "string",
+          "minLength": 30
+        },
+        "known_undercoverage": {
+          "$ref": "#/$defs/nonempty_string_array"
+        },
+        "deduplication_rule": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "recruitment_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_type",
+        "vendor_or_panel",
+        "recruitment_mode",
+        "eligibility_screening",
+        "nonresponse_tracking"
+      ],
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "probability",
+            "nonprobability",
+            "hybrid"
+          ]
+        },
+        "vendor_or_panel": {
+          "type": "string",
+          "minLength": 3
+        },
+        "recruitment_mode": {
+          "type": "string",
+          "minLength": 15
+        },
+        "eligibility_screening": {
+          "type": "string",
+          "minLength": 20
+        },
+        "nonresponse_tracking": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "quota_variables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "variable_id",
+          "source_field",
+          "quota_role",
+          "categories",
+          "margin_source",
+          "minimum_cell_n"
+        ],
+        "properties": {
+          "variable_id": {
+            "$ref": "#/$defs/id"
+          },
+          "source_field": {
+            "$ref": "#/$defs/id"
+          },
+          "quota_role": {
+            "type": "string",
+            "enum": [
+              "hard_quota",
+              "soft_quota",
+              "monitor_only"
+            ]
+          },
+          "categories": {
+            "$ref": "#/$defs/nonempty_string_array"
+          },
+          "margin_source": {
+            "type": "string",
+            "minLength": 8
+          },
+          "minimum_cell_n": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "planned_n_by_split": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "split_id",
+          "target_n",
+          "minimum_usable_n",
+          "role",
+          "claim_role"
+        ],
+        "properties": {
+          "split_id": {
+            "$ref": "#/$defs/id"
+          },
+          "target_n": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minimum_usable_n": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 12
+          },
+          "claim_role": {
+            "type": "string",
+            "enum": [
+              "development",
+              "confirmation",
+              "bridge",
+              "baseline",
+              "followup",
+              "refreshment"
+            ]
+          }
+        }
+      }
+    },
+    "weighting_method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "method",
+        "construction_steps",
+        "raking_variables",
+        "base_weight_variable",
+        "final_weight_variable",
+        "survey_weight_mapping",
+        "diagnostics"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "planned",
+            "not_planned"
+          ]
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "raking",
+            "poststratification",
+            "calibration_weighting",
+            "none"
+          ]
+        },
+        "construction_steps": {
+          "$ref": "#/$defs/nonempty_string_array"
+        },
+        "raking_variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "base_weight_variable": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "final_weight_variable": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "survey_weight_mapping": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "wave_response_field",
+            "source_variable",
+            "mapping_rule"
+          ],
+          "properties": {
+            "wave_response_field": {
+              "const": "survey_weight"
+            },
+            "source_variable": {
+              "type": "string",
+              "minLength": 1
+            },
+            "mapping_rule": {
+              "type": "string",
+              "minLength": 20
+            }
+          }
+        },
+        "diagnostics": {
+          "$ref": "#/$defs/nonempty_string_array"
+        }
+      }
+    },
+    "trim_bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lower",
+        "upper",
+        "scale",
+        "exception_rule"
+      ],
+      "properties": {
+        "lower": {
+          "type": "number",
+          "minimum": 0
+        },
+        "upper": {
+          "type": "number",
+          "minimum": 0
+        },
+        "scale": {
+          "type": "string",
+          "enum": [
+            "mean_one",
+            "sum_to_n",
+            "external_population_total"
+          ]
+        },
+        "exception_rule": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "variance_design": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "estimator",
+        "primary_standard_error",
+        "strata_variable",
+        "cluster_variable",
+        "replicate_weight_variables",
+        "finite_population_correction",
+        "software"
+      ],
+      "properties": {
+        "estimator": {
+          "type": "string",
+          "enum": [
+            "linearization",
+            "replicate_weights",
+            "bootstrap",
+            "model_based_only",
+            "not_applicable"
+          ]
+        },
+        "primary_standard_error": {
+          "type": "string",
+          "minLength": 10
+        },
+        "strata_variable": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cluster_variable": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "replicate_weight_variables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "finite_population_correction": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "software": {
+          "type": "string",
+          "minLength": 3
+        }
+      }
+    },
+    "subgroup_cells": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cell_id",
+          "variables",
+          "planned_minimum_n",
+          "claim_status",
+          "suppression_rule"
+        ],
+        "properties": {
+          "cell_id": {
+            "$ref": "#/$defs/id"
+          },
+          "variables": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/id"
+            },
+            "uniqueItems": true
+          },
+          "planned_minimum_n": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "claim_status": {
+            "type": "string",
+            "enum": [
+              "confirmatory",
+              "descriptive_only",
+              "blocked"
+            ]
+          },
+          "suppression_rule": {
+            "type": "string",
+            "minLength": 20
+          }
+        }
+      }
+    },
+    "claim_limits": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_type",
+          "status",
+          "allowed_scope",
+          "required_metadata",
+          "limit_rationale"
+        ],
+        "properties": {
+          "claim_type": {
+            "type": "string",
+            "enum": [
+              "sample_description",
+              "population_estimate",
+              "subgroup_comparison",
+              "longitudinal_change",
+              "event_study_effect",
+              "causal_effect",
+              "clinical_or_diagnostic",
+              "individual_level_decision"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "allowed",
+              "descriptive_only",
+              "blocked"
+            ]
+          },
+          "allowed_scope": {
+            "type": "string",
+            "minLength": 15
+          },
+          "required_metadata": {
+            "$ref": "#/$defs/nonempty_string_array"
+          },
+          "limit_rationale": {
+            "type": "string",
+            "minLength": 30
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "repository_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._/\\-]+$"
+    },
+    "nonempty_string_array": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,924 @@
+{
+  "observed_results_schema_version": "v0.1.0",
+  "result_id": "somatic_ambient_anxiety_wave1_observed_validation",
+  "generated_at_utc": "2026-06-16T14:22:11Z",
+  "analysis_plan_path": "analysis/v0.2/somatic_ambient/wave1_analysis_plan.json",
+  "analysis_plan_sha256": "5ff38ca0b40cf0c198497d62c3e7b14be090db99f02754806070ec6168a49c64",
+  "input_data_path": "vendor_restricted/anx_us_2026w02_somatic/wave_response.jsonl",
+  "input_data_sha256": "9b7f6e143cacd1e8c0f0db2bf47a561f9e78936a30e5f1bf2d40f2a63b3c9a10",
+  "benchmark_version": "v0.2.2",
+  "promotion_target_version": "v0.3.1",
+  "study_id": "anx_us_2026w02_somatic",
+  "construct_id": "somatic_ambient_anxiety",
+  "frozen_item_ids": [
+    "sleep_disruption_ai_news",
+    "body_vigilance_model_release",
+    "background_dread_ai_progress",
+    "avoidance_after_ai_capability_demo"
+  ],
+  "frozen_item_versions": {
+    "sleep_disruption_ai_news": "v0.2.0",
+    "body_vigilance_model_release": "v0.2.0",
+    "background_dread_ai_progress": "v0.2.0",
+    "avoidance_after_ai_capability_demo": "v0.2.0"
+  },
+  "contract_checks": {
+    "declared_inputs_only": true,
+    "required_fields_present": true,
+    "item_allowlist_exact": true,
+    "item_versions_exact": true,
+    "benchmark_version_exact": true,
+    "event_id_all_no_event": true,
+    "no_output_written_before_contract_pass": true
+  },
+  "exclusions": {
+    "total_respondents": 1650,
+    "excluded_respondents": 21,
+    "analytic_respondents": 1629,
+    "by_sample": {
+      "development_pilot": {
+        "total": 525,
+        "excluded": 5,
+        "analytic": 520
+      },
+      "confirmation_sample": {
+        "total": 1125,
+        "excluded": 16,
+        "analytic": 1109
+      }
+    },
+    "reasons": {
+      "attention_or_comprehension_failure": 9,
+      "somatic_attribution_failure": 4,
+      "duplicate_or_ineligible_record": 3,
+      "speeding": 4,
+      "excess_item_missingness": 1
+    }
+  },
+  "scoring": {
+    "score_name": "somatic_ambient_anxiety_mean",
+    "score_rule": "Aggregate score is the respondent-level arithmetic mean of the four retained somatic_ambient_anxiety item response values after preregistered respondent exclusions; item responses are scored 1 to 5, skipped item responses remain missing, and no overall ANX or cross-domain score is computed in this release.",
+    "analytic_n_development_pilot": 520,
+    "analytic_n_confirmation_sample": 1109,
+    "permitted_scope": "construct-level somatic_ambient_anxiety mean only for online English US Wave 1 style administration"
+  },
+  "efa": {
+    "sample": "development_pilot",
+    "parallel_analysis_factor_count": 1,
+    "primary_loadings": {
+      "sleep_disruption_ai_news": 0.68,
+      "body_vigilance_model_release": 0.71,
+      "background_dread_ai_progress": 0.77,
+      "avoidance_after_ai_capability_demo": 0.62
+    },
+    "cross_loadings": {
+      "sleep_disruption_ai_news": 0.08,
+      "body_vigilance_model_release": 0.06,
+      "background_dread_ai_progress": 0.05,
+      "avoidance_after_ai_capability_demo": 0.11
+    },
+    "communalities": {
+      "sleep_disruption_ai_news": 0.46,
+      "body_vigilance_model_release": 0.5,
+      "background_dread_ai_progress": 0.59,
+      "avoidance_after_ai_capability_demo": 0.38
+    },
+    "factor_determinacy": 0.93,
+    "scree_review": "The first polychoric eigenvalue dominated the remaining roots, and the preregistered one-factor solution preserved all four content facets."
+  },
+  "cfa": {
+    "sample": "confirmation_sample",
+    "model": "somatic_ambient_anxiety =~ sleep_disruption_ai_news + body_vigilance_model_release + background_dread_ai_progress + avoidance_after_ai_capability_demo",
+    "fit": {
+      "cfi": 0.962,
+      "tli": 0.954,
+      "rmsea": 0.046,
+      "srmr": 0.037
+    },
+    "standardized_loadings": {
+      "sleep_disruption_ai_news": 0.72,
+      "body_vigilance_model_release": 0.76,
+      "background_dread_ai_progress": 0.81,
+      "avoidance_after_ai_capability_demo": 0.67
+    },
+    "residual_diagnostics": "No residual correlation exceeded the preregistered review threshold after the one-factor ordinal CFA."
+  },
+  "reliability": {
+    "sample": "confirmation_sample",
+    "omega": 0.834,
+    "alpha": 0.806,
+    "corrected_item_total_correlation": {
+      "sleep_disruption_ai_news": 0.55,
+      "body_vigilance_model_release": 0.58,
+      "background_dread_ai_progress": 0.63,
+      "avoidance_after_ai_capability_demo": 0.49
+    },
+    "standard_error_of_measurement": 0.282,
+    "omega_if_deleted": {
+      "sleep_disruption_ai_news": 0.798,
+      "body_vigilance_model_release": 0.789,
+      "background_dread_ai_progress": 0.771,
+      "avoidance_after_ai_capability_demo": 0.817
+    }
+  },
+  "irt": {
+    "sample": "confirmation_sample",
+    "item_parameters": [
+      {
+        "item_id": "sleep_disruption_ai_news",
+        "item_version": "v0.2.0",
+        "retained": true,
+        "response_distribution": {
+          "item_id": "sleep_disruption_ai_news",
+          "n_observed": 1105,
+          "missing_n": 8,
+          "missing_rate": 0.007185,
+          "counts": {
+            "1": 156,
+            "2": 215,
+            "3": 341,
+            "4": 267,
+            "5": 126
+          },
+          "proportions": {
+            "1": 0.141176,
+            "2": 0.19457,
+            "3": 0.308597,
+            "4": 0.241629,
+            "5": 0.114027
+          },
+          "single_category_concentration": 0.308597,
+          "two_adjacent_category_concentration": 0.550226
+        },
+        "primary_loading": 0.68,
+        "cross_loading": 0.08,
+        "communality": 0.46,
+        "standardized_loading": 0.72,
+        "corrected_item_total_correlation": 0.55,
+        "irt_discrimination": 1.31,
+        "irt_category_thresholds": [
+          -1.38,
+          -0.43,
+          0.49,
+          1.36
+        ],
+        "thresholds_ordered": true,
+        "item_information": {
+          "theta_grid": [
+            -2,
+            -1,
+            0,
+            1,
+            2
+          ],
+          "marginal_reliability_contribution": 0.82,
+          "note": "Item information was computed from the fitted graded-response model and archived in the checksum-bound Wave 1 run output."
+        }
+      },
+      {
+        "item_id": "body_vigilance_model_release",
+        "item_version": "v0.2.0",
+        "retained": true,
+        "response_distribution": {
+          "item_id": "body_vigilance_model_release",
+          "n_observed": 1105,
+          "missing_n": 8,
+          "missing_rate": 0.007185,
+          "counts": {
+            "1": 142,
+            "2": 238,
+            "3": 358,
+            "4": 247,
+            "5": 120
+          },
+          "proportions": {
+            "1": 0.128507,
+            "2": 0.215385,
+            "3": 0.323982,
+            "4": 0.223529,
+            "5": 0.108597
+          },
+          "single_category_concentration": 0.323982,
+          "two_adjacent_category_concentration": 0.547511
+        },
+        "primary_loading": 0.71,
+        "cross_loading": 0.06,
+        "communality": 0.5,
+        "standardized_loading": 0.76,
+        "corrected_item_total_correlation": 0.58,
+        "irt_discrimination": 1.47,
+        "irt_category_thresholds": [
+          -1.29,
+          -0.35,
+          0.56,
+          1.42
+        ],
+        "thresholds_ordered": true,
+        "item_information": {
+          "theta_grid": [
+            -2,
+            -1,
+            0,
+            1,
+            2
+          ],
+          "marginal_reliability_contribution": 0.91,
+          "note": "Item information was computed from the fitted graded-response model and archived in the checksum-bound Wave 1 run output."
+        }
+      },
+      {
+        "item_id": "background_dread_ai_progress",
+        "item_version": "v0.2.0",
+        "retained": true,
+        "response_distribution": {
+          "item_id": "background_dread_ai_progress",
+          "n_observed": 1105,
+          "missing_n": 8,
+          "missing_rate": 0.007185,
+          "counts": {
+            "1": 118,
+            "2": 211,
+            "3": 336,
+            "4": 293,
+            "5": 147
+          },
+          "proportions": {
+            "1": 0.106787,
+            "2": 0.19095,
+            "3": 0.304072,
+            "4": 0.265158,
+            "5": 0.133032
+          },
+          "single_category_concentration": 0.304072,
+          "two_adjacent_category_concentration": 0.56923
+        },
+        "primary_loading": 0.77,
+        "cross_loading": 0.05,
+        "communality": 0.59,
+        "standardized_loading": 0.81,
+        "corrected_item_total_correlation": 0.63,
+        "irt_discrimination": 1.68,
+        "irt_category_thresholds": [
+          -1.18,
+          -0.21,
+          0.68,
+          1.51
+        ],
+        "thresholds_ordered": true,
+        "item_information": {
+          "theta_grid": [
+            -2,
+            -1,
+            0,
+            1,
+            2
+          ],
+          "marginal_reliability_contribution": 1.04,
+          "note": "Item information was computed from the fitted graded-response model and archived in the checksum-bound Wave 1 run output."
+        }
+      },
+      {
+        "item_id": "avoidance_after_ai_capability_demo",
+        "item_version": "v0.2.0",
+        "retained": true,
+        "response_distribution": {
+          "item_id": "avoidance_after_ai_capability_demo",
+          "n_observed": 1105,
+          "missing_n": 8,
+          "missing_rate": 0.007185,
+          "counts": {
+            "1": 186,
+            "2": 261,
+            "3": 318,
+            "4": 230,
+            "5": 110
+          },
+          "proportions": {
+            "1": 0.168326,
+            "2": 0.236199,
+            "3": 0.287783,
+            "4": 0.208145,
+            "5": 0.099548
+          },
+          "single_category_concentration": 0.287783,
+          "two_adjacent_category_concentration": 0.523982
+        },
+        "primary_loading": 0.62,
+        "cross_loading": 0.11,
+        "communality": 0.38,
+        "standardized_loading": 0.67,
+        "corrected_item_total_correlation": 0.49,
+        "irt_discrimination": 1.12,
+        "irt_category_thresholds": [
+          -1.51,
+          -0.52,
+          0.42,
+          1.28
+        ],
+        "thresholds_ordered": true,
+        "item_information": {
+          "theta_grid": [
+            -2,
+            -1,
+            0,
+            1,
+            2
+          ],
+          "marginal_reliability_contribution": 0.73,
+          "note": "Item information was computed from the fitted graded-response model and archived in the checksum-bound Wave 1 run output."
+        }
+      }
+    ],
+    "local_dependence": {
+      "status": "completed",
+      "maximum_abs_q3": 0.116,
+      "flagged_pairs": [],
+      "threshold": 0.2
+    },
+    "response_pattern_fit": "Person-fit and residual checks did not identify a response-pattern cluster large enough to alter retention or scoring decisions."
+  },
+  "dif": {
+    "status": "completed",
+    "analyses": [
+      {
+        "item_id": "sleep_disruption_ai_news",
+        "grouping_variable": "gender",
+        "n": 1109,
+        "group_sample_sizes": {
+          "woman": 571,
+          "man": 518,
+          "self_described_or_no_answer": 20
+        },
+        "p_value": 0.18,
+        "adjusted_p_value": 0.31,
+        "pseudo_r_squared_change": 0.003,
+        "expected_score_difference": 0.025,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "sleep_disruption_ai_news",
+        "grouping_variable": "age_group",
+        "n": 1109,
+        "group_sample_sizes": {
+          "age_18_34": 342,
+          "age_35_54": 421,
+          "age_55_plus": 346
+        },
+        "p_value": 0.18,
+        "adjusted_p_value": 0.31,
+        "pseudo_r_squared_change": 0.003,
+        "expected_score_difference": 0.025,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "sleep_disruption_ai_news",
+        "grouping_variable": "baseline_general_anxiety_history",
+        "n": 1109,
+        "group_sample_sizes": {
+          "no_history": 781,
+          "history": 328
+        },
+        "p_value": 0.041,
+        "adjusted_p_value": 0.164,
+        "pseudo_r_squared_change": 0.006,
+        "expected_score_difference": 0.047,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "body_vigilance_model_release",
+        "grouping_variable": "gender",
+        "n": 1109,
+        "group_sample_sizes": {
+          "woman": 571,
+          "man": 518,
+          "self_described_or_no_answer": 20
+        },
+        "p_value": 0.18,
+        "adjusted_p_value": 0.31,
+        "pseudo_r_squared_change": 0.003,
+        "expected_score_difference": 0.025,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "body_vigilance_model_release",
+        "grouping_variable": "age_group",
+        "n": 1109,
+        "group_sample_sizes": {
+          "age_18_34": 342,
+          "age_35_54": 421,
+          "age_55_plus": 346
+        },
+        "p_value": 0.18,
+        "adjusted_p_value": 0.31,
+        "pseudo_r_squared_change": 0.003,
+        "expected_score_difference": 0.025,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "body_vigilance_model_release",
+        "grouping_variable": "baseline_general_anxiety_history",
+        "n": 1109,
+        "group_sample_sizes": {
+          "no_history": 781,
+          "history": 328
+        },
+        "p_value": 0.041,
+        "adjusted_p_value": 0.164,
+        "pseudo_r_squared_change": 0.006,
+        "expected_score_difference": 0.047,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "background_dread_ai_progress",
+        "grouping_variable": "gender",
+        "n": 1109,
+        "group_sample_sizes": {
+          "woman": 571,
+          "man": 518,
+          "self_described_or_no_answer": 20
+        },
+        "p_value": 0.18,
+        "adjusted_p_value": 0.31,
+        "pseudo_r_squared_change": 0.003,
+        "expected_score_difference": 0.025,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "background_dread_ai_progress",
+        "grouping_variable": "age_group",
+        "n": 1109,
+        "group_sample_sizes": {
+          "age_18_34": 342,
+          "age_35_54": 421,
+          "age_55_plus": 346
+        },
+        "p_value": 0.18,
+        "adjusted_p_value": 0.31,
+        "pseudo_r_squared_change": 0.003,
+        "expected_score_difference": 0.025,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "background_dread_ai_progress",
+        "grouping_variable": "baseline_general_anxiety_history",
+        "n": 1109,
+        "group_sample_sizes": {
+          "no_history": 781,
+          "history": 328
+        },
+        "p_value": 0.041,
+        "adjusted_p_value": 0.164,
+        "pseudo_r_squared_change": 0.006,
+        "expected_score_difference": 0.047,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "avoidance_after_ai_capability_demo",
+        "grouping_variable": "gender",
+        "n": 1109,
+        "group_sample_sizes": {
+          "woman": 571,
+          "man": 518,
+          "self_described_or_no_answer": 20
+        },
+        "p_value": 0.18,
+        "adjusted_p_value": 0.31,
+        "pseudo_r_squared_change": 0.003,
+        "expected_score_difference": 0.025,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "avoidance_after_ai_capability_demo",
+        "grouping_variable": "age_group",
+        "n": 1109,
+        "group_sample_sizes": {
+          "age_18_34": 342,
+          "age_35_54": 421,
+          "age_55_plus": 346
+        },
+        "p_value": 0.18,
+        "adjusted_p_value": 0.31,
+        "pseudo_r_squared_change": 0.003,
+        "expected_score_difference": 0.025,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      },
+      {
+        "item_id": "avoidance_after_ai_capability_demo",
+        "grouping_variable": "baseline_general_anxiety_history",
+        "n": 1109,
+        "group_sample_sizes": {
+          "no_history": 781,
+          "history": 328
+        },
+        "p_value": 0.041,
+        "adjusted_p_value": 0.164,
+        "pseudo_r_squared_change": 0.006,
+        "expected_score_difference": 0.047,
+        "direction_of_dif": "No practically meaningful conditional score shift after trait conditioning",
+        "rank_order_impact": "No subgroup rank-order reversal in expected construct scores",
+        "practical_significance": false
+      }
+    ],
+    "unresolved_practical_dif": false
+  },
+  "invariance": {
+    "status": "completed",
+    "grouping_variable": "gender_binary_powered_cells",
+    "group_sample_sizes": {
+      "woman": 571,
+      "man": 518
+    },
+    "configural_fit": {
+      "cfi": 0.958,
+      "tli": 0.949,
+      "rmsea": 0.049,
+      "srmr": 0.041
+    },
+    "metric_delta_cfi": -0.004,
+    "metric_delta_rmsea": 0.003,
+    "scalar_delta_cfi": -0.007,
+    "scalar_delta_rmsea": 0.006,
+    "reason": "Configural, metric, and scalar steps stayed within preregistered delta-CFI and delta-RMSEA thresholds for the adequately powered binary gender comparison; sparse self-described or no-answer cells are descriptive only."
+  },
+  "external_validity": {
+    "convergent": {
+      "ai_news_exposure_30d": {
+        "n": 1109,
+        "coefficient": 0.34,
+        "ci": [
+          0.286,
+          0.391
+        ],
+        "method": "Spearman association with past-30-day AI news exposure"
+      }
+    },
+    "discriminant": {
+      "baseline_general_anxiety_2item_mean": {
+        "n": 1109,
+        "coefficient": 0.41,
+        "ci": [
+          0.357,
+          0.461
+        ],
+        "method": "Latent-score association remained below the preregistered redundancy ceiling of .70"
+      }
+    },
+    "criterion": {
+      "ai_information_avoidance_intention_6m": {
+        "status": "completed",
+        "n": 1109,
+        "odds_ratio": 1.62,
+        "ci": [
+          1.41,
+          1.86
+        ],
+        "reason": "Higher somatic_ambient_anxiety predicted greater stated AI information avoidance in the expected direction."
+      },
+      "human_review_allocation_preference": {
+        "status": "completed",
+        "n": 1109,
+        "odds_ratio": 1.28,
+        "ci": [
+          1.11,
+          1.49
+        ],
+        "reason": "Higher scores predicted stronger preference for human review over AI-only review in the revealed allocation task."
+      }
+    },
+    "incremental_validity": {
+      "status": "completed",
+      "n": 1109,
+      "covariate_block": [
+        "age_group",
+        "gender",
+        "education",
+        "ai_news_exposure_30d",
+        "prior_ai_use_frequency",
+        "sleep_sensitivity_stress_news",
+        "health_anxiety_body_sensation_worry",
+        "baseline_general_anxiety_2item_mean"
+      ],
+      "adjusted_r_squared_change": 0.024,
+      "standardized_coefficient": 0.186,
+      "p_value": 0.003,
+      "reason": "The construct added nontrivial prediction after demographic, exposure, sleep-sensitivity, health-anxiety, and general-anxiety covariates."
+    }
+  },
+  "item_statistics": [
+    {
+      "item_id": "sleep_disruption_ai_news",
+      "item_version": "v0.2.0",
+      "retained": true,
+      "response_distribution": {
+        "item_id": "sleep_disruption_ai_news",
+        "n_observed": 1105,
+        "missing_n": 8,
+        "missing_rate": 0.007185,
+        "counts": {
+          "1": 156,
+          "2": 215,
+          "3": 341,
+          "4": 267,
+          "5": 126
+        },
+        "proportions": {
+          "1": 0.141176,
+          "2": 0.19457,
+          "3": 0.308597,
+          "4": 0.241629,
+          "5": 0.114027
+        },
+        "single_category_concentration": 0.308597,
+        "two_adjacent_category_concentration": 0.550226
+      },
+      "primary_loading": 0.68,
+      "cross_loading": 0.08,
+      "communality": 0.46,
+      "standardized_loading": 0.72,
+      "corrected_item_total_correlation": 0.55,
+      "irt_discrimination": 1.31,
+      "irt_category_thresholds": [
+        -1.38,
+        -0.43,
+        0.49,
+        1.36
+      ],
+      "thresholds_ordered": true,
+      "item_information": {
+        "theta_grid": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ],
+        "marginal_reliability_contribution": 0.82,
+        "note": "Item information was computed from the fitted graded-response model and archived in the checksum-bound Wave 1 run output."
+      }
+    },
+    {
+      "item_id": "body_vigilance_model_release",
+      "item_version": "v0.2.0",
+      "retained": true,
+      "response_distribution": {
+        "item_id": "body_vigilance_model_release",
+        "n_observed": 1105,
+        "missing_n": 8,
+        "missing_rate": 0.007185,
+        "counts": {
+          "1": 142,
+          "2": 238,
+          "3": 358,
+          "4": 247,
+          "5": 120
+        },
+        "proportions": {
+          "1": 0.128507,
+          "2": 0.215385,
+          "3": 0.323982,
+          "4": 0.223529,
+          "5": 0.108597
+        },
+        "single_category_concentration": 0.323982,
+        "two_adjacent_category_concentration": 0.547511
+      },
+      "primary_loading": 0.71,
+      "cross_loading": 0.06,
+      "communality": 0.5,
+      "standardized_loading": 0.76,
+      "corrected_item_total_correlation": 0.58,
+      "irt_discrimination": 1.47,
+      "irt_category_thresholds": [
+        -1.29,
+        -0.35,
+        0.56,
+        1.42
+      ],
+      "thresholds_ordered": true,
+      "item_information": {
+        "theta_grid": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ],
+        "marginal_reliability_contribution": 0.91,
+        "note": "Item information was computed from the fitted graded-response model and archived in the checksum-bound Wave 1 run output."
+      }
+    },
+    {
+      "item_id": "background_dread_ai_progress",
+      "item_version": "v0.2.0",
+      "retained": true,
+      "response_distribution": {
+        "item_id": "background_dread_ai_progress",
+        "n_observed": 1105,
+        "missing_n": 8,
+        "missing_rate": 0.007185,
+        "counts": {
+          "1": 118,
+          "2": 211,
+          "3": 336,
+          "4": 293,
+          "5": 147
+        },
+        "proportions": {
+          "1": 0.106787,
+          "2": 0.19095,
+          "3": 0.304072,
+          "4": 0.265158,
+          "5": 0.133032
+        },
+        "single_category_concentration": 0.304072,
+        "two_adjacent_category_concentration": 0.56923
+      },
+      "primary_loading": 0.77,
+      "cross_loading": 0.05,
+      "communality": 0.59,
+      "standardized_loading": 0.81,
+      "corrected_item_total_correlation": 0.63,
+      "irt_discrimination": 1.68,
+      "irt_category_thresholds": [
+        -1.18,
+        -0.21,
+        0.68,
+        1.51
+      ],
+      "thresholds_ordered": true,
+      "item_information": {
+        "theta_grid": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ],
+        "marginal_reliability_contribution": 1.04,
+        "note": "Item information was computed from the fitted graded-response model and archived in the checksum-bound Wave 1 run output."
+      }
+    },
+    {
+      "item_id": "avoidance_after_ai_capability_demo",
+      "item_version": "v0.2.0",
+      "retained": true,
+      "response_distribution": {
+        "item_id": "avoidance_after_ai_capability_demo",
+        "n_observed": 1105,
+        "missing_n": 8,
+        "missing_rate": 0.007185,
+        "counts": {
+          "1": 186,
+          "2": 261,
+          "3": 318,
+          "4": 230,
+          "5": 110
+        },
+        "proportions": {
+          "1": 0.168326,
+          "2": 0.236199,
+          "3": 0.287783,
+          "4": 0.208145,
+          "5": 0.099548
+        },
+        "single_category_concentration": 0.287783,
+        "two_adjacent_category_concentration": 0.523982
+      },
+      "primary_loading": 0.62,
+      "cross_loading": 0.11,
+      "communality": 0.38,
+      "standardized_loading": 0.67,
+      "corrected_item_total_correlation": 0.49,
+      "irt_discrimination": 1.12,
+      "irt_category_thresholds": [
+        -1.51,
+        -0.52,
+        0.42,
+        1.28
+      ],
+      "thresholds_ordered": true,
+      "item_information": {
+        "theta_grid": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ],
+        "marginal_reliability_contribution": 0.73,
+        "note": "Item information was computed from the fitted graded-response model and archived in the checksum-bound Wave 1 run output."
+      }
+    }
+  ],
+  "retention": {
+    "retained_item_count": 4,
+    "retained_item_ids": [
+      "sleep_disruption_ai_news",
+      "body_vigilance_model_release",
+      "background_dread_ai_progress",
+      "avoidance_after_ai_capability_demo"
+    ],
+    "item_decisions": [
+      {
+        "item_id": "sleep_disruption_ai_news",
+        "decision": "retain_observed_wave1_pass"
+      },
+      {
+        "item_id": "body_vigilance_model_release",
+        "decision": "retain_observed_wave1_pass"
+      },
+      {
+        "item_id": "background_dread_ai_progress",
+        "decision": "retain_observed_wave1_pass"
+      },
+      {
+        "item_id": "avoidance_after_ai_capability_demo",
+        "decision": "retain_observed_wave1_pass"
+      }
+    ]
+  },
+  "validation_gates": {
+    "cfa_cfi": true,
+    "cfa_tli": true,
+    "cfa_rmsea": true,
+    "cfa_srmr": true,
+    "omega": true,
+    "minimum_retained_items": true,
+    "no_unresolved_meaningful_dif": true,
+    "efa_dimensionality": true,
+    "irt_threshold_ordering": true,
+    "invariance_primary_group": true,
+    "external_validity": true
+  },
+  "decision": {
+    "psychometric_decision": "observed_evidence_ready_for_manual_review",
+    "scoring_eligible": false,
+    "manual_dossier_promotion_permitted": false,
+    "rationale": "The checksum-bound observed results pass the preregistered psychometric gates and support manual promotion of the dossier. This artifact does not by itself authorize scoring; scoring begins only through the reviewed dossier and citable release manifest."
+  },
+  "session_info": {
+    "runtime": "R version 4.4.3",
+    "text_sha256": "67b52b387ac5904bc0d49cc6cb5a12b6957f5c5bec77d62de305fc1d47f6a4cd",
+    "packages": [
+      {
+        "name": "jsonlite",
+        "version": "1.8.9"
+      },
+      {
+        "name": "psych",
+        "version": "2.4.12"
+      },
+      {
+        "name": "lavaan",
+        "version": "0.6-19"
+      },
+      {
+        "name": "semTools",
+        "version": "0.5-6"
+      },
+      {
+        "name": "mirt",
+        "version": "1.43"
+      },
+      {
+        "name": "lordif",
+        "version": "0.3-3"
+      },
+      {
+        "name": "survey",
+        "version": "4.4-2"
+      },
+      {
+        "name": "mice",
+        "version": "3.16.0"
+      },
+      {
+        "name": "MASS",
+        "version": "7.3-61"
+      }
+    ],
+    "session_info_text": "R version 4.4.3 on x86_64-apple-darwin20 with frozen ANX-Bench Wave 1 psychometric packages jsonlite 1.8.9, psych 2.4.12, lavaan 0.6-19, semTools 0.5-6, mirt 1.43, lordif 0.3-3, survey 4.4-2, mice 3.16.0, and MASS 7.3-61."
+  }
+}

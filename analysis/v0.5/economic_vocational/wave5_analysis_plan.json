@@ -1,0 +1,798 @@
+{
+  "$schema": "../../../schema/psychometric_analysis_plan.schema.json",
+  "analysis_plan_schema_version": "v0.1.0",
+  "plan_id": "anx_us_2026w05_economic_analysis_plan",
+  "benchmark_version": "v0.5.0",
+  "study_id": "anx_us_2026w05_economic_calibration",
+  "registration": {
+    "preregistration_path": "docs/preregistrations/anx_us_2026w05_economic_calibration.md",
+    "analysis_plan_path": "analysis/v0.5/economic_vocational/wave5_analysis_plan.json",
+    "authoritative_contract": true,
+    "outcome_inspection_status": "not_inspected"
+  },
+  "required_inputs": [
+    {
+      "input_id": "wave_response_file",
+      "path": "vendor_restricted/anx_us_2026w05_economic/wave_response.jsonl",
+      "role": "Respondent-item file for the four economic and vocational ANX items, validated against schema/wave_response.schema.json before any item distributions or psychometric models are estimated.",
+      "required_fields": [
+        "wave_id",
+        "benchmark_version",
+        "item_id",
+        "item_version",
+        "respondent_id_hash",
+        "raw_response",
+        "scored_value",
+        "missingness_code",
+        "event_id",
+        "survey_weight"
+      ],
+      "validation_rule": "All rows must use wave_id anx_us_2026w05_economic, benchmark_version v0.5.0, item_version v0.1.0, event_id no_event, and exactly the four frozen economic_vocational_anxiety item IDs."
+    },
+    {
+      "input_id": "respondent_covariate_file",
+      "path": "vendor_restricted/anx_us_2026w05_economic/respondent_covariates.csv",
+      "role": "Respondent-level analytic file containing sample split, eligibility, exclusions, quotas, weights, demographics, employment variables, AI exposure variables, baseline anxiety, external-validity comparators, and paradata.",
+      "required_fields": [
+        "respondent_id_hash",
+        "sample_id",
+        "analytic_eligible",
+        "age_group",
+        "gender",
+        "race_ethnicity",
+        "education",
+        "census_region",
+        "employment_status",
+        "occupation_group",
+        "labor_force_attachment",
+        "prior_ai_exposure_frequency",
+        "ai_news_exposure_30d",
+        "perceived_occupational_ai_exposure",
+        "baseline_general_anxiety_2item_mean",
+        "final_weight"
+      ],
+      "validation_rule": "Each respondent must appear in exactly one non-overlapping sample_id, all eligible respondents must join to four administered item rows unless item missingness is explicitly coded, and all preregistered exclusion variables must be present before outcome inspection."
+    },
+    {
+      "input_id": "frozen_item_files",
+      "path": "items/v0.1/economic_vocational",
+      "role": "Frozen item wording, response anchors, scoring keys, construct metadata, exclusion metadata, and validation metadata for the administered economic and vocational item pool.",
+      "required_fields": [
+        "skill_obsolescence_software",
+        "wage_pressure_customer_support",
+        "retraining_pressure_accounting",
+        "status_loss_creative_work"
+      ],
+      "validation_rule": "The analysis allowlist is exactly skill_obsolescence_software, wage_pressure_customer_support, retraining_pressure_accounting, and status_loss_creative_work, all with item_version v0.1.0 and construct_id economic_vocational_anxiety."
+    },
+    {
+      "input_id": "fielding_packet",
+      "path": "docs/instruments/anx_us_2026w05_economic_codebook.md",
+      "role": "Frozen codebook, instrument, preregistration, and no-event registry used to audit variable derivations, item administration, event-study prohibitions, and public-data restrictions.",
+      "required_fields": [
+        "sample_id",
+        "event_id",
+        "attention_check_passed",
+        "scenario_comprehension_passed",
+        "economic_vocational_attribution_passed",
+        "speeding_flag",
+        "straightline_anx_block",
+        "anx_items_missing_prop",
+        "poststrat_weight",
+        "final_weight"
+      ],
+      "validation_rule": "Analysis scripts must reject renamed or recoded codebook variables unless a dated preregistration addendum was filed before outcome inspection and preserves all pass-fail decisions."
+    }
+  ],
+  "software_environment": {
+    "language": "R",
+    "runtime_version": "R 4.4.3",
+    "packages": [
+      {
+        "name": "psych",
+        "version": "2.4.12",
+        "purpose": "Polychoric correlations, ordinal EFA, corrected item-total correlations, omega summaries, and item descriptive diagnostics."
+      },
+      {
+        "name": "GPArotation",
+        "version": "2024.3-1",
+        "purpose": "Oblique exploratory factor rotations for pilot factor-structure diagnostics."
+      },
+      {
+        "name": "lavaan",
+        "version": "0.6-19",
+        "purpose": "Ordered-categorical CFA and multi-group measurement-invariance models using WLSMV."
+      },
+      {
+        "name": "semTools",
+        "version": "0.5-6",
+        "purpose": "Ordinal reliability helpers, CFA fit summaries, and measurement-invariance comparison tables."
+      },
+      {
+        "name": "mirt",
+        "version": "1.43",
+        "purpose": "Graded-response IRT calibration, item information, threshold ordering checks, local dependence, and DIF sensitivity models."
+      },
+      {
+        "name": "lordif",
+        "version": "0.3-3",
+        "purpose": "Ordinal logistic DIF screening with effect-size diagnostics for demographic, employment, AI exposure, and mode subgroups."
+      },
+      {
+        "name": "survey",
+        "version": "4.4-2",
+        "purpose": "Post-stratified weighted descriptive distributions, weight diagnostics, and weighted sensitivity estimates."
+      },
+      {
+        "name": "mice",
+        "version": "3.16.0",
+        "purpose": "Covariate-only sensitivity checks for external-validity models when non-ANX covariates are missing."
+      }
+    ],
+    "version_lock_rule": "Analyses must archive sessionInfo output and package versions exactly; any substitution requires a preregistered addendum showing unchanged confirmatory pass-fail decisions."
+  },
+  "randomization_and_seeds": {
+    "global_seed": 20260516,
+    "procedure_seeds": {
+      "pilot_item_order_audit": 20260517,
+      "efa_parallel_analysis": 20260518,
+      "efa_bootstrap_loading_stability": 20260519,
+      "confirmation_cfa_start_values": 20260520,
+      "omega_bootstrap": 20260521,
+      "irt_start_values": 20260522,
+      "dif_resampling": 20260523,
+      "weight_sensitivity": 20260524
+    },
+    "seed_policy": "Seeds are fixed before outcome inspection, set immediately before stochastic procedures, and written to the validation dossier with the exact R session lock."
+  },
+  "sample_splits": [
+    {
+      "split_id": "development_pilot",
+      "role": "development_pilot",
+      "target_n": 500,
+      "overlap_rule": "A respondent assigned to the development pilot is permanently ineligible for the independent confirmation sample and must not contribute to confirmation pass-fail decisions.",
+      "allowed_analyses": [
+        "item_distributions",
+        "missingness_review",
+        "efa",
+        "preliminary_omega",
+        "preliminary_irt",
+        "cognitive_debrief_review"
+      ]
+    },
+    {
+      "split_id": "confirmation_sample",
+      "role": "confirmation_sample",
+      "target_n": 1000,
+      "overlap_rule": "The confirmation sample must contain no respondent, panel identifier, household linkage, or protected linkage token appearing in the development pilot.",
+      "allowed_analyses": [
+        "cfa",
+        "omega",
+        "irt",
+        "dif",
+        "invariance",
+        "external_validity",
+        "release_decision"
+      ]
+    }
+  ],
+  "eligibility_and_exclusions": {
+    "eligibility_rules": [
+      {
+        "rule_id": "adult_us_english_consent",
+        "rule": "Respondent is age 18 or older, resides in the United States, can complete the survey in English without assistance, and provided informed consent.",
+        "target_field": "sample_provenance/exclusion_flow/eligibility"
+      },
+      {
+        "rule_id": "nonoverlap_confirmation",
+        "rule": "Confirmation respondents must not have participated in the development pilot or share protected linkage evidence with a pilot respondent.",
+        "target_field": "sample_provenance/exclusion_flow/eligibility"
+      }
+    ],
+    "exclusion_rules": [
+      {
+        "rule_id": "failed_attention_check",
+        "rule": "Exclude respondents who do not select Moderately anxious on the instructed-response attention check.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "failed_comprehension_check",
+        "rule": "Exclude respondents who fail the scenario-comprehension check identifying the scenarios as hypothetical research materials.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "failed_attribution_check",
+        "rule": "Exclude respondents who fail the economic-vocational attribution check about rating anxiety toward economic or vocational changes.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "speeding",
+        "rule": "Exclude respondents whose completion time is below one-third of the same-sample median after clear breakoffs are removed.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "straightline_plus_quality_failure",
+        "rule": "Exclude respondents who give the same substantive response to all four ANX items and also fail an attention or minimum-reading-time check.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "excessive_anx_missingness",
+        "rule": "Exclude respondents missing or giving non-substantive responses on more than 25 percent of administered ANX items.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "duplicate_or_unusable_record",
+        "rule": "Exclude confirmed duplicate respondents, non-consenting respondents, protocol-ineligible respondents, breakoffs without usable item data, vendor-confirmed fraud, and records unusable after audit.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      },
+      {
+        "rule_id": "self_reported_nonunderstanding",
+        "rule": "Exclude respondents reporting that they understood only a few scenarios or did not understand the scenarios.",
+        "target_field": "sample_provenance/exclusion_flow/exclusions"
+      }
+    ],
+    "non_exclusion_flags": [
+      {
+        "rule_id": "single_low_item_time",
+        "rule": "A single item response time below one-third of the sample median item time is retained as a sensitivity flag and does not exclude by itself.",
+        "target_field": "evidence/item_response_time_sensitivity"
+      },
+      {
+        "rule_id": "occupation_or_anxiety_status",
+        "rule": "Unemployment, low income, career transition, high perceived occupational AI exposure, and high baseline general anxiety are retained for DIF or validity analyses and do not exclude by themselves.",
+        "target_field": "evidence/dif_and_external_validity"
+      },
+      {
+        "rule_id": "vendor_low_confidence_unconfirmed",
+        "rule": "A vendor low-confidence flag that is not confirmed as fraud remains a sensitivity flag and does not exclude by itself.",
+        "target_field": "sample_provenance/exclusion_flow/non_exclusion_flags"
+      }
+    ],
+    "flow_table_target_field": "sample_provenance/exclusion_flow"
+  },
+  "weighting_policy": {
+    "primary_estimation": "Primary EFA, CFA, omega, IRT, DIF, invariance, and external-validity pass-fail decisions are unweighted unless the estimator has a validated survey-weight implementation.",
+    "descriptive_estimation": "Weighted and unweighted item distributions, missingness rates, sample characteristics, and exclusion rates must both be reported for the pilot and confirmation sample.",
+    "weight_construction": "Construct post-stratification or raking weights separately by sample using age group, gender, race and ethnicity, education, Census region, employment status, and stable AI exposure or occupation margins when available.",
+    "trimming": {
+      "minimum": 0.3,
+      "maximum": 3.0,
+      "exception_rule": "Weights outside 0.30 to 3.00 must be trimmed unless a documented sensitivity analysis shows a wider range is necessary and leaves primary conclusions unchanged."
+    },
+    "sensitivity_required": true,
+    "target_field": "sample_provenance/weighting"
+  },
+  "missing_data_handling": {
+    "item_distributions": "Report observed, skipped, breakoff, technical failure, and quality-control missingness separately for each item before respondent exclusions and after analytic exclusions.",
+    "factor_models": "EFA and CFA use observed ordered responses from analytically eligible respondents; pairwise polychoric correlations are allowed for pilot EFA diagnostics, while confirmation CFA uses the estimator default for ordered categorical missingness without imputing ANX responses.",
+    "reliability": "Ordinal omega and corrected item-total correlations are computed from eligible respondents with sufficient observed retained items; no ANX item response is imputed for pass-fail reliability gates.",
+    "irt": "Graded-response IRT uses observed ordered item responses only; respondents with missing retained items contribute according to the package likelihood implementation and missingness must be reported.",
+    "external_validity": "External-validity models use complete observed retained item summaries and prespecified covariates; missing non-ANX covariates may use explicit missing categories or covariate-only sensitivity imputation.",
+    "imputation_policy": "Do not impute ANX item responses, item scores, construct summaries, exclusion flags, sample membership, or event fields; any covariate-only imputation is sensitivity evidence and cannot rescue a failed primary gate.",
+    "target_field": "evidence/missingness"
+  },
+  "models": {
+    "efa": {
+      "sample": "development_pilot",
+      "estimator": "Ordinal EFA on polychoric correlations with oblique rotation and parallel-analysis support.",
+      "primary_statistics": [
+        "primary_loading_min",
+        "secondary_loading_max",
+        "parallel_analysis_factor_count",
+        "factor_interpretability"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "efa_primary_loading",
+          "statistic": "primary_loading_min",
+          "operator": ">=",
+          "threshold": 0.5,
+          "pass_action": "Carry item forward to confirmation review.",
+          "fail_action": "Flag item for revision, exclusion, or item-level-only review.",
+          "target_field": "evidence/efa/item_loadings"
+        },
+        {
+          "gate_id": "efa_secondary_loading",
+          "statistic": "secondary_loading_max",
+          "operator": "<=",
+          "threshold": 0.3,
+          "pass_action": "No material secondary loading is detected.",
+          "fail_action": "Require written construct interpretation or block construct scoring.",
+          "target_field": "evidence/efa/cross_loadings"
+        },
+        {
+          "gate_id": "efa_factor_count",
+          "statistic": "parallel_analysis_factor_count",
+          "operator": "in",
+          "threshold": [
+            1,
+            2
+          ],
+          "pass_action": "Retain one-factor model or justify two-factor interpretation.",
+          "fail_action": "Block construct scoring because the four-item pool lacks coherent dimensionality.",
+          "target_field": "evidence/efa/factor_count"
+        }
+      ],
+      "target_fields": [
+        "evidence/efa/item_loadings",
+        "evidence/efa/factor_count",
+        "decision/item_retention"
+      ]
+    },
+    "cfa": {
+      "sample": "confirmation_sample",
+      "estimator": "Ordered-categorical CFA using WLSMV with the preregistered one-factor economic_vocational_anxiety model.",
+      "primary_statistics": [
+        "cfi",
+        "tli",
+        "rmsea",
+        "srmr",
+        "standardized_loading_min"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "cfa_cfi",
+          "statistic": "cfi",
+          "operator": ">=",
+          "threshold": 0.95,
+          "pass_action": "CFA CFI meets strong fit support.",
+          "fail_action": "If below 0.90 block construct scoring; if 0.90 to 0.949 require dossier caution.",
+          "target_field": "evidence/cfa/fit"
+        },
+        {
+          "gate_id": "cfa_tli",
+          "statistic": "tli",
+          "operator": ">=",
+          "threshold": 0.95,
+          "pass_action": "CFA TLI meets strong fit support.",
+          "fail_action": "If below 0.90 block construct scoring; if 0.90 to 0.949 require dossier caution.",
+          "target_field": "evidence/cfa/fit"
+        },
+        {
+          "gate_id": "cfa_rmsea",
+          "statistic": "rmsea",
+          "operator": "<=",
+          "threshold": 0.06,
+          "pass_action": "CFA RMSEA meets strong fit support.",
+          "fail_action": "If above 0.080 block construct scoring; if 0.061 to 0.080 require dossier caution.",
+          "target_field": "evidence/cfa/fit"
+        },
+        {
+          "gate_id": "cfa_srmr",
+          "statistic": "srmr",
+          "operator": "<=",
+          "threshold": 0.08,
+          "pass_action": "CFA SRMR meets strong fit support.",
+          "fail_action": "Block or caution according to full fit pattern and residual diagnostics.",
+          "target_field": "evidence/cfa/fit"
+        },
+        {
+          "gate_id": "cfa_loading",
+          "statistic": "standardized_loading_min",
+          "operator": ">=",
+          "threshold": 0.5,
+          "pass_action": "All retained items meet loading threshold.",
+          "fail_action": "Drop weak item or block construct scoring if fewer than three items remain.",
+          "target_field": "evidence/cfa/item_loadings"
+        }
+      ],
+      "target_fields": [
+        "evidence/cfa/fit",
+        "evidence/cfa/item_loadings",
+        "decision/item_retention"
+      ]
+    },
+    "omega": {
+      "sample": "confirmation_sample",
+      "estimator": "Ordinal omega from polychoric factor model with bootstrap confidence intervals where feasible.",
+      "primary_statistics": [
+        "omega_total",
+        "omega_total_ci_lower",
+        "corrected_item_total_min"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "omega_early_review",
+          "statistic": "omega_total",
+          "operator": ">=",
+          "threshold": 0.7,
+          "pass_action": "Reliability is sufficient for early scored construct review.",
+          "fail_action": "Block construct scoring and require revision or additional items.",
+          "target_field": "evidence/reliability/omega"
+        },
+        {
+          "gate_id": "omega_mature_review",
+          "statistic": "omega_total",
+          "operator": ">=",
+          "threshold": 0.8,
+          "pass_action": "Reliability meets mature headline scoring review threshold.",
+          "fail_action": "Do not claim mature headline scoring readiness.",
+          "target_field": "evidence/reliability/omega"
+        },
+        {
+          "gate_id": "item_total_correlation",
+          "statistic": "corrected_item_total_min",
+          "operator": ">=",
+          "threshold": 0.3,
+          "pass_action": "Corrected item-total correlations support retention.",
+          "fail_action": "Require item-level justification or exclusion.",
+          "target_field": "evidence/reliability/item_total"
+        }
+      ],
+      "target_fields": [
+        "evidence/reliability/omega",
+        "evidence/reliability/item_total"
+      ]
+    },
+    "irt": {
+      "sample": "confirmation_sample",
+      "estimator": "Unidimensional graded-response IRT model for ordered 1 to 5 item responses.",
+      "primary_statistics": [
+        "discrimination_min",
+        "threshold_ordering_violations",
+        "local_dependence_abs_max",
+        "item_information_min"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "irt_discrimination",
+          "statistic": "discrimination_min",
+          "operator": ">=",
+          "threshold": 0.65,
+          "pass_action": "All retained items show minimally useful discrimination.",
+          "fail_action": "Flag weak item for revision, exclusion, or claim blocking.",
+          "target_field": "evidence/irt/discrimination"
+        },
+        {
+          "gate_id": "irt_threshold_ordering",
+          "statistic": "threshold_ordering_violations",
+          "operator": "=",
+          "threshold": 0,
+          "pass_action": "Response categories function in ordered severity sequence.",
+          "fail_action": "Investigate response scale functioning and block scored approval if unresolved.",
+          "target_field": "evidence/irt/thresholds"
+        },
+        {
+          "gate_id": "irt_local_dependence",
+          "statistic": "local_dependence_abs_max",
+          "operator": "<",
+          "threshold": 0.2,
+          "pass_action": "No severe residual local dependence is detected.",
+          "fail_action": "Block construct scoring or revise redundant items.",
+          "target_field": "evidence/irt/local_dependence"
+        }
+      ],
+      "target_fields": [
+        "evidence/irt/discrimination",
+        "evidence/irt/thresholds",
+        "evidence/irt/information",
+        "evidence/irt/local_dependence"
+      ]
+    },
+    "dif": {
+      "sample": "confirmation_sample",
+      "estimator": "Ordinal logistic DIF with Benjamini-Hochberg FDR control within the four-item family and IRT DIF sensitivity where subgroup sizes permit.",
+      "primary_statistics": [
+        "dif_fdr_q",
+        "dif_pseudo_r2_delta_max",
+        "expected_score_difference_sd_max",
+        "rank_order_impact_flag"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "dif_fdr",
+          "statistic": "dif_fdr_q",
+          "operator": ">=",
+          "threshold": 0.05,
+          "pass_action": "No statistically flagged DIF remains after family control.",
+          "fail_action": "Evaluate practical DIF before retention decision.",
+          "target_field": "evidence/dif/statistical_screen"
+        },
+        {
+          "gate_id": "dif_pseudo_r2",
+          "statistic": "dif_pseudo_r2_delta_max",
+          "operator": "<",
+          "threshold": 0.02,
+          "pass_action": "Practical DIF by pseudo R-squared is below threshold.",
+          "fail_action": "Block scored approval unless justified as immaterial and disclosed.",
+          "target_field": "evidence/dif/practical_impact"
+        },
+        {
+          "gate_id": "dif_expected_score",
+          "statistic": "expected_score_difference_sd_max",
+          "operator": "<",
+          "threshold": 0.1,
+          "pass_action": "Expected score impact is below material threshold.",
+          "fail_action": "Block or limit claims for affected subgroup comparisons.",
+          "target_field": "evidence/dif/practical_impact"
+        }
+      ],
+      "target_fields": [
+        "evidence/dif/statistical_screen",
+        "evidence/dif/practical_impact",
+        "decision/subgroup_claims"
+      ]
+    },
+    "invariance": {
+      "sample": "confirmation_sample",
+      "estimator": "Multi-group ordered-categorical CFA for configural, metric, and scalar or threshold invariance, with preregistered IRT linking fallback if CFA is unstable.",
+      "primary_statistics": [
+        "configural_converged",
+        "metric_delta_cfi",
+        "metric_delta_rmsea",
+        "scalar_delta_cfi",
+        "scalar_delta_rmsea"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "invariance_configural",
+          "statistic": "configural_converged",
+          "operator": "=",
+          "threshold": true,
+          "pass_action": "Proceed to metric and scalar invariance comparisons.",
+          "fail_action": "Block subgroup comparability claims for affected grouping variable.",
+          "target_field": "evidence/invariance/configural"
+        },
+        {
+          "gate_id": "invariance_metric_cfi",
+          "statistic": "metric_delta_cfi",
+          "operator": ">=",
+          "threshold": -0.01,
+          "pass_action": "Metric invariance CFI threshold passes.",
+          "fail_action": "Flag metric non-invariance for the grouping variable.",
+          "target_field": "evidence/invariance/metric"
+        },
+        {
+          "gate_id": "invariance_metric_rmsea",
+          "statistic": "metric_delta_rmsea",
+          "operator": "<=",
+          "threshold": 0.015,
+          "pass_action": "Metric invariance RMSEA threshold passes.",
+          "fail_action": "Flag metric non-invariance for the grouping variable.",
+          "target_field": "evidence/invariance/metric"
+        },
+        {
+          "gate_id": "invariance_scalar_cfi",
+          "statistic": "scalar_delta_cfi",
+          "operator": ">=",
+          "threshold": -0.01,
+          "pass_action": "Scalar or threshold invariance CFI threshold passes.",
+          "fail_action": "Block mean-comparison claims for affected grouping variable.",
+          "target_field": "evidence/invariance/scalar"
+        },
+        {
+          "gate_id": "invariance_scalar_rmsea",
+          "statistic": "scalar_delta_rmsea",
+          "operator": "<=",
+          "threshold": 0.015,
+          "pass_action": "Scalar or threshold invariance RMSEA threshold passes.",
+          "fail_action": "Block mean-comparison claims for affected grouping variable.",
+          "target_field": "evidence/invariance/scalar"
+        }
+      ],
+      "target_fields": [
+        "evidence/invariance/configural",
+        "evidence/invariance/metric",
+        "evidence/invariance/scalar",
+        "decision/subgroup_claims"
+      ]
+    },
+    "external_validity": {
+      "sample": "confirmation_sample",
+      "estimator": "Spearman correlations, ordinal regression, and adjusted incremental-validity models using retained economic_vocational_anxiety summaries only after dimensionality and reliability gates pass.",
+      "primary_statistics": [
+        "occupational_ai_exposure_spearman",
+        "baseline_general_anxiety_spearman",
+        "labor_market_worry_odds_ratio",
+        "retraining_pressure_standardized_beta",
+        "incremental_r2_delta"
+      ],
+      "pass_fail_thresholds": [
+        {
+          "gate_id": "convergent_exposure",
+          "statistic": "occupational_ai_exposure_spearman",
+          "operator": "in",
+          "threshold": [
+            0.15,
+            0.45
+          ],
+          "pass_action": "Convergent validity with perceived occupational AI exposure is in the preregistered range.",
+          "fail_action": "Require dossier explanation and block strong convergent-validity claims.",
+          "target_field": "evidence/external_validity/convergent"
+        },
+        {
+          "gate_id": "discriminant_general_anxiety",
+          "statistic": "baseline_general_anxiety_spearman",
+          "operator": "<=",
+          "threshold": 0.7,
+          "pass_action": "Retained score remains distinguishable from baseline general anxiety.",
+          "fail_action": "Block scored approval unless incremental AI-specific variance is demonstrated.",
+          "target_field": "evidence/external_validity/discriminant"
+        },
+        {
+          "gate_id": "labor_market_worry",
+          "statistic": "labor_market_worry_odds_ratio",
+          "operator": ">=",
+          "threshold": 1.2,
+          "pass_action": "Labor-market worry association reaches practical threshold.",
+          "fail_action": "Block strong criterion-validity claim for labor-market worry.",
+          "target_field": "evidence/external_validity/criterion"
+        },
+        {
+          "gate_id": "incremental_validity",
+          "statistic": "incremental_r2_delta",
+          "operator": ">=",
+          "threshold": 0.01,
+          "pass_action": "Incremental validity reaches preregistered practical threshold.",
+          "fail_action": "Block incremental-validity claim or require coefficient-based sensitivity support.",
+          "target_field": "evidence/external_validity/incremental"
+        }
+      ],
+      "target_fields": [
+        "evidence/external_validity/convergent",
+        "evidence/external_validity/discriminant",
+        "evidence/external_validity/criterion",
+        "evidence/external_validity/incremental"
+      ]
+    }
+  },
+  "validation_gates": [
+    {
+      "gate_id": "retained_item_minimum",
+      "statistic": "retained_item_count",
+      "operator": ">=",
+      "threshold": 3,
+      "pass_action": "A construct-level future scoring review may continue.",
+      "fail_action": "Block construct scoring and restrict any future use to item-level development reporting.",
+      "target_field": "decision/item_retention"
+    },
+    {
+      "gate_id": "missingness_item_max",
+      "statistic": "confirmation_item_missingness_max",
+      "operator": "<=",
+      "threshold": 0.1,
+      "pass_action": "Item missingness is acceptable for scored review.",
+      "fail_action": "Flag item for implementation review or exclusion.",
+      "target_field": "evidence/missingness/item_level"
+    },
+    {
+      "gate_id": "public_subgroup_missingness",
+      "statistic": "public_subgroup_item_missingness_max",
+      "operator": "<=",
+      "threshold": 0.15,
+      "pass_action": "Public subgroup missingness is acceptable.",
+      "fail_action": "Block subgroup claims or require restricted-data review.",
+      "target_field": "evidence/missingness/subgroup"
+    },
+    {
+      "gate_id": "single_category_ceiling",
+      "statistic": "max_single_response_category_prop",
+      "operator": "<=",
+      "threshold": 0.7,
+      "pass_action": "No item is dominated by a single response category.",
+      "fail_action": "Flag item for targeting or wording revision.",
+      "target_field": "evidence/item_distributions/category_concentration"
+    },
+    {
+      "gate_id": "adjacent_category_ceiling",
+      "statistic": "max_two_adjacent_response_category_prop",
+      "operator": "<=",
+      "threshold": 0.85,
+      "pass_action": "No item is excessively concentrated in adjacent response categories.",
+      "fail_action": "Require IRT information justification or block scored approval.",
+      "target_field": "evidence/item_distributions/category_concentration"
+    },
+    {
+      "gate_id": "aggregate_scoring_block",
+      "statistic": "observed_validation_dossier_approved",
+      "operator": "=",
+      "threshold": false,
+      "pass_action": "Keep v0.5.0 non-scored because no observed validation dossier is approved at freeze.",
+      "fail_action": "Do not enable scoring in v0.5.0; observed validation belongs in a later citable release.",
+      "target_field": "decision/scoring_eligibility"
+    }
+  ],
+  "sensitivity_analyses": [
+    {
+      "analysis_id": "weighted_unweighted_comparison",
+      "description": "Compare unweighted primary psychometric decisions with weighted descriptive and external-validity estimates using final trimmed post-stratification weights.",
+      "primary_comparison": "Any conclusion that changes under weighted sensitivity must be flagged in the validation dossier and cannot be hidden behind the unweighted primary estimate.",
+      "target_field": "evidence/sensitivity/weighting"
+    },
+    {
+      "analysis_id": "speed_and_reading_time",
+      "description": "Repeat item distributions, factor summaries, and reliability after excluding respondents with item-level low reading-time flags that were not primary exclusions.",
+      "primary_comparison": "If retained item decisions change after low-reading-time sensitivity exclusions, the item is flagged for implementation review.",
+      "target_field": "evidence/sensitivity/response_time"
+    },
+    {
+      "analysis_id": "covariate_missingness",
+      "description": "Repeat external-validity models using explicit missing categories and covariate-only imputation for non-ANX covariates.",
+      "primary_comparison": "External-validity support must be stable in sign and practical interpretation across complete-case and covariate-missingness sensitivity specifications.",
+      "target_field": "evidence/sensitivity/covariate_missingness"
+    },
+    {
+      "analysis_id": "subgroup_sparse_cells",
+      "description": "Repeat DIF and invariance screens after collapsing sparse public categories according to the codebook disclosure plan.",
+      "primary_comparison": "A claim is subgroup-comparable only when sparse-cell handling does not introduce meaningful DIF or failed invariance.",
+      "target_field": "evidence/sensitivity/subgroup_sparse_cells"
+    }
+  ],
+  "dossier_output": {
+    "dossier_path": "validation/v0.5/economic_vocational_anxiety/wave5_calibration_dossier.json",
+    "required_fields": [
+      "sample_provenance/exclusion_flow",
+      "sample_provenance/weighting",
+      "evidence/item_distributions",
+      "evidence/missingness",
+      "evidence/efa/item_loadings",
+      "evidence/cfa/fit",
+      "evidence/reliability/omega",
+      "evidence/irt/discrimination",
+      "evidence/dif/practical_impact",
+      "evidence/invariance/scalar",
+      "evidence/external_validity/incremental",
+      "evidence/sensitivity/weighting",
+      "decision/item_retention",
+      "decision/scoring_eligibility",
+      "decision/subgroup_claims"
+    ],
+    "write_policy": "The dossier must be written only after fielding and must copy all preregistered statistics, thresholds, pass-fail labels, exclusions, weights, seeds, package versions, and reviewer decisions without post hoc renaming."
+  },
+  "statistic_to_dossier_field": [
+    {
+      "statistic_id": "primary_loading_min",
+      "analysis": "efa",
+      "target_field": "evidence/efa/item_loadings",
+      "decision_use": "Determines pilot item retention and whether weak items can enter confirmation review."
+    },
+    {
+      "statistic_id": "cfi",
+      "analysis": "cfa",
+      "target_field": "evidence/cfa/fit",
+      "decision_use": "Determines whether one-factor confirmation evidence provides strong, cautionary, or blocking model fit support."
+    },
+    {
+      "statistic_id": "omega_total",
+      "analysis": "omega",
+      "target_field": "evidence/reliability/omega",
+      "decision_use": "Determines whether the retained item set meets early and mature reliability review thresholds."
+    },
+    {
+      "statistic_id": "discrimination_min",
+      "analysis": "irt",
+      "target_field": "evidence/irt/discrimination",
+      "decision_use": "Determines whether retained items provide minimally useful graded-response discrimination."
+    },
+    {
+      "statistic_id": "dif_pseudo_r2_delta_max",
+      "analysis": "dif",
+      "target_field": "evidence/dif/practical_impact",
+      "decision_use": "Determines whether statistically detected subgroup DIF is practically material for retention or claim blocking."
+    },
+    {
+      "statistic_id": "scalar_delta_cfi",
+      "analysis": "invariance",
+      "target_field": "evidence/invariance/scalar",
+      "decision_use": "Determines whether subgroup mean-comparison claims are permitted for each grouping variable."
+    },
+    {
+      "statistic_id": "incremental_r2_delta",
+      "analysis": "external_validity",
+      "target_field": "evidence/external_validity/incremental",
+      "decision_use": "Determines whether retained economic and vocational anxiety explains labor-market criteria beyond prespecified covariates."
+    },
+    {
+      "statistic_id": "retained_item_count",
+      "analysis": "release_decision",
+      "target_field": "decision/item_retention",
+      "decision_use": "Determines whether a later citable release can consider construct-level economic scoring."
+    },
+    {
+      "statistic_id": "observed_validation_dossier_approved",
+      "analysis": "release_decision",
+      "target_field": "decision/scoring_eligibility",
+      "decision_use": "Keeps v0.5.0 non-scored and requires any economic scoring to await observed validation in a later release."
+    }
+  ]
+}

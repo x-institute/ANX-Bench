@@ -1,0 +1,939 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/cross_domain_bridge_evidence.schema.json",
+  "title": "ANX-Bench Wave 7 cross-domain bridge evidence artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "bridge_evidence_schema_version",
+    "evidence_id",
+    "evidence_status",
+    "study_id",
+    "wave_id",
+    "benchmark_version",
+    "evidence_date",
+    "preregistration_path",
+    "manifest_path",
+    "analysis_plan_path",
+    "event_registry_path",
+    "event_id",
+    "frozen_item_ids",
+    "frozen_item_versions",
+    "analytic_n",
+    "exclusion_flow",
+    "thresholds",
+    "factor_model_fit",
+    "omega",
+    "irt_linking",
+    "dif",
+    "invariance",
+    "latent_correlations",
+    "bifactor_second_order_readiness",
+    "scoring_authorization",
+    "final_decision"
+  ],
+  "properties": {
+    "bridge_evidence_schema_version": {
+      "type": "string",
+      "const": "v0.1.0"
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "preregistered_template",
+        "observed"
+      ]
+    },
+    "study_id": {
+      "type": "string",
+      "const": "anx_us_2026w07_cross_domain_bridge"
+    },
+    "wave_id": {
+      "type": "string",
+      "const": "anx_us_2026w07_cross_domain_bridge"
+    },
+    "benchmark_version": {
+      "type": "string",
+      "const": "v0.7.0"
+    },
+    "evidence_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "preregistration_path": {
+      "type": "string",
+      "const": "docs/preregistrations/anx_us_2026w07_cross_domain_bridge.md"
+    },
+    "manifest_path": {
+      "type": "string",
+      "const": "releases/v0.7.0/manifest.json"
+    },
+    "analysis_plan_path": {
+      "type": "string",
+      "const": "analysis/v0.7/cross_domain_bridge/wave7_analysis_plan.json"
+    },
+    "event_registry_path": {
+      "type": "string",
+      "const": "events/v0.7/anx_us_2026w07_cross_domain_bridge_event_registry.json"
+    },
+    "event_id": {
+      "type": "string",
+      "const": "no_event"
+    },
+    "frozen_item_ids": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "sleep_disruption_ai_news",
+          "body_vigilance_model_release",
+          "background_dread_ai_progress",
+          "avoidance_after_ai_capability_demo",
+          "skill_obsolescence_software",
+          "wage_pressure_customer_support",
+          "retraining_pressure_accounting",
+          "status_loss_creative_work",
+          "deepfake_evidence_trust",
+          "synthetic_news_provenance",
+          "ai_expert_claim_conflict",
+          "personalized_misinformation_targeting"
+        ]
+      }
+    },
+    "frozen_item_versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo",
+        "skill_obsolescence_software",
+        "wage_pressure_customer_support",
+        "retraining_pressure_accounting",
+        "status_loss_creative_work",
+        "deepfake_evidence_trust",
+        "synthetic_news_provenance",
+        "ai_expert_claim_conflict",
+        "personalized_misinformation_targeting"
+      ],
+      "properties": {
+        "sleep_disruption_ai_news": {
+          "type": "string",
+          "const": "v0.2.0"
+        },
+        "body_vigilance_model_release": {
+          "type": "string",
+          "const": "v0.2.0"
+        },
+        "background_dread_ai_progress": {
+          "type": "string",
+          "const": "v0.2.0"
+        },
+        "avoidance_after_ai_capability_demo": {
+          "type": "string",
+          "const": "v0.2.0"
+        },
+        "skill_obsolescence_software": {
+          "type": "string",
+          "const": "v0.1.0"
+        },
+        "wage_pressure_customer_support": {
+          "type": "string",
+          "const": "v0.1.0"
+        },
+        "retraining_pressure_accounting": {
+          "type": "string",
+          "const": "v0.1.0"
+        },
+        "status_loss_creative_work": {
+          "type": "string",
+          "const": "v0.1.0"
+        },
+        "deepfake_evidence_trust": {
+          "type": "string",
+          "const": "v0.1.0"
+        },
+        "synthetic_news_provenance": {
+          "type": "string",
+          "const": "v0.1.0"
+        },
+        "ai_expert_claim_conflict": {
+          "type": "string",
+          "const": "v0.1.0"
+        },
+        "personalized_misinformation_targeting": {
+          "type": "string",
+          "const": "v0.1.0"
+        }
+      }
+    },
+    "analytic_n": {
+      "$ref": "#/$defs/analytic_n"
+    },
+    "exclusion_flow": {
+      "$ref": "#/$defs/exclusion_flow"
+    },
+    "thresholds": {
+      "$ref": "#/$defs/thresholds"
+    },
+    "factor_model_fit": {
+      "$ref": "#/$defs/factor_model_fit"
+    },
+    "omega": {
+      "$ref": "#/$defs/omega"
+    },
+    "irt_linking": {
+      "$ref": "#/$defs/irt_linking"
+    },
+    "dif": {
+      "$ref": "#/$defs/dif"
+    },
+    "invariance": {
+      "$ref": "#/$defs/invariance"
+    },
+    "latent_correlations": {
+      "$ref": "#/$defs/latent_correlations"
+    },
+    "bifactor_second_order_readiness": {
+      "$ref": "#/$defs/bifactor_second_order_readiness"
+    },
+    "scoring_authorization": {
+      "$ref": "#/$defs/scoring_authorization"
+    },
+    "final_decision": {
+      "$ref": "#/$defs/final_decision"
+    }
+  },
+  "$defs": {
+    "nullable_number": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "nullable_integer": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "nullable_boolean": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "gate_decision": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "pass",
+        "block",
+        null
+      ]
+    },
+    "analytic_n": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_n",
+        "minimum_n",
+        "achieved_eligible_n",
+        "final_analytic_n",
+        "independent_from_wave5_wave6",
+        "decision"
+      ],
+      "properties": {
+        "target_n": {
+          "type": "integer",
+          "const": 1500
+        },
+        "minimum_n": {
+          "type": "integer",
+          "const": 1200
+        },
+        "achieved_eligible_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "final_analytic_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "independent_from_wave5_wave6": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "decision": {
+          "$ref": "#/$defs/gate_decision"
+        }
+      }
+    },
+    "exclusion_flow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "started_n",
+        "consented_eligible_n",
+        "excluded_under_18_n",
+        "excluded_non_us_n",
+        "excluded_non_english_or_assisted_n",
+        "excluded_duplicate_n",
+        "excluded_vendor_fraud_n",
+        "excluded_attention_check_n",
+        "excluded_cross_domain_attribution_check_n",
+        "excluded_scenario_comprehension_n",
+        "excluded_fast_completion_n",
+        "excluded_excessive_anx_missingness_n",
+        "excluded_straightline_plus_quality_failure_n",
+        "excluded_withdrawal_n",
+        "excluded_nonunderstanding_n",
+        "total_excluded_n",
+        "non_exclusion_sensitivity_flags_retained",
+        "reported_by_required_subgroups",
+        "decision"
+      ],
+      "properties": {
+        "started_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "consented_eligible_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_under_18_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_non_us_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_non_english_or_assisted_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_duplicate_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_vendor_fraud_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_attention_check_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_cross_domain_attribution_check_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_scenario_comprehension_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_fast_completion_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_excessive_anx_missingness_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_straightline_plus_quality_failure_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_withdrawal_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "excluded_nonunderstanding_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "total_excluded_n": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "non_exclusion_sensitivity_flags_retained": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "reported_by_required_subgroups": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "decision": {
+          "$ref": "#/$defs/gate_decision"
+        }
+      }
+    },
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimum_analytic_n",
+        "factor_model",
+        "omega",
+        "irt_linking",
+        "dif",
+        "invariance",
+        "latent_correlations",
+        "general_factor"
+      ],
+      "properties": {
+        "minimum_analytic_n": {
+          "type": "integer",
+          "const": 1200
+        },
+        "factor_model": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum_primary_loading",
+            "maximum_secondary_loading",
+            "minimum_correlated_three_factor_cfi",
+            "maximum_correlated_three_factor_rmsea",
+            "minimum_standardized_loading"
+          ],
+          "properties": {
+            "minimum_primary_loading": {
+              "type": "number",
+              "const": 0.5
+            },
+            "maximum_secondary_loading": {
+              "type": "number",
+              "const": 0.3
+            },
+            "minimum_correlated_three_factor_cfi": {
+              "type": "number",
+              "const": 0.95
+            },
+            "maximum_correlated_three_factor_rmsea": {
+              "type": "number",
+              "const": 0.06
+            },
+            "minimum_standardized_loading": {
+              "type": "number",
+              "const": 0.5
+            }
+          }
+        },
+        "omega": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum_domain_omega",
+            "minimum_headline_domain_omega"
+          ],
+          "properties": {
+            "minimum_domain_omega": {
+              "type": "number",
+              "const": 0.7
+            },
+            "minimum_headline_domain_omega": {
+              "type": "number",
+              "const": 0.8
+            }
+          }
+        },
+        "irt_linking": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum_discrimination",
+            "maximum_threshold_ordering_violations",
+            "maximum_local_dependence_abs",
+            "maximum_anchor_drift_abs_mean_sd",
+            "maximum_linking_se_central_80"
+          ],
+          "properties": {
+            "minimum_discrimination": {
+              "type": "number",
+              "const": 0.65
+            },
+            "maximum_threshold_ordering_violations": {
+              "type": "integer",
+              "const": 0
+            },
+            "maximum_local_dependence_abs": {
+              "type": "number",
+              "const": 0.2
+            },
+            "maximum_anchor_drift_abs_mean_sd": {
+              "type": "number",
+              "const": 0.2
+            },
+            "maximum_linking_se_central_80": {
+              "type": "number",
+              "const": 0.15
+            }
+          }
+        },
+        "dif": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fdr_q_material_below",
+            "pseudo_r2_delta_material_at_or_above",
+            "expected_score_difference_sd_material_at_or_above"
+          ],
+          "properties": {
+            "fdr_q_material_below": {
+              "type": "number",
+              "const": 0.05
+            },
+            "pseudo_r2_delta_material_at_or_above": {
+              "type": "number",
+              "const": 0.02
+            },
+            "expected_score_difference_sd_material_at_or_above": {
+              "type": "number",
+              "const": 0.1
+            }
+          }
+        },
+        "invariance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum_metric_delta_cfi",
+            "maximum_metric_delta_rmsea",
+            "minimum_scalar_delta_cfi",
+            "maximum_scalar_delta_rmsea"
+          ],
+          "properties": {
+            "minimum_metric_delta_cfi": {
+              "type": "number",
+              "const": -0.01
+            },
+            "maximum_metric_delta_rmsea": {
+              "type": "number",
+              "const": 0.015
+            },
+            "minimum_scalar_delta_cfi": {
+              "type": "number",
+              "const": -0.01
+            },
+            "maximum_scalar_delta_rmsea": {
+              "type": "number",
+              "const": 0.015
+            }
+          }
+        },
+        "latent_correlations": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum_abs_pairwise",
+            "maximum_abs_pairwise"
+          ],
+          "properties": {
+            "minimum_abs_pairwise": {
+              "type": "number",
+              "const": 0.3
+            },
+            "maximum_abs_pairwise": {
+              "type": "number",
+              "const": 0.75
+            }
+          }
+        },
+        "general_factor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum_omega_hierarchical",
+            "minimum_explained_common_variance",
+            "domain_specific_variance_required"
+          ],
+          "properties": {
+            "minimum_omega_hierarchical": {
+              "type": "number",
+              "const": 0.5
+            },
+            "minimum_explained_common_variance": {
+              "type": "number",
+              "const": 0.5
+            },
+            "domain_specific_variance_required": {
+              "type": "boolean",
+              "const": true
+            }
+          }
+        }
+      }
+    },
+    "factor_model_fit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "efa_primary_loading_min",
+        "efa_secondary_loading_abs_max",
+        "efa_parallel_analysis_factor_count",
+        "three_factor_interpretable",
+        "correlated_three_factor_cfi",
+        "correlated_three_factor_rmsea",
+        "standardized_loading_min",
+        "unidimensional_model_not_sufficient",
+        "decision"
+      ],
+      "properties": {
+        "efa_primary_loading_min": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "efa_secondary_loading_abs_max": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "efa_parallel_analysis_factor_count": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "three_factor_interpretable": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "correlated_three_factor_cfi": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "correlated_three_factor_rmsea": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "standardized_loading_min": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "unidimensional_model_not_sufficient": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "decision": {
+          "$ref": "#/$defs/gate_decision"
+        }
+      }
+    },
+    "omega": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "somatic_ambient_anxiety",
+        "economic_vocational_anxiety",
+        "epistemic_trust_anxiety",
+        "minimum_domain_omega",
+        "all_domains_at_or_above_0_70",
+        "all_domains_at_or_above_0_80",
+        "decision"
+      ],
+      "properties": {
+        "somatic_ambient_anxiety": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "economic_vocational_anxiety": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "epistemic_trust_anxiety": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "minimum_domain_omega": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "all_domains_at_or_above_0_70": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "all_domains_at_or_above_0_80": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "decision": {
+          "$ref": "#/$defs/gate_decision"
+        }
+      }
+    },
+    "irt_linking": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_converged",
+        "discrimination_min",
+        "threshold_ordering_violations",
+        "local_dependence_abs_max",
+        "anchor_drift_abs_mean_sd",
+        "linking_se_central_80_max",
+        "official_theta_scoring_introduced",
+        "decision"
+      ],
+      "properties": {
+        "model_converged": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "discrimination_min": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "threshold_ordering_violations": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "local_dependence_abs_max": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "anchor_drift_abs_mean_sd": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "linking_se_central_80_max": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "official_theta_scoring_introduced": {
+          "type": "boolean",
+          "const": false
+        },
+        "decision": {
+          "$ref": "#/$defs/gate_decision"
+        }
+      }
+    },
+    "dif": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "screened_group_variables",
+        "max_fdr_q_for_flagged_items",
+        "max_pseudo_r2_delta",
+        "max_expected_score_difference_sd",
+        "rank_order_impact_detected",
+        "material_unresolved_dif_item_count",
+        "decision"
+      ],
+      "properties": {
+        "screened_group_variables": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "max_fdr_q_for_flagged_items": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "max_pseudo_r2_delta": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "max_expected_score_difference_sd": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "rank_order_impact_detected": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "material_unresolved_dif_item_count": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "decision": {
+          "$ref": "#/$defs/gate_decision"
+        }
+      }
+    },
+    "invariance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "configural_all_converged",
+        "minimum_metric_delta_cfi",
+        "maximum_metric_delta_rmsea",
+        "minimum_scalar_delta_cfi",
+        "maximum_scalar_delta_rmsea",
+        "failed_key_comparison_count",
+        "irt_fallback_used",
+        "irt_fallback_reviewer_approved",
+        "decision"
+      ],
+      "properties": {
+        "configural_all_converged": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "minimum_metric_delta_cfi": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "maximum_metric_delta_rmsea": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "minimum_scalar_delta_cfi": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "maximum_scalar_delta_rmsea": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "failed_key_comparison_count": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "irt_fallback_used": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "irt_fallback_reviewer_approved": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "decision": {
+          "$ref": "#/$defs/gate_decision"
+        }
+      }
+    },
+    "latent_correlations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "somatic_economic",
+        "somatic_epistemic",
+        "economic_epistemic",
+        "minimum_abs_pairwise",
+        "maximum_abs_pairwise",
+        "confidence_intervals_reported",
+        "weight_and_exclusion_sensitivity_stable",
+        "decision"
+      ],
+      "properties": {
+        "somatic_economic": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "somatic_epistemic": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "economic_epistemic": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "minimum_abs_pairwise": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "maximum_abs_pairwise": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "confidence_intervals_reported": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "weight_and_exclusion_sensitivity_stable": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "decision": {
+          "$ref": "#/$defs/gate_decision"
+        }
+      }
+    },
+    "bifactor_second_order_readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_converged",
+        "omega_hierarchical",
+        "explained_common_variance",
+        "domain_specific_factors_retain_interpretable_variance",
+        "overall_readiness_decision"
+      ],
+      "properties": {
+        "model_converged": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "omega_hierarchical": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "explained_common_variance": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "domain_specific_factors_retain_interpretable_variance": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "overall_readiness_decision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "blocked",
+            "domain_only",
+            "overall_readiness_review_supported",
+            null
+          ]
+        }
+      }
+    },
+    "scoring_authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "official_scored_items",
+        "aggregate_scoring_permitted",
+        "cross_domain_score_authorized",
+        "overall_anx_score_authorized",
+        "domain_combined_score_authorized",
+        "event_study_claim_permitted",
+        "trend_claim_permitted",
+        "individual_level_use_permitted",
+        "policy_decision_ranking_permitted"
+      ],
+      "properties": {
+        "official_scored_items": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "aggregate_scoring_permitted": {
+          "type": "boolean",
+          "const": false
+        },
+        "cross_domain_score_authorized": {
+          "type": "boolean",
+          "const": false
+        },
+        "overall_anx_score_authorized": {
+          "type": "boolean",
+          "const": false
+        },
+        "domain_combined_score_authorized": {
+          "type": "boolean",
+          "const": false
+        },
+        "event_study_claim_permitted": {
+          "type": "boolean",
+          "const": false
+        },
+        "trend_claim_permitted": {
+          "type": "boolean",
+          "const": false
+        },
+        "individual_level_use_permitted": {
+          "type": "boolean",
+          "const": false
+        },
+        "policy_decision_ranking_permitted": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "final_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bridge_decision",
+        "release_blocking",
+        "later_proposal_permitted",
+        "scoring_authorized",
+        "decision_rationale"
+      ],
+      "properties": {
+        "bridge_decision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "blocked",
+            "bridge_supported_domain_only",
+            "bridge_supported_for_overall_readiness_review",
+            null
+          ]
+        },
+        "release_blocking": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "later_proposal_permitted": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "scoring_authorized": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "enum": [
+            false,
+            null
+          ]
+        },
+        "decision_rationale": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

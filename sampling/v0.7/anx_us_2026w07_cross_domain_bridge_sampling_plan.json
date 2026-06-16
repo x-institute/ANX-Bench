@@ -1,0 +1,401 @@
+{
+  "$schema": "../../schema/sampling_plan.schema.json",
+  "sampling_plan_schema_version": "v0.1.0",
+  "plan_id": "anx_us_2026w07_cross_domain_bridge_sampling_plan",
+  "benchmark_version": "v0.7.0",
+  "wave_id": "anx_us_2026w07_cross_domain_bridge",
+  "registration": {
+    "sampling_plan_path": "sampling/v0.7/anx_us_2026w07_cross_domain_bridge_sampling_plan.json",
+    "preregistration_path": "docs/preregistrations/anx_us_2026w07_cross_domain_bridge.md",
+    "authoritative_contract": true,
+    "freeze_status": "frozen_before_fielding",
+    "outcome_inspection_status": "not_inspected"
+  },
+  "target_population": {
+    "population_id": "us_adults_online_english_2026",
+    "description": "Non-institutionalized adults age 18 or older residing in the United States who can complete an English-language online self-administered survey.",
+    "geography": "United States",
+    "age_range": {
+      "minimum": 18,
+      "maximum": null
+    },
+    "language": "English",
+    "inclusion_criteria": [
+      "Age 18 or older at screening.",
+      "Current residence in the United States or District of Columbia.",
+      "Able to complete the survey in English without assistance.",
+      "Provides informed consent before any ANX-Bench item is administered."
+    ],
+    "exclusion_criteria": [
+      "Under age 18.",
+      "Residence outside the United States or District of Columbia.",
+      "Unable to self-administer the English survey.",
+      "Duplicate, vendor-confirmed fraud, withdrawal of consent, breakoff without usable ANX item data, or preregistered quality-control exclusion."
+    ],
+    "coverage_limits": [
+      "The frame does not cover adults who cannot access or complete online surveys in English.",
+      "Institutionalized adults, adults without stable panel reachability, and adults excluded by vendor fraud controls are outside the covered analytic frame.",
+      "Weighted estimates are calibrated descriptive estimates for the covered online adult population, not a full probability-sample estimate of all US adults."
+    ]
+  },
+  "sampling_frame": {
+    "frame_id": "professional_online_panel_us_adults",
+    "frame_type": "nonprobability_online_panel",
+    "frame_description": "A high-quality professional online panel with profile variables for demographic quota monitoring, duplicate detection, AI-exposure screening, and post-fielding calibration to external margins.",
+    "known_undercoverage": [
+      "Adults not reachable through online panels.",
+      "Adults with limited English proficiency.",
+      "Adults with low digital access or low survey-panel participation propensity."
+    ],
+    "deduplication_rule": "Vendor and study-level duplicate checks must remove repeated panel identifiers, device or fingerprint duplicates when available, and records flagged as confirmed fraud before weights are finalized."
+  },
+  "recruitment_source": {
+    "source_type": "nonprobability",
+    "vendor_or_panel": "Professional online panel vendor selected before fielding",
+    "recruitment_mode": "Panel invitation with quota monitoring and respondent-level eligibility screening before ANX-Bench item exposure.",
+    "eligibility_screening": "Screening confirms age, US residence, English self-administration ability, consent, and no known prior participation in Wave 5 or Wave 6 when protected panel linkage is available.",
+    "nonresponse_tracking": "Vendor disposition counts must archive invitations, starts, screenouts, quota stops, breakoffs, completes, exclusions, and final analytic eligible cases."
+  },
+  "quota_variables": [
+    {
+      "variable_id": "age_group",
+      "source_field": "age_group",
+      "quota_role": "soft_quota",
+      "categories": [
+        "18_29",
+        "30_44",
+        "45_59",
+        "60_plus"
+      ],
+      "margin_source": "Current Population Survey or ACS adult margins available before weighting",
+      "minimum_cell_n": 125
+    },
+    {
+      "variable_id": "gender",
+      "source_field": "gender",
+      "quota_role": "soft_quota",
+      "categories": [
+        "woman",
+        "man",
+        "nonbinary_or_another_identity"
+      ],
+      "margin_source": "CPS or vendor-calibrated adult panel benchmarks with nonbinary category monitored descriptively",
+      "minimum_cell_n": 50
+    },
+    {
+      "variable_id": "race_ethnicity",
+      "source_field": "race_ethnicity",
+      "quota_role": "soft_quota",
+      "categories": [
+        "hispanic_any_race",
+        "white_non_hispanic",
+        "black_non_hispanic",
+        "asian_non_hispanic",
+        "other_or_multiple_non_hispanic"
+      ],
+      "margin_source": "ACS adult race and ethnicity margins",
+      "minimum_cell_n": 100
+    },
+    {
+      "variable_id": "education",
+      "source_field": "education",
+      "quota_role": "soft_quota",
+      "categories": [
+        "high_school_or_less",
+        "some_college_or_associate",
+        "bachelors_or_higher"
+      ],
+      "margin_source": "ACS or CPS adult education margins",
+      "minimum_cell_n": 180
+    },
+    {
+      "variable_id": "census_region",
+      "source_field": "census_region",
+      "quota_role": "soft_quota",
+      "categories": [
+        "northeast",
+        "midwest",
+        "south",
+        "west"
+      ],
+      "margin_source": "Census adult regional distribution",
+      "minimum_cell_n": 150
+    },
+    {
+      "variable_id": "employment_status",
+      "source_field": "employment_status",
+      "quota_role": "monitor_only",
+      "categories": [
+        "employed_full_time",
+        "employed_part_time",
+        "self_employed",
+        "unemployed",
+        "student_homemaker_retired_or_other"
+      ],
+      "margin_source": "CPS labor-force status margins where category mapping is stable",
+      "minimum_cell_n": 75
+    },
+    {
+      "variable_id": "occupation_group",
+      "source_field": "occupation_group",
+      "quota_role": "monitor_only",
+      "categories": [
+        "management_business_science_arts",
+        "service",
+        "sales_office",
+        "natural_resources_construction_maintenance",
+        "production_transportation_material_moving",
+        "not_currently_employed"
+      ],
+      "margin_source": "CPS occupation group margins for employed adults, with nonemployed monitored separately",
+      "minimum_cell_n": 60
+    },
+    {
+      "variable_id": "prior_ai_exposure_frequency",
+      "source_field": "prior_ai_exposure_frequency",
+      "quota_role": "monitor_only",
+      "categories": [
+        "never_or_rarely",
+        "monthly",
+        "weekly",
+        "daily"
+      ],
+      "margin_source": "No authoritative population margin; use same-wave distribution for sensitivity only",
+      "minimum_cell_n": 100
+    },
+    {
+      "variable_id": "ai_news_exposure_30d",
+      "source_field": "ai_news_exposure_30d",
+      "quota_role": "monitor_only",
+      "categories": [
+        "none_or_low",
+        "moderate",
+        "high"
+      ],
+      "margin_source": "No authoritative population margin; use same-wave distribution for sensitivity only",
+      "minimum_cell_n": 150
+    }
+  ],
+  "planned_n_by_split": [
+    {
+      "split_id": "bridge_sample",
+      "target_n": 1500,
+      "minimum_usable_n": 1200,
+      "role": "Independent cross-domain bridge sample after preregistered exclusions.",
+      "claim_role": "bridge"
+    }
+  ],
+  "weighting_method": {
+    "status": "planned",
+    "method": "raking",
+    "construction_steps": [
+      "Start from one base weight per eligible respondent because the planned panel source does not provide unequal selection probabilities for a probability sample.",
+      "Remove ineligible and preregistered excluded respondents before fitting final analytic weights.",
+      "Rake eligible respondents to external adult margins for age group, gender, race and ethnicity, education, and Census region.",
+      "Evaluate employment status and occupation group as calibration variables when external margins map cleanly to collected categories; otherwise report them as monitored sensitivity variables.",
+      "Do not rake on AI exposure or AI-news exposure unless a prespecified external benchmark is available before outcome inspection.",
+      "Trim weights to the frozen lower and upper bounds, rescale to mean one, and archive weighted and unweighted diagnostics before outcome analysis."
+    ],
+    "raking_variables": [
+      "age_group",
+      "gender",
+      "race_ethnicity",
+      "education",
+      "census_region",
+      "employment_status",
+      "occupation_group"
+    ],
+    "base_weight_variable": "base_weight",
+    "final_weight_variable": "final_weight",
+    "survey_weight_mapping": {
+      "wave_response_field": "survey_weight",
+      "source_variable": "final_weight",
+      "mapping_rule": "Copy respondent-level final_weight to survey_weight on every respondent-item row after trimming and mean-one rescaling."
+    },
+    "diagnostics": [
+      "Effective sample size overall and by planned split.",
+      "Weight minimum, maximum, mean, median, coefficient of variation, design effect, and percent trimmed.",
+      "Weighted and unweighted distributions for each quota variable.",
+      "Maximum absolute marginal deviation from each external raking target.",
+      "Sensitivity table comparing primary descriptive estimates with unweighted estimates."
+    ]
+  },
+  "trim_bounds": {
+    "lower": 0.3,
+    "upper": 3.0,
+    "scale": "mean_one",
+    "exception_rule": "Weights outside 0.30 to 3.00 are trimmed before rescaling; wider bounds require a frozen addendum before outcome inspection and cannot be chosen based on ANX outcomes."
+  },
+  "variance_design": {
+    "estimator": "linearization",
+    "primary_standard_error": "Taylor linearization using final survey_weight for weighted descriptive estimates; psychometric model decisions remain governed by the analysis plan.",
+    "strata_variable": null,
+    "cluster_variable": null,
+    "replicate_weight_variables": [],
+    "finite_population_correction": null,
+    "software": "R survey package, version locked in the Wave 7 analysis plan"
+  },
+  "subgroup_cells": [
+    {
+      "cell_id": "age_group",
+      "variables": [
+        "age_group"
+      ],
+      "planned_minimum_n": 125,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Suppress or collapse any age cell with fewer than 75 eligible respondents after exclusions."
+    },
+    {
+      "cell_id": "gender",
+      "variables": [
+        "gender"
+      ],
+      "planned_minimum_n": 50,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Suppress any gender category with fewer than 50 eligible respondents; do not use sparse categories for confirmatory difference claims."
+    },
+    {
+      "cell_id": "race_ethnicity",
+      "variables": [
+        "race_ethnicity"
+      ],
+      "planned_minimum_n": 100,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Suppress or combine race and ethnicity categories only according to the frozen codebook; report sparse cells as underpowered."
+    },
+    {
+      "cell_id": "education",
+      "variables": [
+        "education"
+      ],
+      "planned_minimum_n": 180,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Suppress education subgroup estimates with fewer than 100 eligible respondents or unstable weight diagnostics."
+    },
+    {
+      "cell_id": "census_region",
+      "variables": [
+        "census_region"
+      ],
+      "planned_minimum_n": 150,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Suppress regional estimates with fewer than 100 eligible respondents or effective sample size below 70."
+    },
+    {
+      "cell_id": "ai_exposure",
+      "variables": [
+        "prior_ai_exposure_frequency"
+      ],
+      "planned_minimum_n": 100,
+      "claim_status": "descriptive_only",
+      "suppression_rule": "Report AI exposure groups as sample-calibrated descriptive contrasts only because no authoritative population margin is frozen."
+    },
+    {
+      "cell_id": "occupation_by_ai_exposure",
+      "variables": [
+        "occupation_group",
+        "prior_ai_exposure_frequency"
+      ],
+      "planned_minimum_n": 60,
+      "claim_status": "blocked",
+      "suppression_rule": "Do not report crossed occupation by AI exposure cells as benchmark subgroup claims unless a later plan freezes larger cell targets and variance treatment."
+    }
+  ],
+  "claim_limits": [
+    {
+      "claim_type": "sample_description",
+      "status": "allowed",
+      "allowed_scope": "Weighted and unweighted description of the Wave 7 eligible bridge sample and its covered online adult frame.",
+      "required_metadata": [
+        "fielding dispositions",
+        "quota distributions",
+        "exclusion flow",
+        "weight diagnostics"
+      ],
+      "limit_rationale": "Sample description is required to interpret bridge evidence and does not imply probability-sample representativeness."
+    },
+    {
+      "claim_type": "population_estimate",
+      "status": "descriptive_only",
+      "allowed_scope": "Calibrated descriptive estimates for covered English-language online US adults, labeled as nonprobability weighted estimates.",
+      "required_metadata": [
+        "target_population",
+        "sampling_frame",
+        "weighting_method",
+        "trim_bounds",
+        "variance_design",
+        "survey_weight"
+      ],
+      "limit_rationale": "The recruitment source is a nonprobability online panel, so weighted estimates require explicit nonprobability limitations and cannot be described as nationally representative probability estimates."
+    },
+    {
+      "claim_type": "subgroup_comparison",
+      "status": "descriptive_only",
+      "allowed_scope": "Prespecified single-variable subgroup descriptions when minimum cell sizes, suppression rules, and weight diagnostics are satisfied.",
+      "required_metadata": [
+        "subgroup_cells",
+        "cell_n",
+        "effective_n",
+        "variance_design",
+        "suppression_rule"
+      ],
+      "limit_rationale": "Wave 7 is powered for bridge psychometrics, not confirmatory population subgroup difference testing."
+    },
+    {
+      "claim_type": "longitudinal_change",
+      "status": "blocked",
+      "allowed_scope": "No Wave 7 longitudinal trend, change, or repeated-cross-section claim is authorized.",
+      "required_metadata": [
+        "compatible_prior_sampling_plan",
+        "weight_harmonization",
+        "panel_or_refreshment_rule"
+      ],
+      "limit_rationale": "Wave 7 is an independent cross-domain bridge sample and is not frozen as a trend wave."
+    },
+    {
+      "claim_type": "event_study_effect",
+      "status": "blocked",
+      "allowed_scope": "No event-window, model-release shock, or causal event-study claim is authorized.",
+      "required_metadata": [
+        "locked_event_registry",
+        "baseline_sampling_plan",
+        "followup_sampling_plan",
+        "event_variance_design"
+      ],
+      "limit_rationale": "The Wave 7 event registry is locked to no_event and the sampling plan contains no baseline or follow-up event design."
+    },
+    {
+      "claim_type": "causal_effect",
+      "status": "blocked",
+      "allowed_scope": "No causal effect claim is authorized from Wave 7.",
+      "required_metadata": [
+        "identification_strategy",
+        "assignment_or_exposure_rule",
+        "causal_variance_design"
+      ],
+      "limit_rationale": "The bridge wave is observational and contains no randomized or quasi-experimental exposure design for causal inference."
+    },
+    {
+      "claim_type": "clinical_or_diagnostic",
+      "status": "blocked",
+      "allowed_scope": "No clinical, diagnostic, treatment, screening, or individual-risk interpretation is authorized.",
+      "required_metadata": [
+        "clinical_validation",
+        "diagnostic_thresholds",
+        "individual_decision_protocol"
+      ],
+      "limit_rationale": "ANX-Bench Wave 7 measures research constructs and has no clinical validation or diagnostic threshold."
+    },
+    {
+      "claim_type": "individual_level_decision",
+      "status": "blocked",
+      "allowed_scope": "No respondent-level decision, ranking, eligibility, employment, clinical, or policy action may use Wave 7 scores.",
+      "required_metadata": [
+        "individual_decision_protocol",
+        "fairness_audit",
+        "appeals_process"
+      ],
+      "limit_rationale": "The benchmark is designed for aggregate research evidence, not decisions about individual respondents."
+    }
+  ]
+}

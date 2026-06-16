@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/anchor_response.schema.json",
+  "title": "ANX-Bench Anchor Response Row Schema",
+  "description": "Canonical non-scored export contract for one respondent-domain-severity anchoring-vignette rating. Anchor response rows support response-style calibration, monotonicity diagnostics, and sensitivity analyses, but they are not scored ANX item rows and cannot be exported under schema/wave_response.schema.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "wave_id",
+    "benchmark_version",
+    "respondent_id_hash",
+    "anchor_id",
+    "domain",
+    "intended_severity",
+    "raw_response",
+    "missingness_code",
+    "response_timestamp",
+    "survey_weight",
+    "domain_order_violation",
+    "domain_response_style_stratum",
+    "overall_response_style_stratum"
+  ],
+  "properties": {
+    "wave_id": {
+      "const": "anx_us_2026w08_full_domain_bridge",
+      "description": "Wave identifier for the Wave 8 full-domain bridge anchor export."
+    },
+    "benchmark_version": {
+      "const": "v0.8.0",
+      "description": "Benchmark release version governing the Wave 8 anchor vignette set."
+    },
+    "respondent_id_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 or stronger salted, study-scoped pseudonymous respondent identifier. Direct identifiers are prohibited."
+    },
+    "anchor_id": {
+      "type": "string",
+      "enum": [
+        "anchor_somatic_ambient_low",
+        "anchor_somatic_ambient_moderate",
+        "anchor_somatic_ambient_high",
+        "anchor_economic_vocational_low",
+        "anchor_economic_vocational_moderate",
+        "anchor_economic_vocational_high",
+        "anchor_epistemic_low",
+        "anchor_epistemic_moderate",
+        "anchor_epistemic_high",
+        "anchor_relational_low",
+        "anchor_relational_moderate",
+        "anchor_relational_high",
+        "anchor_existential_identity_low",
+        "anchor_existential_identity_moderate",
+        "anchor_existential_identity_high",
+        "anchor_autonomy_surveillance_low",
+        "anchor_autonomy_surveillance_moderate",
+        "anchor_autonomy_surveillance_high",
+        "anchor_safety_catastrophic_low",
+        "anchor_safety_catastrophic_moderate",
+        "anchor_safety_catastrophic_high"
+      ],
+      "description": "Stable Wave 8 anchoring-vignette identifier. This is not an ANX item_id."
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "somatic_ambient",
+        "economic_vocational",
+        "epistemic",
+        "relational",
+        "existential_identity",
+        "autonomy_surveillance",
+        "safety_catastrophic"
+      ],
+      "description": "Wave 8 domain targeted by the anchor vignette."
+    },
+    "intended_severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "moderate",
+        "high"
+      ],
+      "description": "Preregistered severity band for the anchor vignette."
+    },
+    "raw_response": {
+      "description": "Observed 1 to 5 anxiety rating for the anchor vignette, or null when no answer was captured. Anchor responses are non-scored calibration data.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 5
+    },
+    "missingness_code": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "skipped_by_respondent",
+        "survey_breakoff",
+        "technical_failure",
+        "removed_by_quality_control",
+        "not_scored_excluded_respondent",
+        "not_scored_item_ineligible",
+        "item_not_administered_by_design"
+      ],
+      "description": "Missingness provenance for the anchor row. observed requires a non-null raw_response; every other value requires raw_response to be null."
+    },
+    "response_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^.*(Z|[+]00:00)$",
+      "description": "UTC timestamp at which the anchor response was submitted or finalized by the fielding system."
+    },
+    "survey_weight": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Final respondent-level analysis weight applicable to this non-scored anchor row. Use 1.0 until final weights are constructed."
+    },
+    "domain_order_violation": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Domain-level monotonicity descriptor repeated on all three anchor rows for the respondent-domain. True means at least one observed pair contradicts low <= moderate <= high; null means fewer than two ratings are observed."
+    },
+    "domain_response_style_stratum": {
+      "type": "string",
+      "enum": [
+        "compressed_low",
+        "compressed_high",
+        "calibrated_monotone",
+        "weakly_monotone_compressed",
+        "nonmonotone",
+        "incomplete"
+      ],
+      "description": "Wave 8 domain-specific response-style stratum derived from the low, moderate, and high anchor ratings."
+    },
+    "overall_response_style_stratum": {
+      "type": "string",
+      "enum": [
+        "broadly_calibrated",
+        "globally_compressed_low",
+        "globally_compressed_high",
+        "mixed_response_style",
+        "nonmonotone_any_domain",
+        "anchor_incomplete"
+      ],
+      "description": "Respondent-level all-domain anchor response-style stratum repeated on each of the respondent's 21 anchor rows."
+    }
+  }
+}

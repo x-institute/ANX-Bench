@@ -1,0 +1,899 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/retest_evidence.schema.json",
+  "title": "ANX-Bench 14-day test-retest evidence packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "retest_evidence_schema_version",
+    "evidence_id",
+    "study_id",
+    "benchmark_version",
+    "construct_id",
+    "score_name",
+    "event_id",
+    "evidence_date",
+    "preregistration_path",
+    "event_registry_path",
+    "fielding_design",
+    "frozen_item_ids",
+    "frozen_item_versions",
+    "thresholds",
+    "linkage_counts",
+    "exclusion_flow",
+    "attrition_diagnostics",
+    "icc_2_1",
+    "mean_change",
+    "item_stability",
+    "longitudinal_invariance",
+    "panel_conditioning_sensitivity",
+    "decision_table",
+    "reporting_restrictions"
+  ],
+  "properties": {
+    "retest_evidence_schema_version": {
+      "type": "string",
+      "const": "v0.1.0"
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "study_id": {
+      "type": "string",
+      "const": "anx_us_2026w03_somatic_retest"
+    },
+    "benchmark_version": {
+      "type": "string",
+      "const": "v0.3.1"
+    },
+    "construct_id": {
+      "type": "string",
+      "const": "somatic_ambient_anxiety"
+    },
+    "score_name": {
+      "type": "string",
+      "const": "somatic_ambient_anxiety_mean"
+    },
+    "event_id": {
+      "type": "string",
+      "const": "no_event"
+    },
+    "evidence_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "preregistration_path": {
+      "type": "string",
+      "const": "docs/preregistrations/anx_us_2026w03_somatic_retest.md"
+    },
+    "event_registry_path": {
+      "type": "string",
+      "const": "events/v0.3/anx_us_2026w03_somatic_retest_event_registry.json"
+    },
+    "fielding_design": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "retest_interval_days",
+        "primary_window_start_day_inclusive",
+        "primary_window_end_day_exclusive",
+        "timing_sensitivity_start_day_inclusive",
+        "timing_sensitivity_end_day_inclusive",
+        "administration_mode",
+        "country",
+        "language",
+        "allowed_claim_scope"
+      ],
+      "properties": {
+        "retest_interval_days": {
+          "type": "integer",
+          "const": 14
+        },
+        "primary_window_start_day_inclusive": {
+          "type": "integer",
+          "const": 13
+        },
+        "primary_window_end_day_exclusive": {
+          "type": "integer",
+          "const": 16
+        },
+        "timing_sensitivity_start_day_inclusive": {
+          "type": "integer",
+          "const": 10
+        },
+        "timing_sensitivity_end_day_inclusive": {
+          "type": "integer",
+          "const": 21
+        },
+        "administration_mode": {
+          "type": "string",
+          "const": "online_self_administered_survey"
+        },
+        "country": {
+          "type": "string",
+          "const": "United States"
+        },
+        "language": {
+          "type": "string",
+          "const": "English"
+        },
+        "allowed_claim_scope": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "frozen_item_ids": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "sleep_disruption_ai_news",
+          "body_vigilance_model_release",
+          "background_dread_ai_progress",
+          "avoidance_after_ai_capability_demo"
+        ]
+      }
+    },
+    "frozen_item_versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo"
+      ],
+      "properties": {
+        "sleep_disruption_ai_news": {
+          "type": "string",
+          "const": "v0.2.0"
+        },
+        "body_vigilance_model_release": {
+          "type": "string",
+          "const": "v0.2.0"
+        },
+        "background_dread_ai_progress": {
+          "type": "string",
+          "const": "v0.2.0"
+        },
+        "avoidance_after_ai_capability_demo": {
+          "type": "string",
+          "const": "v0.2.0"
+        }
+      }
+    },
+    "thresholds": {
+      "$ref": "#/$defs/thresholds"
+    },
+    "linkage_counts": {
+      "$ref": "#/$defs/linkage_counts"
+    },
+    "exclusion_flow": {
+      "$ref": "#/$defs/exclusion_flow"
+    },
+    "attrition_diagnostics": {
+      "$ref": "#/$defs/attrition_diagnostics"
+    },
+    "icc_2_1": {
+      "$ref": "#/$defs/icc_2_1"
+    },
+    "mean_change": {
+      "$ref": "#/$defs/mean_change"
+    },
+    "item_stability": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/item_stability"
+      }
+    },
+    "longitudinal_invariance": {
+      "$ref": "#/$defs/longitudinal_invariance"
+    },
+    "panel_conditioning_sensitivity": {
+      "$ref": "#/$defs/panel_conditioning_sensitivity"
+    },
+    "decision_table": {
+      "$ref": "#/$defs/decision_table"
+    },
+    "reporting_restrictions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_study_claim_permitted",
+        "trend_claim_permitted",
+        "causal_shock_claim_permitted",
+        "longer_interval_longitudinal_claim_permitted",
+        "notes"
+      ],
+      "properties": {
+        "event_study_claim_permitted": {
+          "type": "boolean",
+          "const": false
+        },
+        "trend_claim_permitted": {
+          "type": "boolean",
+          "const": false
+        },
+        "causal_shock_claim_permitted": {
+          "type": "boolean",
+          "const": false
+        },
+        "longer_interval_longitudinal_claim_permitted": {
+          "type": "boolean",
+          "const": false
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nullable_nonnegative_integer": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "nullable_number": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "nullable_unit_number": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "decision": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "pass",
+        "caution",
+        "fail",
+        null
+      ]
+    },
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "construct",
+        "item",
+        "attrition",
+        "longitudinal_invariance",
+        "panel_conditioning"
+      ],
+      "properties": {
+        "construct": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum_complete_pair_n",
+            "minimum_icc_2_1",
+            "minimum_icc_95ci_lower",
+            "maximum_abs_weighted_mean_change",
+            "mean_change_ci_low_minimum",
+            "mean_change_ci_high_maximum",
+            "maximum_abs_standardized_response_mean"
+          ],
+          "properties": {
+            "minimum_complete_pair_n": {
+              "type": "integer",
+              "const": 500
+            },
+            "minimum_icc_2_1": {
+              "type": "number",
+              "const": 0.7
+            },
+            "minimum_icc_95ci_lower": {
+              "type": "number",
+              "const": 0.6
+            },
+            "maximum_abs_weighted_mean_change": {
+              "type": "number",
+              "const": 0.15
+            },
+            "mean_change_ci_low_minimum": {
+              "type": "number",
+              "const": -0.25
+            },
+            "mean_change_ci_high_maximum": {
+              "type": "number",
+              "const": 0.25
+            },
+            "maximum_abs_standardized_response_mean": {
+              "type": "number",
+              "const": 0.2
+            }
+          }
+        },
+        "item": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum_unweighted_stability_correlation",
+            "maximum_abs_weighted_mean_change",
+            "minimum_weighted_exact_agreement",
+            "minimum_weighted_adjacent_agreement",
+            "maximum_weighted_two_or_more_category_move_share",
+            "maximum_missing_or_unusable_rate"
+          ],
+          "properties": {
+            "minimum_unweighted_stability_correlation": {
+              "type": "number",
+              "const": 0.5
+            },
+            "maximum_abs_weighted_mean_change": {
+              "type": "number",
+              "const": 0.2
+            },
+            "minimum_weighted_exact_agreement": {
+              "type": "number",
+              "const": 0.45
+            },
+            "minimum_weighted_adjacent_agreement": {
+              "type": "number",
+              "const": 0.85
+            },
+            "maximum_weighted_two_or_more_category_move_share": {
+              "type": "number",
+              "const": 0.15
+            },
+            "maximum_missing_or_unusable_rate": {
+              "type": "number",
+              "const": 0.1
+            }
+          }
+        },
+        "attrition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "flag_standardized_mean_difference_greater_than",
+            "flag_weighted_percentage_point_difference_greater_than",
+            "attrition_sensitive_mean_difference_greater_than_points",
+            "attrition_sensitive_mean_difference_greater_than_sd"
+          ],
+          "properties": {
+            "flag_standardized_mean_difference_greater_than": {
+              "type": "number",
+              "const": 0.1
+            },
+            "flag_weighted_percentage_point_difference_greater_than": {
+              "type": "number",
+              "const": 5.0
+            },
+            "attrition_sensitive_mean_difference_greater_than_points": {
+              "type": "number",
+              "const": 0.15
+            },
+            "attrition_sensitive_mean_difference_greater_than_sd": {
+              "type": "number",
+              "const": 0.2
+            }
+          }
+        },
+        "longitudinal_invariance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "metric_delta_cfi_minimum",
+            "metric_delta_rmsea_maximum",
+            "scalar_delta_cfi_minimum",
+            "scalar_delta_rmsea_maximum",
+            "maximum_expected_score_impact",
+            "maximum_same_item_residual_correlation"
+          ],
+          "properties": {
+            "metric_delta_cfi_minimum": {
+              "type": "number",
+              "const": -0.01
+            },
+            "metric_delta_rmsea_maximum": {
+              "type": "number",
+              "const": 0.015
+            },
+            "scalar_delta_cfi_minimum": {
+              "type": "number",
+              "const": -0.01
+            },
+            "scalar_delta_rmsea_maximum": {
+              "type": "number",
+              "const": 0.015
+            },
+            "maximum_expected_score_impact": {
+              "type": "number",
+              "const": 0.1
+            },
+            "maximum_same_item_residual_correlation": {
+              "type": "number",
+              "const": 0.2
+            }
+          }
+        },
+        "panel_conditioning": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum_conditioning_excluded_icc_if_primary_passes",
+            "maximum_abs_weighted_mean_change_difference"
+          ],
+          "properties": {
+            "minimum_conditioning_excluded_icc_if_primary_passes": {
+              "type": "number",
+              "const": 0.65
+            },
+            "maximum_abs_weighted_mean_change_difference": {
+              "type": "number",
+              "const": 0.1
+            }
+          }
+        }
+      }
+    },
+    "linkage_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "wave1_eligible_with_recontact_permission_n",
+        "invited_n",
+        "bounced_or_unreachable_n",
+        "started_retest_n",
+        "consented_n",
+        "complete_before_exclusions_n",
+        "unique_linked_pairs_n",
+        "ambiguous_or_duplicate_link_excluded_n",
+        "complete_primary_window_pairs_n",
+        "timing_sensitivity_pairs_n",
+        "final_primary_analytic_pairs_n"
+      ],
+      "properties": {
+        "wave1_eligible_with_recontact_permission_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "invited_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "bounced_or_unreachable_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "started_retest_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "consented_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "complete_before_exclusions_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "unique_linked_pairs_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "ambiguous_or_duplicate_link_excluded_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "complete_primary_window_pairs_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "timing_sensitivity_pairs_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "final_primary_analytic_pairs_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        }
+      }
+    },
+    "exclusion_flow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "excluded_no_retest_consent_n",
+        "excluded_unmatched_or_nonunique_link_n",
+        "excluded_outside_primary_window_n",
+        "excluded_attention_check_n",
+        "excluded_comprehension_check_n",
+        "excluded_somatic_attribution_check_n",
+        "excluded_fast_completion_n",
+        "excluded_straightline_plus_qc_failure_n",
+        "excluded_missing_or_invalid_retest_item_n",
+        "excluded_vendor_duplicate_fraud_bot_n",
+        "excluded_self_reported_nonunderstanding_n",
+        "total_excluded_primary_n"
+      ],
+      "properties": {
+        "excluded_no_retest_consent_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "excluded_unmatched_or_nonunique_link_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "excluded_outside_primary_window_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "excluded_attention_check_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "excluded_comprehension_check_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "excluded_somatic_attribution_check_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "excluded_fast_completion_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "excluded_straightline_plus_qc_failure_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "excluded_missing_or_invalid_retest_item_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "excluded_vendor_duplicate_fraud_bot_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "excluded_self_reported_nonunderstanding_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "total_excluded_primary_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        }
+      }
+    },
+    "attrition_diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "covariates_compared",
+        "max_absolute_standardized_mean_difference",
+        "max_absolute_weighted_percentage_point_difference",
+        "wave1_construct_mean_difference_points",
+        "wave1_construct_mean_difference_sd",
+        "flagged_covariates",
+        "attrition_sensitive",
+        "attrition_adjusted_weighting_applied",
+        "decision"
+      ],
+      "properties": {
+        "covariates_compared": {
+          "type": "array",
+          "minItems": 14,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "max_absolute_standardized_mean_difference": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "max_absolute_weighted_percentage_point_difference": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "wave1_construct_mean_difference_points": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "wave1_construct_mean_difference_sd": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "flagged_covariates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attrition_sensitive": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "attrition_adjusted_weighting_applied": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "decision": {
+          "$ref": "#/$defs/decision"
+        }
+      }
+    },
+    "icc_2_1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "analytic_n",
+        "estimate",
+        "ci_95_lower",
+        "ci_95_upper",
+        "bootstrap_resamples",
+        "weighted_sensitivity_estimate",
+        "decision"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "const": "two_way_random_effects_absolute_agreement_single_measure_icc_2_1"
+        },
+        "analytic_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "estimate": {
+          "$ref": "#/$defs/nullable_unit_number"
+        },
+        "ci_95_lower": {
+          "$ref": "#/$defs/nullable_unit_number"
+        },
+        "ci_95_upper": {
+          "$ref": "#/$defs/nullable_unit_number"
+        },
+        "bootstrap_resamples": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "weighted_sensitivity_estimate": {
+          "$ref": "#/$defs/nullable_unit_number"
+        },
+        "decision": {
+          "$ref": "#/$defs/decision"
+        }
+      }
+    },
+    "mean_change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "weighted_wave1_mean",
+        "weighted_retest_mean",
+        "weighted_mean_change",
+        "robust_standard_error",
+        "ci_95_lower",
+        "ci_95_upper",
+        "standardized_response_mean",
+        "decision"
+      ],
+      "properties": {
+        "weighted_wave1_mean": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "weighted_retest_mean": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "weighted_mean_change": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "robust_standard_error": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "ci_95_lower": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "ci_95_upper": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "standardized_response_mean": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "decision": {
+          "$ref": "#/$defs/decision"
+        }
+      }
+    },
+    "item_stability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "item_version",
+        "paired_item_n",
+        "weighted_mean_change",
+        "unweighted_stability_correlation",
+        "weighted_exact_agreement",
+        "weighted_adjacent_agreement",
+        "weighted_two_or_more_category_move_share",
+        "missing_or_unusable_retest_rate",
+        "decision"
+      ],
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "enum": [
+            "sleep_disruption_ai_news",
+            "body_vigilance_model_release",
+            "background_dread_ai_progress",
+            "avoidance_after_ai_capability_demo"
+          ]
+        },
+        "item_version": {
+          "type": "string",
+          "const": "v0.2.0"
+        },
+        "paired_item_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "weighted_mean_change": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "unweighted_stability_correlation": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "weighted_exact_agreement": {
+          "$ref": "#/$defs/nullable_unit_number"
+        },
+        "weighted_adjacent_agreement": {
+          "$ref": "#/$defs/nullable_unit_number"
+        },
+        "weighted_two_or_more_category_move_share": {
+          "$ref": "#/$defs/nullable_unit_number"
+        },
+        "missing_or_unusable_retest_rate": {
+          "$ref": "#/$defs/nullable_unit_number"
+        },
+        "decision": {
+          "$ref": "#/$defs/decision"
+        }
+      }
+    },
+    "longitudinal_invariance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "configural_converged",
+        "configural_one_factor_preserved",
+        "metric_delta_cfi",
+        "metric_delta_rmsea",
+        "scalar_delta_cfi",
+        "scalar_delta_rmsea",
+        "max_expected_construct_score_impact",
+        "max_same_item_residual_correlation",
+        "status_label",
+        "decision"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "configural_converged": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "configural_one_factor_preserved": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "metric_delta_cfi": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "metric_delta_rmsea": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "scalar_delta_cfi": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "scalar_delta_rmsea": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "max_expected_construct_score_impact": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "max_same_item_residual_correlation": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "status_label": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "longitudinal_invariance_passed",
+            "partial_longitudinal_invariance",
+            "longitudinal_invariance_failed_configural",
+            "longitudinal_invariance_failed_metric",
+            "longitudinal_invariance_failed_scalar_or_threshold",
+            null
+          ]
+        },
+        "decision": {
+          "$ref": "#/$defs/decision"
+        }
+      }
+    },
+    "panel_conditioning_sensitivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "excluded_conditioning_n",
+        "conditioning_excluded_icc",
+        "conditioning_excluded_weighted_mean_change",
+        "absolute_mean_change_difference",
+        "panel_conditioning_sensitive",
+        "decision"
+      ],
+      "properties": {
+        "excluded_conditioning_n": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "conditioning_excluded_icc": {
+          "$ref": "#/$defs/nullable_unit_number"
+        },
+        "conditioning_excluded_weighted_mean_change": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "absolute_mean_change_difference": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "panel_conditioning_sensitive": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "decision": {
+          "$ref": "#/$defs/decision"
+        }
+      }
+    },
+    "decision_table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "construct_repeatability_decision",
+        "item_level_failed_item_count",
+        "item_level_caution_item_ids",
+        "overall_retest_evidence_decision",
+        "claim_authorized"
+      ],
+      "properties": {
+        "construct_repeatability_decision": {
+          "$ref": "#/$defs/decision"
+        },
+        "item_level_failed_item_count": {
+          "$ref": "#/$defs/nullable_nonnegative_integer"
+        },
+        "item_level_caution_item_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sleep_disruption_ai_news",
+              "body_vigilance_model_release",
+              "background_dread_ai_progress",
+              "avoidance_after_ai_capability_demo"
+            ]
+          }
+        },
+        "overall_retest_evidence_decision": {
+          "$ref": "#/$defs/decision"
+        },
+        "claim_authorized": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

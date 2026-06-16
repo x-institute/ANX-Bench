@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schema/event_registry.schema.json",
+  "registry_schema_version": "v0.1.0",
+  "registry_version": "v0.6.0",
+  "benchmark_release_line": "v0.6",
+  "effective_benchmark_version": "v0.6.0",
+  "wave_id": "anx_us_2026w06_epistemic",
+  "registry_status": "frozen",
+  "registry_lock_date": "2026-06-16",
+  "outcome_inspection_status": "not_inspected",
+  "events": [
+    {
+      "event_id": "no_event",
+      "event_name": "No AI capability event assigned to Wave 6 epistemic calibration",
+      "category": "no_event",
+      "event_description": "This registry records that the anx_us_2026w06_epistemic packet is a non-event psychometric calibration wave for epistemic_trust_anxiety. It is intentionally not anchored to a frontier model release, capability demonstration, misinformation incident, deepfake incident, policy action, public-health information event, legal-evidence controversy, platform-labeling change, infrastructure access change, or other time-localized AI event. The registry is locked so Wave 6 responses cannot later be retrofitted into an event-study exposure design after outcome inspection.",
+      "event_timestamp": null,
+      "timestamp_source_url": null,
+      "timestamp_source_type": "not_applicable_no_event",
+      "exposure_window": null,
+      "baseline_window": null,
+      "follow_up_windows": [],
+      "affected_domains": [],
+      "competing_events": [],
+      "lock_date": "2026-06-16",
+      "amendment_history": []
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "item_id": "biosecurity_protocol_misuse",
+  "version": "v0.8.0",
+  "release_status": "development_only",
+  "domain": "safety_catastrophic",
+  "construct": {
+    "construct_id": "safety_catastrophic_ai_anxiety",
+    "label": "Safety and catastrophic AI anxiety",
+    "definition": "Anxiety arising from the belief that advanced AI systems may increase physical danger, misuse, loss of control, infrastructure disruption, cascading failure, or extreme-harm risk.",
+    "subconstruct": "biosecurity misuse concern"
+  },
+  "scenario_text": "Imagine that a frontier AI model becomes highly effective at summarizing laboratory methods, troubleshooting failed protocols, and explaining how to obtain specialized materials. The public version blocks explicit harmful requests, but safety researchers show that determined users can still combine ordinary prompts into guidance that would lower barriers for dangerous biological experimentation. Government agencies and labs add safeguards, yet news coverage emphasizes that the model can accelerate both legitimate research and misuse.",
+  "response_scale": {
+    "scale_type": "5_point_likert",
+    "points": 5,
+    "prompt": "How anxious would this scenario make you about AI systems lowering barriers to dangerous biological misuse?",
+    "anchors": [
+      { "value": 1, "label": "Not at all anxious" },
+      { "value": 2, "label": "Slightly anxious" },
+      { "value": 3, "label": "Moderately anxious" },
+      { "value": 4, "label": "Very anxious" },
+      { "value": 5, "label": "Extremely anxious" }
+    ]
+  },
+  "scoring": {
+    "score_variable": "biosecurity_protocol_misuse_anxiety",
+    "score_range": { "min": 1, "max": 5 },
+    "reverse_coded": false,
+    "scoring_key": { "1": 1, "2": 2, "3": 3, "4": 4, "5": 5 },
+    "missing_response_rule": "Treat skipped responses as missing at the item level and do not impute item scores for primary Wave 8 analyses.",
+    "exclusion_criteria": [
+      "Exclude respondents who fail the Wave 8 instructed-response attention check.",
+      "Exclude respondents who complete the item in less than one-third of the median item reading time for the analytic sample.",
+      "Exclude respondents who fail the Wave 8 scenario-comprehension check.",
+      "Exclude respondents younger than 18 or otherwise ineligible for the US adult sample."
+    ],
+    "interpretation_bands": [
+      { "label": "low", "min_score": 1.0, "max_score": 2.0, "interpretation": "Respondent reports little or no anxiety about AI systems lowering barriers to dangerous biological misuse." },
+      { "label": "moderate", "min_score": 2.01, "max_score": 3.5, "interpretation": "Respondent reports a meaningful but not severe anxiety response to AI-enabled biosecurity misuse concerns." },
+      { "label": "high", "min_score": 3.51, "max_score": 5.0, "interpretation": "Respondent reports strong anxiety that advanced AI could increase biological misuse or large-scale public-safety risk." }
+    ]
+  },
+  "validation": {
+    "psychometric_decision": "development_only",
+    "decision_date": "2026-06-16",
+    "dossier_path": "not_available",
+    "preregistration_path": "docs/preregistrations/anx_us_2026w08_full_domain_bridge.md",
+    "scoring_eligible": false
+  },
+  "population": {
+    "target_population": "US adults, with planned subgroup analysis for healthcare workers, laboratory workers, public-health workers, emergency managers, and respondents with high AI safety news exposure.",
+    "eligible_respondents": "Respondents aged 18 or older who reside in the United States, can complete the English survey unaided, and provide informed consent.",
+    "stratification_variables": [ "age_group", "gender", "race_ethnicity", "education", "health_or_lab_employment", "ai_safety_news_exposure", "prior_ai_exposure" ],
+    "minimum_age": 18,
+    "exclusion_criteria": [
+      "Current inability to provide informed consent.",
+      "Duplicate panel participation within the same measurement wave.",
+      "Self-reported inability to read the survey language."
+    ]
+  },
+  "administration_mode": {
+    "mode": "online_self_administered",
+    "estimated_completion_seconds": 60,
+    "instructions": "Present the scenario exactly as written, followed immediately by the response prompt and the five ordered response options.",
+    "randomization": "Randomize within the safety_catastrophic domain block while preserving the ordered 1 to 5 response scale.",
+    "longitudinal_use": "Use identical wording, response anchors, scoring, and eligibility rules across bridge waves unless a new item version is released."
+  },
+  "ethics_flags": {
+    "risk_level": "moderate",
+    "sensitive_content": [ "biosecurity", "AI misuse", "public safety", "dangerous experimentation" ],
+    "distress_protocol_required": true,
+    "debrief_required": true,
+    "data_protection_notes": "Do not collect laboratory protocols, material names, facility names, operational procedures, credentials, or respondent knowledge of real vulnerabilities.",
+    "irb_notes": "The item intentionally avoids operational instructions while describing misuse risk. Distress language and a skip option must be available."
+  }
+}

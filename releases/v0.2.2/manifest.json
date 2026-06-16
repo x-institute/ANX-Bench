@@ -1,0 +1,192 @@
+{
+  "$schema": "../../schema/release.schema.json",
+  "manifest_schema_version": "v0.1.0",
+  "benchmark_version": "v0.2.2",
+  "release_date": "2026-06-16",
+  "release_status": "citable",
+  "release_label": "ANX-Bench v0.2.2 anchored somatic calibration packet",
+  "item_schema": {
+    "path": "schema/item.schema.json",
+    "schema_version": "v0.1.0",
+    "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+  },
+  "methodology_documents": [
+    {
+      "document_type": "methodology",
+      "path": "docs/methodology.md",
+      "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+    },
+    {
+      "document_type": "psychometric_validation_protocol",
+      "path": "docs/psychometric_validation_protocol.md",
+      "sha256": "7ae60e521a1cf36a543302a57ca3c81db0fd013c18a7d630ab25331aa65df2e6"
+    },
+    {
+      "document_type": "preregistration_event_study",
+      "path": "docs/preregistration_event_study.md",
+      "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+    }
+  ],
+  "frozen_item_set": {
+    "item_directory": "items/v0.2",
+    "item_count": 4,
+    "items": [
+      {
+        "path": "items/v0.2/somatic_ambient/sleep_disruption_ai_news.json",
+        "item_id": "sleep_disruption_ai_news",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "009f91ba396dc0fc018c5fc55c90edea035dc605d762eefdf31be23136d277c5"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/body_vigilance_model_release.json",
+        "item_id": "body_vigilance_model_release",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "ced1835dbffe9fc73e9cde1034688c42d7b6ff5f82f17106ddd47f2e5ba083da"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/background_dread_ai_progress.json",
+        "item_id": "background_dread_ai_progress",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "00e8b1951ea03761a975b92394c5f72377a108fa7d3d32dc1fb37e54fe7e76fb"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/avoidance_after_ai_capability_demo.json",
+        "item_id": "avoidance_after_ai_capability_demo",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "f4a06cfbb9c8eea66e80567b95879eee0ba041817c11d245eb2fda29859c0f4d"
+      }
+    ]
+  },
+  "official_scored_items": [],
+  "scoring_eligibility": {
+    "official_scored_item_count": 0,
+    "eligibility_rule": "Official scoring remains prohibited for v0.2.2 because this release only adds non-scored response-scale anchoring vignettes to the frozen somatic calibration packet. Scoring requires approved_scored item status, scoring_eligible true, inclusion in official_scored_items, and completed psychometric validation.",
+    "aggregate_scoring_permitted": false
+  },
+  "checksums": {
+    "algorithm": "SHA-256",
+    "coverage": "Checksums cover release, item, validation dossier, psychometric analysis plan, construct registry, event registry, wave response, score output, and anchor vignette schemas; the frozen v0.2 construct registry; the v0.2.2 somatic instrument, codebook, preregistration, non-event registry, validation dossier, machine-readable analysis plan, anchor vignette set, and every frozen somatic item file.",
+    "files": [
+      {
+        "path": "schema/release.schema.json",
+        "sha256": "f4d347b6c0bfbee787f1346e56eee16835782cab62bd1987a23dc65bab7e520b"
+      },
+      {
+        "path": "schema/item.schema.json",
+        "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+      },
+      {
+        "path": "schema/validation_dossier.schema.json",
+        "sha256": "ae515cbe3501aec6d481ad6609159467749e5b8b54a87831436634be5d28e906"
+      },
+      {
+        "path": "schema/psychometric_analysis_plan.schema.json",
+        "sha256": "246546836a13da1b85ea6d14ab7406069353ae9327bd8bb4496a46721141341e"
+      },
+      {
+        "path": "schema/construct_registry.schema.json",
+        "sha256": "033cfdd8e60c4f98753374ddc3a0fda831b5f24b0cb2e614d729716ea1d198db"
+      },
+      {
+        "path": "schema/event_registry.schema.json",
+        "sha256": "fd4dee2357be82d16d419537540bb2c6c40a5b8dc6528901fdf514b8f12bcdd8"
+      },
+      {
+        "path": "schema/wave_response.schema.json",
+        "sha256": "9bc1989f17a7d68b6a098c7e200db69b72851fb8448061369d71c1ad464786c0"
+      },
+      {
+        "path": "schema/score_output.schema.json",
+        "sha256": "5fc181b77766fcec1a42b78c12c3682ac935cf71e71bd08dd0d086cd84fc4c74"
+      },
+      {
+        "path": "schema/anchor_vignette.schema.json",
+        "sha256": "4ce373e82a6e4f3482dc174e289ac145cf23b35c89ff0dda538f3d0a620b6398"
+      },
+      {
+        "path": "constructs/v0.2/registry.json",
+        "sha256": "10c50f1fd4b20019d65dc445fb8a80a0de06ed72cd4ad1318bac1125de1ec0a6"
+      },
+      {
+        "path": "docs/methodology.md",
+        "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+      },
+      {
+        "path": "docs/psychometric_validation_protocol.md",
+        "sha256": "7ae60e521a1cf36a543302a57ca3c81db0fd013c18a7d630ab25331aa65df2e6"
+      },
+      {
+        "path": "docs/preregistration_event_study.md",
+        "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+      },
+      {
+        "path": "releases/v0.2.2/anx_us_2026w02_somatic_instrument.md",
+        "sha256": "fc26dafd934738e202eb7c2b73acae6db59bcd9a3d02fc4f2a5f2847201c7a9c"
+      },
+      {
+        "path": "releases/v0.2.2/anx_us_2026w02_somatic_codebook.md",
+        "sha256": "fd446c2afd0f2a5e76d047910aebb73aeb89acfb2a6d512c55f7505114a8ff85"
+      },
+      {
+        "path": "releases/v0.2.2/anx_us_2026w02_somatic_calibration_preregistration.md",
+        "sha256": "e63d36d17fda87ddd0160abb8670fccc65f6f291340a308d04e9af711bef8ed5"
+      },
+      {
+        "path": "events/v0.2/anx_us_2026w02_somatic_event_registry.json",
+        "sha256": "170a23bc1389e587986e6829993e205c59f6b0bc2fa0c5e337a57df107cb22cf"
+      },
+      {
+        "path": "validation/v0.2/somatic_ambient_anxiety/wave1_calibration_dossier.json",
+        "sha256": "5de7b4a567cde248f6db9c68cfa4ef99802f274bc2772cbd4073f01d64f98839"
+      },
+      {
+        "path": "analysis/v0.2/somatic_ambient/wave1_analysis_plan.json",
+        "sha256": "5ff38ca0b40cf0c198497d62c3e7b14be090db99f02754806070ec6168a49c64"
+      },
+      {
+        "path": "anchors/v0.2/somatic_ambient/response_scale_vignettes.json",
+        "sha256": "ab4f5dad717e9718f901d794c641412f769fb3ce68023d805eb08887c6bc4bf6"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/sleep_disruption_ai_news.json",
+        "sha256": "009f91ba396dc0fc018c5fc55c90edea035dc605d762eefdf31be23136d277c5"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/body_vigilance_model_release.json",
+        "sha256": "ced1835dbffe9fc73e9cde1034688c42d7b6ff5f82f17106ddd47f2e5ba083da"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/background_dread_ai_progress.json",
+        "sha256": "00e8b1951ea03761a975b92394c5f72377a108fa7d3d32dc1fb37e54fe7e76fb"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/avoidance_after_ai_capability_demo.json",
+        "sha256": "f4a06cfbb9c8eea66e80567b95879eee0ba041817c11d245eb2fda29859c0f4d"
+      }
+    ]
+  }
+}

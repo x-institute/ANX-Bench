@@ -1,0 +1,168 @@
+{
+  "$schema": "../../schema/release.schema.json",
+  "manifest_schema_version": "v0.1.0",
+  "benchmark_version": "v0.6.0",
+  "release_date": "2026-06-16",
+  "release_status": "frozen_candidate",
+  "release_label": "ANX-Bench v0.6.0 planned frozen epistemic trust calibration packet",
+  "item_schema": {
+    "path": "schema/item.schema.json",
+    "schema_version": "v0.1.0",
+    "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+  },
+  "methodology_documents": [
+    {
+      "document_type": "methodology",
+      "path": "docs/methodology.md",
+      "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+    },
+    {
+      "document_type": "psychometric_validation_protocol",
+      "path": "docs/psychometric_validation_protocol.md",
+      "sha256": "c8f7860b730279d1f772e1c87fe09d3732676c765461b8cdb3b68bc8648d0358"
+    },
+    {
+      "document_type": "preregistration_event_study",
+      "path": "docs/preregistration_event_study.md",
+      "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+    }
+  ],
+  "frozen_item_set": {
+    "item_directory": "items/v0.1/epistemic",
+    "item_count": 4,
+    "items": [
+      {
+        "path": "items/v0.1/epistemic/deepfake_evidence_trust.json",
+        "item_id": "deepfake_evidence_trust",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "403443f44627cede092bd3a4d8f5b307171b7fe19ef8ac61d436587a1c7ca75e"
+      },
+      {
+        "path": "items/v0.1/epistemic/synthetic_news_provenance.json",
+        "item_id": "synthetic_news_provenance",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "63973e02c7ccbbf64fb2faf58da058103f1c05cffffb6cbff04a0846356f3545"
+      },
+      {
+        "path": "items/v0.1/epistemic/ai_expert_claim_conflict.json",
+        "item_id": "ai_expert_claim_conflict",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "31dd3213279361a8ec6ac8d61f0b420c6db76a1acafca87ad815e0c7055bebea"
+      },
+      {
+        "path": "items/v0.1/epistemic/personalized_misinformation_targeting.json",
+        "item_id": "personalized_misinformation_targeting",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "d4e1e2511c6c071e76e1c906ed11554bfcf3236f831e7bf0b8365d6902ec7c48"
+      }
+    ]
+  },
+  "official_scored_items": [],
+  "scoring_eligibility": {
+    "official_scored_item_count": 0,
+    "eligibility_rule": "ANX-Bench v0.6.0 is a planned frozen epistemic_trust_anxiety calibration packet only. It freezes the four development-only epistemic items, Wave 6 instrument, codebook, no-event registry, preregistration, construct registry, development-only calibration dossier, and machine-readable analysis plan before outcome inspection. Epistemic item-level, construct, domain, overall, longitudinal, event-study, cross-domain, clinical, diagnostic, individual-level, and policy-decision scoring are not authorized in this release. Scoring awaits observed validation, a completed evidence provenance record, an approved validation dossier, reviewer signoff, updated item metadata, and a later citable release manifest that explicitly lists official scored epistemic items.",
+    "aggregate_scoring_permitted": false
+  },
+  "checksums": {
+    "algorithm": "SHA-256",
+    "coverage": "Checksums cover the v0.6.0 planned frozen epistemic calibration packet: item, release, validation-dossier, and psychometric analysis-plan schemas; standing methodology documents; the v0.6 construct registry; the four administered epistemic item files; the Wave 6 preregistration; frozen fielding instrument; frozen codebook; no-event registry; development-only Wave 6 calibration dossier; and machine-readable analysis plan. Observed validation evidence is intentionally absent, official_scored_items is empty, aggregate scoring is prohibited, and any epistemic scoring must await observed validation and a later citable release.",
+    "files": [
+      {
+        "path": "schema/item.schema.json",
+        "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+      },
+      {
+        "path": "schema/release.schema.json",
+        "sha256": "f4d347b6c0bfbee787f1346e56eee16835782cab62bd1987a23dc65bab7e520b"
+      },
+      {
+        "path": "schema/validation_dossier.schema.json",
+        "sha256": "3743ed59c2ef26863a4cb3d35ff7cb51c83d9f4aca96691e090e2d8a25f9a9fa"
+      },
+      {
+        "path": "schema/psychometric_analysis_plan.schema.json",
+        "sha256": "246546836a13da1b85ea6d14ab7406069353ae9327bd8bb4496a46721141341e"
+      },
+      {
+        "path": "docs/methodology.md",
+        "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+      },
+      {
+        "path": "docs/psychometric_validation_protocol.md",
+        "sha256": "c8f7860b730279d1f772e1c87fe09d3732676c765461b8cdb3b68bc8648d0358"
+      },
+      {
+        "path": "docs/preregistration_event_study.md",
+        "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+      },
+      {
+        "path": "constructs/v0.6/registry.json",
+        "sha256": "791b153d2c36fe2cf4113e07124364f1adf73299be9aa0166b615a5b4594c7cd"
+      },
+      {
+        "path": "items/v0.1/epistemic/deepfake_evidence_trust.json",
+        "sha256": "403443f44627cede092bd3a4d8f5b307171b7fe19ef8ac61d436587a1c7ca75e"
+      },
+      {
+        "path": "items/v0.1/epistemic/synthetic_news_provenance.json",
+        "sha256": "63973e02c7ccbbf64fb2faf58da058103f1c05cffffb6cbff04a0846356f3545"
+      },
+      {
+        "path": "items/v0.1/epistemic/ai_expert_claim_conflict.json",
+        "sha256": "31dd3213279361a8ec6ac8d61f0b420c6db76a1acafca87ad815e0c7055bebea"
+      },
+      {
+        "path": "items/v0.1/epistemic/personalized_misinformation_targeting.json",
+        "sha256": "d4e1e2511c6c071e76e1c906ed11554bfcf3236f831e7bf0b8365d6902ec7c48"
+      },
+      {
+        "path": "docs/preregistrations/anx_us_2026w06_epistemic_calibration.md",
+        "sha256": "ecc5e0239a1d57b899162d71ed1ee3f21293a0a1975833d4b6cf8c906f823a3b"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w06_epistemic_instrument.md",
+        "sha256": "120f0229b469f5bd8f39f5a44cf1cfd2e6e59991f1b9e5752b8f2c992461eff7"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w06_epistemic_codebook.md",
+        "sha256": "bd52438fed7461df7e93f1fc0ae9f1191449297211bf66c34b3bdaca9d8acab2"
+      },
+      {
+        "path": "events/v0.6/anx_us_2026w06_epistemic_event_registry.json",
+        "sha256": "44c61545dc433456d34215f34c7bc7baf3df865d33780b01aa2062df1fc6fbc3"
+      },
+      {
+        "path": "validation/v0.6/epistemic_trust_anxiety/wave6_calibration_dossier.json",
+        "sha256": "af48bbe576813e2e83c17a75f286bce28cde6e1781c4c0c800cd055fc74ddb6d"
+      },
+      {
+        "path": "analysis/v0.6/epistemic_trust/wave6_analysis_plan.json",
+        "sha256": "7c480bf145c2c8f30accf10064437e67b4f54c248d4dc891e3fe04db7b6364ca"
+      }
+    ]
+  }
+}

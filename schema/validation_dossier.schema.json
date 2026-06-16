@@ -1,0 +1,948 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/validation_dossier.schema.json",
+  "title": "ANX-Bench Psychometric Validation Dossier Schema",
+  "description": "Machine-readable schema for psychometric approval dossiers covering item-level and construct-level validation evidence before an ANX-Bench item version may enter scored release.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "dossier_schema_version",
+    "dossier_id",
+    "benchmark_version",
+    "dossier_status",
+    "domain",
+    "construct",
+    "preregistration_path",
+    "evidence_provenance_path",
+    "sample_provenance",
+    "items",
+    "evidence",
+    "retention_table",
+    "decision",
+    "reviewer_signoff"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "dossier_status": {
+            "enum": [
+              "approved_item_level_only",
+              "approved_scored"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "results"
+        ],
+        "properties": {
+          "results": {
+            "required": [
+              "analytic_n",
+              "retained_item_count",
+              "cfa_fit",
+              "reliability",
+              "item_statistics",
+              "dif",
+              "invariance",
+              "external_validity"
+            ]
+          },
+          "evidence": {
+            "required": [
+              "cfa",
+              "reliability",
+              "dif",
+              "invariance",
+              "external_validity"
+            ],
+            "properties": {
+              "cfa": {
+                "properties": {
+                  "status": {
+                    "const": "completed"
+                  }
+                }
+              },
+              "reliability": {
+                "properties": {
+                  "status": {
+                    "const": "completed"
+                  }
+                }
+              },
+              "dif": {
+                "properties": {
+                  "status": {
+                    "const": "completed"
+                  }
+                }
+              },
+              "invariance": {
+                "properties": {
+                  "status": {
+                    "const": "completed"
+                  }
+                }
+              },
+              "external_validity": {
+                "properties": {
+                  "convergent": {
+                    "properties": {
+                      "status": {
+                        "const": "completed"
+                      }
+                    }
+                  },
+                  "discriminant": {
+                    "properties": {
+                      "status": {
+                        "const": "completed"
+                      }
+                    }
+                  },
+                  "criterion": {
+                    "properties": {
+                      "status": {
+                        "const": "completed"
+                      }
+                    }
+                  },
+                  "incremental_validity": {
+                    "properties": {
+                      "status": {
+                        "const": "completed"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "dossier_status": {
+            "const": "approved_scored"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "sample_provenance": {
+            "properties": {
+              "confirmation_sample": {
+                "properties": {
+                  "status": {
+                    "const": "fielded"
+                  },
+                  "analytic_n": {
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          },
+          "results": {
+            "properties": {
+              "analytic_n": {
+                "minimum": 1
+              },
+              "retained_item_count": {
+                "minimum": 3
+              }
+            }
+          },
+          "decision": {
+            "properties": {
+              "psychometric_decision": {
+                "const": "approved_scored"
+              },
+              "scoring_eligible": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "$schema": {
+      "$ref": "#/$defs/repository_path"
+    },
+    "dossier_schema_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "dossier_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "dossier_status": {
+      "type": "string",
+      "enum": [
+        "development_only",
+        "approved_item_level_only",
+        "approved_scored",
+        "blocked"
+      ]
+    },
+    "domain": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "construct": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "construct_id",
+        "label",
+        "intended_use"
+      ],
+      "properties": {
+        "construct_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 3
+        },
+        "intended_use": {
+          "type": "string",
+          "minLength": 40
+        }
+      }
+    },
+    "preregistration_path": {
+      "$ref": "#/$defs/repository_path"
+    },
+    "evidence_provenance_path": {
+      "$ref": "#/$defs/repository_path",
+      "description": "Repository path to the statistic-level evidence provenance file. approved_scored dossiers are valid only when the referenced provenance file contains observed-data, signed, checksum-bound, non-future-dated evidence for the completed validation statistics."
+    },
+    "sample_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "development_pilot",
+        "confirmation_sample",
+        "refresh_or_bridge_sample"
+      ],
+      "properties": {
+        "development_pilot": {
+          "$ref": "#/$defs/sample_record"
+        },
+        "confirmation_sample": {
+          "$ref": "#/$defs/sample_record"
+        },
+        "refresh_or_bridge_sample": {
+          "$ref": "#/$defs/sample_record"
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item_id",
+          "item_version",
+          "item_path",
+          "release_status",
+          "psychometric_decision",
+          "scoring_eligible"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+          },
+          "item_version": {
+            "type": "string",
+            "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "item_path": {
+            "$ref": "#/$defs/repository_path"
+          },
+          "release_status": {
+            "type": "string",
+            "enum": [
+              "exemplar",
+              "development_only",
+              "approved_item_level_only",
+              "approved_scored",
+              "blocked"
+            ]
+          },
+          "psychometric_decision": {
+            "type": "string",
+            "enum": [
+              "not_reviewed",
+              "development_only",
+              "approved_item_level_only",
+              "approved_scored",
+              "blocked"
+            ]
+          },
+          "scoring_eligible": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "efa",
+        "cfa",
+        "reliability",
+        "irt",
+        "dif",
+        "invariance"
+      ],
+      "properties": {
+        "efa": {
+          "$ref": "#/$defs/evidence_record"
+        },
+        "cfa": {
+          "$ref": "#/$defs/evidence_record"
+        },
+        "reliability": {
+          "$ref": "#/$defs/evidence_record"
+        },
+        "irt": {
+          "$ref": "#/$defs/evidence_record"
+        },
+        "dif": {
+          "$ref": "#/$defs/evidence_record"
+        },
+        "invariance": {
+          "$ref": "#/$defs/evidence_record"
+        },
+        "external_validity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "convergent",
+            "discriminant",
+            "criterion",
+            "incremental_validity"
+          ],
+          "properties": {
+            "convergent": {
+              "$ref": "#/$defs/evidence_record"
+            },
+            "discriminant": {
+              "$ref": "#/$defs/evidence_record"
+            },
+            "criterion": {
+              "$ref": "#/$defs/evidence_record"
+            },
+            "incremental_validity": {
+              "$ref": "#/$defs/evidence_record"
+            }
+          }
+        }
+      }
+    },
+    "retention_table": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item_id",
+          "item_version",
+          "criterion",
+          "observed_result",
+          "threshold",
+          "decision",
+          "rationale"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+          },
+          "item_version": {
+            "type": "string",
+            "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "criterion": {
+            "type": "string",
+            "minLength": 10
+          },
+          "observed_result": {
+            "type": "string",
+            "minLength": 10
+          },
+          "threshold": {
+            "type": "string",
+            "minLength": 10
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "retain",
+              "revise",
+              "exclude",
+              "pending"
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 30
+          }
+        }
+      }
+    },
+    "results": {
+      "$ref": "#/$defs/structured_results"
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "psychometric_decision",
+        "decision_date",
+        "scoring_eligible",
+        "approval_scope",
+        "rationale"
+      ],
+      "properties": {
+        "psychometric_decision": {
+          "type": "string",
+          "enum": [
+            "development_only",
+            "approved_item_level_only",
+            "approved_scored",
+            "blocked"
+          ]
+        },
+        "decision_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "scoring_eligible": {
+          "type": "boolean"
+        },
+        "approval_scope": {
+          "type": "string",
+          "minLength": 20
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 40
+        }
+      }
+    },
+    "reviewer_signoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewer",
+        "role",
+        "date",
+        "conflicts",
+        "signoff_status",
+        "notes"
+      ],
+      "properties": {
+        "reviewer": {
+          "type": "string",
+          "minLength": 3
+        },
+        "role": {
+          "type": "string",
+          "minLength": 3
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "conflicts": {
+          "type": "string",
+          "minLength": 4
+        },
+        "signoff_status": {
+          "type": "string",
+          "enum": [
+            "signed_off",
+            "signed_off_with_restrictions",
+            "returned_for_revision",
+            "blocked",
+            "not_yet_reviewed"
+          ]
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 30
+        }
+      }
+    }
+  },
+  "$defs": {
+    "repository_path": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/\\-]+$"
+    },
+    "sample_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "sampling_frame",
+        "recruitment_source",
+        "fielding_dates",
+        "target_n",
+        "analytic_n",
+        "exclusion_summary",
+        "provenance_notes"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "planned",
+            "fielded",
+            "not_applicable"
+          ]
+        },
+        "sampling_frame": {
+          "type": "string",
+          "minLength": 10
+        },
+        "recruitment_source": {
+          "type": "string",
+          "minLength": 5
+        },
+        "fielding_dates": {
+          "type": "string",
+          "minLength": 4
+        },
+        "target_n": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "analytic_n": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "exclusion_summary": {
+          "type": "string",
+          "minLength": 10
+        },
+        "provenance_notes": {
+          "type": "string",
+          "minLength": 30
+        }
+      }
+    },
+    "evidence_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "sample",
+        "method",
+        "required_statistics",
+        "decision_rule",
+        "result_summary",
+        "release_consequence"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "planned",
+            "completed",
+            "not_applicable"
+          ]
+        },
+        "sample": {
+          "type": "string",
+          "minLength": 5
+        },
+        "method": {
+          "type": "string",
+          "minLength": 10
+        },
+        "required_statistics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "decision_rule": {
+          "type": "string",
+          "minLength": 20
+        },
+        "result_summary": {
+          "type": "string",
+          "minLength": 20
+        },
+        "release_consequence": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "structured_results": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "analytic_n",
+        "retained_item_count",
+        "cfa_fit",
+        "reliability",
+        "item_statistics",
+        "dif",
+        "invariance",
+        "external_validity"
+      ],
+      "properties": {
+        "analytic_n": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "retained_item_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cfa_fit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sample",
+            "model",
+            "cfi",
+            "tli",
+            "rmsea",
+            "srmr"
+          ],
+          "properties": {
+            "sample": {
+              "type": "string",
+              "minLength": 5
+            },
+            "model": {
+              "type": "string",
+              "minLength": 10
+            },
+            "cfi": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tli": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "rmsea": {
+              "type": "number",
+              "minimum": 0
+            },
+            "srmr": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "reliability": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sample",
+            "omega",
+            "alpha",
+            "standard_error_of_measurement"
+          ],
+          "properties": {
+            "sample": {
+              "type": "string",
+              "minLength": 5
+            },
+            "omega": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "alpha": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "standard_error_of_measurement": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "item_statistics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "item_id",
+              "retained",
+              "primary_loading",
+              "max_cross_loading",
+              "corrected_item_total_correlation",
+              "floor_rate",
+              "ceiling_rate",
+              "adjacent_floor_rate",
+              "adjacent_ceiling_rate",
+              "missing_rate"
+            ],
+            "properties": {
+              "item_id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+              },
+              "retained": {
+                "type": "boolean"
+              },
+              "primary_loading": {
+                "type": "number"
+              },
+              "max_cross_loading": {
+                "type": "number"
+              },
+              "corrected_item_total_correlation": {
+                "type": "number"
+              },
+              "floor_rate": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "ceiling_rate": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "adjacent_floor_rate": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "adjacent_ceiling_rate": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "missing_rate": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "dif": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "unresolved_practical_dif",
+            "analyses"
+          ],
+          "properties": {
+            "unresolved_practical_dif": {
+              "type": "boolean"
+            },
+            "analyses": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "item_id",
+                  "grouping_variable",
+                  "method",
+                  "effect_size_metric",
+                  "effect_size",
+                  "practical_threshold",
+                  "statistically_supported",
+                  "practically_meaningful",
+                  "resolved"
+                ],
+                "properties": {
+                  "item_id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+                  },
+                  "grouping_variable": {
+                    "type": "string",
+                    "minLength": 2
+                  },
+                  "method": {
+                    "type": "string",
+                    "minLength": 10
+                  },
+                  "effect_size_metric": {
+                    "type": "string",
+                    "enum": [
+                      "delta_pseudo_r2",
+                      "standardized_expected_score_difference",
+                      "rank_order_shift",
+                      "other_preregistered"
+                    ]
+                  },
+                  "effect_size": {
+                    "type": "number"
+                  },
+                  "practical_threshold": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "statistically_supported": {
+                    "type": "boolean"
+                  },
+                  "practically_meaningful": {
+                    "type": "boolean"
+                  },
+                  "resolved": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "invariance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "comparison_scope",
+            "metric_delta_cfi",
+            "metric_delta_rmsea",
+            "scalar_delta_cfi",
+            "scalar_delta_rmsea"
+          ],
+          "properties": {
+            "method": {
+              "type": "string",
+              "minLength": 10
+            },
+            "comparison_scope": {
+              "type": "string",
+              "minLength": 10
+            },
+            "metric_delta_cfi": {
+              "type": "number"
+            },
+            "metric_delta_rmsea": {
+              "type": "number"
+            },
+            "scalar_delta_cfi": {
+              "type": "number"
+            },
+            "scalar_delta_rmsea": {
+              "type": "number"
+            },
+            "residual_delta_cfi": {
+              "type": "number"
+            },
+            "residual_delta_rmsea": {
+              "type": "number"
+            }
+          }
+        },
+        "external_validity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "convergent",
+            "discriminant",
+            "criterion",
+            "incremental_validity"
+          ],
+          "properties": {
+            "convergent": {
+              "$ref": "#/$defs/validity_result"
+            },
+            "discriminant": {
+              "$ref": "#/$defs/validity_result"
+            },
+            "criterion": {
+              "$ref": "#/$defs/validity_result"
+            },
+            "incremental_validity": {
+              "$ref": "#/$defs/validity_result"
+            }
+          }
+        }
+      }
+    },
+    "validity_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "variable",
+        "coefficient_metric",
+        "coefficient",
+        "ci_low",
+        "ci_high",
+        "direction_matches",
+        "passes_threshold"
+      ],
+      "properties": {
+        "variable": {
+          "type": "string",
+          "minLength": 3
+        },
+        "coefficient_metric": {
+          "type": "string",
+          "enum": [
+            "r",
+            "standardized_beta",
+            "latent_correlation",
+            "adjusted_r2_delta",
+            "pseudo_r2_delta",
+            "odds_ratio",
+            "likelihood_ratio",
+            "other_preregistered"
+          ]
+        },
+        "coefficient": {
+          "type": "number"
+        },
+        "ci_low": {
+          "type": "number"
+        },
+        "ci_high": {
+          "type": "number"
+        },
+        "direction_matches": {
+          "type": "boolean"
+        },
+        "passes_threshold": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

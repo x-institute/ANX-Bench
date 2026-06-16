@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/anchor_vignette.schema.json",
+  "title": "ANX-Bench Anchoring Vignette Set Schema",
+  "description": "Validation schema for non-scored anchoring vignettes used to evaluate response-style calibration, differential item functioning sensitivity, and cross-wave response-scale comparability.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "vignette_set_id",
+    "version",
+    "benchmark_release_line",
+    "target_domain",
+    "target_construct",
+    "non_scored_status",
+    "response_scale",
+    "expected_ordering",
+    "administration",
+    "vignettes"
+  ],
+  "properties": {
+    "vignette_set_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "benchmark_release_line": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+$"
+    },
+    "target_domain": {
+      "type": "string",
+      "enum": [
+        "economic_vocational",
+        "epistemic",
+        "relational",
+        "existential_identity",
+        "autonomy_surveillance",
+        "safety_catastrophic",
+        "somatic_ambient"
+      ]
+    },
+    "target_construct": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "non_scored_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "is_scored_item",
+        "aggregate_scoring_permitted",
+        "permitted_uses",
+        "prohibited_uses"
+      ],
+      "properties": {
+        "is_scored_item": {
+          "const": false
+        },
+        "aggregate_scoring_permitted": {
+          "const": false
+        },
+        "permitted_uses": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 12
+          }
+        },
+        "prohibited_uses": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 12
+          }
+        }
+      }
+    },
+    "response_scale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scale_type",
+        "points",
+        "prompt",
+        "anchors"
+      ],
+      "properties": {
+        "scale_type": {
+          "const": "5_point_likert"
+        },
+        "points": {
+          "const": 5
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 20
+        },
+        "anchors": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "value",
+              "label"
+            ],
+            "properties": {
+              "value": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "label": {
+                "type": "string",
+                "minLength": 3
+              }
+            }
+          }
+        }
+      }
+    },
+    "expected_ordering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "severity_order",
+        "violation_rule"
+      ],
+      "properties": {
+        "severity_order": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+          }
+        },
+        "violation_rule": {
+          "type": "string",
+          "minLength": 40
+        }
+      }
+    },
+    "administration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "placement",
+        "randomization",
+        "required_status"
+      ],
+      "properties": {
+        "placement": {
+          "type": "string",
+          "minLength": 30
+        },
+        "randomization": {
+          "type": "string",
+          "minLength": 20
+        },
+        "required_status": {
+          "type": "string",
+          "minLength": 10
+        }
+      }
+    },
+    "vignettes": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "vignette_id",
+          "version",
+          "target_domain",
+          "target_construct",
+          "intended_severity_band",
+          "participant_text",
+          "response_scale_ref",
+          "expected_rank",
+          "non_scored"
+        ],
+        "properties": {
+          "vignette_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "target_domain": {
+            "const": "somatic_ambient"
+          },
+          "target_construct": {
+            "const": "somatic_ambient_anxiety"
+          },
+          "intended_severity_band": {
+            "type": "string",
+            "enum": [
+              "low",
+              "moderate",
+              "high"
+            ]
+          },
+          "participant_text": {
+            "type": "string",
+            "minLength": 80
+          },
+          "response_scale_ref": {
+            "const": "shared_5_point_anxiety"
+          },
+          "expected_rank": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "non_scored": {
+            "const": true
+          }
+        }
+      }
+    }
+  }
+}

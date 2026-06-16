@@ -1,0 +1,170 @@
+{
+  "event_study_evidence_schema_version": "v0.1.0",
+  "evidence_id": "anx_us_2026w04_somatic_event_study_evidence_template",
+  "study_id": "anx_us_2026w04_somatic_event_study",
+  "benchmark_version": "v0.4.0",
+  "source_scored_release": "v0.3.1",
+  "construct_id": "somatic_ambient_anxiety",
+  "score_name": "somatic_ambient_anxiety_mean",
+  "analysis_plan_schema_version": "v0.4.0",
+  "analysis_plan_path": "analysis/v0.4/somatic_event_study/wave4_event_study_analysis_plan.json",
+  "preregistration_path": "docs/preregistrations/anx_us_2026w04_somatic_event_study.md",
+  "event_registry_path": "events/v0.4/anx_us_2026w04_somatic_event_registry.template.json",
+  "frozen_item_ids": [
+    "sleep_disruption_ai_news",
+    "body_vigilance_model_release",
+    "background_dread_ai_progress",
+    "avoidance_after_ai_capability_demo"
+  ],
+  "frozen_item_versions": {
+    "sleep_disruption_ai_news": "v0.2.0",
+    "body_vigilance_model_release": "v0.2.0",
+    "background_dread_ai_progress": "v0.2.0",
+    "avoidance_after_ai_capability_demo": "v0.2.0"
+  },
+  "locked_event_id": null,
+  "registry_lock_proof": {
+    "registry_version": null,
+    "registry_status": null,
+    "lock_date": null,
+    "event_locked_before_outcome_inspection": null,
+    "outcome_inspection_status": null,
+    "registry_sha256": null,
+    "event_record_sha256": null,
+    "release_blocking_confound_present": null
+  },
+  "analysis_windows": {
+    "baseline_primary": "event_time_days >= -14 and event_time_hours <= -24",
+    "followup_primary": "event_time_hours >= 24 and event_time_days <= 7",
+    "excluded_event_buffer": "event_time_hours > -24 and event_time_hours < 24",
+    "placebo_pretrend_early_pre": "event_time_days >= -14 and event_time_days <= -8",
+    "placebo_pretrend_late_pre": "event_time_days >= -7 and event_time_hours <= -24"
+  },
+  "sample_counts": {
+    "baseline_primary_nominal_n": null,
+    "followup_primary_nominal_n": null,
+    "baseline_effective_weighted_n": null,
+    "followup_effective_weighted_n": null,
+    "analytic_exclusions_n": null,
+    "weighting_sensitive": null
+  },
+  "primary_estimate": {
+    "coefficient_name": "beta_post_event",
+    "coefficient": null,
+    "standard_error": null,
+    "ci_95_lower": null,
+    "ci_95_upper": null,
+    "p_value": null,
+    "decision": null
+  },
+  "pretrend_check": {
+    "coefficient_name": "late_pre_period",
+    "coefficient": null,
+    "ci_95_lower": null,
+    "ci_95_upper": null,
+    "p_value": null,
+    "decision": null
+  },
+  "robustness_checks": [
+    {
+      "check_id": "unweighted_primary_model",
+      "coefficient": null,
+      "ci_95_lower": null,
+      "ci_95_upper": null,
+      "p_value": null,
+      "decision": null,
+      "notes": null
+    },
+    {
+      "check_id": "alternative_weight_trim",
+      "coefficient": null,
+      "ci_95_lower": null,
+      "ci_95_upper": null,
+      "p_value": null,
+      "decision": null,
+      "notes": null
+    },
+    {
+      "check_id": "aware_only_followup",
+      "coefficient": null,
+      "ci_95_lower": null,
+      "ci_95_upper": null,
+      "p_value": null,
+      "decision": null,
+      "notes": null
+    },
+    {
+      "check_id": "exclude_unrelated_personal_crisis",
+      "coefficient": null,
+      "ci_95_lower": null,
+      "ci_95_upper": null,
+      "p_value": null,
+      "decision": null,
+      "notes": null
+    },
+    {
+      "check_id": "exclude_high_general_distress",
+      "coefficient": null,
+      "ci_95_lower": null,
+      "ci_95_upper": null,
+      "p_value": null,
+      "decision": null,
+      "notes": null
+    },
+    {
+      "check_id": "narrow_followup_window",
+      "coefficient": null,
+      "ci_95_lower": null,
+      "ci_95_upper": null,
+      "p_value": null,
+      "decision": null,
+      "notes": null
+    },
+    {
+      "check_id": "placebo_pretrend",
+      "coefficient": null,
+      "ci_95_lower": null,
+      "ci_95_upper": null,
+      "p_value": null,
+      "decision": null,
+      "notes": null
+    },
+    {
+      "check_id": "event_buffer_sensitivity",
+      "coefficient": null,
+      "ci_95_lower": null,
+      "ci_95_upper": null,
+      "p_value": null,
+      "decision": null,
+      "notes": null
+    },
+    {
+      "check_id": "negative_control_outcome",
+      "coefficient": null,
+      "ci_95_lower": null,
+      "ci_95_upper": null,
+      "p_value": null,
+      "decision": null,
+      "notes": null
+    }
+  ],
+  "confounds": {
+    "release_blocking_confound_present": null,
+    "competing_event_review": null,
+    "adjudication_notes": null
+  },
+  "claim_decision": {
+    "primary_threshold_decision": null,
+    "claim_authorized": null,
+    "authorized_claim_language": null,
+    "blocked_claims": [
+      "causal AI capability effect",
+      "overall ANX-Bench score",
+      "clinical anxiety or diagnosis",
+      "long-term change beyond the preregistered follow-up window",
+      "cross-domain ANX movement"
+    ],
+    "decision_notes": null
+  },
+  "reported_claim_text": null
+}

@@ -1,0 +1,165 @@
+{
+  "$schema": "validation/v0.7/cross_domain_bridge/observed_wave7_results.template.schema.json",
+  "template_schema_note": "Canonical v0.7.1 bridge-bundle template. Replace null observed values and placeholder hashes before release; this template records the required observed-results contract for Wave 7 bridge evidence.",
+  "observed_results_template_version": "v0.7.1",
+  "result_id": "anx_us_2026w07_cross_domain_bridge_observed_results_template",
+  "study_id": "anx_us_2026w07_cross_domain_bridge",
+  "wave_id": "anx_us_2026w07_cross_domain_bridge",
+  "benchmark_version": "v0.7.0",
+  "promotion_target_version": "v0.7.1",
+  "event_id": "no_event",
+  "evidence_status": "template_pending_observed_data",
+  "generated_at_utc": null,
+  "outcome_inspection_timing": {
+    "analysis_plan_locked_at_utc": null,
+    "event_registry_locked_at_utc": null,
+    "item_files_locked_at_utc": null,
+    "first_outcome_inspection_at_utc": null,
+    "outcome_inspection_definition": "Outcome inspection begins when any analyst or reviewer views respondent-level outcomes, item distributions, factor results, reliability estimates, IRT diagnostics, DIF flags, invariance diagnostics, latent correlations, or bifactor or second-order readiness outputs.",
+    "rules_changed_after_outcome_inspection": false,
+    "post_inspection_change_log": []
+  },
+  "source_artifact_checksums": {
+    "release_manifest_v0_7_0": {
+      "path": "releases/v0.7.0/manifest.json",
+      "sha256": null
+    },
+    "preregistration": {
+      "path": "docs/preregistrations/anx_us_2026w07_cross_domain_bridge.md",
+      "sha256": null
+    },
+    "analysis_plan": {
+      "path": "analysis/v0.7/cross_domain_bridge/wave7_analysis_plan.json",
+      "sha256": null
+    },
+    "event_registry": {
+      "path": "events/v0.7/anx_us_2026w07_cross_domain_bridge_event_registry.json",
+      "sha256": null
+    },
+    "construct_registry": {
+      "path": "constructs/v0.7/registry.json",
+      "sha256": null
+    },
+    "restricted_respondent_item_data": {
+      "path": "restricted://wave7/respondent_item_responses.csv",
+      "sha256": null
+    },
+    "restricted_covariate_data": {
+      "path": "restricted://wave7/respondent_covariates.csv",
+      "sha256": null
+    },
+    "fielding_disposition_data": {
+      "path": "restricted://wave7/fielding_disposition.csv",
+      "sha256": null
+    },
+    "analysis_outputs_archive": {
+      "path": "restricted://wave7/analysis_outputs.zip",
+      "sha256": null
+    },
+    "software_session_lock": {
+      "path": "restricted://wave7/session_lock.txt",
+      "sha256": null
+    }
+  },
+  "frozen_item_set": {
+    "somatic_ambient_anxiety": {
+      "item_version": "v0.2.0",
+      "item_ids": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo"
+      ]
+    },
+    "economic_vocational_anxiety": {
+      "item_version": "v0.1.0",
+      "item_ids": [
+        "skill_obsolescence_software",
+        "wage_pressure_customer_support",
+        "retraining_pressure_accounting",
+        "status_loss_creative_work"
+      ]
+    },
+    "epistemic_trust_anxiety": {
+      "item_version": "v0.1.0",
+      "item_ids": [
+        "deepfake_evidence_trust",
+        "synthetic_news_provenance",
+        "ai_expert_claim_conflict",
+        "personalized_misinformation_targeting"
+      ]
+    }
+  },
+  "respondent_flow": {
+    "target_n": 1500,
+    "minimum_analytic_n": 1200,
+    "started_n": null,
+    "consented_eligible_n": null,
+    "achieved_eligible_n": null,
+    "final_analytic_n": null,
+    "independent_from_wave5_wave6": null,
+    "exclusions": {
+      "under_18_n": null,
+      "non_us_n": null,
+      "non_english_or_assisted_n": null,
+      "duplicate_n": null,
+      "vendor_fraud_n": null,
+      "attention_check_n": null,
+      "cross_domain_attribution_check_n": null,
+      "scenario_comprehension_n": null,
+      "fast_completion_n": null,
+      "excessive_anx_missingness_n": null,
+      "straightline_plus_quality_failure_n": null,
+      "withdrawal_n": null,
+      "nonunderstanding_n": null,
+      "total_excluded_n": null
+    },
+    "sensitivity_flags_retained_not_excluded": [
+      "high_baseline_general_anxiety",
+      "high_prior_ai_exposure",
+      "high_ai_news_exposure",
+      "unemployment",
+      "occupational_transition",
+      "institutional_trust",
+      "device_type",
+      "open_text_distress"
+    ]
+  },
+  "observed_outputs": {
+    "item_missingness_by_item": {},
+    "item_response_distributions_by_item": {},
+    "factor_model_fit": {},
+    "omega": {},
+    "irt_linking": {},
+    "dif": {},
+    "invariance": {},
+    "latent_correlations": {},
+    "bifactor_second_order_readiness": {},
+    "weight_sensitivity": {},
+    "exclusion_sensitivity": {}
+  },
+  "scoring_authorization": {
+    "official_scored_items": [],
+    "aggregate_scoring_permitted": false,
+    "cross_domain_score_authorized": false,
+    "overall_anx_score_authorized": false,
+    "domain_combined_score_authorized": false,
+    "event_study_claim_permitted": false,
+    "trend_claim_permitted": false,
+    "individual_level_use_permitted": false,
+    "policy_decision_ranking_permitted": false
+  },
+  "analyst_signoff": {
+    "analyst_name": null,
+    "analyst_role": "analysis_lead",
+    "signed_at_utc": null,
+    "statement": "The observed results were generated from the frozen Wave 7 inputs using the preregistered analysis plan. No threshold, exclusion rule, item-retention rule, scoring authorization, or claim boundary was changed after outcome inspection."
+  },
+  "reviewer_signoff": {
+    "reviewer_name": null,
+    "reviewer_role": "independent_psychometric_reviewer",
+    "signed_at_utc": null,
+    "statement": "The reviewer checked the observed outputs, checksum records, no-event status, and claim limits before v0.7.1 release promotion. The evidence remains bridge evidence only and scoring remains unauthorized."
+  }
+}
+

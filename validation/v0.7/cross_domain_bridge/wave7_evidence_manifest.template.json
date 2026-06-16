@@ -1,0 +1,130 @@
+{
+  "$schema": "validation/v0.7/cross_domain_bridge/wave7_evidence_manifest.template.schema.json",
+  "template_schema_note": "Canonical v0.7.1 bridge evidence manifest template. Replace null checksums, timestamps, and signoff fields before release.",
+  "evidence_manifest_template_version": "v0.7.1",
+  "manifest_id": "anx_us_2026w07_cross_domain_bridge_evidence_manifest_template",
+  "study_id": "anx_us_2026w07_cross_domain_bridge",
+  "wave_id": "anx_us_2026w07_cross_domain_bridge",
+  "benchmark_version": "v0.7.0",
+  "promotion_target_version": "v0.7.1",
+  "event_id": "no_event",
+  "release_role": "bridge_evidence_only",
+  "run_timestamp_utc": null,
+  "outcome_inspection_timing": {
+    "first_outcome_inspection_at_utc": null,
+    "manifest_created_after_outcome_inspection": null,
+    "checksum_freeze_after_outcome_inspection": null,
+    "rule_changes_after_outcome_inspection": false,
+    "claim_changes_after_outcome_inspection": false
+  },
+  "required_public_artifacts": [
+    {
+      "artifact_id": "observed_wave7_results",
+      "path": "validation/v0.7/cross_domain_bridge/observed_wave7_results.json",
+      "sha256": null,
+      "role": "observed result ledger",
+      "required_before_release": true
+    },
+    {
+      "artifact_id": "content_validity_dossier",
+      "path": "validation/v0.7/cross_domain_bridge/content_validity_dossier.json",
+      "sha256": null,
+      "role": "independent content-validity gate",
+      "required_before_release": true
+    },
+    {
+      "artifact_id": "wave7_bridge_evidence",
+      "path": "validation/v0.7/cross_domain_bridge/wave7_bridge_evidence.json",
+      "sha256": null,
+      "role": "machine-validated bridge decision artifact",
+      "required_before_release": true
+    },
+    {
+      "artifact_id": "wave7_evidence_provenance",
+      "path": "validation/v0.7/cross_domain_bridge/wave7_evidence_provenance.json",
+      "sha256": null,
+      "role": "statistic-level provenance record",
+      "required_before_release": true
+    },
+    {
+      "artifact_id": "v0_7_1_release_manifest",
+      "path": "releases/v0.7.1/manifest.json",
+      "sha256": null,
+      "role": "release manifest created after observed evidence is complete",
+      "required_before_release": true
+    }
+  ],
+  "required_restricted_artifacts": [
+    {
+      "artifact_id": "respondent_item_data",
+      "path": "restricted://wave7/respondent_item_responses.csv",
+      "sha256": null,
+      "role": "raw respondent by item response matrix"
+    },
+    {
+      "artifact_id": "respondent_covariates",
+      "path": "restricted://wave7/respondent_covariates.csv",
+      "sha256": null,
+      "role": "subgroup, exposure, device, and weighting variables"
+    },
+    {
+      "artifact_id": "fielding_disposition",
+      "path": "restricted://wave7/fielding_disposition.csv",
+      "sha256": null,
+      "role": "eligibility, consent, exclusion, breakoff, and sample source record"
+    },
+    {
+      "artifact_id": "analysis_outputs",
+      "path": "restricted://wave7/analysis_outputs.zip",
+      "sha256": null,
+      "role": "complete generated output archive for observed bridge statistics"
+    },
+    {
+      "artifact_id": "software_session_lock",
+      "path": "restricted://wave7/session_lock.txt",
+      "sha256": null,
+      "role": "runtime, package versions, random seeds, and system information"
+    }
+  ],
+  "validation_commands": [
+    {
+      "command": "python3 tools/validate_content_validity_dossier.py validation/v0.7/cross_domain_bridge/content_validity_dossier.json",
+      "must_pass_before_release": true
+    },
+    {
+      "command": "python3 tools/validate_cross_domain_bridge_evidence.py validation/v0.7/cross_domain_bridge/wave7_bridge_evidence.json",
+      "must_pass_before_release": true
+    },
+    {
+      "command": "python3 tools/validate_release.py releases/v0.7.1/manifest.json",
+      "must_pass_before_release": true
+    }
+  ],
+  "scoring_authorization": {
+    "official_scored_items": [],
+    "aggregate_scoring_permitted": false,
+    "cross_domain_score_authorized": false,
+    "overall_anx_score_authorized": false,
+    "domain_combined_score_authorized": false,
+    "event_study_claim_permitted": false,
+    "trend_claim_permitted": false,
+    "individual_level_use_permitted": false,
+    "policy_decision_ranking_permitted": false
+  },
+  "analyst": {
+    "name": null,
+    "role": "analysis_lead",
+    "affiliation": null,
+    "signed_at_utc": null,
+    "independence_statement": "The analyst generated the observed evidence from frozen inputs and did not change thresholds, exclusion rules, item-retention rules, scoring authorization, or claim boundaries after outcome inspection."
+  },
+  "reviewer": {
+    "name": null,
+    "role": "release_reviewer",
+    "affiliation": null,
+    "signed_at_utc": null,
+    "review_statement": "The reviewer verified allowed filenames, nonzero checksum readiness, no-event status, outcome-inspection timing, and the explicit prohibition on scoring before v0.7.1 promotion."
+  },
+  "provenance_assertion": "This manifest indexes the complete v0.7.1 cross-domain bridge evidence bundle. The bundle may support only bridge-evidence claims and may not authorize any overall ANX, cross-domain, domain-combined, event-study, trend, individual-level, clinical, or policy-decision score."
+}
+

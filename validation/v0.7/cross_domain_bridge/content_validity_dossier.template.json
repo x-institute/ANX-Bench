@@ -1,0 +1,474 @@
+{
+  "$schema": "../../../schema/content_validity_dossier.schema.json",
+  "dossier_schema_version": "v0.1.0",
+  "dossier_id": "wave7_cross_domain_bridge_content_validity_template",
+  "benchmark_version": "v0.7.0",
+  "dossier_status": "preregistered_template",
+  "construct_id": "cross_domain_bridge_blueprint",
+  "construct_definition": "The Wave 7 bridge blueprint covers somatic and ambient AI anxiety, economic and vocational AI anxiety, and epistemic trust anxiety as distinct but related ANX-Bench domains for co-administration and bridge diagnostics.",
+  "intended_scored_use": "This template does not authorize scored use. It preregisters the content-validity review structure that must be completed before any Wave 7 bridge item set can support approved_scored promotion in a later release.",
+  "target_population": "Non-institutionalized US adults age 18 or older completing an English-language online self-administered ANX-Bench survey.",
+  "review_protocol_path": "docs/content_validity_protocol.md",
+  "item_ids": [
+    "sleep_disruption_ai_news",
+    "body_vigilance_model_release",
+    "background_dread_ai_progress",
+    "avoidance_after_ai_capability_demo",
+    "skill_obsolescence_software",
+    "wage_pressure_customer_support",
+    "retraining_pressure_accounting",
+    "status_loss_creative_work",
+    "deepfake_evidence_trust",
+    "synthetic_news_provenance",
+    "ai_expert_claim_conflict",
+    "personalized_misinformation_targeting"
+  ],
+  "domain_facets": [
+    {
+      "facet_id": "somatic_sleep_disruption",
+      "facet_label": "Somatic sleep disruption",
+      "facet_definition": "Sleep interruption or difficulty settling after exposure to AI capability news or AI progress information.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "sleep_disruption_ai_news"
+      ]
+    },
+    {
+      "facet_id": "somatic_body_vigilance",
+      "facet_label": "Somatic body vigilance",
+      "facet_definition": "Bodily monitoring, physical tension, or heightened physiological vigilance after a salient AI model release.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "body_vigilance_model_release"
+      ]
+    },
+    {
+      "facet_id": "somatic_background_dread",
+      "facet_label": "Somatic background dread",
+      "facet_definition": "Diffuse background unease or dread linked to cumulative AI progress rather than a single immediate threat.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "background_dread_ai_progress"
+      ]
+    },
+    {
+      "facet_id": "somatic_information_avoidance",
+      "facet_label": "Somatic information avoidance",
+      "facet_definition": "Avoidance of further AI capability information after a concrete demonstration because of anxiety or bodily unease.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "avoidance_after_ai_capability_demo"
+      ]
+    },
+    {
+      "facet_id": "economic_skill_obsolescence",
+      "facet_label": "Economic skill obsolescence",
+      "facet_definition": "Concern that AI capability advances will reduce the value of learned occupational skills or professional competence.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "skill_obsolescence_software"
+      ]
+    },
+    {
+      "facet_id": "economic_wage_pressure",
+      "facet_label": "Economic wage pressure",
+      "facet_definition": "Concern that AI-mediated substitution or bargaining changes will suppress wages or weaken compensation security.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "wage_pressure_customer_support"
+      ]
+    },
+    {
+      "facet_id": "economic_retraining_burden",
+      "facet_label": "Economic retraining burden",
+      "facet_definition": "Anxiety about the time, cost, and uncertainty of retraining to remain employable as AI capabilities advance.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "retraining_pressure_accounting"
+      ]
+    },
+    {
+      "facet_id": "economic_status_loss",
+      "facet_label": "Economic status loss",
+      "facet_definition": "Anxiety that AI systems will erode occupational status, creative value, or social recognition attached to work.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "status_loss_creative_work"
+      ]
+    },
+    {
+      "facet_id": "epistemic_evidence_authenticity",
+      "facet_label": "Epistemic evidence authenticity",
+      "facet_definition": "Anxiety that deepfakes or synthetic records will make ordinary evidence harder to authenticate and trust.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "deepfake_evidence_trust"
+      ]
+    },
+    {
+      "facet_id": "epistemic_source_provenance",
+      "facet_label": "Epistemic source provenance",
+      "facet_definition": "Concern that AI-generated news or media provenance signals will be insufficient for judging source origin and reliability.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "synthetic_news_provenance"
+      ]
+    },
+    {
+      "facet_id": "epistemic_expert_claim_conflict",
+      "facet_label": "Epistemic expert claim conflict",
+      "facet_definition": "Anxiety about deciding what to trust when AI-supported expert claims or analyses conflict in public information settings.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "ai_expert_claim_conflict"
+      ]
+    },
+    {
+      "facet_id": "epistemic_targeted_misinformation",
+      "facet_label": "Epistemic targeted misinformation",
+      "facet_definition": "Anxiety that AI systems can personalize false or manipulative information in ways that are difficult to detect.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "personalized_misinformation_targeting"
+      ]
+    }
+  ],
+  "reviewer_panel": {
+    "reviewer_count": 0,
+    "independent_reviewer_count": 0,
+    "minimum_independent_reviewers_required": 3,
+    "independence_rule": "Reviewers must not have drafted the candidate items, managed the fielding vendor, or held release authority for this item set; independent ratings must be completed before consensus discussion.",
+    "reviewers": []
+  },
+  "item_reviews": [
+    {
+      "item_id": "sleep_disruption_ai_news",
+      "item_version": "v0.2.0",
+      "primary_facet_id": "somatic_sleep_disruption",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "body_vigilance_model_release",
+      "item_version": "v0.2.0",
+      "primary_facet_id": "somatic_body_vigilance",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "background_dread_ai_progress",
+      "item_version": "v0.2.0",
+      "primary_facet_id": "somatic_background_dread",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "avoidance_after_ai_capability_demo",
+      "item_version": "v0.2.0",
+      "primary_facet_id": "somatic_information_avoidance",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "skill_obsolescence_software",
+      "item_version": "v0.1.0",
+      "primary_facet_id": "economic_skill_obsolescence",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "wage_pressure_customer_support",
+      "item_version": "v0.1.0",
+      "primary_facet_id": "economic_wage_pressure",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "retraining_pressure_accounting",
+      "item_version": "v0.1.0",
+      "primary_facet_id": "economic_retraining_burden",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "status_loss_creative_work",
+      "item_version": "v0.1.0",
+      "primary_facet_id": "economic_status_loss",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "deepfake_evidence_trust",
+      "item_version": "v0.1.0",
+      "primary_facet_id": "epistemic_evidence_authenticity",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "synthetic_news_provenance",
+      "item_version": "v0.1.0",
+      "primary_facet_id": "epistemic_source_provenance",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "ai_expert_claim_conflict",
+      "item_version": "v0.1.0",
+      "primary_facet_id": "epistemic_expert_claim_conflict",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    },
+    {
+      "item_id": "personalized_misinformation_targeting",
+      "item_version": "v0.1.0",
+      "primary_facet_id": "epistemic_targeted_misinformation",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [],
+      "criterion_cvi": {
+        "relevance": null,
+        "clarity": null,
+        "facet_fit": null,
+        "ethical_acceptability": null
+      },
+      "overall_item_cvi": null,
+      "construct_overlap_flag": "pending_review",
+      "reading_level_flag": "pending_review",
+      "harm_ethics_flag": "pending_review",
+      "required_revision": "pending_review"
+    }
+  ],
+  "scale_level_cvi": {
+    "calculation_rule": "Overall item CVI is the minimum of relevance, clarity, facet-fit, and ethical-acceptability CVI; S-CVI/Ave is the mean overall item CVI across retained items after reviewer ratings are complete.",
+    "scale_cvi_average": null,
+    "scale_cvi_universal_agreement": null,
+    "minimum_item_cvi_required": 0.78,
+    "minimum_scale_cvi_average_required": 0.9,
+    "all_required_facets_covered": false,
+    "unresolved_construct_overlap_count": 12,
+    "unresolved_reading_level_count": 12,
+    "unresolved_harm_ethics_count": 12
+  },
+  "revision_decisions": [
+    {
+      "item_id": "sleep_disruption_ai_news",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "body_vigilance_model_release",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "background_dread_ai_progress",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "avoidance_after_ai_capability_demo",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "skill_obsolescence_software",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "wage_pressure_customer_support",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "retraining_pressure_accounting",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "status_loss_creative_work",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "deepfake_evidence_trust",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "synthetic_news_provenance",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "ai_expert_claim_conflict",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    },
+    {
+      "item_id": "personalized_misinformation_targeting",
+      "decision": "pending_review",
+      "decision_rationale": "Frozen bridge template awaiting independent content-validity ratings and facet coverage review.",
+      "new_item_version_required": false,
+      "resolved_before_scored_promotion": false
+    }
+  ],
+  "promotion_eligibility": {
+    "scored_promotion_eligible": false,
+    "minimum_independent_reviewers_met": false,
+    "all_item_cvi_thresholds_met": false,
+    "scale_cvi_threshold_met": false,
+    "construct_overlap_resolved": false,
+    "reading_level_resolved": false,
+    "harm_ethics_resolved": false,
+    "eligibility_statement": "This preregistered template maps all Wave 7 bridge items to required facets but is not eligible for scored promotion until at least three independent reviewers complete ratings, all CVI thresholds pass, and all flags are resolved."
+  },
+  "signoff": {
+    "content_validity_decision": "not_reviewed",
+    "signed_by": [],
+    "signed_date": null,
+    "signoff_statement": "No content-validity signoff has been completed for this preregistered template; it is frozen only as the Wave 7 bridge review blueprint."
+  }
+}

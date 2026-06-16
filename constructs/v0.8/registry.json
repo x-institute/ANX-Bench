@@ -1,0 +1,281 @@
+{
+  "$schema": "../../schema/construct_registry.schema.json",
+  "registry_schema_version": "v0.1.0",
+  "registry_version": "v0.8.0",
+  "benchmark_release_line": "v0.8",
+  "effective_benchmark_version": "v0.8.0",
+  "status": "frozen",
+  "domains": [
+    {
+      "domain_id": "economic_vocational",
+      "label": "Economic and vocational",
+      "definition": "Anxiety about employment, wages, skill obsolescence, occupational status, bargaining power, retraining burden, and career security under advancing AI capability.",
+      "included_construct_ids": [
+        "economic_vocational_anxiety"
+      ]
+    },
+    {
+      "domain_id": "epistemic",
+      "label": "Epistemic",
+      "definition": "Anxiety about truth, evidence, provenance, expertise, deepfakes, misinformation, source authenticity, personalized information manipulation, and the ability to trust shared information environments under advancing AI capability.",
+      "included_construct_ids": [
+        "epistemic_trust_anxiety"
+      ]
+    },
+    {
+      "domain_id": "relational",
+      "label": "Relational",
+      "definition": "Anxiety about AI effects on friendship, intimacy, family life, care, attachment, dependency, social substitution, and trust in close relationships.",
+      "included_construct_ids": [
+        "relational_ai_anxiety"
+      ]
+    },
+    {
+      "domain_id": "existential_identity",
+      "label": "Existential and identity",
+      "definition": "Anxiety about meaning, human distinctiveness, creativity, dignity, agency, social value, status, and self-concept under advancing AI capability.",
+      "included_construct_ids": [
+        "existential_identity_ai_anxiety"
+      ]
+    },
+    {
+      "domain_id": "autonomy_surveillance",
+      "label": "Autonomy and surveillance",
+      "definition": "Anxiety about monitoring, manipulation, automated evaluation, profiling, institutional scoring, loss of choice, and diminished practical autonomy under AI-mediated systems.",
+      "included_construct_ids": [
+        "autonomy_surveillance_ai_anxiety"
+      ]
+    },
+    {
+      "domain_id": "safety_catastrophic",
+      "label": "Safety and catastrophic",
+      "definition": "Anxiety about physical safety, misuse, weapons, loss of control, infrastructure failure, cascading harm, and extreme-risk narratives linked to AI capability.",
+      "included_construct_ids": [
+        "safety_catastrophic_ai_anxiety"
+      ]
+    },
+    {
+      "domain_id": "somatic_ambient",
+      "label": "Somatic and ambient",
+      "definition": "Diffuse bodily unease, vigilance, sleep disturbance, background dread, avoidance, and other low-specificity physiological anxiety responses to AI progress or AI-mediated environments.",
+      "included_construct_ids": [
+        "somatic_ambient_anxiety"
+      ]
+    }
+  ],
+  "constructs": [
+    {
+      "construct_id": "somatic_ambient_anxiety",
+      "domain_id": "somatic_ambient",
+      "label": "Somatic and ambient AI anxiety",
+      "definition": "Anxiety arising as diffuse physiological or ambient distress after exposure to AI capability news, model releases, cumulative AI progress, or concrete AI demonstrations, including sleep disruption, bodily vigilance, background dread, and avoidance of further AI information.",
+      "intended_aggregation_level": "approved_construct_score",
+      "minimum_retained_items": 4,
+      "anchor_status": "cross_domain_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 2000,
+        "required_evidence": [
+          "Previously approved source scoring remains governed by the earlier citable somatic release and is not expanded by v0.8.0.",
+          "Wave 8 split-sample EFA and CFA evidence supporting the intended domain structure without construct collapse.",
+          "Ordinal omega, corrected item-total, graded-response IRT, local-dependence, DIF, and measurement-invariance evidence meeting the preregistered Wave 8 thresholds.",
+          "Cross-domain latent correlations inside the preregistered bridge band and interpreted with domain-specific residual evidence.",
+          "Written release decision separating bridge evidence from any official scoring, trend, event-study, clinical, individual-level, or policy claim."
+        ],
+        "scoring_rule": "Somatic and ambient AI anxiety is source-scored only under its prior citable release scope and used in v0.8.0 only as a bridge anchor. No v0.8.0 item-level, construct, domain, cross-domain, overall, longitudinal, event-study, clinical, individual-level, or policy-decision scoring is authorized until a later citable release explicitly approves retained items."
+      },
+      "allowed_item_ids": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo"
+      ]
+    },
+    {
+      "construct_id": "economic_vocational_anxiety",
+      "domain_id": "economic_vocational",
+      "label": "Economic and vocational AI anxiety",
+      "definition": "Anxiety arising from perceived labor-market, wage, skill, retraining, status, and career-security pressure associated with advancing AI capability in work and occupational settings.",
+      "intended_aggregation_level": "multi_item_construct_candidate",
+      "minimum_retained_items": 3,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 2000,
+        "required_evidence": [
+          "No construct-level scoring is permitted in v0.8.0; this construct is included only for full-domain bridge validation.",
+          "Wave 8 split-sample EFA and CFA evidence supporting the intended domain structure without construct collapse.",
+          "Ordinal omega, corrected item-total, graded-response IRT, local-dependence, DIF, and measurement-invariance evidence meeting the preregistered Wave 8 thresholds.",
+          "Cross-domain latent correlations inside the preregistered bridge band and interpreted with domain-specific residual evidence.",
+          "Written release decision separating bridge evidence from any official scoring, trend, event-study, clinical, individual-level, or policy claim."
+        ],
+        "scoring_rule": "Economic and vocational AI anxiety is development-only in v0.8.0 and may be analyzed only for bridge diagnostics. No v0.8.0 item-level, construct, domain, cross-domain, overall, longitudinal, event-study, clinical, individual-level, or policy-decision scoring is authorized until a later citable release explicitly approves retained items."
+      },
+      "allowed_item_ids": [
+        "skill_obsolescence_software",
+        "wage_pressure_customer_support",
+        "retraining_pressure_accounting",
+        "status_loss_creative_work"
+      ]
+    },
+    {
+      "construct_id": "epistemic_trust_anxiety",
+      "domain_id": "epistemic",
+      "label": "Epistemic trust anxiety",
+      "definition": "Anxiety arising from the belief that advancing AI systems may make ordinary evidence, testimony, media records, expert claims, provenance signals, targeted information, or institutional fact-finding harder to trust.",
+      "intended_aggregation_level": "multi_item_construct_candidate",
+      "minimum_retained_items": 3,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 2000,
+        "required_evidence": [
+          "No construct-level scoring is permitted in v0.8.0; this construct is included only for full-domain bridge validation.",
+          "Wave 8 split-sample EFA and CFA evidence supporting the intended domain structure without construct collapse.",
+          "Ordinal omega, corrected item-total, graded-response IRT, local-dependence, DIF, and measurement-invariance evidence meeting the preregistered Wave 8 thresholds.",
+          "Cross-domain latent correlations inside the preregistered bridge band and interpreted with domain-specific residual evidence.",
+          "Written release decision separating bridge evidence from any official scoring, trend, event-study, clinical, individual-level, or policy claim."
+        ],
+        "scoring_rule": "Epistemic trust anxiety is development-only in v0.8.0 and may be analyzed only for bridge diagnostics. No v0.8.0 item-level, construct, domain, cross-domain, overall, longitudinal, event-study, clinical, individual-level, or policy-decision scoring is authorized until a later citable release explicitly approves retained items."
+      },
+      "allowed_item_ids": [
+        "deepfake_evidence_trust",
+        "synthetic_news_provenance",
+        "ai_expert_claim_conflict",
+        "personalized_misinformation_targeting"
+      ]
+    },
+    {
+      "construct_id": "relational_ai_anxiety",
+      "domain_id": "relational",
+      "label": "Relational AI anxiety",
+      "definition": "Anxiety arising from the belief that advanced AI systems may displace, mediate, or destabilize trust, intimacy, caregiving, attachment, authenticity, reciprocity, or emotional reliance in close human relationships.",
+      "intended_aggregation_level": "multi_item_construct_candidate",
+      "minimum_retained_items": 3,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 2000,
+        "required_evidence": [
+          "No construct-level scoring is permitted in v0.8.0; this construct is included only for full-domain bridge validation.",
+          "Wave 8 split-sample EFA and CFA evidence supporting the intended domain structure without construct collapse.",
+          "Ordinal omega, corrected item-total, graded-response IRT, local-dependence, DIF, and measurement-invariance evidence meeting the preregistered Wave 8 thresholds.",
+          "Cross-domain latent correlations inside the preregistered bridge band and interpreted with domain-specific residual evidence.",
+          "Written release decision separating bridge evidence from any official scoring, trend, event-study, clinical, individual-level, or policy claim."
+        ],
+        "scoring_rule": "Relational AI anxiety is development-only in v0.8.0 and may be analyzed only for bridge diagnostics. No v0.8.0 item-level, construct, domain, cross-domain, overall, longitudinal, event-study, clinical, individual-level, or policy-decision scoring is authorized until a later citable release explicitly approves retained items."
+      },
+      "allowed_item_ids": [
+        "partner_ai_confidant_displacement",
+        "friend_group_ai_mediation",
+        "eldercare_ai_attachment_shift"
+      ]
+    },
+    {
+      "construct_id": "existential_identity_ai_anxiety",
+      "domain_id": "existential_identity",
+      "label": "Existential and identity AI anxiety",
+      "definition": "Anxiety arising from the belief that advanced AI systems may threaten human distinctiveness, purpose, dignity, agency, social value, creativity, moral status, or stable self-understanding.",
+      "intended_aggregation_level": "multi_item_construct_candidate",
+      "minimum_retained_items": 3,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 2000,
+        "required_evidence": [
+          "No construct-level scoring is permitted in v0.8.0; this construct is included only for full-domain bridge validation.",
+          "Wave 8 split-sample EFA and CFA evidence supporting the intended domain structure without construct collapse.",
+          "Ordinal omega, corrected item-total, graded-response IRT, local-dependence, DIF, and measurement-invariance evidence meeting the preregistered Wave 8 thresholds.",
+          "Cross-domain latent correlations inside the preregistered bridge band and interpreted with domain-specific residual evidence.",
+          "Written release decision separating bridge evidence from any official scoring, trend, event-study, clinical, individual-level, or policy claim."
+        ],
+        "scoring_rule": "Existential and identity AI anxiety is development-only in v0.8.0 and may be analyzed only for bridge diagnostics. No v0.8.0 item-level, construct, domain, cross-domain, overall, longitudinal, event-study, clinical, individual-level, or policy-decision scoring is authorized until a later citable release explicitly approves retained items."
+      },
+      "allowed_item_ids": [
+        "ai_personhood_boundary_uncertainty",
+        "human_judgment_status_loss",
+        "life_purpose_ai_substitution"
+      ]
+    },
+    {
+      "construct_id": "autonomy_surveillance_ai_anxiety",
+      "domain_id": "autonomy_surveillance",
+      "label": "Autonomy and surveillance AI anxiety",
+      "definition": "Anxiety arising from the belief that AI-mediated monitoring, prediction, classification, persuasion, scoring, or automated decision systems may constrain practical choice, privacy, self-direction, or procedural control.",
+      "intended_aggregation_level": "multi_item_construct_candidate",
+      "minimum_retained_items": 3,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 2000,
+        "required_evidence": [
+          "No construct-level scoring is permitted in v0.8.0; this construct is included only for full-domain bridge validation.",
+          "Wave 8 split-sample EFA and CFA evidence supporting the intended domain structure without construct collapse.",
+          "Ordinal omega, corrected item-total, graded-response IRT, local-dependence, DIF, and measurement-invariance evidence meeting the preregistered Wave 8 thresholds.",
+          "Cross-domain latent correlations inside the preregistered bridge band and interpreted with domain-specific residual evidence.",
+          "Written release decision separating bridge evidence from any official scoring, trend, event-study, clinical, individual-level, or policy claim."
+        ],
+        "scoring_rule": "Autonomy and surveillance AI anxiety is development-only in v0.8.0 and may be analyzed only for bridge diagnostics. No v0.8.0 item-level, construct, domain, cross-domain, overall, longitudinal, event-study, clinical, individual-level, or policy-decision scoring is authorized until a later citable release explicitly approves retained items."
+      },
+      "allowed_item_ids": [
+        "public_space_tracking",
+        "workplace_behavior_scoring",
+        "personalized_behavior_nudging"
+      ]
+    },
+    {
+      "construct_id": "safety_catastrophic_ai_anxiety",
+      "domain_id": "safety_catastrophic",
+      "label": "Safety and catastrophic AI anxiety",
+      "definition": "Anxiety arising from the belief that advanced AI systems may increase physical danger, misuse, weapons escalation, loss of control, infrastructure disruption, cascading failure, or extreme-harm risk.",
+      "intended_aggregation_level": "multi_item_construct_candidate",
+      "minimum_retained_items": 3,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 2000,
+        "required_evidence": [
+          "No construct-level scoring is permitted in v0.8.0; this construct is included only for full-domain bridge validation.",
+          "Wave 8 split-sample EFA and CFA evidence supporting the intended domain structure without construct collapse.",
+          "Ordinal omega, corrected item-total, graded-response IRT, local-dependence, DIF, and measurement-invariance evidence meeting the preregistered Wave 8 thresholds.",
+          "Cross-domain latent correlations inside the preregistered bridge band and interpreted with domain-specific residual evidence.",
+          "Written release decision separating bridge evidence from any official scoring, trend, event-study, clinical, individual-level, or policy claim."
+        ],
+        "scoring_rule": "Safety and catastrophic AI anxiety is development-only in v0.8.0 and may be analyzed only for bridge diagnostics. No v0.8.0 item-level, construct, domain, cross-domain, overall, longitudinal, event-study, clinical, individual-level, or policy-decision scoring is authorized until a later citable release explicitly approves retained items."
+      },
+      "allowed_item_ids": [
+        "autonomous_cyber_cascade",
+        "biosecurity_protocol_misuse",
+        "military_escalation_ai_advice"
+      ]
+    }
+  ],
+  "release_rules": [
+    "The v0.8 registry freezes a full-domain bridge across all seven ANX-Bench domains and does not authorize any new scored item, domain score, cross-domain score, or overall ANX score.",
+    "The somatic source anchors preserve their prior source-release construct rules only outside this v0.8.0 bridge packet; in Wave 8 they are bridge anchors and do not create v0.8 scored output.",
+    "Economic-vocational, epistemic, relational, existential-identity, autonomy-surveillance, and safety-catastrophic item pools remain development-only until observed validation, reviewer signoff, updated item metadata, and a later citable manifest approve retained items.",
+    "Version v0.8.0 blocks longitudinal trend claims, event-study claims, capability-shock claims, clinical interpretation, individual-level classification, aggregate scoring, and policy-decision use.",
+    "Passing the Wave 8 bridge may only support a later preregistered aggregate-score proposal after EFA, CFA, omega, IRT, DIF, invariance, bounded latent-correlation, external-validity, and disclosure evidence are observed and checksum-bound."
+  ]
+}

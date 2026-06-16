@@ -1,0 +1,147 @@
+{
+  "$schema": "../../../schema/content_validity_dossier.schema.json",
+  "dossier_schema_version": "v0.1.0",
+  "dossier_id": "test_content_validity_low_cvi",
+  "benchmark_version": "v0.7.1",
+  "dossier_status": "completed",
+  "construct_id": "test_cross_domain_bridge",
+  "construct_definition": "A focused test construct representing AI-related anxiety responses across a bridge item set before scored promotion.",
+  "intended_scored_use": "This artifact intentionally fails the content-validity gate because one criterion lacks adequate independent reviewer agreement.",
+  "target_population": "US adults completing an English-language online ANX-Bench validation survey.",
+  "review_protocol_path": "docs/content_validity_protocol.md",
+  "item_ids": [
+    "test_sleep_ai_news"
+  ],
+  "domain_facets": [
+    {
+      "facet_id": "somatic_sleep_disruption",
+      "facet_label": "Somatic sleep disruption",
+      "facet_definition": "Sleep disruption and difficulty settling after exposure to AI capability information.",
+      "required_for_scored_promotion": true,
+      "mapped_item_ids": [
+        "test_sleep_ai_news"
+      ]
+    }
+  ],
+  "reviewer_panel": {
+    "reviewer_count": 3,
+    "independent_reviewer_count": 3,
+    "minimum_independent_reviewers_required": 3,
+    "independence_rule": "Reviewers did not draft the items, manage fielding, or hold release authority; ratings were completed independently before discussion.",
+    "reviewers": [
+      {
+        "reviewer_id": "reviewer_alpha",
+        "expertise_area": "Psychometrics and survey methodology",
+        "independent": true,
+        "conflict_of_interest_statement": "No item authorship, fielding role, or release authority.",
+        "review_completed": true
+      },
+      {
+        "reviewer_id": "reviewer_beta",
+        "expertise_area": "AI risk communication and public understanding",
+        "independent": true,
+        "conflict_of_interest_statement": "No item authorship, fielding role, or release authority.",
+        "review_completed": true
+      },
+      {
+        "reviewer_id": "reviewer_gamma",
+        "expertise_area": "Human-subjects ethics and participant protection",
+        "independent": true,
+        "conflict_of_interest_statement": "No item authorship, fielding role, or release authority.",
+        "review_completed": true
+      }
+    ]
+  },
+  "item_reviews": [
+    {
+      "item_id": "test_sleep_ai_news",
+      "item_version": "v0.1.0",
+      "primary_facet_id": "somatic_sleep_disruption",
+      "secondary_facet_ids": [],
+      "reviewer_ratings": [
+        {
+          "reviewer_id": "reviewer_alpha",
+          "relevance": 4,
+          "clarity": 4,
+          "facet_fit": 4,
+          "ethical_acceptability": 4,
+          "construct_overlap_flag": "none",
+          "reading_level_flag": "none",
+          "harm_ethics_flag": "none",
+          "comments": "Acceptable on all criteria."
+        },
+        {
+          "reviewer_id": "reviewer_beta",
+          "relevance": 3,
+          "clarity": 3,
+          "facet_fit": 3,
+          "ethical_acceptability": 3,
+          "construct_overlap_flag": "none",
+          "reading_level_flag": "none",
+          "harm_ethics_flag": "none",
+          "comments": "Acceptable with minor wording reservations."
+        },
+        {
+          "reviewer_id": "reviewer_gamma",
+          "relevance": 2,
+          "clarity": 3,
+          "facet_fit": 3,
+          "ethical_acceptability": 3,
+          "construct_overlap_flag": "none",
+          "reading_level_flag": "none",
+          "harm_ethics_flag": "none",
+          "comments": "Relevance needs major revision before scored use."
+        }
+      ],
+      "criterion_cvi": {
+        "relevance": 0.67,
+        "clarity": 1,
+        "facet_fit": 1,
+        "ethical_acceptability": 1
+      },
+      "overall_item_cvi": 0.67,
+      "construct_overlap_flag": "none",
+      "reading_level_flag": "none",
+      "harm_ethics_flag": "none",
+      "required_revision": "major"
+    }
+  ],
+  "scale_level_cvi": {
+    "calculation_rule": "Overall item CVI is the minimum criterion I-CVI; S-CVI/Ave is the mean of retained overall item CVI values.",
+    "scale_cvi_average": 0.67,
+    "scale_cvi_universal_agreement": 0,
+    "minimum_item_cvi_required": 0.78,
+    "minimum_scale_cvi_average_required": 0.9,
+    "all_required_facets_covered": false,
+    "unresolved_construct_overlap_count": 0,
+    "unresolved_reading_level_count": 0,
+    "unresolved_harm_ethics_count": 0
+  },
+  "revision_decisions": [
+    {
+      "item_id": "test_sleep_ai_news",
+      "decision": "major_revision_required",
+      "decision_rationale": "One independent reviewer judged relevance below the acceptable CVI threshold.",
+      "new_item_version_required": true,
+      "resolved_before_scored_promotion": false
+    }
+  ],
+  "promotion_eligibility": {
+    "scored_promotion_eligible": true,
+    "minimum_independent_reviewers_met": true,
+    "all_item_cvi_thresholds_met": true,
+    "scale_cvi_threshold_met": true,
+    "construct_overlap_resolved": true,
+    "reading_level_resolved": true,
+    "harm_ethics_resolved": true,
+    "eligibility_statement": "This statement intentionally overclaims eligibility despite failed item and scale CVI thresholds for validator testing."
+  },
+  "signoff": {
+    "content_validity_decision": "approved_for_psychometric_promotion_review",
+    "signed_by": [
+      "reviewer_alpha"
+    ],
+    "signed_date": "2026-06-15",
+    "signoff_statement": "This signoff intentionally conflicts with the failed CVI evidence for validator testing."
+  }
+}

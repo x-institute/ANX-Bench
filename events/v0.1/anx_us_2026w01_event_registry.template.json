@@ -1,0 +1,86 @@
+{
+  "$schema": "../../schema/event_registry.schema.json",
+  "registry_schema_version": "v0.1.0",
+  "registry_version": "v0.1.0",
+  "benchmark_release_line": "v0.1",
+  "effective_benchmark_version": "v0.1.0",
+  "wave_id": "anx_us_2026w01",
+  "registry_status": "template",
+  "registry_lock_date": "2026-01-02",
+  "outcome_inspection_status": "not_inspected",
+  "events": [
+    {
+      "event_id": "frontier_model_release_template",
+      "event_name": "Template Frontier Model Public Release",
+      "category": "frontier_model_release",
+      "event_description": "Template record for a public frontier model release announced by the developer through an official release note before ANX-Bench outcome inspection.",
+      "event_timestamp": "2026-01-05T17:00:00Z",
+      "timestamp_source_url": "https://example.org/archived-official-release-note-2026-01-05",
+      "timestamp_source_type": "official_release_note",
+      "exposure_window": {
+        "window_id": "immediate_public_exposure",
+        "start": "2026-01-05T17:00:00Z",
+        "end": "2026-01-08T17:00:00Z",
+        "inclusion_rule": "Include response_timestamp values greater than or equal to the event timestamp and less than the exposure window end."
+      },
+      "baseline_window": {
+        "window_id": "pre_event_baseline",
+        "start": "2025-12-22T17:00:00Z",
+        "end": "2026-01-05T17:00:00Z",
+        "inclusion_rule": "Include response_timestamp values greater than or equal to the baseline start and strictly before the event timestamp."
+      },
+      "follow_up_windows": [
+        {
+          "window_id": "immediate_post_event",
+          "start": "2026-01-05T17:00:00Z",
+          "end": "2026-01-08T17:00:00Z",
+          "inclusion_rule": "Include response_timestamp values greater than or equal to the event timestamp and less than 72 hours after the event timestamp."
+        },
+        {
+          "window_id": "short_post_event",
+          "start": "2026-01-09T00:00:00Z",
+          "end": "2026-01-20T00:00:00Z",
+          "inclusion_rule": "Include response_timestamp values on or after the short follow-up start and strictly before the short follow-up end."
+        },
+        {
+          "window_id": "extended_post_event",
+          "start": "2026-01-20T00:00:00Z",
+          "end": "2026-02-04T00:00:00Z",
+          "inclusion_rule": "Include response_timestamp values on or after the extended follow-up start and strictly before the extended follow-up end."
+        }
+      ],
+      "affected_domains": [
+        "economic_vocational",
+        "epistemic",
+        "safety_catastrophic"
+      ],
+      "competing_events": [
+        {
+          "event_name": "Template contemporaneous AI policy announcement",
+          "event_timestamp": "2026-01-06T15:00:00Z",
+          "source_url": "https://example.org/archived-policy-announcement-2026-01-06",
+          "reason_for_inclusion": "The announcement falls inside the immediate exposure window and could independently affect AI-related anxiety estimates.",
+          "expected_direction_of_bias": "unknown_or_ambiguous"
+        }
+      ],
+      "lock_date": "2026-01-02",
+      "amendment_history": []
+    },
+    {
+      "event_id": "no_event",
+      "event_name": "No event calibration option",
+      "category": "no_event",
+      "event_description": "Reserved record for calibration or routine longitudinal waves that are explicitly not tied to a discrete AI event-study exposure.",
+      "event_timestamp": null,
+      "timestamp_source_url": null,
+      "timestamp_source_type": "not_applicable_no_event",
+      "exposure_window": null,
+      "baseline_window": null,
+      "follow_up_windows": [],
+      "affected_domains": [],
+      "competing_events": [],
+      "lock_date": "2026-01-02",
+      "amendment_history": []
+    }
+  ]
+}

@@ -1,0 +1,546 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/event_registry.schema.json",
+  "title": "ANX-Bench Event Registry Schema",
+  "description": "Machine-readable schema for a frozen ANX-Bench event registry used to define event-study exposure before ANX-Bench outcomes are inspected. A valid registry is the source of truth for event_id values, event timestamps, exposure windows, baseline windows, follow-up windows, affected domains, competing events, lock dates, and amendment history.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registry_schema_version",
+    "registry_version",
+    "benchmark_release_line",
+    "effective_benchmark_version",
+    "wave_id",
+    "registry_status",
+    "registry_lock_date",
+    "outcome_inspection_status",
+    "events"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Relative or absolute path to the JSON Schema used to validate this event registry."
+    },
+    "registry_schema_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic version of this event registry schema contract."
+    },
+    "registry_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic version of the concrete event registry file."
+    },
+    "benchmark_release_line": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+$",
+      "description": "ANX-Bench release line governed by this registry."
+    },
+    "effective_benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Exact benchmark release version for which this registry is valid."
+    },
+    "wave_id": {
+      "type": "string",
+      "pattern": "^anx_[a-z]{2,3}_[0-9]{4}w[0-9]{2}(_[a-z0-9]+)*$",
+      "description": "Wave identifier whose event-study exposure assignments must resolve to this registry."
+    },
+    "registry_status": {
+      "type": "string",
+      "enum": [
+        "template",
+        "draft",
+        "frozen",
+        "superseded"
+      ],
+      "description": "Lifecycle status of the registry. Confirmatory event-study use requires frozen."
+    },
+    "registry_lock_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Calendar date on which the registry was frozen before response outcome inspection."
+    },
+    "outcome_inspection_status": {
+      "type": "string",
+      "enum": [
+        "not_inspected",
+        "inspected_after_lock",
+        "exploratory_only"
+      ],
+      "description": "Whether ANX-Bench response outcomes had been inspected when the registry was locked."
+    },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/event_record"
+      },
+      "description": "Closed set of event records available to the wave. Response rows and preregistrations may reference only event_id values listed here."
+    }
+  },
+  "$defs": {
+    "snake_case_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "uri_or_citation": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Stable source URL, archive URL, DOI, accession, or citation sufficient to independently verify the event timestamp."
+    },
+    "date_time_or_null": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "date_time_window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "window_id",
+        "start",
+        "end",
+        "inclusion_rule"
+      ],
+      "properties": {
+        "window_id": {
+          "$ref": "#/$defs/snake_case_id"
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inclusion_rule": {
+          "type": "string",
+          "minLength": 20,
+          "description": "Boundary rule for assigning response_timestamp values to this window, including inclusive and exclusive endpoints."
+        }
+      }
+    },
+    "competing_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_name",
+        "event_timestamp",
+        "source_url",
+        "reason_for_inclusion",
+        "expected_direction_of_bias"
+      ],
+      "properties": {
+        "event_name": {
+          "type": "string",
+          "minLength": 3
+        },
+        "event_timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source_url": {
+          "$ref": "#/$defs/uri_or_citation"
+        },
+        "reason_for_inclusion": {
+          "type": "string",
+          "minLength": 30
+        },
+        "expected_direction_of_bias": {
+          "type": "string",
+          "enum": [
+            "increase_anx",
+            "decrease_anx",
+            "unknown_or_ambiguous"
+          ]
+        }
+      }
+    },
+    "amendment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "amendment_id",
+        "amendment_date",
+        "author",
+        "change_type",
+        "description",
+        "outcome_data_inspected",
+        "confirmatory_status"
+      ],
+      "properties": {
+        "amendment_id": {
+          "$ref": "#/$defs/snake_case_id"
+        },
+        "amendment_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "author": {
+          "type": "string",
+          "minLength": 3
+        },
+        "change_type": {
+          "type": "string",
+          "enum": [
+            "clerical_correction",
+            "source_archival_update",
+            "window_correction",
+            "event_reclassification",
+            "event_addition",
+            "event_removal",
+            "other"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 40
+        },
+        "outcome_data_inspected": {
+          "type": "boolean"
+        },
+        "confirmatory_status": {
+          "type": "string",
+          "enum": [
+            "confirmatory_preserved",
+            "exploratory_only",
+            "superseded"
+          ]
+        }
+      }
+    },
+    "event_adjudication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "qualifies",
+        "severity_tier",
+        "capability_domain",
+        "public_reach_tier",
+        "novelty_tier",
+        "affected_domain_rationale",
+        "coder_ids",
+        "coder_disagreements",
+        "reconciliation_decision",
+        "source_count"
+      ],
+      "properties": {
+        "qualifies": {
+          "type": "boolean",
+          "description": "Prospective adjudication result under docs/event_classification_rubric.md. Confirmatory non-no_event records must qualify before outcome inspection."
+        },
+        "severity_tier": {
+          "type": "string",
+          "enum": [
+            "tier_1_minor",
+            "tier_2_moderate",
+            "tier_3_major",
+            "tier_4_systemic"
+          ],
+          "description": "Prospective psychological-salience tier assigned from external evidence, not from observed ANX-Bench effects."
+        },
+        "capability_domain": {
+          "type": "string",
+          "enum": [
+            "frontier_model_capability",
+            "tool_or_agent_capability",
+            "multimodal_media_capability",
+            "embodied_or_robotic_capability",
+            "autonomous_system_deployment",
+            "labor_market_or_workplace_capability",
+            "misinformation_or_persuasion_capability",
+            "surveillance_or_governance_capability",
+            "safety_or_security_capability",
+            "infrastructure_or_access_capability",
+            "other_prespecified_capability"
+          ],
+          "description": "Primary AI capability area implicated by the event, assigned before inspecting outcome data."
+        },
+        "public_reach_tier": {
+          "type": "string",
+          "enum": [
+            "reach_1_specialist",
+            "reach_2_sectoral",
+            "reach_3_general_public",
+            "reach_4_sustained_mass"
+          ],
+          "description": "Prospective estimate of likely public exposure in the target population during the exposure window."
+        },
+        "novelty_tier": {
+          "type": "string",
+          "enum": [
+            "novelty_1_incremental",
+            "novelty_2_distinct",
+            "novelty_3_breakthrough",
+            "novelty_4_paradigm"
+          ],
+          "description": "Prospective rating of how much the event changes the public capability reference point."
+        },
+        "affected_domain_rationale": {
+          "type": "string",
+          "minLength": 80,
+          "description": "Field-by-field rationale linking source evidence to affected_domains and capability_domain without reference to ANX-Bench outcomes."
+        },
+        "coder_ids": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/snake_case_id"
+          },
+          "description": "Stable identifiers for independent coders who completed pre-outcome adjudication."
+        },
+        "coder_disagreements": {
+          "type": "string",
+          "minLength": 20,
+          "description": "Summary of material coder disagreements, or an explicit statement that no material disagreements occurred."
+        },
+        "reconciliation_decision": {
+          "type": "string",
+          "minLength": 40,
+          "description": "Final documented reconciliation outcome, including disputed fields resolved and confirmatory eligibility."
+        },
+        "source_count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of independent sources used to verify timestamp, reach, novelty, severity, and affected-domain classification."
+        }
+      }
+    },
+    "event_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "event_name",
+        "category",
+        "event_description",
+        "event_timestamp",
+        "timestamp_source_url",
+        "timestamp_source_type",
+        "exposure_window",
+        "baseline_window",
+        "follow_up_windows",
+        "affected_domains",
+        "competing_events",
+        "lock_date",
+        "amendment_history"
+      ],
+      "properties": {
+        "event_id": {
+          "$ref": "#/$defs/snake_case_id",
+          "description": "Stable identifier used in wave response rows, preregistrations, analysis scripts, and reports."
+        },
+        "event_name": {
+          "type": "string",
+          "minLength": 3
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "frontier_model_release",
+            "capability_demonstration",
+            "ai_safety_incident",
+            "labor_market_announcement",
+            "policy_or_regulatory_action",
+            "misinformation_or_deepfake_incident",
+            "infrastructure_or_access_change",
+            "other_prespecified",
+            "no_event"
+          ]
+        },
+        "event_description": {
+          "type": "string",
+          "minLength": 30,
+          "description": "Factual event description written without reference to observed ANX-Bench outcomes."
+        },
+        "event_timestamp": {
+          "$ref": "#/$defs/date_time_or_null",
+          "description": "Externally timestamped event time. Use null only when category is no_event."
+        },
+        "timestamp_source_url": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/uri_or_citation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Independent source for the event timestamp. Use null only when category is no_event."
+        },
+        "timestamp_source_type": {
+          "type": "string",
+          "enum": [
+            "official_release_note",
+            "regulatory_filing",
+            "public_incident_report",
+            "archived_news_wire",
+            "court_or_policy_document",
+            "academic_or_dataset_record",
+            "not_applicable_no_event",
+            "other_archived_source"
+          ]
+        },
+        "exposure_window": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/date_time_window"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "baseline_window": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/date_time_window"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "follow_up_windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/date_time_window"
+          }
+        },
+        "affected_domains": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "economic_vocational",
+              "epistemic",
+              "relational",
+              "existential_identity",
+              "autonomy_surveillance",
+              "safety_catastrophic",
+              "somatic_ambient"
+            ]
+          }
+        },
+        "event_adjudication": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/event_adjudication"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Prospective event classification metadata required for non-no_event records. Use null only for no_event records and templates that intentionally preserve no_event validity."
+        },
+        "competing_events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/competing_event"
+          }
+        },
+        "lock_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date this event record was locked before outcome inspection."
+        },
+        "amendment_history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/amendment"
+          },
+          "description": "Chronological record of post-creation corrections or amendments. Empty array means no amendments have been made."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "no_event"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "event_id": {
+                "const": "no_event"
+              },
+              "event_timestamp": {
+                "type": "null"
+              },
+              "timestamp_source_url": {
+                "type": "null"
+              },
+              "timestamp_source_type": {
+                "const": "not_applicable_no_event"
+              },
+              "exposure_window": {
+                "type": "null"
+              },
+              "baseline_window": {
+                "type": "null"
+              },
+              "follow_up_windows": {
+                "maxItems": 0
+              },
+              "affected_domains": {
+                "maxItems": 0
+              },
+              "competing_events": {
+                "maxItems": 0
+              },
+              "event_adjudication": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "required": [
+              "event_adjudication"
+            ],
+            "properties": {
+              "event_timestamp": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "timestamp_source_url": {
+                "$ref": "#/$defs/uri_or_citation"
+              },
+              "timestamp_source_type": {
+                "not": {
+                  "const": "not_applicable_no_event"
+                }
+              },
+              "exposure_window": {
+                "$ref": "#/$defs/date_time_window"
+              },
+              "baseline_window": {
+                "$ref": "#/$defs/date_time_window"
+              },
+              "follow_up_windows": {
+                "minItems": 1
+              },
+              "affected_domains": {
+                "minItems": 1
+              },
+              "event_adjudication": {
+                "$ref": "#/$defs/event_adjudication"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

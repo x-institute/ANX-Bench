@@ -1,0 +1,152 @@
+{
+  "$schema": "../../schema/release.schema.json",
+  "manifest_schema_version": "v0.1.0",
+  "benchmark_version": "v0.2.0",
+  "release_date": "2026-06-15",
+  "release_status": "citable",
+  "release_label": "ANX-Bench v0.2.0 somatic and ambient development pool release",
+  "item_schema": {
+    "path": "schema/item.schema.json",
+    "schema_version": "v0.1.0",
+    "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+  },
+  "methodology_documents": [
+    {
+      "document_type": "methodology",
+      "path": "docs/methodology.md",
+      "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+    },
+    {
+      "document_type": "psychometric_validation_protocol",
+      "path": "docs/psychometric_validation_protocol.md",
+      "sha256": "64f595f4f157f6e26f9c2497905af9fd033eb074586b8618285d336c916884fa"
+    },
+    {
+      "document_type": "preregistration_event_study",
+      "path": "docs/preregistration_event_study.md",
+      "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+    }
+  ],
+  "frozen_item_set": {
+    "item_directory": "items/v0.2",
+    "item_count": 4,
+    "items": [
+      {
+        "path": "items/v0.2/somatic_ambient/sleep_disruption_ai_news.json",
+        "item_id": "sleep_disruption_ai_news",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "009f91ba396dc0fc018c5fc55c90edea035dc605d762eefdf31be23136d277c5"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/body_vigilance_model_release.json",
+        "item_id": "body_vigilance_model_release",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "ced1835dbffe9fc73e9cde1034688c42d7b6ff5f82f17106ddd47f2e5ba083da"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/background_dread_ai_progress.json",
+        "item_id": "background_dread_ai_progress",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "00e8b1951ea03761a975b92394c5f72377a108fa7d3d32dc1fb37e54fe7e76fb"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/avoidance_after_ai_capability_demo.json",
+        "item_id": "avoidance_after_ai_capability_demo",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "f4a06cfbb9c8eea66e80567b95879eee0ba041817c11d245eb2fda29859c0f4d"
+      }
+    ]
+  },
+  "official_scored_items": [],
+  "scoring_eligibility": {
+    "official_scored_item_count": 0,
+    "eligibility_rule": "Official scoring requires release_status to be approved_scored, validation.scoring_eligible to be true, inclusion in official_scored_items, and consistency with the psychometric validation protocol.",
+    "aggregate_scoring_permitted": false
+  },
+  "checksums": {
+    "algorithm": "SHA-256",
+    "coverage": "Checksums cover the item schema, validation dossier schema, construct registry schema, event registry schema, v0.2 construct registry, methodology documents, preregistration protocol, psychometric validation protocol, planned somatic and ambient validation dossier, and every frozen v0.2 item file listed in this release manifest.",
+    "files": [
+      {
+        "path": "schema/item.schema.json",
+        "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+      },
+      {
+        "path": "schema/validation_dossier.schema.json",
+        "sha256": "48452a460506913af162a4728db13364b32fcca163f1b601305f7946f99fc0ef"
+      },
+      {
+        "path": "schema/construct_registry.schema.json",
+        "sha256": "033cfdd8e60c4f98753374ddc3a0fda831b5f24b0cb2e614d729716ea1d198db"
+      },
+      {
+        "path": "schema/event_registry.schema.json",
+        "sha256": "fd4dee2357be82d16d419537540bb2c6c40a5b8dc6528901fdf514b8f12bcdd8"
+      },
+      {
+        "path": "constructs/v0.2/registry.json",
+        "sha256": "10c50f1fd4b20019d65dc445fb8a80a0de06ed72cd4ad1318bac1125de1ec0a6"
+      },
+      {
+        "path": "docs/methodology.md",
+        "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+      },
+      {
+        "path": "docs/psychometric_validation_protocol.md",
+        "sha256": "64f595f4f157f6e26f9c2497905af9fd033eb074586b8618285d336c916884fa"
+      },
+      {
+        "path": "docs/preregistrations/anx_us_2026w01_calibration.md",
+        "sha256": "21803b8114d45939dc9a5600852a099da70f7b3523fba769a8b6e819034a618f"
+      },
+      {
+        "path": "docs/preregistration_event_study.md",
+        "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/sleep_disruption_ai_news.json",
+        "sha256": "009f91ba396dc0fc018c5fc55c90edea035dc605d762eefdf31be23136d277c5"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/body_vigilance_model_release.json",
+        "sha256": "ced1835dbffe9fc73e9cde1034688c42d7b6ff5f82f17106ddd47f2e5ba083da"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/background_dread_ai_progress.json",
+        "sha256": "00e8b1951ea03761a975b92394c5f72377a108fa7d3d32dc1fb37e54fe7e76fb"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/avoidance_after_ai_capability_demo.json",
+        "sha256": "f4a06cfbb9c8eea66e80567b95879eee0ba041817c11d245eb2fda29859c0f4d"
+      },
+      {
+        "path": "validation/v0.2/somatic_ambient_anxiety/wave1_calibration_dossier.json",
+        "sha256": "8ada95c9af18efe97a2671c961ee7f4e04cfaadc479cc5774951d74d0937325f"
+      }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "../../schema/event_registry.schema.json",
+  "registry_schema_version": "v0.1.0",
+  "registry_version": "v0.4.0",
+  "benchmark_release_line": "v0.4",
+  "effective_benchmark_version": "v0.4.0",
+  "wave_id": "anx_us_2026w04_somatic",
+  "registry_status": "template",
+  "registry_lock_date": "2026-06-16",
+  "outcome_inspection_status": "not_inspected",
+  "events": [
+    {
+      "event_id": "no_event",
+      "event_name": "No qualifying AI capability event assigned yet for Wave 4 somatic template",
+      "category": "no_event",
+      "event_description": "This template registry reserves the event-study contract for anx_us_2026w04_somatic before any qualifying AI capability event is selected. The placeholder record is intentionally encoded as no_event so event_timestamp, timestamp_source_url, baseline_window, exposure_window, follow_up_windows, affected_domains, event_adjudication, and competing_events remain null-safe under the current schema. For a future non-no_event record, event_adjudication must be replaced with a complete prospective adjudication object: qualifies states rubric eligibility; severity_tier states the pre-outcome salience tier; capability_domain states the primary AI capability area; public_reach_tier states likely exposure; novelty_tier states capability-reference novelty; affected_domain_rationale explains the domain mapping without outcome data; coder_ids lists independent coders; coder_disagreements records material disagreements or their absence; reconciliation_decision records the final pre-lock decision; source_count counts independent classification sources. A confirmatory event-study registry must replace this record with a fully sourced, UTC timestamped event record, complete baseline and exposure windows, prespecified follow-up windows, affected domains, competing-event review, adjudication metadata, lock date, and amendment history before outcome inspection.",
+      "event_timestamp": null,
+      "timestamp_source_url": null,
+      "timestamp_source_type": "not_applicable_no_event",
+      "baseline_window": null,
+      "exposure_window": null,
+      "follow_up_windows": [],
+      "affected_domains": [],
+      "event_adjudication": null,
+      "competing_events": [],
+      "lock_date": "2026-06-16",
+      "amendment_history": []
+    }
+  ]
+}

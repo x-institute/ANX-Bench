@@ -1,0 +1,328 @@
+{
+  "$schema": "../../schema/release.schema.json",
+  "manifest_schema_version": "v0.1.0",
+  "benchmark_version": "v0.1.0",
+  "release_date": "2026-06-15",
+  "release_status": "citable",
+  "release_label": "ANX-Bench v0.1.0 exemplar and development release",
+  "item_schema": {
+    "path": "schema/item.schema.json",
+    "schema_version": "v0.1.0",
+    "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+  },
+  "methodology_documents": [
+    {
+      "document_type": "methodology",
+      "path": "docs/methodology.md",
+      "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+    },
+    {
+      "document_type": "psychometric_validation_protocol",
+      "path": "docs/psychometric_validation_protocol.md",
+      "sha256": "64f595f4f157f6e26f9c2497905af9fd033eb074586b8618285d336c916884fa"
+    },
+    {
+      "document_type": "preregistration_event_study",
+      "path": "docs/preregistration_event_study.md",
+      "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+    }
+  ],
+  "frozen_item_set": {
+    "item_directory": "items/v0.1",
+    "item_count": 14,
+    "items": [
+      {
+        "path": "items/v0.1/autonomy_surveillance/institutional_scoring_automation.json",
+        "item_id": "institutional_scoring_automation",
+        "item_version": "v0.1.0",
+        "domain": "autonomy_surveillance",
+        "construct": "autonomy_surveillance_ai_anxiety_anchor",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "aaa39c0ad6c67fee96d00afab70f46be61518ca55aa3f97577fde7e74317b8a2"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/job_displacement_radiology.json",
+        "item_id": "job_displacement_radiology",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "anticipated_job_displacement_anxiety",
+        "release_status": "exemplar",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "5caf960899373c5d7357794682e19ab89c554bef4d4842344e2b3b98a6eb19c6"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/retraining_pressure_accounting.json",
+        "item_id": "retraining_pressure_accounting",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "36412be8662d7284bfc9804b1e26364b9def046a30777d6e17ffa73dcdbc62fc"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/skill_obsolescence_software.json",
+        "item_id": "skill_obsolescence_software",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "b08e3f205a990199cf790540fb6b54d2f0d2a40424d12cf37e4797e5c175d92d"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/status_loss_creative_work.json",
+        "item_id": "status_loss_creative_work",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "14dd4d6772c145fbdeca21920d65b46d667936ad015559e56e2505287e0edcfe"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/wage_pressure_customer_support.json",
+        "item_id": "wage_pressure_customer_support",
+        "item_version": "v0.1.0",
+        "domain": "economic_vocational",
+        "construct": "economic_vocational_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "6f696f1fead12e79e2564b54d24c462ca9add0911327549915f82914a116c142"
+      },
+      {
+        "path": "items/v0.1/epistemic/ai_expert_claim_conflict.json",
+        "item_id": "ai_expert_claim_conflict",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "ce6140461f059fdcc5d5fc0fe10d51be9de88e32f99066557f46647b0913ed97"
+      },
+      {
+        "path": "items/v0.1/epistemic/deepfake_evidence_trust.json",
+        "item_id": "deepfake_evidence_trust",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "80336ae0c2eb0f25e097f19f9f23ea7261dc090a4d9ac8d829762872fe209edb"
+      },
+      {
+        "path": "items/v0.1/epistemic/personalized_misinformation_targeting.json",
+        "item_id": "personalized_misinformation_targeting",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "9d5e7ca2c7c2aa534aa29043efca0c84181edc56f7998133ce03ee43762b32d3"
+      },
+      {
+        "path": "items/v0.1/epistemic/synthetic_news_provenance.json",
+        "item_id": "synthetic_news_provenance",
+        "item_version": "v0.1.0",
+        "domain": "epistemic",
+        "construct": "epistemic_trust_anxiety",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "9bcea9b0dda9ef3fbc90b1edfe8d2d17d34bd2dec74fc50cfbb748f3d20f2b05"
+      },
+      {
+        "path": "items/v0.1/existential_identity/creativity_status_displacement.json",
+        "item_id": "creativity_status_displacement",
+        "item_version": "v0.1.0",
+        "domain": "existential_identity",
+        "construct": "existential_identity_ai_anxiety_anchor",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "cba64048519b211d468f3e846a766840f2558e68184f89990b4288cbb84a061a"
+      },
+      {
+        "path": "items/v0.1/relational/child_companion_attachment.json",
+        "item_id": "child_companion_attachment",
+        "item_version": "v0.1.0",
+        "domain": "relational",
+        "construct": "relational_ai_anxiety_anchor",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "44a04bf28abbba9ec10b4f15d73ea5b86a33f70d6f94f0c315312fcbb31f7110"
+      },
+      {
+        "path": "items/v0.1/safety_catastrophic/ai_enabled_systemic_harm.json",
+        "item_id": "ai_enabled_systemic_harm",
+        "item_version": "v0.1.0",
+        "domain": "safety_catastrophic",
+        "construct": "safety_catastrophic_ai_anxiety_anchor",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "680c8e8c96a4d66aaecc648aa95558caf89ce59f6ddbb14cd74f83598b9960c8"
+      },
+      {
+        "path": "items/v0.1/somatic_ambient/ambient_bodily_unease.json",
+        "item_id": "ambient_bodily_unease",
+        "item_version": "v0.1.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_ai_anxiety_anchor",
+        "release_status": "development_only",
+        "validation": {
+          "scoring_eligible": false
+        },
+        "sha256": "33a77d2e18c568d6f9f9a1c6f8439a79d657a73548e1bb17dc6d20b283eb9333"
+      }
+    ]
+  },
+  "official_scored_items": [],
+  "scoring_eligibility": {
+    "official_scored_item_count": 0,
+    "eligibility_rule": "Official scoring requires release_status to be approved_scored, validation.scoring_eligible to be true, inclusion in official_scored_items, and consistency with the psychometric validation protocol.",
+    "aggregate_scoring_permitted": false
+  },
+  "checksums": {
+    "algorithm": "SHA-256",
+    "coverage": "Checksums cover the item schema, validation dossier schema, construct registry schema, event registry schema, versioned construct registry, methodology documents, preregistration protocol, psychometric validation protocol, frozen fielding instrument packet, event registry template, validation dossiers, and every frozen item file listed in this release manifest.",
+    "files": [
+      {
+        "path": "schema/item.schema.json",
+        "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+      },
+      {
+        "path": "schema/validation_dossier.schema.json",
+        "sha256": "48452a460506913af162a4728db13364b32fcca163f1b601305f7946f99fc0ef"
+      },
+      {
+        "path": "schema/construct_registry.schema.json",
+        "sha256": "033cfdd8e60c4f98753374ddc3a0fda831b5f24b0cb2e614d729716ea1d198db"
+      },
+      {
+        "path": "schema/event_registry.schema.json",
+        "sha256": "fd4dee2357be82d16d419537540bb2c6c40a5b8dc6528901fdf514b8f12bcdd8"
+      },
+      {
+        "path": "constructs/v0.1/registry.json",
+        "sha256": "a6c16362d901ac85c9b3b1a6a9f335f1da412f4d9c903f4e266f1e2407bd24ab"
+      },
+      {
+        "path": "docs/methodology.md",
+        "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+      },
+      {
+        "path": "docs/psychometric_validation_protocol.md",
+        "sha256": "64f595f4f157f6e26f9c2497905af9fd033eb074586b8618285d336c916884fa"
+      },
+      {
+        "path": "docs/preregistrations/anx_us_2026w01_calibration.md",
+        "sha256": "21803b8114d45939dc9a5600852a099da70f7b3523fba769a8b6e819034a618f"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w01_instrument.md",
+        "sha256": "b301897b513b9d761719ffd96a5ad74b6ef870eaf5a78af5e1cf54b9706c0e74"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w01_codebook.md",
+        "sha256": "645bd18366d7a3a660044f18c894a58b04e10ab209be1a3c8c1c4f7f43477ce5"
+      },
+      {
+        "path": "docs/preregistration_event_study.md",
+        "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+      },
+      {
+        "path": "events/v0.1/anx_us_2026w01_event_registry.template.json",
+        "sha256": "7feb1526ea0cd5c9360b6a72beb9e75370327df1fb4de23d4e6bef05c9e48ce9"
+      },
+      {
+        "path": "items/v0.1/autonomy_surveillance/institutional_scoring_automation.json",
+        "sha256": "aaa39c0ad6c67fee96d00afab70f46be61518ca55aa3f97577fde7e74317b8a2"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/job_displacement_radiology.json",
+        "sha256": "5caf960899373c5d7357794682e19ab89c554bef4d4842344e2b3b98a6eb19c6"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/retraining_pressure_accounting.json",
+        "sha256": "36412be8662d7284bfc9804b1e26364b9def046a30777d6e17ffa73dcdbc62fc"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/skill_obsolescence_software.json",
+        "sha256": "b08e3f205a990199cf790540fb6b54d2f0d2a40424d12cf37e4797e5c175d92d"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/status_loss_creative_work.json",
+        "sha256": "14dd4d6772c145fbdeca21920d65b46d667936ad015559e56e2505287e0edcfe"
+      },
+      {
+        "path": "items/v0.1/economic_vocational/wage_pressure_customer_support.json",
+        "sha256": "6f696f1fead12e79e2564b54d24c462ca9add0911327549915f82914a116c142"
+      },
+      {
+        "path": "items/v0.1/epistemic/ai_expert_claim_conflict.json",
+        "sha256": "ce6140461f059fdcc5d5fc0fe10d51be9de88e32f99066557f46647b0913ed97"
+      },
+      {
+        "path": "items/v0.1/epistemic/deepfake_evidence_trust.json",
+        "sha256": "80336ae0c2eb0f25e097f19f9f23ea7261dc090a4d9ac8d829762872fe209edb"
+      },
+      {
+        "path": "items/v0.1/epistemic/personalized_misinformation_targeting.json",
+        "sha256": "9d5e7ca2c7c2aa534aa29043efca0c84181edc56f7998133ce03ee43762b32d3"
+      },
+      {
+        "path": "items/v0.1/epistemic/synthetic_news_provenance.json",
+        "sha256": "9bcea9b0dda9ef3fbc90b1edfe8d2d17d34bd2dec74fc50cfbb748f3d20f2b05"
+      },
+      {
+        "path": "items/v0.1/existential_identity/creativity_status_displacement.json",
+        "sha256": "cba64048519b211d468f3e846a766840f2558e68184f89990b4288cbb84a061a"
+      },
+      {
+        "path": "items/v0.1/relational/child_companion_attachment.json",
+        "sha256": "44a04bf28abbba9ec10b4f15d73ea5b86a33f70d6f94f0c315312fcbb31f7110"
+      },
+      {
+        "path": "items/v0.1/safety_catastrophic/ai_enabled_systemic_harm.json",
+        "sha256": "680c8e8c96a4d66aaecc648aa95558caf89ce59f6ddbb14cd74f83598b9960c8"
+      },
+      {
+        "path": "items/v0.1/somatic_ambient/ambient_bodily_unease.json",
+        "sha256": "33a77d2e18c568d6f9f9a1c6f8439a79d657a73548e1bb17dc6d20b283eb9333"
+      },
+      {
+        "path": "validation/v0.1/economic_vocational_anxiety/wave1_calibration_dossier.json",
+        "sha256": "3b1e468f3cce7dc1dcf4b3deacc28788559c7e36abca68d9ca91a767bc03e885"
+      },
+      {
+        "path": "validation/v0.1/epistemic_trust_anxiety/wave1_calibration_dossier.json",
+        "sha256": "3fc4c570430b17a7b95bbf1c1631b8207aa5cb02e0b9fee2a65d95f33b9e5c57"
+      }
+    ]
+  }
+}

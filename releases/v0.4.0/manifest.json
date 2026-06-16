@@ -1,0 +1,152 @@
+{
+  "$schema": "../../schema/release.schema.json",
+  "manifest_schema_version": "v0.1.0",
+  "benchmark_version": "v0.4.0",
+  "release_date": "2026-06-16",
+  "release_status": "frozen_candidate",
+  "release_label": "ANX-Bench v0.4.0 somatic event-study candidate packet",
+  "item_schema": {
+    "path": "schema/item.schema.json",
+    "schema_version": "v0.1.0",
+    "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+  },
+  "methodology_documents": [
+    {
+      "document_type": "methodology",
+      "path": "docs/methodology.md",
+      "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+    },
+    {
+      "document_type": "psychometric_validation_protocol",
+      "path": "docs/psychometric_validation_protocol.md",
+      "sha256": "c8f7860b730279d1f772e1c87fe09d3732676c765461b8cdb3b68bc8648d0358"
+    },
+    {
+      "document_type": "preregistration_event_study",
+      "path": "docs/preregistration_event_study.md",
+      "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+    }
+  ],
+  "frozen_item_set": {
+    "item_directory": "items/v0.2",
+    "item_count": 4,
+    "items": [
+      {
+        "path": "items/v0.2/somatic_ambient/sleep_disruption_ai_news.json",
+        "item_id": "sleep_disruption_ai_news",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "approved_scored",
+        "validation": {
+          "scoring_eligible": true
+        },
+        "sha256": "b914e7ed49c798675e0be6c25fb48ea12722ad61773afce8d21d1455ba1bf74c"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/body_vigilance_model_release.json",
+        "item_id": "body_vigilance_model_release",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "approved_scored",
+        "validation": {
+          "scoring_eligible": true
+        },
+        "sha256": "ad69f92e0772d37a0fc9f9d11fa0bd0049d13f40b16a4e162346454c4e82faaa"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/background_dread_ai_progress.json",
+        "item_id": "background_dread_ai_progress",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "approved_scored",
+        "validation": {
+          "scoring_eligible": true
+        },
+        "sha256": "0957373578439a51d307bbf524e731f57f469c1e3a0d94a55a13839b361379bd"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/avoidance_after_ai_capability_demo.json",
+        "item_id": "avoidance_after_ai_capability_demo",
+        "item_version": "v0.2.0",
+        "domain": "somatic_ambient",
+        "construct": "somatic_ambient_anxiety",
+        "release_status": "approved_scored",
+        "validation": {
+          "scoring_eligible": true
+        },
+        "sha256": "4577752724f240e58572f69a6abeaa22da8adeac946715591c19356d6274767e"
+      }
+    ]
+  },
+  "official_scored_items": [],
+  "scoring_eligibility": {
+    "official_scored_item_count": 0,
+    "eligibility_rule": "ANX-Bench v0.4.0 is a frozen event-study candidate packet only. It points to the v0.3.1 four-item somatic_ambient_anxiety scored item set for preregistered field administration, but it does not itself authorize new item-level, construct, domain, overall, longitudinal, or event-study benchmark claims until a qualifying event registry is completed and locked before outcome inspection, observed event evidence is added, and the preregistered analysis thresholds pass.",
+    "aggregate_scoring_permitted": false
+  },
+  "checksums": {
+    "algorithm": "SHA-256",
+    "coverage": "Checksums cover the v0.4.0 frozen candidate release manifest dependencies: release and item schema references, construct registry, standing methodology documents, the v0.3.1 scored somatic item files reused for field administration, the Wave 4 somatic event-study preregistration, event registry template, fielding instrument, and machine-readable analysis plan. Observed event evidence is intentionally absent from this frozen candidate packet, and all new event-study claims remain disabled until a later evidence-bound release.",
+    "files": [
+      {
+        "path": "schema/item.schema.json",
+        "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+      },
+      {
+        "path": "schema/release.schema.json",
+        "sha256": "f4d347b6c0bfbee787f1346e56eee16835782cab62bd1987a23dc65bab7e520b"
+      },
+      {
+        "path": "constructs/v0.3/registry.json",
+        "sha256": "8d5361d81f37a61b3ef49b69e79c96331de4f6ad87d587b12348b34b76b86bce"
+      },
+      {
+        "path": "docs/methodology.md",
+        "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+      },
+      {
+        "path": "docs/psychometric_validation_protocol.md",
+        "sha256": "c8f7860b730279d1f772e1c87fe09d3732676c765461b8cdb3b68bc8648d0358"
+      },
+      {
+        "path": "docs/preregistration_event_study.md",
+        "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/sleep_disruption_ai_news.json",
+        "sha256": "b914e7ed49c798675e0be6c25fb48ea12722ad61773afce8d21d1455ba1bf74c"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/body_vigilance_model_release.json",
+        "sha256": "ad69f92e0772d37a0fc9f9d11fa0bd0049d13f40b16a4e162346454c4e82faaa"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/background_dread_ai_progress.json",
+        "sha256": "0957373578439a51d307bbf524e731f57f469c1e3a0d94a55a13839b361379bd"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/avoidance_after_ai_capability_demo.json",
+        "sha256": "4577752724f240e58572f69a6abeaa22da8adeac946715591c19356d6274767e"
+      },
+      {
+        "path": "docs/preregistrations/anx_us_2026w04_somatic_event_study.md",
+        "sha256": "262d0029c8d72f22a178204b78f1b16a19440a7c5ad401837f389ee19171de04"
+      },
+      {
+        "path": "events/v0.4/anx_us_2026w04_somatic_event_registry.template.json",
+        "sha256": "00271a95790b28590d2764c2555c8078b6ec5f220c6bca43f0bfe9d4a6533526"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w04_somatic_event_instrument.md",
+        "sha256": "132712514aebf16aca363d06970a08a33593559178fb5f24d698a356b3cd488d"
+      },
+      {
+        "path": "analysis/v0.4/somatic_event_study/wave4_event_study_analysis_plan.json",
+        "sha256": "963277c45d30809adc38298dd2290ef4cfb9ab32deb845482c4244d725cdc6d5"
+      }
+    ]
+  }
+}

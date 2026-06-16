@@ -1,0 +1,560 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/aggregate_score_proposal.schema.json",
+  "title": "ANX-Bench Aggregate Score Proposal Schema",
+  "description": "Preregistration and review contract for any proposed overall, cross-domain, or domain-combined ANX-Bench score. A valid proposal can describe a possible aggregate score, but it does not itself authorize scoring.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "proposal_schema_version",
+    "proposal_id",
+    "proposal_status",
+    "benchmark_version_target",
+    "proposal_date",
+    "preregistration_date",
+    "source_bridge_evidence",
+    "contributing_constructs",
+    "contributing_items",
+    "scoring_model",
+    "weights",
+    "missingness_rules",
+    "uncertainty_reporting",
+    "invariance_dif_limits",
+    "claim_scope",
+    "blocked_uses",
+    "scoring_authorized",
+    "reviewer_signoff"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "proposal_schema_version": {
+      "type": "string",
+      "const": "v0.1.0"
+    },
+    "proposal_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "proposal_status": {
+      "type": "string",
+      "enum": [
+        "preregistered_template",
+        "observed_proposal",
+        "withdrawn",
+        "rejected",
+        "superseded"
+      ]
+    },
+    "benchmark_version_target": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+    },
+    "proposal_date": {
+      "$ref": "#/$defs/nullable_date"
+    },
+    "preregistration_date": {
+      "$ref": "#/$defs/nullable_date"
+    },
+    "source_bridge_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bridge_evidence_path",
+        "bridge_evidence_id",
+        "required_bridge_decision",
+        "observed_bridge_required",
+        "bridge_evidence_status",
+        "bridge_decision",
+        "bridge_scoring_authorized",
+        "bridge_evidence_is_authorization"
+      ],
+      "properties": {
+        "bridge_evidence_path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "bridge_evidence_id": {
+          "$ref": "#/$defs/nullable_identifier"
+        },
+        "required_bridge_decision": {
+          "type": "string",
+          "const": "bridge_supported_for_overall_readiness_review"
+        },
+        "observed_bridge_required": {
+          "type": "boolean",
+          "const": true
+        },
+        "bridge_evidence_status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "observed",
+            null
+          ]
+        },
+        "bridge_decision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "bridge_supported_for_overall_readiness_review",
+            null
+          ]
+        },
+        "bridge_scoring_authorized": {
+          "$ref": "#/$defs/nullable_boolean"
+        },
+        "bridge_evidence_is_authorization": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "contributing_constructs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/contributing_construct"
+      }
+    },
+    "contributing_items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/contributing_item"
+      }
+    },
+    "scoring_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_family",
+        "estimand",
+        "score_scale",
+        "aggregation_sequence",
+        "source_score_inputs",
+        "release_authorization"
+      ],
+      "properties": {
+        "model_family": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "estimand": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "score_scale": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "aggregation_sequence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "source_score_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "release_authorization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "release_approval_required",
+            "release_manifest_path",
+            "scoring_authorized"
+          ],
+          "properties": {
+            "release_approval_required": {
+              "type": "boolean",
+              "const": true
+            },
+            "release_manifest_path": {
+              "$ref": "#/$defs/nullable_repository_path"
+            },
+            "scoring_authorized": {
+              "type": "boolean",
+              "const": false
+            }
+          }
+        }
+      }
+    },
+    "weights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "construct_weighting",
+        "domain_weighting",
+        "population_weighting",
+        "sensitivity_weights"
+      ],
+      "properties": {
+        "construct_weighting": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "domain_weighting": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "population_weighting": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "sensitivity_weights": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "missingness_rules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_missingness_rule",
+        "item_missingness_rule",
+        "construct_missingness_rule",
+        "imputation_rule",
+        "missingness_reporting"
+      ],
+      "properties": {
+        "unit_missingness_rule": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "item_missingness_rule": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "construct_missingness_rule": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "imputation_rule": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "missingness_reporting": {
+          "$ref": "#/$defs/nullable_text"
+        }
+      }
+    },
+    "uncertainty_reporting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "standard_error_method",
+        "confidence_interval_method",
+        "design_effect_reporting",
+        "bootstrap_or_replication_plan",
+        "minimum_reported_fields"
+      ],
+      "properties": {
+        "standard_error_method": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "confidence_interval_method": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "design_effect_reporting": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "bootstrap_or_replication_plan": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "minimum_reported_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "invariance_dif_limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_invariance_level",
+        "failed_comparison_rule",
+        "unresolved_dif_rule",
+        "affected_claim_limitation",
+        "observed_unresolved_material_dif_item_count",
+        "observed_failed_key_invariance_comparison_count"
+      ],
+      "properties": {
+        "required_invariance_level": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "failed_comparison_rule": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "unresolved_dif_rule": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "affected_claim_limitation": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "observed_unresolved_material_dif_item_count": {
+          "$ref": "#/$defs/nullable_integer"
+        },
+        "observed_failed_key_invariance_comparison_count": {
+          "$ref": "#/$defs/nullable_integer"
+        }
+      }
+    },
+    "claim_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "population_scope",
+        "construct_scope",
+        "time_scope",
+        "permitted_claims",
+        "explicit_claim_limits",
+        "prohibited_claims_acknowledged"
+      ],
+      "properties": {
+        "population_scope": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "construct_scope": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "time_scope": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "permitted_claims": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "explicit_claim_limits": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "prohibited_claims_acknowledged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "blocked_uses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "scoring_authorized": {
+      "type": "boolean",
+      "const": false
+    },
+    "reviewer_signoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "psychometric_reviewer",
+        "release_reviewer",
+        "signed_date",
+        "decision",
+        "signoff_statement"
+      ],
+      "properties": {
+        "psychometric_reviewer": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "release_reviewer": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "signed_date": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "decision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "proposal_ready_for_release_review",
+            "proposal_blocked",
+            null
+          ]
+        },
+        "signoff_statement": {
+          "$ref": "#/$defs/nullable_text"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nullable_boolean": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "nullable_integer": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "nullable_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "nullable_identifier": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "nullable_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "repository_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._/\\-]+$"
+    },
+    "nullable_repository_path": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._/\\-]+$"
+    },
+    "contributing_construct": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "construct_id",
+        "domain_id",
+        "source_release",
+        "source_construct_approval",
+        "included_item_ids",
+        "bridge_role",
+        "minimum_items_required"
+      ],
+      "properties": {
+        "construct_id": {
+          "$ref": "#/$defs/nullable_identifier"
+        },
+        "domain_id": {
+          "$ref": "#/$defs/nullable_identifier"
+        },
+        "source_release": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "source_construct_approval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "approval_status",
+            "approved_for_aggregate_source",
+            "approval_artifact_path",
+            "approval_date"
+          ],
+          "properties": {
+            "approval_status": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "approved_scored",
+                null
+              ]
+            },
+            "approved_for_aggregate_source": {
+              "$ref": "#/$defs/nullable_boolean"
+            },
+            "approval_artifact_path": {
+              "$ref": "#/$defs/nullable_repository_path"
+            },
+            "approval_date": {
+              "$ref": "#/$defs/nullable_date"
+            }
+          }
+        },
+        "included_item_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+          }
+        },
+        "bridge_role": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "minimum_items_required": {
+          "$ref": "#/$defs/nullable_integer"
+        }
+      }
+    },
+    "contributing_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "item_version",
+        "construct_id",
+        "domain_id",
+        "source_item_status",
+        "scoring_key_version_locked"
+      ],
+      "properties": {
+        "item_id": {
+          "$ref": "#/$defs/nullable_identifier"
+        },
+        "item_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "construct_id": {
+          "$ref": "#/$defs/nullable_identifier"
+        },
+        "domain_id": {
+          "$ref": "#/$defs/nullable_identifier"
+        },
+        "source_item_status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "approved_scored",
+            null
+          ]
+        },
+        "scoring_key_version_locked": {
+          "$ref": "#/$defs/nullable_boolean"
+        }
+      }
+    }
+  }
+}

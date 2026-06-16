@@ -1,0 +1,30 @@
+{
+  "$schema": "../../schema/event_registry.schema.json",
+  "registry_schema_version": "v0.1.0",
+  "registry_version": "v0.8.0",
+  "benchmark_release_line": "v0.8",
+  "effective_benchmark_version": "v0.8.0",
+  "wave_id": "anx_us_2026w08_full_domain_bridge",
+  "registry_status": "frozen",
+  "registry_lock_date": "2026-06-16",
+  "outcome_inspection_status": "not_inspected",
+  "events": [
+    {
+      "event_id": "no_event",
+      "event_name": "No AI capability event assigned to Wave 8 full-domain bridge",
+      "category": "no_event",
+      "event_description": "This registry records that anx_us_2026w08_full_domain_bridge is a non-event psychometric bridge wave for full-domain validation across all seven ANX-Bench domains. It is intentionally not anchored to a frontier model release, capability demonstration, labor-market announcement, deepfake incident, misinformation incident, surveillance deployment, safety incident, regulatory action, public infrastructure event, benchmark release, or any other time-localized AI event. The registry is locked so Wave 8 responses cannot later be retrofitted into an event-study, capability-shock, before-after, baseline, follow-up, trend, or causal exposure design after outcome inspection.",
+      "event_timestamp": null,
+      "timestamp_source_url": null,
+      "timestamp_source_type": "not_applicable_no_event",
+      "exposure_window": null,
+      "baseline_window": null,
+      "follow_up_windows": [],
+      "affected_domains": [],
+      "event_adjudication": null,
+      "competing_events": [],
+      "lock_date": "2026-06-16",
+      "amendment_history": []
+    }
+  ]
+}

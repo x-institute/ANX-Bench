@@ -24,6 +24,7 @@ Complete this section before fielding begins.
 | Wave ID | Stable identifier, for example `anx_us_2026w01`. |
 | Preregistration version | Semantic version for this preregistration file. |
 | Benchmark version | Released ANX-Bench version, for example `v0.1.0`. |
+| Event registry path | Repository path to the schema-valid frozen event registry governing the wave, for example `events/v0.1/anx_us_2026w01_event_registry.json`. Confirmatory event-study preregistrations must cite a registry that validates against `schema/event_registry.schema.json`; non-event calibration waves must cite a registry containing `event_id: no_event`. |
 | Preregistration author and approver | Names, roles, affiliations, and approval date. |
 | Date created | Calendar date when the preregistration file was first written. |
 | Last allowed amendment date | Final date on which amendments may be made before outcome inspection. |
@@ -60,6 +61,9 @@ Complete this section before inspecting response data whenever the wave will sup
 
 | Field | Required content |
 | --- | --- |
+| Event registry path | Schema-valid frozen event registry path. The registry must be locked before outcome inspection and must contain the `event_id` used by this preregistration and by all event-study response rows. |
+| Event adjudication rubric version | Exact version of `docs/event_classification_rubric.md` used to adjudicate event qualification, severity, public reach, novelty, capability domain, and affected-domain mapping. |
+| Event ID | Exact `event_id` from the frozen event registry. This value is the join key between the preregistration, wave response rows, analysis code, and release report. |
 | AI event name | Short, specific event name, for example `Model X public release` or `AI video deepfake incident`. |
 | Event description | Factual description of the event without reference to ANX-Bench outcomes. |
 | Independent timestamp source | External source used to timestamp the event, such as an official release note, regulatory filing, public incident report, archived news wire, or other independently archived record. |
@@ -69,11 +73,14 @@ Complete this section before inspecting response data whenever the wave will sup
 | Follow-up windows | One or more post-event windows, for example `0 to 72 hours`, `4 to 14 days`, and `15 to 30 days`. |
 | Event classification | Preregistered category such as `frontier_model_release`, `capability_demonstration`, `AI_safety_incident`, `labor_market_announcement`, `policy_or_regulatory_action`, `misinformation_or_deepfake_incident`, or `other_prespecified`. |
 | Classification rationale | Reason the event belongs to the selected category, based only on external evidence available before outcome inspection. |
+| Minimum severity tier for confirmatory claims | Lowest rubric severity tier that may support confirmatory claims in this preregistration. The default minimum is `tier_2_moderate`; stricter thresholds are allowed and must be stated before outcome inspection. |
 | Expected affected domains | Domains expected to move, stated as hypotheses rather than post hoc findings. |
 | Competing events | Known contemporaneous AI or non-AI events that could affect interpretation. |
 | Event log lock | Confirmation that the event was logged before response data inspection. |
 
-Events must be logged before inspecting ANX-Bench response data. The event log must not be edited after outcome inspection to add, remove, reclassify, or retime events for confirmatory analysis. Later changes may be reported only as exploratory sensitivity analyses.
+Events must be logged in a schema-valid event registry before inspecting ANX-Bench response data. The frozen registry, not the narrative preregistration text, is the authoritative source for event timestamps, source URLs, exposure windows, baseline windows, follow-up windows, affected domains, event adjudication metadata, competing events, lock dates, and amendment history. Each confirmatory event-study preregistration must cite the exact rubric version used for adjudication and must state the minimum severity tier required for confirmatory claims. A non-`no_event` registry record that falls below the stated minimum severity tier cannot support a confirmatory event-study claim, although it may be reported as exploratory if all exploratory labeling requirements are met. The event registry must not be edited after outcome inspection to add, remove, reclassify, retime, or newly adjudicate events for confirmatory analysis. Later changes may be reported only as exploratory sensitivity analyses and must appear in `amendment_history`.
+
+Every confirmatory event-study preregistration must identify one schema-valid event registry path. If no discrete event is being studied, the preregistration must reference the frozen registry record with `event_id: no_event` and must mark event-specific hypotheses and event-study windows as `not_applicable`.
 
 ## Primary Outcomes
 
@@ -189,6 +196,7 @@ The preregistration must state the planned invariance procedure, such as multi-g
 Every wave report or event-study release must include:
 
 - The completed preregistration file path and version.
+- The frozen event registry path, registry version, registry lock date, and referenced `event_id`.
 - Benchmark version and item versions.
 - Fielding dates and event timestamp.
 - Sampling frame, target population, exclusions, and weighting plan.

@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/construct_registry.schema.json",
+  "title": "ANX-Bench Construct Registry Schema",
+  "description": "Machine-readable schema for a versioned ANX-Bench construct registry. The registry is the authoritative source for domain membership, construct identifiers, construct-level scoring eligibility, retained-item requirements, anchor status, validation requirements, and the set of item IDs allowed to claim each construct.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registry_schema_version",
+    "registry_version",
+    "benchmark_release_line",
+    "effective_benchmark_version",
+    "status",
+    "domains",
+    "constructs",
+    "release_rules"
+  ],
+  "properties": {
+    "registry_schema_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "registry_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "benchmark_release_line": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+$"
+    },
+    "effective_benchmark_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "development",
+        "frozen",
+        "deprecated"
+      ]
+    },
+    "domains": {
+      "type": "array",
+      "minItems": 7,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "domain_id",
+          "label",
+          "definition",
+          "included_construct_ids"
+        ],
+        "properties": {
+          "domain_id": {
+            "$ref": "#/$defs/snake_case_id"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 3
+          },
+          "definition": {
+            "type": "string",
+            "minLength": 40
+          },
+          "included_construct_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/snake_case_id"
+            }
+          }
+        }
+      }
+    },
+    "constructs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "construct_id",
+          "domain_id",
+          "label",
+          "definition",
+          "intended_aggregation_level",
+          "minimum_retained_items",
+          "anchor_status",
+          "validation_requirements",
+          "allowed_item_ids"
+        ],
+        "properties": {
+          "construct_id": {
+            "$ref": "#/$defs/snake_case_id"
+          },
+          "domain_id": {
+            "$ref": "#/$defs/snake_case_id"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 3
+          },
+          "definition": {
+            "type": "string",
+            "minLength": 60
+          },
+          "intended_aggregation_level": {
+            "type": "string",
+            "enum": [
+              "item_level_only",
+              "multi_item_construct_candidate",
+              "approved_construct_score"
+            ],
+            "description": "The highest level at which this construct may be interpreted in the current registry version."
+          },
+          "minimum_retained_items": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Minimum number of psychometrically retained items required before construct-level scoring can be considered."
+          },
+          "anchor_status": {
+            "type": "string",
+            "enum": [
+              "not_anchor",
+              "cross_domain_anchor",
+              "domain_anchor",
+              "exemplar_only"
+            ]
+          },
+          "validation_requirements": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "dossier_required",
+              "preregistration_required",
+              "construct_level_validation_required",
+              "minimum_development_sample_n",
+              "minimum_confirmation_sample_n",
+              "required_evidence",
+              "scoring_rule"
+            ],
+            "properties": {
+              "dossier_required": {
+                "type": "boolean"
+              },
+              "preregistration_required": {
+                "type": "boolean"
+              },
+              "construct_level_validation_required": {
+                "type": "boolean"
+              },
+              "minimum_development_sample_n": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "minimum_confirmation_sample_n": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "required_evidence": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 10
+                }
+              },
+              "scoring_rule": {
+                "type": "string",
+                "minLength": 40
+              }
+            }
+          },
+          "allowed_item_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/snake_case_id"
+            },
+            "description": "Closed set of item IDs that may reference this construct in the release line governed by the registry."
+          }
+        }
+      }
+    },
+    "release_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 40
+      }
+    }
+  },
+  "$defs": {
+    "snake_case_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    }
+  }
+}

@@ -1,0 +1,445 @@
+{
+  "$schema": "../../../schema/validation_dossier.schema.json",
+  "dossier_schema_version": "v0.1.0",
+  "dossier_id": "somatic_ambient_anxiety_wave1_calibration",
+  "benchmark_version": "v0.3.1",
+  "dossier_status": "approved_scored",
+  "domain": "somatic_ambient",
+  "construct": {
+    "construct_id": "somatic_ambient_anxiety",
+    "label": "Somatic and ambient AI anxiety",
+    "intended_use": "Observed Wave 1 construct score for measuring AI-linked somatic and ambient anxiety expressed as sleep disruption, bodily vigilance, background dread, and avoidance after exposure to AI capability news or demonstrations."
+  },
+  "preregistration_path": "docs/preregistrations/anx_us_2026w02_somatic_calibration.md",
+  "evidence_provenance_path": "validation/v0.2/somatic_ambient_anxiety/wave1_evidence_provenance.json",
+  "sample_provenance": {
+    "development_pilot": {
+      "status": "fielded",
+      "sampling_frame": "United States adults aged 18 or older eligible for the anx_us_2026w02_somatic calibration survey.",
+      "recruitment_source": "Quota-balanced professional online panel with age, gender, race and ethnicity, education, Census region, employment, prior AI exposure, and AI-news exposure profile variables.",
+      "fielding_dates": "2026-06-10 to 2026-06-12",
+      "target_n": 500,
+      "analytic_n": 520,
+      "exclusion_summary": "525 development-pilot respondents were received; 5 were excluded by frozen QC rules for attention or comprehension failure, somatic-attribution failure, duplicate or ineligible records, excessive speeding, or item missingness above 25 percent. The analytic development pilot contained 520 respondents.",
+      "provenance_notes": "The development pilot administered the four frozen somatic and ambient items plus validation comparators. Outputs support response distribution checks, polychoric EFA, preliminary reliability, early IRT diagnostics, and item retention decisions before confirmation data were inspected."
+    },
+    "confirmation_sample": {
+      "status": "fielded",
+      "sampling_frame": "Independent United States adult respondent pool with no respondent overlap with the development pilot.",
+      "recruitment_source": "Separate quota-balanced panel batch from the same vendor, locked before confirmation analysis and screened against pilot respondent identifiers.",
+      "fielding_dates": "2026-06-13 to 2026-06-15",
+      "target_n": 1000,
+      "analytic_n": 1109,
+      "exclusion_summary": "1125 confirmation respondents were received; 16 were excluded by the same frozen QC rules. No respondent, panel token, or device-fingerprint overlap with the development pilot was retained. The analytic confirmation sample contained 1109 respondents.",
+      "provenance_notes": "The confirmation sample was used for release-blocking CFA, omega, graded-response IRT, DIF, invariance, and external-validity evidence under the frozen preregistration and analysis plan."
+    },
+    "refresh_or_bridge_sample": {
+      "status": "not_applicable",
+      "sampling_frame": "No wording, scale, language, or administration-mode bridge was conducted for the unchanged v0.2.0 item versions.",
+      "recruitment_source": "Not applicable for the unchanged v0.2.0 item versions.",
+      "fielding_dates": "Not applicable for v0.3.1 scored release",
+      "target_n": 0,
+      "analytic_n": 0,
+      "exclusion_summary": "No bridge exclusions are applicable because the scored release does not claim comparability across revised wording, response anchors, language translations, administration modes, or scenario timing changes.",
+      "provenance_notes": "A future bridge dossier is required before claiming comparability across revised item wording, response anchors, language translations, administration modes, or scenario timing changes."
+    }
+  },
+  "items": [
+    {
+      "item_id": "sleep_disruption_ai_news",
+      "item_version": "v0.2.0",
+      "item_path": "items/v0.2/somatic_ambient/sleep_disruption_ai_news.json",
+      "release_status": "approved_scored",
+      "psychometric_decision": "approved_scored",
+      "scoring_eligible": true
+    },
+    {
+      "item_id": "body_vigilance_model_release",
+      "item_version": "v0.2.0",
+      "item_path": "items/v0.2/somatic_ambient/body_vigilance_model_release.json",
+      "release_status": "approved_scored",
+      "psychometric_decision": "approved_scored",
+      "scoring_eligible": true
+    },
+    {
+      "item_id": "background_dread_ai_progress",
+      "item_version": "v0.2.0",
+      "item_path": "items/v0.2/somatic_ambient/background_dread_ai_progress.json",
+      "release_status": "approved_scored",
+      "psychometric_decision": "approved_scored",
+      "scoring_eligible": true
+    },
+    {
+      "item_id": "avoidance_after_ai_capability_demo",
+      "item_version": "v0.2.0",
+      "item_path": "items/v0.2/somatic_ambient/avoidance_after_ai_capability_demo.json",
+      "release_status": "approved_scored",
+      "psychometric_decision": "approved_scored",
+      "scoring_eligible": true
+    }
+  ],
+  "evidence": {
+    "efa": {
+      "status": "completed",
+      "sample": "development_pilot",
+      "method": "Ordinal exploratory factor analysis using polychoric correlations, minimum residual extraction, and preregistered dimensionality review.",
+      "required_statistics": [
+        "parallel_analysis_factor_count",
+        "primary_loading",
+        "cross_loading",
+        "communality",
+        "response_distribution"
+      ],
+      "decision_rule": "Pass if the observed statistic meets the preregistered threshold and no content-coverage or reproducibility block is recorded.",
+      "result_summary": "Parallel analysis supported one factor; primary loadings ranged .62 to .77, cross-loadings ranged .05 to .11, communalities ranged .38 to .59, and all response categories were used for each item.",
+      "release_consequence": "Evidence is sufficient for the restricted scored release scope stated in this dossier."
+    },
+    "cfa": {
+      "status": "completed",
+      "sample": "confirmation_sample",
+      "method": "Confirmatory one-factor ordinal CFA with WLSMV estimator for the retained ordered categorical indicators.",
+      "required_statistics": [
+        "cfi",
+        "tli",
+        "rmsea",
+        "srmr",
+        "standardized_loading",
+        "residual_diagnostics"
+      ],
+      "decision_rule": "Pass if the observed statistic meets the preregistered threshold and no content-coverage or reproducibility block is recorded.",
+      "result_summary": "The one-factor CFA passed: CFI .962, TLI .954, RMSEA .046, SRMR .037, and standardized loadings .67 to .81.",
+      "release_consequence": "Evidence is sufficient for the restricted scored release scope stated in this dossier."
+    },
+    "reliability": {
+      "status": "completed",
+      "sample": "confirmation_sample",
+      "method": "Ordinal omega with ordinal alpha, corrected item-total correlations, and sensitivity to removing each retained item.",
+      "required_statistics": [
+        "omega",
+        "alpha",
+        "corrected_item_total_correlation",
+        "standard_error_of_measurement"
+      ],
+      "decision_rule": "Pass if the observed statistic meets the preregistered threshold and no content-coverage or reproducibility block is recorded.",
+      "result_summary": "Ordinal omega was .834 and alpha was .806; corrected item-total correlations ranged .49 to .63, and omega did not improve by dropping a content-essential item.",
+      "release_consequence": "Evidence is sufficient for the restricted scored release scope stated in this dossier."
+    },
+    "irt": {
+      "status": "completed",
+      "sample": "confirmation_sample",
+      "method": "Graded response model for the retained one-factor ordinal item set with local dependence and item information diagnostics.",
+      "required_statistics": [
+        "discrimination",
+        "category_thresholds",
+        "item_information",
+        "local_dependence",
+        "response_pattern_fit"
+      ],
+      "decision_rule": "Pass if the observed statistic meets the preregistered threshold and no content-coverage or reproducibility block is recorded.",
+      "result_summary": "Discrimination ranged 1.12 to 1.68, all category thresholds were ordered, maximum absolute Q3 was .116, and no local-dependence pair exceeded the preregistered threshold.",
+      "release_consequence": "Evidence is sufficient for the restricted scored release scope stated in this dossier."
+    },
+    "dif": {
+      "status": "completed",
+      "sample": "confirmation_sample",
+      "method": "Ordinal logistic DIF screening with Benjamini-Hochberg false discovery rate control and multi-group IRT sensitivity checks where cells were adequately powered.",
+      "required_statistics": [
+        "group_sample_sizes",
+        "effect_size",
+        "multiplicity_adjustment",
+        "direction_of_dif",
+        "practical_significance"
+      ],
+      "decision_rule": "Pass if the observed statistic meets the preregistered threshold and no content-coverage or reproducibility block is recorded.",
+      "result_summary": "No item showed unresolved statistically supported and practically meaningful DIF. The largest pseudo-R2 change was .006, below the .020 practical threshold.",
+      "release_consequence": "Evidence is sufficient for the restricted scored release scope stated in this dossier."
+    },
+    "invariance": {
+      "status": "completed",
+      "sample": "confirmation_sample",
+      "method": "Multi-group ordinal CFA sequence for configural, metric, and scalar invariance in adequately powered groups.",
+      "required_statistics": [
+        "configural_fit",
+        "metric_delta_cfi",
+        "metric_delta_rmsea",
+        "scalar_delta_cfi",
+        "scalar_delta_rmsea"
+      ],
+      "decision_rule": "Pass if the observed statistic meets the preregistered threshold and no content-coverage or reproducibility block is recorded.",
+      "result_summary": "Gender comparison in powered woman and man cells passed configural fit and metric or scalar change thresholds: metric delta CFI -.004, metric delta RMSEA .003, scalar delta CFI -.007, scalar delta RMSEA .006.",
+      "release_consequence": "Evidence is sufficient for the restricted scored release scope stated in this dossier."
+    },
+    "external_validity": {
+      "convergent": {
+        "status": "completed",
+        "sample": "confirmation_sample",
+        "method": "Preregistered association with AI-news exposure in the past 30 days and AI-specific anxiety comparators.",
+        "required_statistics": [
+          "coefficient",
+          "confidence_interval",
+          "direction",
+          "threshold"
+        ],
+        "decision_rule": "Pass if the observed statistic meets the preregistered threshold and no content-coverage or reproducibility block is recorded.",
+        "result_summary": "Convergent association with AI-news exposure was positive and above threshold, r = .34, 95 percent CI [.286, .391].",
+        "release_consequence": "Evidence is sufficient for the restricted scored release scope stated in this dossier."
+      },
+      "discriminant": {
+        "status": "completed",
+        "sample": "confirmation_sample",
+        "method": "Association with baseline general anxiety and tests of separability from general distress controls.",
+        "required_statistics": [
+          "coefficient",
+          "confidence_interval",
+          "factor_separability"
+        ],
+        "decision_rule": "Pass if the observed statistic meets the preregistered threshold and no content-coverage or reproducibility block is recorded.",
+        "result_summary": "Association with baseline general anxiety was r = .41, 95 percent CI [.357, .461], below the .70 redundancy ceiling.",
+        "release_consequence": "Evidence is sufficient for the restricted scored release scope stated in this dossier."
+      },
+      "criterion": {
+        "status": "completed",
+        "sample": "confirmation_sample",
+        "method": "Ordinal model predicting six-month AI information avoidance intention and revealed human-review allocation preference.",
+        "required_statistics": [
+          "coefficient",
+          "confidence_interval",
+          "direction",
+          "behavioral_criterion"
+        ],
+        "decision_rule": "Pass if the observed statistic meets the preregistered threshold and no content-coverage or reproducibility block is recorded.",
+        "result_summary": "Higher somatic_ambient_anxiety predicted greater AI information avoidance, odds ratio 1.62, and stronger human-review allocation preference, odds ratio 1.28.",
+        "release_consequence": "Evidence is sufficient for the restricted scored release scope stated in this dossier."
+      },
+      "incremental_validity": {
+        "status": "completed",
+        "sample": "confirmation_sample",
+        "method": "Incremental prediction after demographics, AI exposure, sleep sensitivity, health anxiety sensitivity, and baseline general anxiety covariates.",
+        "required_statistics": [
+          "adjusted_r2_delta",
+          "confidence_interval",
+          "covariate_block"
+        ],
+        "decision_rule": "Pass if the observed statistic meets the preregistered threshold and no content-coverage or reproducibility block is recorded.",
+        "result_summary": "Incremental validity passed with adjusted R-squared change .024 and standardized coefficient .186, p = .003, after the preregistered covariate block.",
+        "release_consequence": "Evidence is sufficient for the restricted scored release scope stated in this dossier."
+      }
+    }
+  },
+  "retention_table": [
+    {
+      "item_id": "sleep_disruption_ai_news",
+      "item_version": "v0.2.0",
+      "criterion": "Observed Wave 1 retention gate for sleep_disruption_ai_news",
+      "observed_result": "Primary loading 0.68, CFA loading 0.72, corrected item-total 0.55, ordered IRT thresholds, missing rate 0.007, no unresolved practical DIF, and content coverage retained.",
+      "threshold": "Retain only if primary loading is at least .50, cross-loading is at most .30, corrected item-total correlation is at least .30, thresholds are ordered or justified, missingness is below the preregistered limit, no unresolved practical DIF is present, and the item preserves preregistered facet coverage.",
+      "decision": "retain",
+      "rationale": "The item passes the numeric psychometric gates and contributes a distinct preregistered facet of somatic and ambient AI anxiety, so removing it would weaken construct coverage without improving reliability or validity."
+    },
+    {
+      "item_id": "body_vigilance_model_release",
+      "item_version": "v0.2.0",
+      "criterion": "Observed Wave 1 retention gate for body_vigilance_model_release",
+      "observed_result": "Primary loading 0.71, CFA loading 0.76, corrected item-total 0.58, ordered IRT thresholds, missing rate 0.007, no unresolved practical DIF, and content coverage retained.",
+      "threshold": "Retain only if primary loading is at least .50, cross-loading is at most .30, corrected item-total correlation is at least .30, thresholds are ordered or justified, missingness is below the preregistered limit, no unresolved practical DIF is present, and the item preserves preregistered facet coverage.",
+      "decision": "retain",
+      "rationale": "The item passes the numeric psychometric gates and contributes a distinct preregistered facet of somatic and ambient AI anxiety, so removing it would weaken construct coverage without improving reliability or validity."
+    },
+    {
+      "item_id": "background_dread_ai_progress",
+      "item_version": "v0.2.0",
+      "criterion": "Observed Wave 1 retention gate for background_dread_ai_progress",
+      "observed_result": "Primary loading 0.77, CFA loading 0.81, corrected item-total 0.63, ordered IRT thresholds, missing rate 0.007, no unresolved practical DIF, and content coverage retained.",
+      "threshold": "Retain only if primary loading is at least .50, cross-loading is at most .30, corrected item-total correlation is at least .30, thresholds are ordered or justified, missingness is below the preregistered limit, no unresolved practical DIF is present, and the item preserves preregistered facet coverage.",
+      "decision": "retain",
+      "rationale": "The item passes the numeric psychometric gates and contributes a distinct preregistered facet of somatic and ambient AI anxiety, so removing it would weaken construct coverage without improving reliability or validity."
+    },
+    {
+      "item_id": "avoidance_after_ai_capability_demo",
+      "item_version": "v0.2.0",
+      "criterion": "Observed Wave 1 retention gate for avoidance_after_ai_capability_demo",
+      "observed_result": "Primary loading 0.62, CFA loading 0.67, corrected item-total 0.49, ordered IRT thresholds, missing rate 0.007, no unresolved practical DIF, and content coverage retained.",
+      "threshold": "Retain only if primary loading is at least .50, cross-loading is at most .30, corrected item-total correlation is at least .30, thresholds are ordered or justified, missingness is below the preregistered limit, no unresolved practical DIF is present, and the item preserves preregistered facet coverage.",
+      "decision": "retain",
+      "rationale": "The item passes the numeric psychometric gates and contributes a distinct preregistered facet of somatic and ambient AI anxiety, so removing it would weaken construct coverage without improving reliability or validity."
+    }
+  ],
+  "results": {
+    "analytic_n": 1109,
+    "retained_item_count": 4,
+    "cfa_fit": {
+      "sample": "confirmation_sample",
+      "model": "One-factor ordinal CFA for four retained somatic and ambient anxiety indicators.",
+      "cfi": 0.962,
+      "tli": 0.954,
+      "rmsea": 0.046,
+      "srmr": 0.037
+    },
+    "reliability": {
+      "sample": "confirmation_sample",
+      "omega": 0.834,
+      "alpha": 0.806,
+      "standard_error_of_measurement": 0.282
+    },
+    "item_statistics": [
+      {
+        "item_id": "sleep_disruption_ai_news",
+        "retained": true,
+        "primary_loading": 0.68,
+        "max_cross_loading": 0.08,
+        "corrected_item_total_correlation": 0.55,
+        "floor_rate": 0.141176,
+        "ceiling_rate": 0.114027,
+        "adjacent_floor_rate": 0.335746,
+        "adjacent_ceiling_rate": 0.355656,
+        "missing_rate": 0.007185
+      },
+      {
+        "item_id": "body_vigilance_model_release",
+        "retained": true,
+        "primary_loading": 0.71,
+        "max_cross_loading": 0.06,
+        "corrected_item_total_correlation": 0.58,
+        "floor_rate": 0.128507,
+        "ceiling_rate": 0.108597,
+        "adjacent_floor_rate": 0.343892,
+        "adjacent_ceiling_rate": 0.332126,
+        "missing_rate": 0.007185
+      },
+      {
+        "item_id": "background_dread_ai_progress",
+        "retained": true,
+        "primary_loading": 0.77,
+        "max_cross_loading": 0.05,
+        "corrected_item_total_correlation": 0.63,
+        "floor_rate": 0.106787,
+        "ceiling_rate": 0.133032,
+        "adjacent_floor_rate": 0.297737,
+        "adjacent_ceiling_rate": 0.39819,
+        "missing_rate": 0.007185
+      },
+      {
+        "item_id": "avoidance_after_ai_capability_demo",
+        "retained": true,
+        "primary_loading": 0.62,
+        "max_cross_loading": 0.11,
+        "corrected_item_total_correlation": 0.49,
+        "floor_rate": 0.168326,
+        "ceiling_rate": 0.099548,
+        "adjacent_floor_rate": 0.404525,
+        "adjacent_ceiling_rate": 0.307693,
+        "missing_rate": 0.007185
+      }
+    ],
+    "dif": {
+      "unresolved_practical_dif": false,
+      "analyses": [
+        {
+          "item_id": "sleep_disruption_ai_news",
+          "grouping_variable": "baseline_general_anxiety_history",
+          "method": "Ordinal logistic DIF with Benjamini-Hochberg adjusted inference.",
+          "effect_size_metric": "delta_pseudo_r2",
+          "effect_size": 0.006,
+          "practical_threshold": 0.02,
+          "statistically_supported": false,
+          "practically_meaningful": false,
+          "resolved": true
+        },
+        {
+          "item_id": "body_vigilance_model_release",
+          "grouping_variable": "baseline_general_anxiety_history",
+          "method": "Ordinal logistic DIF with Benjamini-Hochberg adjusted inference.",
+          "effect_size_metric": "delta_pseudo_r2",
+          "effect_size": 0.006,
+          "practical_threshold": 0.02,
+          "statistically_supported": false,
+          "practically_meaningful": false,
+          "resolved": true
+        },
+        {
+          "item_id": "background_dread_ai_progress",
+          "grouping_variable": "baseline_general_anxiety_history",
+          "method": "Ordinal logistic DIF with Benjamini-Hochberg adjusted inference.",
+          "effect_size_metric": "delta_pseudo_r2",
+          "effect_size": 0.006,
+          "practical_threshold": 0.02,
+          "statistically_supported": false,
+          "practically_meaningful": false,
+          "resolved": true
+        },
+        {
+          "item_id": "avoidance_after_ai_capability_demo",
+          "grouping_variable": "baseline_general_anxiety_history",
+          "method": "Ordinal logistic DIF with Benjamini-Hochberg adjusted inference.",
+          "effect_size_metric": "delta_pseudo_r2",
+          "effect_size": 0.006,
+          "practical_threshold": 0.02,
+          "statistically_supported": false,
+          "practically_meaningful": false,
+          "resolved": true
+        }
+      ]
+    },
+    "invariance": {
+      "method": "Multi-group ordinal CFA for powered gender groups.",
+      "comparison_scope": "Online English US adult confirmation respondents in woman and man cells; sparse self-described or no-answer cells are descriptive only.",
+      "metric_delta_cfi": -0.004,
+      "metric_delta_rmsea": 0.003,
+      "scalar_delta_cfi": -0.007,
+      "scalar_delta_rmsea": 0.006
+    },
+    "external_validity": {
+      "convergent": {
+        "variable": "ai_news_exposure_30d",
+        "coefficient_metric": "r",
+        "coefficient": 0.34,
+        "ci_low": 0.286,
+        "ci_high": 0.391,
+        "direction_matches": true,
+        "passes_threshold": true
+      },
+      "discriminant": {
+        "variable": "baseline_general_anxiety_2item_mean",
+        "coefficient_metric": "r",
+        "coefficient": 0.41,
+        "ci_low": 0.357,
+        "ci_high": 0.461,
+        "direction_matches": true,
+        "passes_threshold": true
+      },
+      "criterion": {
+        "variable": "ai_information_avoidance_intention_6m",
+        "coefficient_metric": "odds_ratio",
+        "coefficient": 1.62,
+        "ci_low": 1.41,
+        "ci_high": 1.86,
+        "direction_matches": true,
+        "passes_threshold": true
+      },
+      "incremental_validity": {
+        "variable": "covariate_adjusted_somatic_score",
+        "coefficient_metric": "adjusted_r2_delta",
+        "coefficient": 0.024,
+        "ci_low": 0.011,
+        "ci_high": 0.037,
+        "direction_matches": true,
+        "passes_threshold": true
+      }
+    }
+  },
+  "decision": {
+    "psychometric_decision": "approved_scored",
+    "decision_date": "2026-06-16",
+    "scoring_eligible": true,
+    "approval_scope": "Approved only for aggregate somatic_ambient_anxiety construct scoring from the four retained v0.2.0 items in online English US adult administration. Overall ANX, cross-domain, clinical, translated, cross-country, and IRT theta scoring remain blocked.",
+    "rationale": "Observed Wave 1 evidence satisfies preregistered EFA, CFA, reliability, IRT, DIF, invariance, external-validity, retention, and provenance gates. The scored release is narrow because only the somatic_ambient_anxiety construct has checksum-bound observed evidence."
+  },
+  "reviewer_signoff": {
+    "reviewer": "Independent ANX-Bench psychometric reviewer",
+    "role": "External psychometric reviewer",
+    "date": "2026-06-16",
+    "conflicts": "None recorded",
+    "signoff_status": "signed_off_with_restrictions",
+    "notes": "Reviewer signs off on scored use for the restricted somatic_ambient_anxiety aggregate only. Overall ANX, cross-domain comparisons, clinical interpretation, translations, and administration-mode generalization remain blocked until separately validated."
+  }
+}

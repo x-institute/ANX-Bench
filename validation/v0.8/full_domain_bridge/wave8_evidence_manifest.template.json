@@ -1,0 +1,225 @@
+{
+  "$schema": "schema/psychometric_evidence_manifest.schema.json",
+  "evidence_manifest_schema_version": "v0.8.1",
+  "manifest_id": "anx_us_2026w08_full_domain_bridge_evidence_manifest_template",
+  "benchmark_version": "v0.8.0",
+  "construct_id": "full_domain_bridge",
+  "validation_dossier_path": "validation/v0.8/full_domain_bridge/wave8_full_domain_bridge_evidence.json",
+  "preregistration_path": "docs/preregistrations/anx_us_2026w08_full_domain_bridge.md",
+  "analysis_plan_path": "analysis/v0.8/full_domain_bridge/wave8_analysis_plan.json",
+  "raw_restricted_dataset_hash": {
+    "algorithm": "SHA-256",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "artifact": "restricted://wave8/respondent_item_responses.csv"
+  },
+  "analysis_script_hash": {
+    "algorithm": "SHA-256",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "artifact": "analysis/v0.8/full_domain_bridge/wave8_reproducible_analysis_workflow.Rmd"
+  },
+  "software_session_lock": {
+    "lock_artifact": "restricted://wave8/session_lock.txt",
+    "runtime": "R planned placeholder runtime with renv lockfile and deterministic seeds",
+    "packages": [
+      {
+        "name": "R",
+        "version": "planned_placeholder"
+      },
+      {
+        "name": "lavaan",
+        "version": "planned_placeholder"
+      },
+      {
+        "name": "psych",
+        "version": "planned_placeholder"
+      },
+      {
+        "name": "mirt",
+        "version": "planned_placeholder"
+      },
+      {
+        "name": "lordif",
+        "version": "planned_placeholder"
+      }
+    ],
+    "session_info_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "reproducibility_rule": "Before citation, replace this placeholder with the exact runtime, package lock, random seeds, session-info hash, and rerun rule used for all Wave 8 analyses."
+  },
+  "run_timestamp_utc": "2026-06-16T00:00:00Z",
+  "analyst": {
+    "name": "planned_placeholder_analyst",
+    "role": "analysis lead placeholder awaiting observed Wave 8 rerun",
+    "affiliation": "ANX-Bench planned evidence workflow",
+    "independence_statement": "Placeholder only. The observed analyst must attest that no thresholds, exclusions, item decisions, scoring rules, or claim boundaries changed after outcome inspection."
+  },
+  "output_artifact_hashes": [
+    {
+      "artifact_id": "sample_exclusions_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/sample_exclusions_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding sample and exclusion statistics to restricted data hashes, split-file hash, script hash, software lock, analyst signoff, reviewer signoff, and output hash."
+    },
+    {
+      "artifact_id": "split_assignment_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/split_assignment_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding split assignment statistics to restricted frame hash, split-file hash, script hash, software lock, analyst signoff, reviewer signoff, and output hash."
+    },
+    {
+      "artifact_id": "efa_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/efa_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding EFA statistics to restricted response hash, split-file hash, EFA notebook hash, software lock, analyst signoff, reviewer signoff, and output hash."
+    },
+    {
+      "artifact_id": "cfa_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/cfa_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding CFA statistics to restricted response hash, split-file hash, CFA notebook hash, software lock, analyst signoff, reviewer signoff, and output hash."
+    },
+    {
+      "artifact_id": "omega_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/omega_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding omega statistics to restricted response hash, split-file hash, reliability notebook hash, software lock, analyst signoff, reviewer signoff, and output hash."
+    },
+    {
+      "artifact_id": "irt_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/irt_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding IRT statistics to restricted response hash, split-file hash, IRT notebook hash, software lock, analyst signoff, reviewer signoff, and output hash."
+    },
+    {
+      "artifact_id": "dif_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/dif_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding DIF statistics to restricted response and covariate hashes, split-file hash, DIF notebook hash, software lock, analyst signoff, reviewer signoff, and output hash."
+    },
+    {
+      "artifact_id": "invariance_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/invariance_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding invariance statistics to restricted response and covariate hashes, split-file hash, invariance notebook hash, software lock, analyst signoff, reviewer signoff, and output hash."
+    },
+    {
+      "artifact_id": "latent_correlations_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/latent_correlations_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding latent-correlation statistics to restricted response hash, split-file hash, latent-correlation notebook hash, software lock, analyst signoff, reviewer signoff, and output hash."
+    },
+    {
+      "artifact_id": "somatic_anchor_drift_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/somatic_anchor_drift_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding somatic-anchor drift statistics to restricted response and source-anchor hashes, split-file hash, drift notebook hash, software lock, analyst signoff, reviewer signoff, and output hash."
+    },
+    {
+      "artifact_id": "final_bridge_decision_provenance_packet",
+      "path": "restricted://wave8/analysis_outputs/final_bridge_decision_provenance_packet.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "description": "Planned packet binding the final bridge decision to restricted gate output hashes, public artifact hashes, split-file hash, software lock, analyst signoff, reviewer signoff, output hash, and no-scoring claim boundary."
+    }
+  ],
+  "reported_statistic_map": [
+    {
+      "statistic_id": "sample_exclusions_gate",
+      "dossier_json_pointer": "/analytic_n",
+      "analysis_family": "retention",
+      "reported_value": "planned_or_placeholder: analytic N, exclusion counts, and sample-flow decision not observed",
+      "artifact_id": "sample_exclusions_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/sample_exclusions_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate sample_exclusions --raw-hash restricted://wave8/respondent_item_responses.csv --fielding-hash restricted://wave8/fielding_disposition.csv --split-hash restricted://wave8/split_assignment.csv --session-lock restricted://wave8/session_lock.txt"
+    },
+    {
+      "statistic_id": "split_assignment_gate",
+      "dossier_json_pointer": "/split_sample",
+      "analysis_family": "retention",
+      "reported_value": "planned_or_placeholder: EFA and CFA split assignment not observed",
+      "artifact_id": "split_assignment_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/split_assignment_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate split_assignment --frame-hash restricted://wave8/eligible_respondent_frame.csv --split-hash restricted://wave8/split_assignment.csv --script-hash analysis/v0.8/full_domain_bridge/create_efa_cfa_split.R --session-lock restricted://wave8/session_lock.txt"
+    },
+    {
+      "statistic_id": "efa_gate",
+      "dossier_json_pointer": "/efa",
+      "analysis_family": "efa",
+      "reported_value": "planned_or_placeholder: EFA factor count, loadings, cross-loadings, thresholds, and residuals not observed",
+      "artifact_id": "efa_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/efa_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate efa --raw-hash restricted://wave8/respondent_item_responses.csv --split-hash restricted://wave8/split_assignment.csv --notebook-hash analysis/v0.8/full_domain_bridge/ordinal_efa_wave8.Rmd --session-lock restricted://wave8/session_lock.txt"
+    },
+    {
+      "statistic_id": "cfa_gate",
+      "dossier_json_pointer": "/cfa",
+      "analysis_family": "cfa",
+      "reported_value": "planned_or_placeholder: CFA fit, loadings, residuals, and comparator-model results not observed",
+      "artifact_id": "cfa_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/cfa_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate cfa --raw-hash restricted://wave8/respondent_item_responses.csv --split-hash restricted://wave8/split_assignment.csv --notebook-hash analysis/v0.8/full_domain_bridge/seven_domain_cfa_wave8.Rmd --session-lock restricted://wave8/session_lock.txt"
+    },
+    {
+      "statistic_id": "omega_gate",
+      "dossier_json_pointer": "/omega",
+      "analysis_family": "reliability",
+      "reported_value": "planned_or_placeholder: domain omega estimates and reliability decision not observed",
+      "artifact_id": "omega_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/omega_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate omega --raw-hash restricted://wave8/respondent_item_responses.csv --split-hash restricted://wave8/split_assignment.csv --notebook-hash analysis/v0.8/full_domain_bridge/domain_omega_wave8.Rmd --session-lock restricted://wave8/session_lock.txt"
+    },
+    {
+      "statistic_id": "irt_gate",
+      "dossier_json_pointer": "/irt",
+      "analysis_family": "irt",
+      "reported_value": "planned_or_placeholder: graded-response IRT diagnostics and linking-SE results not observed",
+      "artifact_id": "irt_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/irt_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate irt --raw-hash restricted://wave8/respondent_item_responses.csv --split-hash restricted://wave8/split_assignment.csv --notebook-hash analysis/v0.8/full_domain_bridge/irt_diagnostics_wave8.Rmd --session-lock restricted://wave8/session_lock.txt"
+    },
+    {
+      "statistic_id": "dif_gate",
+      "dossier_json_pointer": "/dif",
+      "analysis_family": "dif",
+      "reported_value": "planned_or_placeholder: DIF flags, effect sizes, and subgroup interpretation blocks not observed",
+      "artifact_id": "dif_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/dif_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate dif --raw-hash restricted://wave8/respondent_item_responses.csv --covariate-hash restricted://wave8/respondent_covariates.csv --split-hash restricted://wave8/split_assignment.csv --notebook-hash analysis/v0.8/full_domain_bridge/dif_screening_wave8.Rmd --session-lock restricted://wave8/session_lock.txt"
+    },
+    {
+      "statistic_id": "invariance_gate",
+      "dossier_json_pointer": "/invariance",
+      "analysis_family": "invariance",
+      "reported_value": "planned_or_placeholder: configural, metric, threshold, and partial-invariance results not observed",
+      "artifact_id": "invariance_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/invariance_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate invariance --raw-hash restricted://wave8/respondent_item_responses.csv --covariate-hash restricted://wave8/respondent_covariates.csv --split-hash restricted://wave8/split_assignment.csv --notebook-hash analysis/v0.8/full_domain_bridge/invariance_wave8.Rmd --session-lock restricted://wave8/session_lock.txt"
+    },
+    {
+      "statistic_id": "latent_correlations_gate",
+      "dossier_json_pointer": "/latent_correlations",
+      "analysis_family": "external_validity",
+      "reported_value": "planned_or_placeholder: pairwise latent correlations, confidence intervals, and aggregate-readiness sensitivity results not observed",
+      "artifact_id": "latent_correlations_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/latent_correlations_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate latent_correlations --raw-hash restricted://wave8/respondent_item_responses.csv --split-hash restricted://wave8/split_assignment.csv --notebook-hash analysis/v0.8/full_domain_bridge/latent_correlations_wave8.Rmd --session-lock restricted://wave8/session_lock.txt"
+    },
+    {
+      "statistic_id": "somatic_anchor_drift_gate",
+      "dossier_json_pointer": "/somatic_anchor_drift",
+      "analysis_family": "external_validity",
+      "reported_value": "planned_or_placeholder: somatic-anchor drift estimates and source-anchor-use decision not observed",
+      "artifact_id": "somatic_anchor_drift_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/somatic_anchor_drift_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate somatic_anchor_drift --raw-hash restricted://wave8/respondent_item_responses.csv --source-anchor-hash restricted://wave8/source_anchor_linkage.csv --split-hash restricted://wave8/split_assignment.csv --notebook-hash analysis/v0.8/full_domain_bridge/somatic_anchor_drift_wave8.Rmd --session-lock restricted://wave8/session_lock.txt"
+    },
+    {
+      "statistic_id": "final_bridge_decision_gate",
+      "dossier_json_pointer": "/final_decision",
+      "analysis_family": "retention",
+      "reported_value": "planned_or_placeholder: final bridge decision not observed, not reviewed, not citable, and not scoring-authorized",
+      "artifact_id": "final_bridge_decision_provenance_packet",
+      "artifact_json_pointer": "/planned_statistics/final_bridge_decision_gate",
+      "reproduction_command": "Rscript analysis/v0.8/full_domain_bridge/run_wave8_gate.R --gate final_bridge_decision --observed-ledger validation/v0.8/full_domain_bridge/observed_wave8_results.json --content-validity validation/v0.8/full_domain_bridge/content_validity_dossier.json --provenance validation/v0.8/full_domain_bridge/wave8_evidence_provenance.json --split-hash restricted://wave8/split_assignment.csv --session-lock restricted://wave8/session_lock.txt"
+    }
+  ],
+  "provenance_assertion": "This Wave 8 manifest is planned_or_placeholder only. It binds each planned statistic to restricted data hashes, split-file hash, analysis script or notebook hash, software/session lock, output artifact hash, analyst placeholder, reviewer signoff requirement, and reproduction command, but it contains no observed citable evidence and cannot authorize bridge-readiness, scoring, trend, event-study, clinical, or policy claims."
+}

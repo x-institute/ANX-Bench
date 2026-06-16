@@ -1,0 +1,163 @@
+{
+  "$schema": "../../schema/release.schema.json",
+  "manifest_schema_version": "v0.1.0",
+  "benchmark_version": "v0.3.2",
+  "release_date": "2026-06-16",
+  "release_status": "citable",
+  "release_label": "ANX-Bench v0.3.2 citable 14-day somatic repeatability evidence release",
+  "item_schema": {
+    "path": "schema/item.schema.json",
+    "schema_version": "v0.1.0",
+    "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+  },
+  "methodology_documents": [
+    {
+      "document_type": "methodology",
+      "path": "docs/methodology.md",
+      "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+    },
+    {
+      "document_type": "psychometric_validation_protocol",
+      "path": "docs/psychometric_validation_protocol.md",
+      "sha256": "c8f7860b730279d1f772e1c87fe09d3732676c765461b8cdb3b68bc8648d0358"
+    },
+    {
+      "document_type": "preregistration_event_study",
+      "path": "docs/preregistration_event_study.md",
+      "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+    }
+  ],
+  "frozen_item_set": {
+    "item_directory": "items/v0.3",
+    "item_count": 0,
+    "items": []
+  },
+  "official_scored_items": [],
+  "scoring_eligibility": {
+    "official_scored_item_count": 0,
+    "eligibility_rule": "This citable v0.3.2 release is evidence-only for 14-day repeatability of the v0.3.1 somatic_ambient_anxiety_mean. It creates no new scored items, changes no item wording, and grants no aggregate scoring permission. Official scoring continues to use the v0.3.1 source scored construct definition and its approved four-item manifest.",
+    "aggregate_scoring_permitted": false
+  },
+  "checksums": {
+    "algorithm": "SHA-256",
+    "coverage": "Checksums cover every public file that defines the v0.3.2 repeatability-only evidence release: release and retest schemas, construct registry, methodology documents, retest benchmark card, preregistration, no-event registry, retest instrument, retest codebook, analysis plan, analysis runner, observed retest evidence, the null template that cannot authorize claims, the v0.3.1 source scored release, observed Wave 1 validation evidence, calibration instrument materials, and all four approved v0.3.1 item files. Restricted raw retest data and session outputs are represented only through the observed evidence packet and recorded digests.",
+    "files": [
+      {
+        "path": "schema/release.schema.json",
+        "sha256": "f4d347b6c0bfbee787f1346e56eee16835782cab62bd1987a23dc65bab7e520b"
+      },
+      {
+        "path": "schema/item.schema.json",
+        "sha256": "51276030d33a9a807826d4f3b3fec0a96045685f707a2a2499778ebc86bf0e5c"
+      },
+      {
+        "path": "schema/validation_dossier.schema.json",
+        "sha256": "3743ed59c2ef26863a4cb3d35ff7cb51c83d9f4aca96691e090e2d8a25f9a9fa"
+      },
+      {
+        "path": "schema/retest_evidence.schema.json",
+        "sha256": "821d49fbe93bb1d3d690a00e7f205389fc3cb89e89ecb274742e300d6a06e7a3"
+      },
+      {
+        "path": "schema/construct_registry.schema.json",
+        "sha256": "033cfdd8e60c4f98753374ddc3a0fda831b5f24b0cb2e614d729716ea1d198db"
+      },
+      {
+        "path": "constructs/v0.3/registry.json",
+        "sha256": "8d5361d81f37a61b3ef49b69e79c96331de4f6ad87d587b12348b34b76b86bce"
+      },
+      {
+        "path": "docs/methodology.md",
+        "sha256": "8d660db0a2b49cf16654d8ed767923121b0cd0e66b82dbc35d19f34a1b718872"
+      },
+      {
+        "path": "docs/psychometric_validation_protocol.md",
+        "sha256": "c8f7860b730279d1f772e1c87fe09d3732676c765461b8cdb3b68bc8648d0358"
+      },
+      {
+        "path": "docs/preregistration_event_study.md",
+        "sha256": "0aea474732ca8b7eb9d142304e5220953b1db5b06ed67535dd3c18481f046b44"
+      },
+      {
+        "path": "docs/releases/v0.3.2_retest_benchmark_card.md",
+        "sha256": "725549b9f1cc4b2fd14f935f71193c3102c13f0712bdbc463b9df302577a1a4b"
+      },
+      {
+        "path": "docs/preregistrations/anx_us_2026w03_somatic_retest.md",
+        "sha256": "8727aea43441e591eb62e0f5a5839da0eebe957a47b60bb017670819f59e1208"
+      },
+      {
+        "path": "events/v0.3/anx_us_2026w03_somatic_retest_event_registry.json",
+        "sha256": "37f779c551d914a9359fc1fcbd1a74cd9a598380a6345375f9b4a070e230fcbb"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w03_somatic_retest_instrument.md",
+        "sha256": "244c8bb9a4ed47338ace18e8d3229a930bb6b0f152851038cba6e7aa9bd285e3"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w03_somatic_retest_codebook.md",
+        "sha256": "c5e6833e06dc8935f19b709d60e0326fde1266e3313e063b34bbdacb3ad59e6f"
+      },
+      {
+        "path": "analysis/v0.3/somatic_ambient_retest/wave3_retest_analysis_plan.json",
+        "sha256": "a2fb02829319fe91178a177ef2bb68f748ad34e0cfffc7935758ebf8e7bfd729"
+      },
+      {
+        "path": "analysis/v0.3/somatic_ambient_retest/run_wave3_retest_analysis.R",
+        "sha256": "d18b16ea35e4e9b67286b79578470a3a8fc1c136e9581df434348e132d97310f"
+      },
+      {
+        "path": "validation/v0.3/somatic_ambient_retest/wave3_retest_evidence.json",
+        "sha256": "c0bbbc3f0a73d8400c67fcefb6c23eb1b717963729ca6267a0ce6118f4d9434a"
+      },
+      {
+        "path": "validation/v0.3/somatic_ambient_retest/wave3_retest_evidence.template.json",
+        "sha256": "2ea9bc063c95a2c2100015e3b5ec557733c953ec6028f5fece91fcd7b8672026"
+      },
+      {
+        "path": "releases/v0.3.1/manifest.json",
+        "sha256": "e42ae690e4b06bb0278a6fbcb9e698d4b3b2ece232f5096e7d378a7ebde13bca"
+      },
+      {
+        "path": "docs/releases/v0.3.1_benchmark_card.md",
+        "sha256": "8797dd39be17a9dcda4df72263e298d321aa36ad162dc1e22b53a88b0eb99f72"
+      },
+      {
+        "path": "validation/v0.2/somatic_ambient_anxiety/observed_wave1_results.json",
+        "sha256": "81a1d2d94c734c768433f637d4c0a5eabda1197956aadd4e55ad5f5bbf16a7d6"
+      },
+      {
+        "path": "docs/preregistrations/anx_us_2026w02_somatic_calibration.md",
+        "sha256": "c89666dca3112dc1106fbd8450fac8df2d817ee2623e25e7c6a1b6dca8d3b107"
+      },
+      {
+        "path": "events/v0.2/anx_us_2026w02_somatic_event_registry.json",
+        "sha256": "170a23bc1389e587986e6829993e205c59f6b0bc2fa0c5e337a57df107cb22cf"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w02_somatic_instrument.md",
+        "sha256": "67f68eef41257c92726046c726986dacfa08a372bd2a0cddeb8b133bc9b8b3ac"
+      },
+      {
+        "path": "docs/instruments/anx_us_2026w02_somatic_codebook.md",
+        "sha256": "c903b909bf30837da8d87d22659fc6746853c480f2e5c48f86d5ba0ac380d08e"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/sleep_disruption_ai_news.json",
+        "sha256": "b914e7ed49c798675e0be6c25fb48ea12722ad61773afce8d21d1455ba1bf74c"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/body_vigilance_model_release.json",
+        "sha256": "ad69f92e0772d37a0fc9f9d11fa0bd0049d13f40b16a4e162346454c4e82faaa"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/background_dread_ai_progress.json",
+        "sha256": "0957373578439a51d307bbf524e731f57f469c1e3a0d94a55a13839b361379bd"
+      },
+      {
+        "path": "items/v0.2/somatic_ambient/avoidance_after_ai_capability_demo.json",
+        "sha256": "4577752724f240e58572f69a6abeaa22da8adeac946715591c19356d6274767e"
+      }
+    ]
+  }
+}

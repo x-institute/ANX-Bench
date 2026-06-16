@@ -1,0 +1,764 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/full_domain_observed_results.schema.json",
+  "title": "ANX-Bench Wave 8 Full-Domain Observed Results Contract",
+  "description": "Schema-gated observed-results contract for the Wave 8 full-domain bridge. This artifact binds the frozen 24-item set, preregistered no-event classification, sample and exclusion flow, EFA and CFA splits, item distributions, domain summaries, model-fit outputs, DIF and invariance summaries, somatic anchor-drift outputs, and claim limits before bridge-evidence and release promotion review.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "observed_results_schema_version",
+    "result_id",
+    "result_status",
+    "study_id",
+    "wave_id",
+    "benchmark_version",
+    "promotion_target_version",
+    "event_id",
+    "evidence_date",
+    "outcome_inspection",
+    "source_paths",
+    "frozen_item_ids",
+    "frozen_item_versions",
+    "sample_exclusion_flow",
+    "split_ids",
+    "split_sample",
+    "item_distributions",
+    "domain_summaries",
+    "model_output_pointers",
+    "model_fit_outputs",
+    "dif_invariance_summaries",
+    "anchor_drift_outputs",
+    "sensitivity_summaries",
+    "claim_limits",
+    "analyst_signoff",
+    "reviewer_signoff"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "const": "schema/full_domain_observed_results.schema.json" },
+    "observed_results_schema_version": { "type": "string", "const": "v0.1.0" },
+    "result_id": { "type": "string", "const": "anx_us_2026w08_full_domain_bridge_observed_results" },
+    "result_status": { "type": "string", "enum": ["template_pending_observed_data", "completed"] },
+    "study_id": { "type": "string", "const": "anx_us_2026w08_full_domain_bridge" },
+    "wave_id": { "type": "string", "const": "anx_us_2026w08_full_domain_bridge" },
+    "benchmark_version": { "type": "string", "const": "v0.8.0" },
+    "promotion_target_version": { "type": "string", "const": "v0.8.1" },
+    "event_id": { "type": "string", "const": "no_event" },
+    "evidence_date": { "$ref": "#/$defs/nullable_date" },
+    "outcome_inspection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "preregistered_inputs_locked_at_utc",
+        "split_assignment_completed_at_utc",
+        "first_outcome_inspection_at_utc",
+        "outcome_inspection_definition",
+        "assigned_before_outcome_inspection",
+        "no_post_hoc_threshold_or_claim_changes"
+      ],
+      "properties": {
+        "preregistered_inputs_locked_at_utc": { "$ref": "#/$defs/nullable_timestamp" },
+        "split_assignment_completed_at_utc": { "$ref": "#/$defs/nullable_timestamp" },
+        "first_outcome_inspection_at_utc": { "$ref": "#/$defs/nullable_timestamp" },
+        "outcome_inspection_definition": {
+          "type": "string",
+          "const": "Outcome inspection begins when any analyst, maintainer, or reviewer sees respondent-level ANX outcomes, item distributions, split-sample EFA or CFA results, reliability estimates, IRT diagnostics, DIF flags, invariance diagnostics, latent correlations, somatic-anchor drift, or aggregate-readiness outputs."
+        },
+        "assigned_before_outcome_inspection": { "$ref": "#/$defs/nullable_boolean" },
+        "no_post_hoc_threshold_or_claim_changes": { "$ref": "#/$defs/nullable_boolean" }
+      }
+    },
+    "source_paths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "release_manifest",
+        "preregistration",
+        "analysis_plan",
+        "event_registry",
+        "sampling_plan",
+        "construct_registry",
+        "instrument",
+        "codebook",
+        "restricted_respondent_item_data",
+        "restricted_covariate_data",
+        "fielding_disposition_data",
+        "analysis_outputs_archive"
+      ],
+      "properties": {
+        "release_manifest": { "type": "string", "const": "releases/v0.8.0/manifest.json" },
+        "preregistration": { "type": "string", "const": "docs/preregistrations/anx_us_2026w08_full_domain_bridge.md" },
+        "analysis_plan": { "type": "string", "const": "analysis/v0.8/full_domain_bridge/wave8_analysis_plan.json" },
+        "event_registry": { "type": "string", "const": "events/v0.8/anx_us_2026w08_full_domain_bridge_event_registry.json" },
+        "sampling_plan": { "type": "string", "const": "sampling/v0.8/anx_us_2026w08_full_domain_bridge_sampling_plan.json" },
+        "construct_registry": { "type": "string", "const": "constructs/v0.8/registry.json" },
+        "instrument": { "type": "string", "const": "docs/instruments/anx_us_2026w08_full_domain_bridge_instrument.md" },
+        "codebook": { "type": "string", "const": "docs/instruments/anx_us_2026w08_full_domain_bridge_codebook.md" },
+        "restricted_respondent_item_data": { "type": "string", "minLength": 1 },
+        "restricted_covariate_data": { "type": "string", "minLength": 1 },
+        "fielding_disposition_data": { "type": "string", "minLength": 1 },
+        "analysis_outputs_archive": { "type": "string", "minLength": 1 }
+      }
+    },
+    "frozen_item_ids": {
+      "type": "array",
+      "minItems": 24,
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/item_id" }
+    },
+    "frozen_item_versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo",
+        "skill_obsolescence_software",
+        "wage_pressure_customer_support",
+        "retraining_pressure_accounting",
+        "status_loss_creative_work",
+        "deepfake_evidence_trust",
+        "synthetic_news_provenance",
+        "ai_expert_claim_conflict",
+        "personalized_misinformation_targeting",
+        "partner_ai_confidant_displacement",
+        "friend_group_ai_mediation",
+        "eldercare_ai_attachment_shift",
+        "ai_personhood_boundary_uncertainty",
+        "human_judgment_status_loss",
+        "life_purpose_ai_substitution",
+        "public_space_tracking",
+        "workplace_behavior_scoring",
+        "personalized_behavior_nudging",
+        "autonomous_cyber_cascade",
+        "biosecurity_protocol_misuse",
+        "military_escalation_ai_advice"
+      ],
+      "properties": {
+        "sleep_disruption_ai_news": { "type": "string", "const": "v0.2.0" },
+        "body_vigilance_model_release": { "type": "string", "const": "v0.2.0" },
+        "background_dread_ai_progress": { "type": "string", "const": "v0.2.0" },
+        "avoidance_after_ai_capability_demo": { "type": "string", "const": "v0.2.0" },
+        "skill_obsolescence_software": { "type": "string", "const": "v0.1.0" },
+        "wage_pressure_customer_support": { "type": "string", "const": "v0.1.0" },
+        "retraining_pressure_accounting": { "type": "string", "const": "v0.1.0" },
+        "status_loss_creative_work": { "type": "string", "const": "v0.1.0" },
+        "deepfake_evidence_trust": { "type": "string", "const": "v0.1.0" },
+        "synthetic_news_provenance": { "type": "string", "const": "v0.1.0" },
+        "ai_expert_claim_conflict": { "type": "string", "const": "v0.1.0" },
+        "personalized_misinformation_targeting": { "type": "string", "const": "v0.1.0" },
+        "partner_ai_confidant_displacement": { "type": "string", "const": "v0.8.0" },
+        "friend_group_ai_mediation": { "type": "string", "const": "v0.8.0" },
+        "eldercare_ai_attachment_shift": { "type": "string", "const": "v0.8.0" },
+        "ai_personhood_boundary_uncertainty": { "type": "string", "const": "v0.8.0" },
+        "human_judgment_status_loss": { "type": "string", "const": "v0.8.0" },
+        "life_purpose_ai_substitution": { "type": "string", "const": "v0.8.0" },
+        "public_space_tracking": { "type": "string", "const": "v0.8.0" },
+        "workplace_behavior_scoring": { "type": "string", "const": "v0.8.0" },
+        "personalized_behavior_nudging": { "type": "string", "const": "v0.8.0" },
+        "autonomous_cyber_cascade": { "type": "string", "const": "v0.8.0" },
+        "biosecurity_protocol_misuse": { "type": "string", "const": "v0.8.0" },
+        "military_escalation_ai_advice": { "type": "string", "const": "v0.8.0" }
+      }
+    },
+    "sample_exclusion_flow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_n",
+        "minimum_analytic_n",
+        "started_n",
+        "consented_eligible_n",
+        "achieved_eligible_n",
+        "weighted_descriptive_n",
+        "unweighted_analytic_n",
+        "final_analytic_n",
+        "exclusions",
+        "reported_by_required_subgroups"
+      ],
+      "properties": {
+        "target_n": { "type": "integer", "const": 2500 },
+        "minimum_analytic_n": { "type": "integer", "const": 2000 },
+        "started_n": { "$ref": "#/$defs/nullable_integer" },
+        "consented_eligible_n": { "$ref": "#/$defs/nullable_integer" },
+        "achieved_eligible_n": { "$ref": "#/$defs/nullable_integer" },
+        "weighted_descriptive_n": { "$ref": "#/$defs/nullable_number" },
+        "unweighted_analytic_n": { "$ref": "#/$defs/nullable_integer" },
+        "final_analytic_n": { "$ref": "#/$defs/nullable_integer" },
+        "reported_by_required_subgroups": { "$ref": "#/$defs/nullable_boolean" },
+        "exclusions": { "$ref": "#/$defs/exclusions" }
+      }
+    },
+    "split_ids": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "split_assignment_seed_id",
+        "efa_split_id",
+        "cfa_split_id",
+        "efa_respondent_ids",
+        "cfa_respondent_ids",
+        "assigned_before_outcome_inspection"
+      ],
+      "properties": {
+        "split_assignment_seed_id": { "$ref": "#/$defs/nullable_string" },
+        "efa_split_id": { "$ref": "#/$defs/nullable_string" },
+        "cfa_split_id": { "$ref": "#/$defs/nullable_string" },
+        "efa_respondent_ids": { "$ref": "#/$defs/nullable_string_array" },
+        "cfa_respondent_ids": { "$ref": "#/$defs/nullable_string_array" },
+        "assigned_before_outcome_inspection": { "$ref": "#/$defs/nullable_boolean" }
+      }
+    },
+    "split_sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["efa_n", "cfa_n", "stratified_by_sample_source_device_order", "full_sample_descriptive_only"],
+      "properties": {
+        "efa_n": { "$ref": "#/$defs/nullable_integer" },
+        "cfa_n": { "$ref": "#/$defs/nullable_integer" },
+        "stratified_by_sample_source_device_order": { "$ref": "#/$defs/nullable_boolean" },
+        "full_sample_descriptive_only": { "$ref": "#/$defs/nullable_boolean" }
+      }
+    },
+    "item_distributions": { "$ref": "#/$defs/item_distribution_map" },
+    "domain_summaries": { "$ref": "#/$defs/domain_summary_map" },
+    "model_output_pointers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "efa_output",
+        "cfa_output",
+        "omega_output",
+        "irt_output",
+        "dif_output",
+        "invariance_output",
+        "latent_correlation_output",
+        "somatic_anchor_drift_output",
+        "aggregate_readiness_output",
+        "software_session_lock"
+      ],
+      "properties": {
+        "efa_output": { "$ref": "#/$defs/nullable_nonempty_string" },
+        "cfa_output": { "$ref": "#/$defs/nullable_nonempty_string" },
+        "omega_output": { "$ref": "#/$defs/nullable_nonempty_string" },
+        "irt_output": { "$ref": "#/$defs/nullable_nonempty_string" },
+        "dif_output": { "$ref": "#/$defs/nullable_nonempty_string" },
+        "invariance_output": { "$ref": "#/$defs/nullable_nonempty_string" },
+        "latent_correlation_output": { "$ref": "#/$defs/nullable_nonempty_string" },
+        "somatic_anchor_drift_output": { "$ref": "#/$defs/nullable_nonempty_string" },
+        "aggregate_readiness_output": { "$ref": "#/$defs/nullable_nonempty_string" },
+        "software_session_lock": { "$ref": "#/$defs/nullable_nonempty_string" }
+      }
+    },
+    "model_fit_outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["efa", "cfa", "omega", "irt", "latent_correlations", "aggregate_readiness"],
+      "properties": {
+        "efa": { "$ref": "#/$defs/efa_output" },
+        "cfa": { "$ref": "#/$defs/cfa_output" },
+        "omega": { "$ref": "#/$defs/omega_output" },
+        "irt": { "$ref": "#/$defs/irt_output" },
+        "latent_correlations": { "$ref": "#/$defs/latent_correlation_output" },
+        "aggregate_readiness": { "$ref": "#/$defs/aggregate_readiness_output" }
+      }
+    },
+    "dif_invariance_summaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["screened_group_variables", "dif", "invariance"],
+      "properties": {
+        "screened_group_variables": {
+          "type": "array",
+          "minItems": 12,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "dif": { "$ref": "#/$defs/dif_output" },
+        "invariance": { "$ref": "#/$defs/invariance_output" }
+      }
+    },
+    "anchor_drift_outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_scoring_context", "somatic_anchor_item_drifts", "mean_abs_drift_sd", "max_single_item_abs_drift_sd", "source_anchor_use_blocked"],
+      "properties": {
+        "source_scoring_context": { "type": "string", "const": "v0.3.1_somatic_ambient_anxiety_mean" },
+        "somatic_anchor_item_drifts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sleep_disruption_ai_news",
+            "body_vigilance_model_release",
+            "background_dread_ai_progress",
+            "avoidance_after_ai_capability_demo"
+          ],
+          "properties": {
+            "sleep_disruption_ai_news": { "$ref": "#/$defs/nullable_number" },
+            "body_vigilance_model_release": { "$ref": "#/$defs/nullable_number" },
+            "background_dread_ai_progress": { "$ref": "#/$defs/nullable_number" },
+            "avoidance_after_ai_capability_demo": { "$ref": "#/$defs/nullable_number" }
+          }
+        },
+        "mean_abs_drift_sd": { "$ref": "#/$defs/nullable_number" },
+        "max_single_item_abs_drift_sd": { "$ref": "#/$defs/nullable_number" },
+        "source_anchor_use_blocked": { "$ref": "#/$defs/nullable_boolean" }
+      }
+    },
+    "sensitivity_summaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "weight_sensitivity",
+        "exclusion_sensitivity",
+        "device_sensitivity",
+        "sample_source_sensitivity",
+        "domain_block_order_sensitivity",
+        "ai_news_exposure_sensitivity",
+        "baseline_general_anxiety_sensitivity",
+        "open_text_confusion_sensitivity"
+      ],
+      "properties": {
+        "weight_sensitivity": { "$ref": "#/$defs/sensitivity_summary" },
+        "exclusion_sensitivity": { "$ref": "#/$defs/sensitivity_summary" },
+        "device_sensitivity": { "$ref": "#/$defs/sensitivity_summary" },
+        "sample_source_sensitivity": { "$ref": "#/$defs/sensitivity_summary" },
+        "domain_block_order_sensitivity": { "$ref": "#/$defs/sensitivity_summary" },
+        "ai_news_exposure_sensitivity": { "$ref": "#/$defs/sensitivity_summary" },
+        "baseline_general_anxiety_sensitivity": { "$ref": "#/$defs/sensitivity_summary" },
+        "open_text_confusion_sensitivity": { "$ref": "#/$defs/sensitivity_summary" }
+      }
+    },
+    "claim_limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "official_scored_items",
+        "new_domain_scores_authorized",
+        "domain_score_claim_permitted",
+        "cross_domain_score_authorized",
+        "overall_anx_score_authorized",
+        "aggregate_scoring_permitted",
+        "event_study_claim_permitted",
+        "trend_claim_permitted",
+        "causal_capability_shock_claim_permitted",
+        "subgroup_comparability_claim_permitted",
+        "clinical_or_diagnostic_use_permitted",
+        "individual_level_use_permitted",
+        "policy_decision_ranking_permitted",
+        "allowed_release_claim"
+      ],
+      "properties": {
+        "official_scored_items": { "type": "array", "maxItems": 0 },
+        "new_domain_scores_authorized": { "type": "boolean", "const": false },
+        "domain_score_claim_permitted": { "type": "boolean", "const": false },
+        "cross_domain_score_authorized": { "type": "boolean", "const": false },
+        "overall_anx_score_authorized": { "type": "boolean", "const": false },
+        "aggregate_scoring_permitted": { "type": "boolean", "const": false },
+        "event_study_claim_permitted": { "type": "boolean", "const": false },
+        "trend_claim_permitted": { "type": "boolean", "const": false },
+        "causal_capability_shock_claim_permitted": { "type": "boolean", "const": false },
+        "subgroup_comparability_claim_permitted": { "type": "boolean", "const": false },
+        "clinical_or_diagnostic_use_permitted": { "type": "boolean", "const": false },
+        "individual_level_use_permitted": { "type": "boolean", "const": false },
+        "policy_decision_ranking_permitted": { "type": "boolean", "const": false },
+        "allowed_release_claim": {
+          "type": "string",
+          "const": "Citable Wave 8 output, if all gates pass, is limited to full-domain bridge-readiness evidence and does not authorize scoring, trend, event-study, clinical, individual-level, causal, or policy-ranking claims."
+        }
+      }
+    },
+    "analyst_signoff": { "$ref": "#/$defs/signoff" },
+    "reviewer_signoff": { "$ref": "#/$defs/signoff" }
+  },
+  "$defs": {
+    "nullable_string": { "type": ["string", "null"] },
+    "nullable_nonempty_string": { "type": ["string", "null"], "minLength": 1 },
+    "nullable_date": { "type": ["string", "null"], "format": "date" },
+    "nullable_timestamp": { "type": ["string", "null"], "format": "date-time" },
+    "nullable_integer": { "type": ["integer", "null"], "minimum": 0 },
+    "nullable_number": { "type": ["number", "null"] },
+    "nullable_boolean": { "type": ["boolean", "null"] },
+    "nullable_string_array": {
+      "type": ["array", "null"],
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "item_id": {
+      "type": "string",
+      "enum": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo",
+        "skill_obsolescence_software",
+        "wage_pressure_customer_support",
+        "retraining_pressure_accounting",
+        "status_loss_creative_work",
+        "deepfake_evidence_trust",
+        "synthetic_news_provenance",
+        "ai_expert_claim_conflict",
+        "personalized_misinformation_targeting",
+        "partner_ai_confidant_displacement",
+        "friend_group_ai_mediation",
+        "eldercare_ai_attachment_shift",
+        "ai_personhood_boundary_uncertainty",
+        "human_judgment_status_loss",
+        "life_purpose_ai_substitution",
+        "public_space_tracking",
+        "workplace_behavior_scoring",
+        "personalized_behavior_nudging",
+        "autonomous_cyber_cascade",
+        "biosecurity_protocol_misuse",
+        "military_escalation_ai_advice"
+      ]
+    },
+    "domain_id": {
+      "type": "string",
+      "enum": [
+        "somatic_ambient",
+        "economic_vocational",
+        "epistemic",
+        "relational",
+        "existential_identity",
+        "autonomy_surveillance",
+        "safety_catastrophic"
+      ]
+    },
+    "exclusions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "declined_or_withdrawn_n",
+        "under_18_n",
+        "non_us_n",
+        "non_english_or_assisted_n",
+        "duplicate_n",
+        "vendor_fraud_n",
+        "attention_check_failed_n",
+        "scenario_comprehension_failed_n",
+        "full_domain_attribution_failed_n",
+        "fast_completion_n",
+        "excessive_anx_missingness_n",
+        "straightline_plus_quality_failure_n",
+        "nonunderstanding_n",
+        "platform_order_error_n",
+        "total_excluded_n"
+      ],
+      "properties": {
+        "declined_or_withdrawn_n": { "$ref": "#/$defs/nullable_integer" },
+        "under_18_n": { "$ref": "#/$defs/nullable_integer" },
+        "non_us_n": { "$ref": "#/$defs/nullable_integer" },
+        "non_english_or_assisted_n": { "$ref": "#/$defs/nullable_integer" },
+        "duplicate_n": { "$ref": "#/$defs/nullable_integer" },
+        "vendor_fraud_n": { "$ref": "#/$defs/nullable_integer" },
+        "attention_check_failed_n": { "$ref": "#/$defs/nullable_integer" },
+        "scenario_comprehension_failed_n": { "$ref": "#/$defs/nullable_integer" },
+        "full_domain_attribution_failed_n": { "$ref": "#/$defs/nullable_integer" },
+        "fast_completion_n": { "$ref": "#/$defs/nullable_integer" },
+        "excessive_anx_missingness_n": { "$ref": "#/$defs/nullable_integer" },
+        "straightline_plus_quality_failure_n": { "$ref": "#/$defs/nullable_integer" },
+        "nonunderstanding_n": { "$ref": "#/$defs/nullable_integer" },
+        "platform_order_error_n": { "$ref": "#/$defs/nullable_integer" },
+        "total_excluded_n": { "$ref": "#/$defs/nullable_integer" }
+      }
+    },
+    "item_distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "n_administered",
+        "n_observed",
+        "missing_n",
+        "missing_rate",
+        "response_counts",
+        "response_proportions",
+        "single_category_concentration",
+        "two_adjacent_category_concentration",
+        "mean",
+        "sd"
+      ],
+      "properties": {
+        "n_administered": { "$ref": "#/$defs/nullable_integer" },
+        "n_observed": { "$ref": "#/$defs/nullable_integer" },
+        "missing_n": { "$ref": "#/$defs/nullable_integer" },
+        "missing_rate": { "$ref": "#/$defs/nullable_number" },
+        "response_counts": { "$ref": "#/$defs/response_count_map" },
+        "response_proportions": { "$ref": "#/$defs/response_proportion_map" },
+        "single_category_concentration": { "$ref": "#/$defs/nullable_number" },
+        "two_adjacent_category_concentration": { "$ref": "#/$defs/nullable_number" },
+        "mean": { "$ref": "#/$defs/nullable_number" },
+        "sd": { "$ref": "#/$defs/nullable_number" }
+      }
+    },
+    "response_count_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["1", "2", "3", "4", "5"],
+      "properties": {
+        "1": { "$ref": "#/$defs/nullable_integer" },
+        "2": { "$ref": "#/$defs/nullable_integer" },
+        "3": { "$ref": "#/$defs/nullable_integer" },
+        "4": { "$ref": "#/$defs/nullable_integer" },
+        "5": { "$ref": "#/$defs/nullable_integer" }
+      }
+    },
+    "response_proportion_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["1", "2", "3", "4", "5"],
+      "properties": {
+        "1": { "$ref": "#/$defs/nullable_number" },
+        "2": { "$ref": "#/$defs/nullable_number" },
+        "3": { "$ref": "#/$defs/nullable_number" },
+        "4": { "$ref": "#/$defs/nullable_number" },
+        "5": { "$ref": "#/$defs/nullable_number" }
+      }
+    },
+    "item_distribution_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sleep_disruption_ai_news",
+        "body_vigilance_model_release",
+        "background_dread_ai_progress",
+        "avoidance_after_ai_capability_demo",
+        "skill_obsolescence_software",
+        "wage_pressure_customer_support",
+        "retraining_pressure_accounting",
+        "status_loss_creative_work",
+        "deepfake_evidence_trust",
+        "synthetic_news_provenance",
+        "ai_expert_claim_conflict",
+        "personalized_misinformation_targeting",
+        "partner_ai_confidant_displacement",
+        "friend_group_ai_mediation",
+        "eldercare_ai_attachment_shift",
+        "ai_personhood_boundary_uncertainty",
+        "human_judgment_status_loss",
+        "life_purpose_ai_substitution",
+        "public_space_tracking",
+        "workplace_behavior_scoring",
+        "personalized_behavior_nudging",
+        "autonomous_cyber_cascade",
+        "biosecurity_protocol_misuse",
+        "military_escalation_ai_advice"
+      ],
+      "properties": {
+        "sleep_disruption_ai_news": { "$ref": "#/$defs/item_distribution" },
+        "body_vigilance_model_release": { "$ref": "#/$defs/item_distribution" },
+        "background_dread_ai_progress": { "$ref": "#/$defs/item_distribution" },
+        "avoidance_after_ai_capability_demo": { "$ref": "#/$defs/item_distribution" },
+        "skill_obsolescence_software": { "$ref": "#/$defs/item_distribution" },
+        "wage_pressure_customer_support": { "$ref": "#/$defs/item_distribution" },
+        "retraining_pressure_accounting": { "$ref": "#/$defs/item_distribution" },
+        "status_loss_creative_work": { "$ref": "#/$defs/item_distribution" },
+        "deepfake_evidence_trust": { "$ref": "#/$defs/item_distribution" },
+        "synthetic_news_provenance": { "$ref": "#/$defs/item_distribution" },
+        "ai_expert_claim_conflict": { "$ref": "#/$defs/item_distribution" },
+        "personalized_misinformation_targeting": { "$ref": "#/$defs/item_distribution" },
+        "partner_ai_confidant_displacement": { "$ref": "#/$defs/item_distribution" },
+        "friend_group_ai_mediation": { "$ref": "#/$defs/item_distribution" },
+        "eldercare_ai_attachment_shift": { "$ref": "#/$defs/item_distribution" },
+        "ai_personhood_boundary_uncertainty": { "$ref": "#/$defs/item_distribution" },
+        "human_judgment_status_loss": { "$ref": "#/$defs/item_distribution" },
+        "life_purpose_ai_substitution": { "$ref": "#/$defs/item_distribution" },
+        "public_space_tracking": { "$ref": "#/$defs/item_distribution" },
+        "workplace_behavior_scoring": { "$ref": "#/$defs/item_distribution" },
+        "personalized_behavior_nudging": { "$ref": "#/$defs/item_distribution" },
+        "autonomous_cyber_cascade": { "$ref": "#/$defs/item_distribution" },
+        "biosecurity_protocol_misuse": { "$ref": "#/$defs/item_distribution" },
+        "military_escalation_ai_advice": { "$ref": "#/$defs/item_distribution" }
+      }
+    },
+    "domain_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["administered_item_ids", "retained_item_ids", "analytic_n", "mean", "sd", "omega", "minimum_discrimination", "unresolved_material_dif_item_count", "invariance_supported", "bridge_readiness_decision"],
+      "properties": {
+        "administered_item_ids": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/item_id" }
+        },
+        "retained_item_ids": { "type": ["array", "null"], "items": { "$ref": "#/$defs/item_id" }, "uniqueItems": true },
+        "analytic_n": { "$ref": "#/$defs/nullable_integer" },
+        "mean": { "$ref": "#/$defs/nullable_number" },
+        "sd": { "$ref": "#/$defs/nullable_number" },
+        "omega": { "$ref": "#/$defs/nullable_number" },
+        "minimum_discrimination": { "$ref": "#/$defs/nullable_number" },
+        "unresolved_material_dif_item_count": { "$ref": "#/$defs/nullable_integer" },
+        "invariance_supported": { "$ref": "#/$defs/nullable_boolean" },
+        "bridge_readiness_decision": {
+          "type": ["string", "null"],
+          "enum": ["pass", "block", "not_evaluable", null]
+        }
+      }
+    },
+    "domain_summary_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "somatic_ambient",
+        "economic_vocational",
+        "epistemic",
+        "relational",
+        "existential_identity",
+        "autonomy_surveillance",
+        "safety_catastrophic"
+      ],
+      "properties": {
+        "somatic_ambient": { "$ref": "#/$defs/domain_summary" },
+        "economic_vocational": { "$ref": "#/$defs/domain_summary" },
+        "epistemic": { "$ref": "#/$defs/domain_summary" },
+        "relational": { "$ref": "#/$defs/domain_summary" },
+        "existential_identity": { "$ref": "#/$defs/domain_summary" },
+        "autonomy_surveillance": { "$ref": "#/$defs/domain_summary" },
+        "safety_catastrophic": { "$ref": "#/$defs/domain_summary" }
+      }
+    },
+    "efa_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sample_role", "parallel_analysis_factor_count", "seven_domain_solution_interpretable", "minimum_primary_loading", "maximum_cross_loading", "maximum_residual_local_dependence", "heywood_case_count", "unordered_threshold_item_count"],
+      "properties": {
+        "sample_role": { "type": "string", "const": "efa_split" },
+        "parallel_analysis_factor_count": { "$ref": "#/$defs/nullable_integer" },
+        "seven_domain_solution_interpretable": { "$ref": "#/$defs/nullable_boolean" },
+        "minimum_primary_loading": { "$ref": "#/$defs/nullable_number" },
+        "maximum_cross_loading": { "$ref": "#/$defs/nullable_number" },
+        "maximum_residual_local_dependence": { "$ref": "#/$defs/nullable_number" },
+        "heywood_case_count": { "$ref": "#/$defs/nullable_integer" },
+        "unordered_threshold_item_count": { "$ref": "#/$defs/nullable_integer" }
+      }
+    },
+    "cfa_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sample_role", "correlated_seven_factor_cfi", "correlated_seven_factor_tli", "correlated_seven_factor_rmsea", "rmsea_upper_90", "srmr", "minimum_standardized_loading", "maximum_abs_residual_correlation", "better_than_unidimensional", "better_than_collapsed_domain_models"],
+      "properties": {
+        "sample_role": { "type": "string", "const": "cfa_split" },
+        "correlated_seven_factor_cfi": { "$ref": "#/$defs/nullable_number" },
+        "correlated_seven_factor_tli": { "$ref": "#/$defs/nullable_number" },
+        "correlated_seven_factor_rmsea": { "$ref": "#/$defs/nullable_number" },
+        "rmsea_upper_90": { "$ref": "#/$defs/nullable_number" },
+        "srmr": { "$ref": "#/$defs/nullable_number" },
+        "minimum_standardized_loading": { "$ref": "#/$defs/nullable_number" },
+        "maximum_abs_residual_correlation": { "$ref": "#/$defs/nullable_number" },
+        "better_than_unidimensional": { "$ref": "#/$defs/nullable_boolean" },
+        "better_than_collapsed_domain_models": { "$ref": "#/$defs/nullable_boolean" }
+      }
+    },
+    "omega_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum_domain_omega", "all_domains_at_or_above_0_70", "all_domains_at_or_above_0_80"],
+      "properties": {
+        "minimum_domain_omega": { "$ref": "#/$defs/nullable_number" },
+        "all_domains_at_or_above_0_70": { "$ref": "#/$defs/nullable_boolean" },
+        "all_domains_at_or_above_0_80": { "$ref": "#/$defs/nullable_boolean" }
+      }
+    },
+    "irt_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model_converged", "minimum_discrimination", "monotonic_threshold_violations", "material_local_dependence_detected", "central_80_information_stable", "maximum_linking_se", "official_theta_scoring_introduced"],
+      "properties": {
+        "model_converged": { "$ref": "#/$defs/nullable_boolean" },
+        "minimum_discrimination": { "$ref": "#/$defs/nullable_number" },
+        "monotonic_threshold_violations": { "$ref": "#/$defs/nullable_integer" },
+        "material_local_dependence_detected": { "$ref": "#/$defs/nullable_boolean" },
+        "central_80_information_stable": { "$ref": "#/$defs/nullable_boolean" },
+        "maximum_linking_se": { "$ref": "#/$defs/nullable_number" },
+        "official_theta_scoring_introduced": { "type": "boolean", "const": false }
+      }
+    },
+    "latent_correlation_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum_abs_pairwise", "maximum_abs_pairwise", "confidence_intervals_reported", "positive_theoretically_coherent", "weight_and_exclusion_sensitivity_stable"],
+      "properties": {
+        "minimum_abs_pairwise": { "$ref": "#/$defs/nullable_number" },
+        "maximum_abs_pairwise": { "$ref": "#/$defs/nullable_number" },
+        "confidence_intervals_reported": { "$ref": "#/$defs/nullable_boolean" },
+        "positive_theoretically_coherent": { "$ref": "#/$defs/nullable_boolean" },
+        "weight_and_exclusion_sensitivity_stable": { "$ref": "#/$defs/nullable_boolean" }
+      }
+    },
+    "aggregate_readiness_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["omega_hierarchical", "explained_common_variance", "domain_specific_factors_retain_interpretable_variance", "readiness_label"],
+      "properties": {
+        "omega_hierarchical": { "$ref": "#/$defs/nullable_number" },
+        "explained_common_variance": { "$ref": "#/$defs/nullable_number" },
+        "domain_specific_factors_retain_interpretable_variance": { "$ref": "#/$defs/nullable_boolean" },
+        "readiness_label": {
+          "type": ["string", "null"],
+          "enum": ["blocked", "domain_only", "later_aggregate_readiness_review_supported", null]
+        }
+      }
+    },
+    "dif_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_fdr_q_for_flagged_items", "max_pseudo_r2_delta", "max_expected_score_difference_sd", "rank_order_impact_detected", "threshold_shift_material_impact_detected", "material_unresolved_dif_item_count", "subgroup_comparison_blocks"],
+      "properties": {
+        "max_fdr_q_for_flagged_items": { "$ref": "#/$defs/nullable_number" },
+        "max_pseudo_r2_delta": { "$ref": "#/$defs/nullable_number" },
+        "max_expected_score_difference_sd": { "$ref": "#/$defs/nullable_number" },
+        "rank_order_impact_detected": { "$ref": "#/$defs/nullable_boolean" },
+        "threshold_shift_material_impact_detected": { "$ref": "#/$defs/nullable_boolean" },
+        "material_unresolved_dif_item_count": { "$ref": "#/$defs/nullable_integer" },
+        "subgroup_comparison_blocks": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "invariance_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["configural_all_converged", "minimum_metric_delta_cfi", "maximum_metric_delta_rmsea", "minimum_scalar_or_threshold_delta_cfi", "maximum_scalar_or_threshold_delta_rmsea", "partial_invariance_used", "partial_invariance_documented_before_interpretation", "domain_ordering_changed_by_noninvariance", "failed_key_comparison_count"],
+      "properties": {
+        "configural_all_converged": { "$ref": "#/$defs/nullable_boolean" },
+        "minimum_metric_delta_cfi": { "$ref": "#/$defs/nullable_number" },
+        "maximum_metric_delta_rmsea": { "$ref": "#/$defs/nullable_number" },
+        "minimum_scalar_or_threshold_delta_cfi": { "$ref": "#/$defs/nullable_number" },
+        "maximum_scalar_or_threshold_delta_rmsea": { "$ref": "#/$defs/nullable_number" },
+        "partial_invariance_used": { "$ref": "#/$defs/nullable_boolean" },
+        "partial_invariance_documented_before_interpretation": { "$ref": "#/$defs/nullable_boolean" },
+        "domain_ordering_changed_by_noninvariance": { "$ref": "#/$defs/nullable_boolean" },
+        "failed_key_comparison_count": { "$ref": "#/$defs/nullable_integer" }
+      }
+    },
+    "sensitivity_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "analysis_output_pointer",
+        "maximum_abs_domain_mean_shift_sd",
+        "maximum_abs_loading_shift",
+        "decision_changed",
+        "summary"
+      ],
+      "properties": {
+        "analysis_output_pointer": { "$ref": "#/$defs/nullable_nonempty_string" },
+        "maximum_abs_domain_mean_shift_sd": { "$ref": "#/$defs/nullable_number" },
+        "maximum_abs_loading_shift": { "$ref": "#/$defs/nullable_number" },
+        "decision_changed": { "$ref": "#/$defs/nullable_boolean" },
+        "summary": { "$ref": "#/$defs/nullable_nonempty_string" }
+      }
+    },
+    "signoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "role", "signed_at_utc", "statement"],
+      "properties": {
+        "name": { "$ref": "#/$defs/nullable_string" },
+        "role": { "type": "string", "minLength": 1 },
+        "signed_at_utc": { "$ref": "#/$defs/nullable_string" },
+        "statement": { "type": "string", "minLength": 80 }
+      }
+    }
+  }
+}

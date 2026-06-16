@@ -1,6 +1,7 @@
 {
   "item_id": "job_displacement_radiology",
   "version": "v0.1.0",
+  "release_status": "exemplar",
   "domain": "economic_vocational",
   "construct": {
     "construct_id": "anticipated_job_displacement_anxiety",
@@ -77,6 +78,13 @@
         "interpretation": "Respondent reports strong anxiety about occupational security under the described AI deployment."
       }
     ]
+  },
+  "validation": {
+    "psychometric_decision": "development_only",
+    "decision_date": "2026-06-15",
+    "dossier_path": "not_available",
+    "preregistration_path": "not_available",
+    "scoring_eligible": false
   },
   "population": {
     "target_population": "Adults in the general population, with planned subgroup analysis for health care workers and physicians.",

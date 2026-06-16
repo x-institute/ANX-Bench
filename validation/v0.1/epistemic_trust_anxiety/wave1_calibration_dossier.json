@@ -1,0 +1,225 @@
+{
+  "$schema": "../../../schema/validation_dossier.schema.json",
+  "dossier_schema_version": "v0.1.0",
+  "dossier_id": "epistemic_trust_anxiety_wave1_calibration",
+  "benchmark_version": "v0.1.0",
+  "dossier_status": "development_only",
+  "domain": "epistemic",
+  "construct": {
+    "construct_id": "epistemic_trust_anxiety",
+    "label": "Epistemic trust anxiety",
+    "intended_use": "Four-item development pool for measuring anxiety about AI weakening trust in evidence authenticity, news provenance, expert authority, and resistance to personalized misinformation."
+  },
+  "preregistration_path": "docs/preregistrations/anx_us_2026w01_calibration.md",
+  "sample_provenance": {
+    "development_pilot": {
+      "status": "planned",
+      "sampling_frame": "United States adults aged 18 or older eligible for the 2026 wave 1 calibration survey.",
+      "recruitment_source": "Probability-aligned online panel or documented nonprobability panel with preregistered quota and weighting variables.",
+      "fielding_dates": "Planned in preregistration before outcome inspection",
+      "target_n": 500,
+      "analytic_n": 0,
+      "exclusion_summary": "No responses have been collected; exclusions will follow the preregistered attention, timing, comprehension, duplicate, and eligibility rules.",
+      "provenance_notes": "This development-only dossier reserves the calibration evidence record for the epistemic trust anxiety construct pool before fielding."
+    },
+    "confirmation_sample": {
+      "status": "planned",
+      "sampling_frame": "Independent United States adult respondent pool with no respondent overlap with the development pilot.",
+      "recruitment_source": "Separate panel batch or probability-aligned sample source documented before confirmation analysis.",
+      "fielding_dates": "Not fielded in v0.1.0",
+      "target_n": 1000,
+      "analytic_n": 0,
+      "exclusion_summary": "No confirmation responses have been collected; exclusions will be applied before CFA, reliability, IRT, DIF, and invariance analysis.",
+      "provenance_notes": "The confirmation sample is required before any epistemic construct or domain scoring approval can be granted."
+    },
+    "refresh_or_bridge_sample": {
+      "status": "not_applicable",
+      "sampling_frame": "No released scored item version exists yet, so no bridge sample is required for this initial development pool.",
+      "recruitment_source": "Not applicable until item wording, language, administration mode, or scoring is revised after release.",
+      "fielding_dates": "Not applicable for v0.1.0 development-only status",
+      "target_n": 0,
+      "analytic_n": 0,
+      "exclusion_summary": "No bridge exclusions are applicable because no bridge sample exists.",
+      "provenance_notes": "A future bridge dossier is required before claiming comparability across revised item versions, languages, administration modes, or platform provenance labels."
+    }
+  },
+  "items": [
+    {
+      "item_id": "deepfake_evidence_trust",
+      "item_version": "v0.1.0",
+      "item_path": "items/v0.1/epistemic/deepfake_evidence_trust.json",
+      "release_status": "development_only",
+      "psychometric_decision": "development_only",
+      "scoring_eligible": false
+    },
+    {
+      "item_id": "synthetic_news_provenance",
+      "item_version": "v0.1.0",
+      "item_path": "items/v0.1/epistemic/synthetic_news_provenance.json",
+      "release_status": "development_only",
+      "psychometric_decision": "development_only",
+      "scoring_eligible": false
+    },
+    {
+      "item_id": "ai_expert_claim_conflict",
+      "item_version": "v0.1.0",
+      "item_path": "items/v0.1/epistemic/ai_expert_claim_conflict.json",
+      "release_status": "development_only",
+      "psychometric_decision": "development_only",
+      "scoring_eligible": false
+    },
+    {
+      "item_id": "personalized_misinformation_targeting",
+      "item_version": "v0.1.0",
+      "item_path": "items/v0.1/epistemic/personalized_misinformation_targeting.json",
+      "release_status": "development_only",
+      "psychometric_decision": "development_only",
+      "scoring_eligible": false
+    }
+  ],
+  "evidence": {
+    "efa": {
+      "status": "planned",
+      "sample": "development_pilot",
+      "method": "Ordinal exploratory factor analysis using polychoric correlations and oblique rotation, focused on the four epistemic trust anxiety items with cross-domain sensitivity models documented separately.",
+      "required_statistics": [
+        "parallel_analysis_factor_count",
+        "primary_loading",
+        "cross_loading",
+        "communality",
+        "response_distribution"
+      ],
+      "decision_rule": "Retain only items with interpretable primary loadings, acceptable cross-loading behavior, adequate response spread, and coverage of distinct epistemic trust mechanisms.",
+      "result_summary": "No development pilot responses have been collected; EFA evidence is pending and cannot support scoring.",
+      "release_consequence": "All four epistemic items remain development_only and excluded from official scoring until EFA evidence is completed and reviewed."
+    },
+    "cfa": {
+      "status": "planned",
+      "sample": "confirmation_sample",
+      "method": "Confirmatory factor analysis of the retained epistemic trust anxiety model in an independent sample using an estimator suitable for ordered categorical responses.",
+      "required_statistics": [
+        "cfi",
+        "tli",
+        "rmsea",
+        "srmr",
+        "standardized_loading",
+        "residual_diagnostics"
+      ],
+      "decision_rule": "Approve construct scoring only if the retained model satisfies the protocol fit thresholds or a preregistered justification explains limited use without weakening comparison claims.",
+      "result_summary": "No independent confirmation sample has been fielded; CFA fit and loading evidence are unavailable.",
+      "release_consequence": "Construct, domain, overall, longitudinal, and event-study scoring are not permitted for this item pool."
+    },
+    "reliability": {
+      "status": "planned",
+      "sample": "confirmation_sample",
+      "method": "Ordinal omega or coefficient alpha with corrected item-total correlations and sensitivity to removing each retained item.",
+      "required_statistics": [
+        "omega",
+        "alpha",
+        "corrected_item_total_correlation",
+        "standard_error_of_measurement"
+      ],
+      "decision_rule": "Require reliability at or above the protocol threshold for early scored construct use and no item that materially degrades the retained epistemic trust anxiety score.",
+      "result_summary": "No reliability estimates exist because calibration responses have not yet been collected.",
+      "release_consequence": "The dossier cannot support an internally reliable epistemic construct score in v0.1.0."
+    },
+    "irt": {
+      "status": "planned",
+      "sample": "confirmation_sample",
+      "method": "Graded response model or documented ordinal alternative estimating discrimination, category thresholds, item information, and local dependence.",
+      "required_statistics": [
+        "discrimination",
+        "category_thresholds",
+        "item_information",
+        "local_dependence",
+        "response_pattern_fit"
+      ],
+      "decision_rule": "Retain items only if thresholds are ordered or substantively justified, discrimination is useful, and local dependence does not collapse distinct epistemic mechanisms into duplicate indicators.",
+      "result_summary": "No IRT calibration has been run; item parameters are unavailable.",
+      "release_consequence": "No IRT-based scoring, linking, or information claims are permitted for this development pool."
+    },
+    "dif": {
+      "status": "planned",
+      "sample": "confirmation_sample",
+      "method": "Ordinal logistic DIF screening, multi-group IRT, or documented equivalent for preregistered demographic, media-exposure, political-information, institutional-trust, and AI-exposure comparison groups.",
+      "required_statistics": [
+        "group_sample_sizes",
+        "effect_size",
+        "multiplicity_adjustment",
+        "direction_of_dif",
+        "practical_significance"
+      ],
+      "decision_rule": "Block scored comparison use for any item with statistically supported and practically meaningful unresolved DIF in an intended public comparison group.",
+      "result_summary": "No DIF results exist because the confirmation sample has not been analyzed.",
+      "release_consequence": "The item pool cannot support subgroup comparisons, weights-based comparisons, or event-study heterogeneity claims."
+    },
+    "invariance": {
+      "status": "planned",
+      "sample": "confirmation_sample",
+      "method": "Multi-group CFA, alignment, IRT linking, or bridge design matched to the planned comparison claim.",
+      "required_statistics": [
+        "configural_fit",
+        "metric_delta_cfi",
+        "metric_delta_rmsea",
+        "scalar_delta_cfi",
+        "scalar_delta_rmsea"
+      ],
+      "decision_rule": "Permit latent mean, longitudinal, or cross-group comparisons only when scalar invariance or a preregistered validated linking alternative is supported.",
+      "result_summary": "No invariance analysis has been conducted for v0.1.0.",
+      "release_consequence": "The dossier permits only development administration and prohibits benchmark comparison claims."
+    }
+  },
+  "retention_table": [
+    {
+      "item_id": "deepfake_evidence_trust",
+      "item_version": "v0.1.0",
+      "criterion": "Construct coverage before fielding",
+      "observed_result": "Covers trust erosion when AI systems make digital evidence authenticity contested in public fact-finding.",
+      "threshold": "Candidate pool must span multiple epistemic trust mechanisms without reducing the construct to a single media-authenticity concern.",
+      "decision": "pending",
+      "rationale": "The item is substantively relevant but lacks EFA, CFA, reliability, IRT, DIF, and invariance evidence required for retention."
+    },
+    {
+      "item_id": "synthetic_news_provenance",
+      "item_version": "v0.1.0",
+      "criterion": "Construct coverage before fielding",
+      "observed_result": "Covers uncertainty about provenance and source reconstruction when synthetic and authentic news artifacts are mixed.",
+      "threshold": "Candidate pool must include provenance uncertainty as a distinct pathway from deepfake evidence disputes.",
+      "decision": "pending",
+      "rationale": "The item is substantively relevant but lacks calibration evidence required for construct scoring or public comparison use."
+    },
+    {
+      "item_id": "ai_expert_claim_conflict",
+      "item_version": "v0.1.0",
+      "criterion": "Construct coverage before fielding",
+      "observed_result": "Covers anxiety from conflicting AI-supported expert claims when ordinary respondents cannot adjudicate technical authority.",
+      "threshold": "Candidate pool must include expert-claim conflict as a distinct epistemic trust mechanism.",
+      "decision": "pending",
+      "rationale": "The item remains a development candidate until preregistered pilot and confirmation evidence justify retention."
+    },
+    {
+      "item_id": "personalized_misinformation_targeting",
+      "item_version": "v0.1.0",
+      "criterion": "Construct coverage before fielding",
+      "observed_result": "Covers anxiety that AI-personalized misinformation may be difficult to recognize because different people receive tailored variants.",
+      "threshold": "Candidate pool must include personalized targeting as a distinct mechanism affecting trust in shared information environments.",
+      "decision": "pending",
+      "rationale": "The item has substantive construct coverage but no psychometric evidence sufficient for scored release."
+    }
+  ],
+  "decision": {
+    "psychometric_decision": "development_only",
+    "decision_date": "2026-06-15",
+    "scoring_eligible": false,
+    "approval_scope": "Development administration only; no official ANX scoring, longitudinal comparison, or event-study outcome use.",
+    "rationale": "The dossier identifies the four-item epistemic trust anxiety construct pool and planned validation evidence, but no calibration sample has been fielded and no psychometric approval evidence exists."
+  },
+  "reviewer_signoff": {
+    "reviewer": "ANX-Bench methods reviewer pending assignment",
+    "role": "Independent psychometric reviewer",
+    "date": "2026-06-15",
+    "conflicts": "None recorded",
+    "signoff_status": "not_yet_reviewed",
+    "notes": "This development-only dossier is schema-valid for release tracking but does not constitute approval for scored benchmark use."
+  }
+}

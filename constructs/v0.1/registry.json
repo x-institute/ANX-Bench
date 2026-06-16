@@ -1,0 +1,288 @@
+{
+  "$schema": "../../schema/construct_registry.schema.json",
+  "registry_schema_version": "v0.1.0",
+  "registry_version": "v0.1.0",
+  "benchmark_release_line": "v0.1",
+  "effective_benchmark_version": "v0.1.0",
+  "status": "frozen",
+  "domains": [
+    {
+      "domain_id": "economic_vocational",
+      "label": "Economic and vocational",
+      "definition": "Anxiety about employment, wages, skill obsolescence, occupational status, bargaining power, retraining burden, and career security under advancing AI capability.",
+      "included_construct_ids": [
+        "anticipated_job_displacement_anxiety",
+        "economic_vocational_anxiety"
+      ]
+    },
+    {
+      "domain_id": "epistemic",
+      "label": "Epistemic",
+      "definition": "Anxiety about truth, evidence, provenance, expertise, deepfakes, misinformation, and the ability to trust shared information environments under advancing AI capability.",
+      "included_construct_ids": [
+        "epistemic_trust_anxiety"
+      ]
+    },
+    {
+      "domain_id": "relational",
+      "label": "Relational",
+      "definition": "Anxiety about AI effects on friendship, intimacy, family life, care, attachment, dependency, social substitution, and trust in close relationships.",
+      "included_construct_ids": [
+        "relational_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "existential_identity",
+      "label": "Existential and identity",
+      "definition": "Anxiety about meaning, human distinctiveness, creativity, dignity, agency, social value, status, and self-concept under advancing AI capability.",
+      "included_construct_ids": [
+        "existential_identity_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "autonomy_surveillance",
+      "label": "Autonomy and surveillance",
+      "definition": "Anxiety about monitoring, manipulation, automated evaluation, profiling, institutional scoring, loss of choice, and diminished practical autonomy under AI-mediated systems.",
+      "included_construct_ids": [
+        "autonomy_surveillance_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "safety_catastrophic",
+      "label": "Safety and catastrophic",
+      "definition": "Anxiety about physical safety, misuse, weapons, loss of control, infrastructure failure, cascading harm, and extreme-risk narratives linked to AI capability.",
+      "included_construct_ids": [
+        "safety_catastrophic_ai_anxiety_anchor"
+      ]
+    },
+    {
+      "domain_id": "somatic_ambient",
+      "label": "Somatic and ambient",
+      "definition": "Diffuse bodily unease, vigilance, sleep disturbance, background dread, and other low-specificity physiological anxiety responses to AI progress or AI-mediated environments.",
+      "included_construct_ids": [
+        "somatic_ambient_ai_anxiety_anchor"
+      ]
+    }
+  ],
+  "constructs": [
+    {
+      "construct_id": "anticipated_job_displacement_anxiety",
+      "domain_id": "economic_vocational",
+      "label": "Anticipated job displacement anxiety",
+      "definition": "Anxiety arising from the belief that advancing AI systems may reduce the future demand, security, compensation, or status of the respondent's occupation.",
+      "intended_aggregation_level": "item_level_only",
+      "minimum_retained_items": 1,
+      "anchor_status": "exemplar_only",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": false,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Item-level comprehension and response-distribution review",
+          "Item-level reliability and stability evidence where repeated administration is planned",
+          "DIF screening for occupational status, education, age, gender, and language groups when used for comparison"
+        ],
+        "scoring_rule": "This v0.1 exemplar may be scored only as an item-level outcome after item-level validation approval; it cannot define a construct or domain score by itself."
+      },
+      "allowed_item_ids": [
+        "job_displacement_radiology"
+      ]
+    },
+    {
+      "construct_id": "economic_vocational_anxiety",
+      "domain_id": "economic_vocational",
+      "label": "Economic and vocational anxiety",
+      "definition": "Anxiety arising from the belief that advancing AI systems may reduce the future value, bargaining power, status, compensation, security, or transferability of occupational skills.",
+      "intended_aggregation_level": "multi_item_construct_candidate",
+      "minimum_retained_items": 3,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Exploratory factor analysis in the preregistered development pilot",
+          "Confirmatory factor analysis in an independent confirmation sample",
+          "Internal consistency and item-total evidence after retention decisions",
+          "IRT calibration or an explicit justification for an alternative measurement model",
+          "DIF and measurement-invariance review for preregistered comparison groups",
+          "Documented item retention decision leaving at least three retained items before construct scoring"
+        ],
+        "scoring_rule": "This v0.1 multi-item construct candidate may enter construct or domain aggregation only after preregistered validation retains at least three allowed items."
+      },
+      "allowed_item_ids": [
+        "skill_obsolescence_software",
+        "wage_pressure_customer_support",
+        "retraining_pressure_accounting",
+        "status_loss_creative_work"
+      ]
+    },
+    {
+      "construct_id": "epistemic_trust_anxiety",
+      "domain_id": "epistemic",
+      "label": "Epistemic trust anxiety",
+      "definition": "Anxiety arising from the belief that advancing AI systems may make ordinary evidence, testimony, media records, expert claims, provenance signals, targeted information, or institutional fact-finding harder to trust.",
+      "intended_aggregation_level": "multi_item_construct_candidate",
+      "minimum_retained_items": 3,
+      "anchor_status": "not_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": true,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Exploratory factor analysis in the preregistered development pilot",
+          "Confirmatory factor analysis in an independent confirmation sample",
+          "Internal consistency and item-total evidence after retention decisions",
+          "IRT calibration or an explicit justification for an alternative measurement model",
+          "DIF and measurement-invariance review for preregistered comparison groups",
+          "Documented item retention decision leaving at least three retained items before construct scoring"
+        ],
+        "scoring_rule": "This v0.1 multi-item construct candidate may enter construct or domain aggregation only after preregistered validation retains at least three allowed items and the full psychometric validation gate is approved."
+      },
+      "allowed_item_ids": [
+        "deepfake_evidence_trust",
+        "synthetic_news_provenance",
+        "ai_expert_claim_conflict",
+        "personalized_misinformation_targeting"
+      ]
+    },
+    {
+      "construct_id": "relational_ai_anxiety_anchor",
+      "domain_id": "relational",
+      "label": "Relational AI anxiety anchor",
+      "definition": "Anxiety arising from the belief that advancing AI systems may alter attachment, intimacy, dependency, caregiving, friendship, family life, or social trust in close human relationships.",
+      "intended_aggregation_level": "item_level_only",
+      "minimum_retained_items": 1,
+      "anchor_status": "cross_domain_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": false,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Item-level comprehension and response-distribution review",
+          "Item-level DIF screening for preregistered comparison groups",
+          "Evidence that the item functions as an anchor descriptor, not as a standalone construct scale"
+        ],
+        "scoring_rule": "This cross-domain anchor may be reported only as an item-level descriptive or exploratory outcome unless a future registry version admits a validated multi-item construct."
+      },
+      "allowed_item_ids": [
+        "child_companion_attachment"
+      ]
+    },
+    {
+      "construct_id": "existential_identity_ai_anxiety_anchor",
+      "domain_id": "existential_identity",
+      "label": "Existential and identity AI anxiety anchor",
+      "definition": "Anxiety arising from the belief that advancing AI systems may threaten human distinctiveness, purpose, dignity, creativity, agency, status, or self-understanding.",
+      "intended_aggregation_level": "item_level_only",
+      "minimum_retained_items": 1,
+      "anchor_status": "cross_domain_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": false,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Item-level comprehension and response-distribution review",
+          "Item-level DIF screening for preregistered comparison groups",
+          "Evidence that the item functions as an anchor descriptor, not as a standalone construct scale"
+        ],
+        "scoring_rule": "This cross-domain anchor may be reported only as an item-level descriptive or exploratory outcome unless a future registry version admits a validated multi-item construct."
+      },
+      "allowed_item_ids": [
+        "creativity_status_displacement"
+      ]
+    },
+    {
+      "construct_id": "autonomy_surveillance_ai_anxiety_anchor",
+      "domain_id": "autonomy_surveillance",
+      "label": "Autonomy and surveillance AI anxiety anchor",
+      "definition": "Anxiety arising from the belief that advancing AI systems may constrain personal autonomy through monitoring, prediction, automated classification, institutional scoring, or decision rules.",
+      "intended_aggregation_level": "item_level_only",
+      "minimum_retained_items": 1,
+      "anchor_status": "cross_domain_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": false,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Item-level comprehension and response-distribution review",
+          "Item-level DIF screening for preregistered comparison groups",
+          "Evidence that the item functions as an anchor descriptor, not as a standalone construct scale"
+        ],
+        "scoring_rule": "This cross-domain anchor may be reported only as an item-level descriptive or exploratory outcome unless a future registry version admits a validated multi-item construct."
+      },
+      "allowed_item_ids": [
+        "institutional_scoring_automation"
+      ]
+    },
+    {
+      "construct_id": "safety_catastrophic_ai_anxiety_anchor",
+      "domain_id": "safety_catastrophic",
+      "label": "Safety and catastrophic AI anxiety anchor",
+      "definition": "Anxiety arising from the belief that advancing AI systems may enable physical harm, cascading infrastructure failure, weaponization, loss of control, or large-scale systemic danger.",
+      "intended_aggregation_level": "item_level_only",
+      "minimum_retained_items": 1,
+      "anchor_status": "cross_domain_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": false,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Item-level comprehension and response-distribution review",
+          "Item-level DIF screening for preregistered comparison groups",
+          "Evidence that the item functions as an anchor descriptor, not as a standalone construct scale"
+        ],
+        "scoring_rule": "This cross-domain anchor may be reported only as an item-level descriptive or exploratory outcome unless a future registry version admits a validated multi-item construct."
+      },
+      "allowed_item_ids": [
+        "ai_enabled_systemic_harm"
+      ]
+    },
+    {
+      "construct_id": "somatic_ambient_ai_anxiety_anchor",
+      "domain_id": "somatic_ambient",
+      "label": "Somatic and ambient AI anxiety anchor",
+      "definition": "Anxiety arising from diffuse bodily unease, vigilance, sleep disruption, background dread, or physiological arousal after exposure to AI capability news or AI-mediated environments.",
+      "intended_aggregation_level": "item_level_only",
+      "minimum_retained_items": 1,
+      "anchor_status": "cross_domain_anchor",
+      "validation_requirements": {
+        "dossier_required": true,
+        "preregistration_required": true,
+        "construct_level_validation_required": false,
+        "minimum_development_sample_n": 500,
+        "minimum_confirmation_sample_n": 1000,
+        "required_evidence": [
+          "Item-level comprehension and response-distribution review",
+          "Item-level DIF screening for preregistered comparison groups",
+          "Evidence that the item functions as an anchor descriptor, not as a standalone construct scale"
+        ],
+        "scoring_rule": "This cross-domain anchor may be reported only as an item-level descriptive or exploratory outcome unless a future registry version admits a validated multi-item construct."
+      },
+      "allowed_item_ids": [
+        "ambient_bodily_unease"
+      ]
+    }
+  ],
+  "release_rules": [
+    "Construct and domain aggregation must resolve each item to a construct_id in this registry and must ignore unregistered construct labels embedded in item JSON.",
+    "A future item must reference a registered construct_id and appear in that construct's allowed_item_ids before it can enter a frozen item set.",
+    "Item-level-only constructs may support descriptive or exploratory item-level reporting after item-level validation, but they must not be averaged into construct, domain, or overall ANX scores.",
+    "The economic_vocational_anxiety and epistemic_trust_anxiety constructs are the v0.1 multi-item construct candidates; each requires at least three retained allowed items and the full psychometric validation gate before aggregate scoring.",
+    "The five non-economic, non-epistemic cross-domain anchors are item-level-only candidates in v0.1 and cannot serve as validated construct scales without a future registry revision and preregistered validation evidence."
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "retest_evidence_schema_version": "v0.1.0",
+  "evidence_id": "anx_us_2026w03_somatic_retest_evidence_template",
+  "study_id": "anx_us_2026w03_somatic_retest",
+  "benchmark_version": "v0.3.1",
+  "construct_id": "somatic_ambient_anxiety",
+  "score_name": "somatic_ambient_anxiety_mean",
+  "event_id": "no_event",
+  "evidence_date": "2026-06-16",
+  "preregistration_path": "docs/preregistrations/anx_us_2026w03_somatic_retest.md",
+  "event_registry_path": "events/v0.3/anx_us_2026w03_somatic_retest_event_registry.json",
+  "fielding_design": {
+    "retest_interval_days": 14,
+    "primary_window_start_day_inclusive": 13,
+    "primary_window_end_day_exclusive": 16,
+    "timing_sensitivity_start_day_inclusive": 10,
+    "timing_sensitivity_end_day_inclusive": 21,
+    "administration_mode": "online_self_administered_survey",
+    "country": "United States",
+    "language": "English",
+    "allowed_claim_scope": "Short-interval repeatability and longitudinal measurement-quality evidence for the v0.3.1 US English online adult somatic_ambient_anxiety construct only."
+  },
+  "frozen_item_ids": [
+    "sleep_disruption_ai_news",
+    "body_vigilance_model_release",
+    "background_dread_ai_progress",
+    "avoidance_after_ai_capability_demo"
+  ],
+  "frozen_item_versions": {
+    "sleep_disruption_ai_news": "v0.2.0",
+    "body_vigilance_model_release": "v0.2.0",
+    "background_dread_ai_progress": "v0.2.0",
+    "avoidance_after_ai_capability_demo": "v0.2.0"
+  },
+  "thresholds": {
+    "construct": {
+      "minimum_complete_pair_n": 500,
+      "minimum_icc_2_1": 0.7,
+      "minimum_icc_95ci_lower": 0.6,
+      "maximum_abs_weighted_mean_change": 0.15,
+      "mean_change_ci_low_minimum": -0.25,
+      "mean_change_ci_high_maximum": 0.25,
+      "maximum_abs_standardized_response_mean": 0.2
+    },
+    "item": {
+      "minimum_unweighted_stability_correlation": 0.5,
+      "maximum_abs_weighted_mean_change": 0.2,
+      "minimum_weighted_exact_agreement": 0.45,
+      "minimum_weighted_adjacent_agreement": 0.85,
+      "maximum_weighted_two_or_more_category_move_share": 0.15,
+      "maximum_missing_or_unusable_rate": 0.1
+    },
+    "attrition": {
+      "flag_standardized_mean_difference_greater_than": 0.1,
+      "flag_weighted_percentage_point_difference_greater_than": 5.0,
+      "attrition_sensitive_mean_difference_greater_than_points": 0.15,
+      "attrition_sensitive_mean_difference_greater_than_sd": 0.2
+    },
+    "longitudinal_invariance": {
+      "metric_delta_cfi_minimum": -0.01,
+      "metric_delta_rmsea_maximum": 0.015,
+      "scalar_delta_cfi_minimum": -0.01,
+      "scalar_delta_rmsea_maximum": 0.015,
+      "maximum_expected_score_impact": 0.1,
+      "maximum_same_item_residual_correlation": 0.2
+    },
+    "panel_conditioning": {
+      "minimum_conditioning_excluded_icc_if_primary_passes": 0.65,
+      "maximum_abs_weighted_mean_change_difference": 0.1
+    }
+  },
+  "linkage_counts": {
+    "wave1_eligible_with_recontact_permission_n": null,
+    "invited_n": null,
+    "bounced_or_unreachable_n": null,
+    "started_retest_n": null,
+    "consented_n": null,
+    "complete_before_exclusions_n": null,
+    "unique_linked_pairs_n": null,
+    "ambiguous_or_duplicate_link_excluded_n": null,
+    "complete_primary_window_pairs_n": null,
+    "timing_sensitivity_pairs_n": null,
+    "final_primary_analytic_pairs_n": null
+  },
+  "exclusion_flow": {
+    "excluded_no_retest_consent_n": null,
+    "excluded_unmatched_or_nonunique_link_n": null,
+    "excluded_outside_primary_window_n": null,
+    "excluded_attention_check_n": null,
+    "excluded_comprehension_check_n": null,
+    "excluded_somatic_attribution_check_n": null,
+    "excluded_fast_completion_n": null,
+    "excluded_straightline_plus_qc_failure_n": null,
+    "excluded_missing_or_invalid_retest_item_n": null,
+    "excluded_vendor_duplicate_fraud_bot_n": null,
+    "excluded_self_reported_nonunderstanding_n": null,
+    "total_excluded_primary_n": null
+  },
+  "attrition_diagnostics": {
+    "covariates_compared": [
+      "wave1_somatic_ambient_anxiety_mean",
+      "sleep_disruption_ai_news",
+      "body_vigilance_model_release",
+      "background_dread_ai_progress",
+      "avoidance_after_ai_capability_demo",
+      "age_group",
+      "gender",
+      "race_ethnicity",
+      "education",
+      "census_region",
+      "employment_status",
+      "prior_ai_exposure",
+      "ai_news_exposure",
+      "baseline_general_anxiety",
+      "device_type",
+      "wave1_response_time"
+    ],
+    "max_absolute_standardized_mean_difference": null,
+    "max_absolute_weighted_percentage_point_difference": null,
+    "wave1_construct_mean_difference_points": null,
+    "wave1_construct_mean_difference_sd": null,
+    "flagged_covariates": [],
+    "attrition_sensitive": null,
+    "attrition_adjusted_weighting_applied": null,
+    "decision": null
+  },
+  "icc_2_1": {
+    "method": "two_way_random_effects_absolute_agreement_single_measure_icc_2_1",
+    "analytic_n": null,
+    "estimate": null,
+    "ci_95_lower": null,
+    "ci_95_upper": null,
+    "bootstrap_resamples": null,
+    "weighted_sensitivity_estimate": null,
+    "decision": null
+  },
+  "mean_change": {
+    "weighted_wave1_mean": null,
+    "weighted_retest_mean": null,
+    "weighted_mean_change": null,
+    "robust_standard_error": null,
+    "ci_95_lower": null,
+    "ci_95_upper": null,
+    "standardized_response_mean": null,
+    "decision": null
+  },
+  "item_stability": [
+    {
+      "item_id": "sleep_disruption_ai_news",
+      "item_version": "v0.2.0",
+      "paired_item_n": null,
+      "weighted_mean_change": null,
+      "unweighted_stability_correlation": null,
+      "weighted_exact_agreement": null,
+      "weighted_adjacent_agreement": null,
+      "weighted_two_or_more_category_move_share": null,
+      "missing_or_unusable_retest_rate": null,
+      "decision": null
+    },
+    {
+      "item_id": "body_vigilance_model_release",
+      "item_version": "v0.2.0",
+      "paired_item_n": null,
+      "weighted_mean_change": null,
+      "unweighted_stability_correlation": null,
+      "weighted_exact_agreement": null,
+      "weighted_adjacent_agreement": null,
+      "weighted_two_or_more_category_move_share": null,
+      "missing_or_unusable_retest_rate": null,
+      "decision": null
+    },
+    {
+      "item_id": "background_dread_ai_progress",
+      "item_version": "v0.2.0",
+      "paired_item_n": null,
+      "weighted_mean_change": null,
+      "unweighted_stability_correlation": null,
+      "weighted_exact_agreement": null,
+      "weighted_adjacent_agreement": null,
+      "weighted_two_or_more_category_move_share": null,
+      "missing_or_unusable_retest_rate": null,
+      "decision": null
+    },
+    {
+      "item_id": "avoidance_after_ai_capability_demo",
+      "item_version": "v0.2.0",
+      "paired_item_n": null,
+      "weighted_mean_change": null,
+      "unweighted_stability_correlation": null,
+      "weighted_exact_agreement": null,
+      "weighted_adjacent_agreement": null,
+      "weighted_two_or_more_category_move_share": null,
+      "missing_or_unusable_retest_rate": null,
+      "decision": null
+    }
+  ],
+  "longitudinal_invariance": {
+    "method": "Ordinal CFA sequence using WLSMV, with item-response or alignment-based linking fallback if the four-indicator model is not identified or is unstable.",
+    "configural_converged": null,
+    "configural_one_factor_preserved": null,
+    "metric_delta_cfi": null,
+    "metric_delta_rmsea": null,
+    "scalar_delta_cfi": null,
+    "scalar_delta_rmsea": null,
+    "max_expected_construct_score_impact": null,
+    "max_same_item_residual_correlation": null,
+    "status_label": null,
+    "decision": null
+  },
+  "panel_conditioning_sensitivity": {
+    "excluded_conditioning_n": null,
+    "conditioning_excluded_icc": null,
+    "conditioning_excluded_weighted_mean_change": null,
+    "absolute_mean_change_difference": null,
+    "panel_conditioning_sensitive": null,
+    "decision": null
+  },
+  "decision_table": {
+    "construct_repeatability_decision": null,
+    "item_level_failed_item_count": null,
+    "item_level_caution_item_ids": [],
+    "overall_retest_evidence_decision": null,
+    "claim_authorized": null
+  },
+  "reporting_restrictions": {
+    "event_study_claim_permitted": false,
+    "trend_claim_permitted": false,
+    "causal_shock_claim_permitted": false,
+    "longer_interval_longitudinal_claim_permitted": false,
+    "notes": "This retest evidence packet must not be used to claim population trend, event response, causal change after an AI capability shock, or longer-interval longitudinal comparability."
+  }
+}

@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anx-bench.org/schema/longitudinal_linking_plan.schema.json",
+  "title": "ANX-Bench Versioned Longitudinal Linking and Equating Plan",
+  "description": "Machine-readable contract for determining whether two ANX-Bench releases can support longitudinal, trend, cross-release, or event-study comparisons. The plan binds source and target releases, anchor items, item-version continuity, bridge-sample requirements, linking model, invariance gates, drift thresholds, and claim limits before outcome inspection.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "longitudinal_linking_plan_schema_version",
+    "plan_id",
+    "plan_status",
+    "created_date",
+    "source_release",
+    "target_release",
+    "wave_id",
+    "preregistration_paths",
+    "anchor_items",
+    "minimum_overlap_rules",
+    "bridge_sample",
+    "linking_model",
+    "invariance_gates",
+    "drift_thresholds",
+    "domain_scoring_status",
+    "claim_authorization",
+    "blocking_rules"
+  ],
+  "properties": {
+    "longitudinal_linking_plan_schema_version": { "type": "string", "const": "v0.1.0" },
+    "plan_id": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
+    "plan_status": {
+      "type": "string",
+      "enum": ["preregistered_template", "observed_pending_review", "observed_passed", "observed_blocked"]
+    },
+    "created_date": { "type": "string", "format": "date" },
+    "source_release": { "$ref": "#/$defs/release_ref" },
+    "target_release": { "$ref": "#/$defs/release_ref" },
+    "wave_id": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
+    "preregistration_paths": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/repository_path" }
+    },
+    "anchor_items": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/anchor_item" }
+    },
+    "minimum_overlap_rules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimum_anchor_items_total",
+        "minimum_anchor_items_per_scored_domain",
+        "minimum_anchor_response_overlap",
+        "requires_identical_response_scale",
+        "requires_identical_administration_mode",
+        "requires_same_target_population_scope"
+      ],
+      "properties": {
+        "minimum_anchor_items_total": { "type": "integer", "minimum": 3 },
+        "minimum_anchor_items_per_scored_domain": { "type": "integer", "minimum": 3 },
+        "minimum_anchor_response_overlap": { "type": "number", "minimum": 0, "maximum": 1 },
+        "requires_identical_response_scale": { "type": "boolean" },
+        "requires_identical_administration_mode": { "type": "boolean" },
+        "requires_same_target_population_scope": { "type": "boolean" }
+      }
+    },
+    "bridge_sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sample_design",
+        "target_population",
+        "sampling_plan_path",
+        "minimum_analytic_n",
+        "minimum_per_anchor_n",
+        "minimum_subgroup_cell_n",
+        "coadministration_required",
+        "randomization_required",
+        "weights_required_for_population_claims",
+        "outcome_inspection_status"
+      ],
+      "properties": {
+        "sample_design": { "type": "string", "minLength": 20 },
+        "target_population": { "type": "string", "minLength": 20 },
+        "sampling_plan_path": { "$ref": "#/$defs/repository_path" },
+        "minimum_analytic_n": { "type": "integer", "minimum": 1 },
+        "minimum_per_anchor_n": { "type": "integer", "minimum": 1 },
+        "minimum_subgroup_cell_n": { "type": "integer", "minimum": 1 },
+        "coadministration_required": { "type": "boolean" },
+        "randomization_required": { "type": "boolean" },
+        "weights_required_for_population_claims": { "type": "boolean" },
+        "outcome_inspection_status": {
+          "type": "string",
+          "enum": ["before_outcome_inspection", "after_outcome_inspection", "not_applicable"]
+        }
+      }
+    },
+    "linking_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_model",
+        "estimator",
+        "scale_identification",
+        "anchor_treatment",
+        "sensitivity_models",
+        "model_selection_rule"
+      ],
+      "properties": {
+        "primary_model": { "type": "string", "enum": ["mean_sigma_linear_equating", "ordinal_cfa_alignment", "graded_response_irt_linking"] },
+        "estimator": { "type": "string", "minLength": 3 },
+        "scale_identification": { "type": "string", "minLength": 20 },
+        "anchor_treatment": { "type": "string", "enum": ["fixed_common_items", "partial_invariance_freeing_allowed", "all_parameters_reestimated"] },
+        "sensitivity_models": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 3 }
+        },
+        "model_selection_rule": { "type": "string", "minLength": 20 }
+      }
+    },
+    "invariance_gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "configural_required",
+        "metric_required",
+        "scalar_or_threshold_required",
+        "max_metric_delta_cfi_abs",
+        "max_scalar_delta_cfi_abs",
+        "max_delta_rmsea",
+        "max_material_dif_items",
+        "partial_invariance_rule"
+      ],
+      "properties": {
+        "configural_required": { "type": "boolean" },
+        "metric_required": { "type": "boolean" },
+        "scalar_or_threshold_required": { "type": "boolean" },
+        "max_metric_delta_cfi_abs": { "type": "number", "minimum": 0, "maximum": 1 },
+        "max_scalar_delta_cfi_abs": { "type": "number", "minimum": 0, "maximum": 1 },
+        "max_delta_rmsea": { "type": "number", "minimum": 0, "maximum": 1 },
+        "max_material_dif_items": { "type": "integer", "minimum": 0 },
+        "partial_invariance_rule": { "type": "string", "minLength": 40 }
+      }
+    },
+    "drift_thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_mean_anchor_drift_sd",
+        "max_single_anchor_drift_sd",
+        "max_linking_standard_error",
+        "max_rank_order_change",
+        "max_expected_score_difference_sd"
+      ],
+      "properties": {
+        "max_mean_anchor_drift_sd": { "type": "number", "minimum": 0 },
+        "max_single_anchor_drift_sd": { "type": "number", "minimum": 0 },
+        "max_linking_standard_error": { "type": "number", "minimum": 0 },
+        "max_rank_order_change": { "type": "number", "minimum": 0 },
+        "max_expected_score_difference_sd": { "type": "number", "minimum": 0 }
+      }
+    },
+    "domain_scoring_status": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/domain_status" }
+    },
+    "claim_authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["permitted_claims", "blocked_claims", "claim_review_rule"],
+      "properties": {
+        "permitted_claims": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 10 }
+        },
+        "blocked_claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 10 }
+        },
+        "claim_review_rule": { "type": "string", "minLength": 40 }
+      }
+    },
+    "blocking_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 20 }
+    }
+  },
+  "$defs": {
+    "repository_path": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_./-]+$"
+    },
+    "release_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["benchmark_version", "manifest_path", "release_role"],
+      "properties": {
+        "benchmark_version": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "manifest_path": { "$ref": "#/$defs/repository_path" },
+        "release_role": { "type": "string", "enum": ["source_scored_release", "target_candidate_release", "target_scored_release"] }
+      }
+    },
+    "anchor_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "anchor_id",
+        "domain",
+        "construct_id",
+        "source",
+        "target",
+        "item_version_continuity",
+        "anchor_role",
+        "bridge_evidence_path"
+      ],
+      "properties": {
+        "anchor_id": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
+        "domain": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
+        "construct_id": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
+        "source": { "$ref": "#/$defs/item_ref" },
+        "target": { "$ref": "#/$defs/item_ref" },
+        "item_version_continuity": {
+          "type": "string",
+          "enum": ["identical_item_version", "changed_item_version_requires_bridge_evidence"]
+        },
+        "anchor_role": {
+          "type": "string",
+          "enum": ["primary_scale_anchor", "secondary_domain_anchor", "candidate_anchor"]
+        },
+        "bridge_evidence_path": { "type": ["string", "null"], "pattern": "^[A-Za-z0-9_./-]+$" }
+      }
+    },
+    "item_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item_id", "item_version", "item_path"],
+      "properties": {
+        "item_id": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
+        "item_version": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "item_path": { "$ref": "#/$defs/repository_path" }
+      }
+    },
+    "domain_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain_id", "score_status", "reason", "required_evidence_before_scoring"],
+      "properties": {
+        "domain_id": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
+        "score_status": { "type": "string", "enum": ["non_scored", "scored_source_only", "linked_scored"] },
+        "reason": { "type": "string", "minLength": 20 },
+        "required_evidence_before_scoring": { "type": "string", "minLength": 20 }
+      }
+    }
+  }
+}

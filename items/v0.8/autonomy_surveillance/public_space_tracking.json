@@ -1,0 +1,76 @@
+{
+  "item_id": "public_space_tracking",
+  "version": "v0.8.0",
+  "release_status": "development_only",
+  "domain": "autonomy_surveillance",
+  "construct": {
+    "construct_id": "autonomy_surveillance_ai_anxiety",
+    "label": "Autonomy and surveillance AI anxiety",
+    "definition": "Anxiety arising from the belief that AI-mediated monitoring, prediction, classification, persuasion, or automated decision systems may constrain practical choice, privacy, self-direction, or procedural control.",
+    "subconstruct": "public-space tracking and inference"
+  },
+  "scenario_text": "Imagine that transit stations, shopping districts, and apartment lobbies deploy AI camera systems that can track movement patterns, infer unusual behavior, and match repeated visits across locations without storing a person's legal name in the public interface. Officials say the system improves safety and crowd management, but residents cannot see which inferences are attached to them, how long records last, or whether insurers, landlords, employers, or police can later request access.",
+  "response_scale": {
+    "scale_type": "5_point_likert",
+    "points": 5,
+    "prompt": "How anxious would this scenario make you about AI tracking in public spaces reducing privacy and freedom of movement?",
+    "anchors": [
+      { "value": 1, "label": "Not at all anxious" },
+      { "value": 2, "label": "Slightly anxious" },
+      { "value": 3, "label": "Moderately anxious" },
+      { "value": 4, "label": "Very anxious" },
+      { "value": 5, "label": "Extremely anxious" }
+    ]
+  },
+  "scoring": {
+    "score_variable": "public_space_tracking_anxiety",
+    "score_range": { "min": 1, "max": 5 },
+    "reverse_coded": false,
+    "scoring_key": { "1": 1, "2": 2, "3": 3, "4": 4, "5": 5 },
+    "missing_response_rule": "Treat skipped responses as missing at the item level and do not impute item scores for primary Wave 8 analyses.",
+    "exclusion_criteria": [
+      "Exclude respondents who fail the Wave 8 instructed-response attention check.",
+      "Exclude respondents who complete the item in less than one-third of the median item reading time for the analytic sample.",
+      "Exclude respondents who fail the Wave 8 scenario-comprehension check.",
+      "Exclude respondents younger than 18 or otherwise ineligible for the US adult sample."
+    ],
+    "interpretation_bands": [
+      { "label": "low", "min_score": 1.0, "max_score": 2.0, "interpretation": "Respondent reports little or no anxiety about AI tracking in public or semi-public spaces." },
+      { "label": "moderate", "min_score": 2.01, "max_score": 3.5, "interpretation": "Respondent reports a meaningful but not severe anxiety response to AI movement tracking and inference." },
+      { "label": "high", "min_score": 3.51, "max_score": 5.0, "interpretation": "Respondent reports strong anxiety that AI public-space tracking could reduce privacy, autonomy, or freedom of movement." }
+    ]
+  },
+  "validation": {
+    "psychometric_decision": "development_only",
+    "decision_date": "2026-06-16",
+    "dossier_path": "not_available",
+    "preregistration_path": "docs/preregistrations/anx_us_2026w08_full_domain_bridge.md",
+    "scoring_eligible": false
+  },
+  "population": {
+    "target_population": "US adults, with planned subgroup analysis by urbanicity, transit use, housing type, privacy concern, and prior contact with automated surveillance systems.",
+    "eligible_respondents": "Respondents aged 18 or older who reside in the United States, can complete the English survey unaided, and provide informed consent.",
+    "stratification_variables": [ "age_group", "gender", "race_ethnicity", "education", "urbanicity", "transit_use", "prior_ai_exposure" ],
+    "minimum_age": 18,
+    "exclusion_criteria": [
+      "Current inability to provide informed consent.",
+      "Duplicate panel participation within the same measurement wave.",
+      "Self-reported inability to read the survey language."
+    ]
+  },
+  "administration_mode": {
+    "mode": "online_self_administered",
+    "estimated_completion_seconds": 55,
+    "instructions": "Present the scenario exactly as written, followed immediately by the response prompt and the five ordered response options.",
+    "randomization": "Randomize within the autonomy_surveillance domain block while preserving the ordered 1 to 5 response scale.",
+    "longitudinal_use": "Use identical wording, response anchors, scoring, and eligibility rules across bridge waves unless a new item version is released."
+  },
+  "ethics_flags": {
+    "risk_level": "low",
+    "sensitive_content": [ "surveillance", "public movement", "law enforcement access", "housing and insurance access" ],
+    "distress_protocol_required": false,
+    "debrief_required": true,
+    "data_protection_notes": "Do not collect home addresses, commuting routes, exact locations, building names, camera footage, police records, or insurance records.",
+    "irb_notes": "The item may be salient for respondents with surveillance or policing concerns. Debrief must emphasize that no location or legal-status information is requested."
+  }
+}
