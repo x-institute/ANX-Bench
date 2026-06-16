@@ -171,6 +171,7 @@ python3 tools/validate_sampling_plan.py sampling/v0.3/anx_us_2026w03_somatic_ret
 python3 tools/validate_sampling_plan.py sampling/v0.7/anx_us_2026w07_cross_domain_bridge_sampling_plan.json
 python3 tools/validate_content_validity_dossier.py validation/v0.7/cross_domain_bridge/content_validity_dossier.json
 python3 tools/validate_cross_domain_bridge_evidence.py validation/v0.7/cross_domain_bridge/wave7_bridge_evidence.json
+python3 tools/validate_anchor_vignette_set.py anchors/v0.8/full_domain_bridge/response_scale_vignettes.json
 python3 tools/validate_full_domain_bridge_evidence.py validation/v0.8/full_domain_bridge/wave8_full_domain_bridge_evidence.json
 python3 tools/validate_longitudinal_linking_plan.py linking/v0.8/anx_us_2026w08_full_domain_linking_plan.template.json
 python3 tools/validate_validation_dossier.py validation/.../wave1_calibration_dossier.json
@@ -193,6 +194,7 @@ For full-domain bridge promotion from `v0.8.0` to `v0.8.1`, maintainers must use
 
 ```bash
 python3 tools/validate_content_validity_dossier.py validation/v0.8/full_domain_bridge/content_validity_dossier.json
+python3 tools/validate_anchor_vignette_set.py anchors/v0.8/full_domain_bridge/response_scale_vignettes.json
 python3 tools/validate_full_domain_bridge_evidence.py validation/v0.8/full_domain_bridge/wave8_full_domain_bridge_evidence.json
 python3 tools/validate_release.py releases/v0.8.1/manifest.json
 ```
@@ -214,6 +216,7 @@ python3 tools/validate_wave_packet.py anx_us_2026w02_somatic --release v0.2.2
 python3 tools/validate_wave_packet.py anx_us_2026w02_somatic --release v0.2.3
 python3 tools/validate_wave_packet.py anx_us_2026w03_somatic_retest --release v0.3.1
 python3 tools/validate_wave_packet.py anx_us_2026w06_epistemic --release v0.6.0
+python3 tools/validate_wave_packet.py anx_us_2026w08_full_domain_bridge --release v0.8.0
 ```
 
 This gate checks that the frozen fielding instrument, wave codebook, calibration or retest preregistration, event registry when present, and release manifest agree on administered item IDs, item count, item versions, domains, construct IDs, release version, and non-event status. For `anx_us_2026w02_somatic`, the current gate validates the behavioral criterion-validity packet against `releases/v0.2.3/manifest.json` and requires the preregistration and codebook to cite `events/v0.2/anx_us_2026w02_somatic_event_registry.json` with `event_id: no_event`. For `anx_us_2026w03_somatic_retest`, the gate validates the test-retest packet against `releases/v0.3.1/manifest.json`, requires `events/v0.3/anx_us_2026w03_somatic_retest_event_registry.json`, and preserves the retest as repeatability evidence for the existing citable score rather than as a new scored release. For `anx_us_2026w06_epistemic`, the gate validates the non-scored epistemic calibration packet against `releases/v0.6.0/manifest.json`, requires `events/v0.6/anx_us_2026w06_epistemic_event_registry.json`, and preserves Wave 6 as planned validation infrastructure rather than as a scored epistemic release.

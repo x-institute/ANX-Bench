@@ -113,6 +113,15 @@ PACKET_CONFIGS = {
         preregistration_path="docs/preregistrations/anx_us_2026w07_cross_domain_bridge.md",
         event_registry_path="events/v0.7/anx_us_2026w07_cross_domain_bridge_event_registry.json",
     ),
+    "anx_us_2026w08_full_domain_bridge": PacketConfig(
+        wave_id="anx_us_2026w08_full_domain_bridge",
+        default_release="v0.8.0",
+        item_directory="items",
+        instrument_path="docs/instruments/anx_us_2026w08_full_domain_bridge_instrument.md",
+        codebook_path="docs/instruments/anx_us_2026w08_full_domain_bridge_codebook.md",
+        preregistration_path="docs/preregistrations/anx_us_2026w08_full_domain_bridge.md",
+        event_registry_path="events/v0.8/anx_us_2026w08_full_domain_bridge_event_registry.json",
+    ),
 }
 
 
@@ -287,6 +296,28 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def validate_manifest_checksums(
+    issues: list[ValidationIssue],
+    root: Path,
+    manifest_path: Path,
+    required_artifacts: list[str],
+) -> None:
+    checksum_entries = manifest_checksum_entries(manifest_path)
+    for relative_path in required_artifacts:
+        expected_digest = checksum_entries.get(relative_path)
+        if expected_digest is None:
+            issues.append(ValidationIssue(str(manifest_path), f"missing checksum entry for {relative_path!r}"))
+            continue
+        actual_digest = sha256_file(root / relative_path)
+        if expected_digest != actual_digest:
+            issues.append(
+                ValidationIssue(
+                    str(manifest_path),
+                    f"checksum mismatch for {relative_path!r}: manifest has {expected_digest!r}, file has {actual_digest!r}",
+                )
+            )
 
 
 def validate_manifest_item_files(
@@ -470,6 +501,68 @@ EXPECTED_WAVE7_DOMAIN_ORDERS = {
     "order_6": ("epistemic", "economic_vocational", "somatic_ambient"),
 }
 
+EXPECTED_WAVE8_DOMAIN_BLOCK_ORDER = (
+    (
+        "somatic_ambient",
+        (
+            "sleep_disruption_ai_news",
+            "body_vigilance_model_release",
+            "background_dread_ai_progress",
+            "avoidance_after_ai_capability_demo",
+        ),
+    ),
+    (
+        "economic_vocational",
+        (
+            "skill_obsolescence_software",
+            "wage_pressure_customer_support",
+            "retraining_pressure_accounting",
+            "status_loss_creative_work",
+        ),
+    ),
+    (
+        "epistemic",
+        (
+            "deepfake_evidence_trust",
+            "synthetic_news_provenance",
+            "ai_expert_claim_conflict",
+            "personalized_misinformation_targeting",
+        ),
+    ),
+    (
+        "relational",
+        (
+            "partner_ai_confidant_displacement",
+            "friend_group_ai_mediation",
+            "eldercare_ai_attachment_shift",
+        ),
+    ),
+    (
+        "existential_identity",
+        (
+            "ai_personhood_boundary_uncertainty",
+            "human_judgment_status_loss",
+            "life_purpose_ai_substitution",
+        ),
+    ),
+    (
+        "autonomy_surveillance",
+        (
+            "public_space_tracking",
+            "workplace_behavior_scoring",
+            "personalized_behavior_nudging",
+        ),
+    ),
+    (
+        "safety_catastrophic",
+        (
+            "autonomous_cyber_cascade",
+            "biosecurity_protocol_misuse",
+            "military_escalation_ai_advice",
+        ),
+    ),
+)
+
 
 def parse_domain_order_tables(text: str) -> list[dict[str, tuple[str, str, str]]]:
     parsed_tables: list[dict[str, tuple[str, str, str]]] = []
@@ -490,6 +583,23 @@ def parse_domain_order_tables(text: str) -> list[dict[str, tuple[str, str, str]]
     return parsed_tables
 
 
+def parse_wave8_domain_block_tables(text: str) -> list[tuple[tuple[str, tuple[str, ...]], ...]]:
+    parsed_tables: list[tuple[tuple[str, tuple[str, ...]], ...]] = []
+    for table in parse_markdown_tables(text):
+        if not table:
+            continue
+        columns = set(table[0])
+        if not {"Block position", "Domain", "Items randomized within block"} <= columns:
+            continue
+        rows = sorted(table, key=lambda row: int(strip_code(row["Block position"])))
+        parsed_blocks = []
+        for row in rows:
+            item_ids = tuple(item.strip() for item in strip_code(row["Items randomized within block"]).split(","))
+            parsed_blocks.append((strip_code(row["Domain"]), item_ids))
+        parsed_tables.append(tuple(parsed_blocks))
+    return parsed_tables
+
+
 def validate_wave7_bridge_packet(
     issues: list[ValidationIssue],
     root: Path,
@@ -503,20 +613,7 @@ def validate_wave7_bridge_packet(
         "docs/preregistrations/anx_us_2026w07_cross_domain_bridge.md",
         "events/v0.7/anx_us_2026w07_cross_domain_bridge_event_registry.json",
     ]
-    checksum_entries = manifest_checksum_entries(paths.manifest)
-    for relative_path in required_artifacts:
-        expected_digest = checksum_entries.get(relative_path)
-        if expected_digest is None:
-            issues.append(ValidationIssue(str(paths.manifest), f"missing checksum entry for {relative_path!r}"))
-            continue
-        actual_digest = sha256_file(root / relative_path)
-        if expected_digest != actual_digest:
-            issues.append(
-                ValidationIssue(
-                    str(paths.manifest),
-                    f"checksum mismatch for {relative_path!r}: got {expected_digest!r}, expected {actual_digest!r}",
-                )
-            )
+    validate_manifest_checksums(issues, root, paths.manifest, required_artifacts)
 
     for source_path, text in ((paths.instrument, instrument_text), (paths.codebook, codebook_text)):
         order_tables = parse_domain_order_tables(text)
@@ -538,9 +635,109 @@ def validate_wave7_bridge_packet(
         "988",
         "aggregate_scoring_permitted",
     ]
+    combined_text_lower = f"{instrument_text}\n{codebook_text}".lower()
     for phrase in required_phrases:
-        if phrase not in instrument_text and phrase not in codebook_text:
+        if phrase.lower() not in combined_text_lower:
             issues.append(ValidationIssue(str(paths.instrument), f"missing Wave 7 bridge requirement phrase {phrase!r}"))
+
+
+def validate_wave8_full_domain_bridge_packet(
+    issues: list[ValidationIssue],
+    root: Path,
+    paths: PacketPaths,
+    instrument_text: str,
+    codebook_text: str,
+    preregistration_text: str,
+    manifest_count: int | None,
+    manifest_records: list[ItemRecord],
+    codebook_records: list[ItemRecord],
+    prereg_records: list[ItemRecord],
+    instrument_item_ids: list[str],
+) -> None:
+    required_artifacts = [
+        "docs/instruments/anx_us_2026w08_full_domain_bridge_instrument.md",
+        "docs/preregistrations/anx_us_2026w08_full_domain_bridge.md",
+        "events/v0.8/anx_us_2026w08_full_domain_bridge_event_registry.json",
+    ]
+    validate_manifest_checksums(issues, root, paths.manifest, required_artifacts)
+
+    expected_item_ids = [
+        item_id
+        for _domain, item_ids in EXPECTED_WAVE8_DOMAIN_BLOCK_ORDER
+        for item_id in item_ids
+    ]
+    expected_domains = [
+        domain
+        for domain, item_ids in EXPECTED_WAVE8_DOMAIN_BLOCK_ORDER
+        for _item_id in item_ids
+    ]
+
+    if manifest_count != 24:
+        issues.append(ValidationIssue(str(paths.manifest), f"Wave 8 full-domain bridge must freeze exactly 24 items, got {manifest_count}"))
+    for source_path, records in (
+        (paths.manifest, manifest_records),
+        (paths.codebook, codebook_records),
+        (paths.preregistration, prereg_records),
+    ):
+        if len(records) != 24:
+            issues.append(ValidationIssue(str(source_path), f"Wave 8 full-domain bridge must list exactly 24 administered items, got {len(records)}"))
+
+    if instrument_item_ids != expected_item_ids:
+        issues.append(
+            ValidationIssue(
+                str(paths.instrument),
+                "Wave 8 item screen order must match the fixed seven domain-block sequence with within-block item allowlists",
+            )
+        )
+    if [record.item_id for record in manifest_records] != expected_item_ids:
+        issues.append(
+            ValidationIssue(
+                str(paths.manifest),
+                "Wave 8 manifest item order must match the fixed seven domain-block sequence",
+            )
+        )
+    if [record.domain for record in manifest_records] != expected_domains:
+        issues.append(
+            ValidationIssue(
+                str(paths.manifest),
+                "Wave 8 manifest domains must form exactly seven fixed domain blocks",
+            )
+        )
+
+    block_tables = parse_wave8_domain_block_tables(instrument_text)
+    if not block_tables:
+        issues.append(ValidationIssue(str(paths.instrument), "missing fixed seven domain-block order table"))
+    elif EXPECTED_WAVE8_DOMAIN_BLOCK_ORDER not in block_tables:
+        issues.append(
+            ValidationIssue(
+                str(paths.instrument),
+                "fixed domain-block order table must contain exactly the seven Wave 8 full-domain blocks",
+            )
+        )
+
+    required_randomization_phrases = [
+        "Items within each domain block are randomized independently",
+        "uniform random permutation",
+        "Randomize items within each domain block",
+        "within_block_item_order",
+    ]
+    for phrase in required_randomization_phrases:
+        if phrase not in instrument_text and phrase not in codebook_text:
+            issues.append(ValidationIssue(str(paths.instrument), f"missing Wave 8 within-block randomization language {phrase!r}"))
+
+    registry = load_json(paths.event_registry) if paths.event_registry is not None else {}
+    event_ids = [event.get("event_id") for event in registry.get("events", []) if isinstance(event, dict)]
+    if event_ids != [NO_EVENT_ID]:
+        issues.append(ValidationIssue(str(paths.event_registry), f"Wave 8 event registry must contain exactly event_id {NO_EVENT_ID!r}"))
+    if "`event_id` | Constant `no_event`" not in codebook_text:
+        issues.append(ValidationIssue(str(paths.codebook), "Wave 8 codebook must map event_id to constant no_event"))
+    if "`event_id: no_event`" not in preregistration_text:
+        issues.append(ValidationIssue(str(paths.preregistration), "Wave 8 preregistration must state event_id: no_event"))
+
+    manifest = load_json(paths.manifest)
+    scoring_eligibility = manifest.get("scoring_eligibility", {})
+    if scoring_eligibility.get("aggregate_scoring_permitted") is not False:
+        issues.append(ValidationIssue(str(paths.manifest), "Wave 8 aggregate_scoring_permitted must be false"))
 
 
 def validate_wave_packet(wave_id: str, root: Path | None = None, release: str = DEFAULT_RELEASE) -> None:
@@ -648,6 +845,20 @@ def validate_wave_packet(wave_id: str, root: Path | None = None, release: str = 
 
     if wave_id == "anx_us_2026w07_cross_domain_bridge":
         validate_wave7_bridge_packet(issues, root, paths, instrument_text, codebook_text)
+    if wave_id == "anx_us_2026w08_full_domain_bridge":
+        validate_wave8_full_domain_bridge_packet(
+            issues,
+            root,
+            paths,
+            instrument_text,
+            codebook_text,
+            preregistration_text,
+            manifest_count,
+            manifest_records,
+            codebook_records,
+            prereg_records,
+            instrument_item_ids,
+        )
 
     if issues:
         rendered = "\n".join(f"- {issue.render()}" for issue in issues)

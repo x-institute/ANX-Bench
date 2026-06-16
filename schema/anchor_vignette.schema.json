@@ -18,6 +18,10 @@
     "vignettes"
   ],
   "properties": {
+    "$schema": {
+      "type": "string",
+      "minLength": 1
+    },
     "vignette_set_id": {
       "type": "string",
       "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
@@ -198,10 +202,20 @@
             "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
           },
           "target_domain": {
-            "const": "somatic_ambient"
+            "type": "string",
+            "enum": [
+              "economic_vocational",
+              "epistemic",
+              "relational",
+              "existential_identity",
+              "autonomy_surveillance",
+              "safety_catastrophic",
+              "somatic_ambient"
+            ]
           },
           "target_construct": {
-            "const": "somatic_ambient_anxiety"
+            "type": "string",
+            "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
           },
           "intended_severity_band": {
             "type": "string",
@@ -226,7 +240,190 @@
           "non_scored": {
             "const": true
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "target_domain": {
+                  "const": "economic_vocational"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "target_construct": {
+                  "pattern": "^economic_vocational_[a-z0-9]+(_[a-z0-9]+)*$"
+                },
+                "vignette_id": {
+                  "pattern": "^anchor_economic_vocational_(low|moderate|high)$"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "target_domain": {
+                  "const": "epistemic"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "target_construct": {
+                  "pattern": "^epistemic_[a-z0-9]+(_[a-z0-9]+)*$"
+                },
+                "vignette_id": {
+                  "pattern": "^anchor_epistemic_(low|moderate|high)$"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "target_domain": {
+                  "const": "relational"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "target_construct": {
+                  "pattern": "^relational_[a-z0-9]+(_[a-z0-9]+)*$"
+                },
+                "vignette_id": {
+                  "pattern": "^anchor_relational_(low|moderate|high)$"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "target_domain": {
+                  "const": "existential_identity"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "target_construct": {
+                  "pattern": "^existential_identity_[a-z0-9]+(_[a-z0-9]+)*$"
+                },
+                "vignette_id": {
+                  "pattern": "^anchor_existential_identity_(low|moderate|high)$"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "target_domain": {
+                  "const": "autonomy_surveillance"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "target_construct": {
+                  "pattern": "^autonomy_surveillance_[a-z0-9]+(_[a-z0-9]+)*$"
+                },
+                "vignette_id": {
+                  "pattern": "^anchor_autonomy_surveillance_(low|moderate|high)$"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "target_domain": {
+                  "const": "safety_catastrophic"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "target_construct": {
+                  "pattern": "^safety_catastrophic_[a-z0-9]+(_[a-z0-9]+)*$"
+                },
+                "vignette_id": {
+                  "pattern": "^anchor_safety_catastrophic_(low|moderate|high)$"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "target_domain": {
+                  "const": "somatic_ambient"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "target_construct": {
+                  "pattern": "^somatic_ambient_[a-z0-9]+(_[a-z0-9]+)*$"
+                },
+                "vignette_id": {
+                  "pattern": "^anchor_somatic_ambient_(low|moderate|high)$"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "intended_severity_band": {
+                  "const": "low"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "expected_rank": {
+                  "const": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "intended_severity_band": {
+                  "const": "moderate"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "expected_rank": {
+                  "const": 2
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "intended_severity_band": {
+                  "const": "high"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "expected_rank": {
+                  "const": 3
+                }
+              }
+            }
+          }
+        ]
       }
     }
   }

@@ -5,6 +5,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from copy import deepcopy
 from pathlib import Path
 
 
@@ -68,6 +69,12 @@ def _load_v030_manifest() -> dict:
 
 def _load_v031_manifest() -> dict:
     return json.loads((REPO_ROOT / "releases" / "v0.3.1" / "manifest.json").read_text(encoding="utf-8"))
+
+
+def _load_v081_manifest_template() -> dict:
+    return json.loads(
+        (REPO_ROOT / "releases" / "v0.8.1" / "manifest.template.json").read_text(encoding="utf-8")
+    )
 
 
 def _set_checksum(manifest_path: Path, relative_path: str) -> None:
@@ -186,6 +193,75 @@ def _assert_citable_somatic_release_references_observed_results(manifest_path: P
 
 
 class ValidateReleaseTests(unittest.TestCase):
+    def test_v081_manifest_template_preserves_scoring_disabled_bridge_claim_scope(self) -> None:
+        manifest = _load_v081_manifest_template()
+        zero_hash = "0" * 64
+
+        self.assertEqual("v0.8.1", manifest["benchmark_version"])
+        self.assertEqual("citable", manifest["release_status"])
+        self.assertEqual([], manifest["official_scored_items"])
+        self.assertEqual(0, manifest["scoring_eligibility"]["official_scored_item_count"])
+        self.assertFalse(manifest["scoring_eligibility"]["aggregate_scoring_permitted"])
+        self.assertIn("full-domain bridge-readiness evidence", manifest["release_label"])
+        self.assertIn("no official scored items", manifest["scoring_eligibility"]["eligibility_rule"])
+
+        permitted_claims = " ".join(manifest["permitted_claims"]).lower()
+        blocked_claims = " ".join(manifest["blocked_claims"]).lower()
+        self.assertIn("full-domain bridge-readiness", permitted_claims)
+        self.assertIn("no item", blocked_claims)
+        self.assertIn("no domain score", blocked_claims)
+        self.assertIn("no longitudinal trend", blocked_claims)
+        self.assertIn("no clinical interpretation", blocked_claims)
+        self.assertIn("no aggregate-readiness label", blocked_claims)
+
+        checksum_by_path = {record["path"]: record["sha256"] for record in manifest["checksums"]["files"]}
+        required_observed_artifacts = {
+            "validation/v0.8/full_domain_bridge/observed_wave8_results.json",
+            "validation/v0.8/full_domain_bridge/content_validity_dossier.json",
+            "validation/v0.8/full_domain_bridge/wave8_full_domain_bridge_evidence.json",
+            "validation/v0.8/full_domain_bridge/wave8_evidence_provenance.json",
+            "validation/v0.8/full_domain_bridge/wave8_evidence_manifest.json",
+        }
+        self.assertEqual(required_observed_artifacts, required_observed_artifacts & set(checksum_by_path))
+        for path in required_observed_artifacts:
+            self.assertEqual(zero_hash, checksum_by_path[path])
+
+        for item in manifest["frozen_item_set"]["items"]:
+            self.assertEqual("development_only", item["release_status"])
+            self.assertFalse(item["validation"]["scoring_eligible"])
+
+    def test_v081_manifest_with_scored_item_or_aggregate_scoring_fails_validation(self) -> None:
+        manifest = _load_v081_manifest_template()
+        manifest["checksums"]["files"] = [
+            record
+            for record in manifest["checksums"]["files"]
+            if not record["path"].startswith("validation/v0.8/full_domain_bridge/")
+        ]
+
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmpdir:
+            tmp_path = Path(tmpdir)
+            scored_manifest_path = tmp_path / "manifest.json"
+            scored_manifest = deepcopy(manifest)
+            scored_manifest["official_scored_items"] = ["partner_ai_confidant_displacement"]
+            scored_manifest_path.write_text(json.dumps(scored_manifest, indent=2) + "\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                validate_release.ReleaseValidationError,
+                "official_scored_item_count.*does not equal the number of official_scored_items",
+            ):
+                validate_release.validate_release(scored_manifest_path)
+
+            aggregate_manifest_path = tmp_path / "aggregate_manifest.json"
+            aggregate_manifest = deepcopy(manifest)
+            aggregate_manifest["scoring_eligibility"]["aggregate_scoring_permitted"] = True
+            aggregate_manifest_path.write_text(json.dumps(aggregate_manifest, indent=2) + "\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                validate_release.ReleaseValidationError,
+                "psychometric evidence manifest schema",
+            ):
+                validate_release.validate_release(aggregate_manifest_path)
+
     def test_v010_manifest_passes_release_gate_in_clean_fixture(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             manifest_path = _copy_release_fixture(Path(tmpdir))
