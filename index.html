@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#050706">
+    <meta name="description" content="ANX-Bench is a global, longitudinal benchmark for measuring human psychological response to AI capability, deployment, and exposure.">
+    <title>ANX-Bench — The Human Side of AI Progress</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="assets/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="ANX-Bench home">
+        <span>ANX</span><i aria-hidden="true">/</i><span>BENCH</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle__label">Menu</span>
+        <span class="nav-toggle__mark" aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="#mission">Mission</a>
+        <a href="#instrument">Instrument</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#resources">Resources</a>
+        <a class="nav-repo" href="https://github.com/x-institute/ANX-Bench">View repository <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero section-grid" id="top" aria-labelledby="hero-title">
+        <div class="hero__copy" data-reveal>
+          <p class="pretitle">The Global AI Psychological Response Observatory / 2027</p>
+          <h1 id="hero-title">We benchmark what AI can do. <em>Who measures what it does to us?</em></h1>
+          <p class="hero__dek">A global, longitudinal instrument linking domain-specific human response to AI capability, deployment, and exposure.</p>
+          <div class="button-row">
+            <a class="button button--primary" href="#instrument">Explore the instrument <span aria-hidden="true">→</span></a>
+            <a class="button button--secondary" href="new-requirements.md">Read the 2027 proposal <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <figure class="hero__plot" data-reveal aria-labelledby="plot-caption">
+          <div class="plot-label plot-label--x">AI capability / deployment / exposure</div>
+          <div class="plot-label plot-label--y">Invariance-linked human response</div>
+          <img src="assets/observatory.svg" alt="A conceptual plot linking increasing AI capability and exposure with an independently measured human-response signal across quarterly waves.">
+          <figcaption id="plot-caption">
+            <span>2027 onward</span>
+            <span>Quarterly waves + locked events</span>
+          </figcaption>
+        </figure>
+
+        <dl class="scope-rail" aria-label="Proposed 2027 scope">
+          <div><dt>Domains</dt><dd>07</dd></div>
+          <div><dt>Countries</dt><dd>06</dd></div>
+          <div><dt>Cadence</dt><dd>Quarterly</dd></div>
+          <div><dt>Measurement layers</dt><dd>05</dd></div>
+        </dl>
+        <a class="scroll-cue" href="#mission">Scroll to link the signals <span aria-hidden="true">↓</span></a>
+      </section>
+
+      <section class="thesis section-grid" id="mission" aria-labelledby="mission-title">
+        <div class="section-index" aria-hidden="true">01 / MISSION</div>
+        <h2 class="visually-hidden" id="mission-title">Two halves of the AI measurement stack</h2>
+        <article class="signal-column signal-column--capability" data-reveal>
+          <p class="signal-column__label">What models can do</p>
+          <h3>Capability has an instrument panel.</h3>
+          <p>Benchmarks map reasoning, code, autonomy, synthetic media, and long-horizon work. Deployment and exposure make those capabilities real.</p>
+          <ul class="signal-list">
+            <li>Objective capability</li>
+            <li>Deployment telemetry</li>
+            <li>Personal exposure</li>
+          </ul>
+        </article>
+        <div class="signal-join" aria-hidden="true" data-reveal>
+          <svg viewBox="0 0 320 200" role="presentation">
+            <path class="signal-join__cyan" d="M0 42 C110 42 92 100 160 100"></path>
+            <path class="signal-join__lime" d="M320 158 C210 158 228 100 160 100"></path>
+            <circle cx="160" cy="100" r="6"></circle>
+          </svg>
+          <span>Link the signals</span>
+        </div>
+        <article class="signal-column signal-column--response" data-reveal>
+          <p class="signal-column__label">What people experience</p>
+          <h3>Human response needs one.</h3>
+          <p>Not a poll-of-the-week, but a linked, versioned reference series that earns comparison across populations, places, and time.</p>
+          <ul class="signal-list">
+            <li>Psychological response</li>
+            <li>Costly behavior</li>
+            <li>Cultural context</li>
+          </ul>
+        </article>
+        <p class="thesis__statement" data-reveal>ANX-Bench closes the <em>measurement gap.</em></p>
+      </section>
+
+      <section class="why section-grid" id="why" aria-labelledby="why-title">
+        <div class="section-index" aria-hidden="true">02 / WHY</div>
+        <div class="section-heading" data-reveal>
+          <p class="section-kicker">The missing half</p>
+          <h2 id="why-title">Why this benchmark is worth building.</h2>
+          <p>Thousands of tests ask what models can do. ANX-Bench asks how those capabilities register in the lives of the people beneath them—and makes the answer auditable.</p>
+        </div>
+        <div class="why-grid">
+          <article class="why-item" data-reveal>
+            <span class="why-item__number">01</span>
+            <h3>Important</h3>
+            <p>Decision-grade infrastructure for policy, responsible deployment, and labor research—not another transient headline percentage.</p>
+          </article>
+          <article class="why-item" data-reveal>
+            <span class="why-item__number">02</span>
+            <h3>Innovative</h3>
+            <p>Versioned human-response measurement joined to domain-specific capability, deployment, exposure, and locked event signals.</p>
+          </article>
+          <article class="why-item" data-reveal>
+            <span class="why-item__number">03</span>
+            <h3>Insightful</h3>
+            <p>Proximity effects, stated-versus-revealed gaps, and cross-cultural differences remain informative even when results are null.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="domains section-grid" id="domains" aria-labelledby="domains-title">
+        <div class="section-index" aria-hidden="true">03 / CONSTRUCT SPACE</div>
+        <div class="section-heading section-heading--compact" data-reveal>
+          <p class="section-kicker">Seven distinct signals</p>
+          <h2 id="domains-title">Seven domains. Never one score by default.</h2>
+          <p>Each domain grows from anchor coverage into a validated construct. Related does not mean interchangeable.</p>
+        </div>
+
+        <div class="constellation" data-reveal>
+          <div class="constellation__orbits" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="constellation__core" aria-hidden="true">Human<br>response</div>
+          <button class="domain-node domain-node--economic is-active" type="button" data-domain="economic" aria-controls="domain-description" aria-pressed="true"><span>01</span>Economic</button>
+          <button class="domain-node domain-node--epistemic" type="button" data-domain="epistemic" aria-controls="domain-description" aria-pressed="false"><span>02</span>Epistemic</button>
+          <button class="domain-node domain-node--relational" type="button" data-domain="relational" aria-controls="domain-description" aria-pressed="false"><span>03</span>Relational</button>
+          <button class="domain-node domain-node--existential" type="button" data-domain="existential" aria-controls="domain-description" aria-pressed="false"><span>04</span>Existential</button>
+          <button class="domain-node domain-node--autonomy" type="button" data-domain="autonomy" aria-controls="domain-description" aria-pressed="false"><span>05</span>Autonomy</button>
+          <button class="domain-node domain-node--safety" type="button" data-domain="safety" aria-controls="domain-description" aria-pressed="false"><span>06</span>Safety</button>
+          <button class="domain-node domain-node--somatic" type="button" data-domain="somatic" aria-controls="domain-description" aria-pressed="false"><span>07</span>Somatic</button>
+        </div>
+
+        <aside class="domain-panel" id="domain-description" data-reveal aria-live="polite">
+          <p class="domain-panel__status"><span></span> Selected construct / <b data-domain-index>01</b></p>
+          <h3 data-domain-title>Economic / vocational</h3>
+          <p data-domain-copy>Job displacement, skill obsolescence, wage pressure, retraining, and occupational status—stratified by the work people actually do.</p>
+          <p class="domain-panel__question" data-domain-question>What changes when AI can perform a task that defines your livelihood?</p>
+        </aside>
+      </section>
+
+      <section class="instrument section-grid" id="instrument" aria-labelledby="instrument-title">
+        <div class="section-index" aria-hidden="true">04 / THE INSTRUMENT</div>
+        <div class="section-heading" data-reveal>
+          <p class="section-kicker">Five measurement layers</p>
+          <h2 id="instrument-title">No single method gets to be the truth.</h2>
+          <p>The population panel anchors the benchmark. Four additional methods test, explain, and nowcast its signals without pretending their limitations disappear.</p>
+        </div>
+
+        <ol class="layer-stack">
+          <li class="layer layer--reference" data-reveal>
+            <span class="layer__number">01</span>
+            <div class="layer__mark" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="layer__copy"><h3>Panel survey</h3><p>Seven domains, probability-based samples, and invariance-linked multi-item scales.</p></div>
+            <div class="layer__role"><span>Role</span><strong>Calibrated reference series</strong></div>
+          </li>
+          <li class="layer" data-reveal>
+            <span class="layer__number">02</span>
+            <div class="layer__mark layer__mark--choice" aria-hidden="true"></div>
+            <div class="layer__copy"><h3>Behavioral tasks</h3><p>Costly choices involving money, effort, privacy, and human-over-AI review.</p></div>
+            <div class="layer__role"><span>Tests</span><strong>Stated vs. revealed response</strong></div>
+          </li>
+          <li class="layer" data-reveal>
+            <span class="layer__number">03</span>
+            <div class="layer__mark layer__mark--pulse" aria-hidden="true"></div>
+            <div class="layer__copy"><h3>Psychophysiology</h3><p>GSR, HRV, and pupillometry during standardized capability demonstrations.</p></div>
+            <div class="layer__role layer__role--caution"><span>Limit</span><strong>Arousal indicator, not anxiety proof</strong></div>
+          </li>
+          <li class="layer" data-reveal>
+            <span class="layer__number">04</span>
+            <div class="layer__mark layer__mark--split" aria-hidden="true"></div>
+            <div class="layer__copy"><h3>Proximity experiments</h3><p>Randomized proximity, controllability, oversight, and capability information.</p></div>
+            <div class="layer__role"><span>Identifies</span><strong>Mechanism through randomization</strong></div>
+          </li>
+          <li class="layer" data-reveal>
+            <span class="layer__number">05</span>
+            <div class="layer__mark layer__mark--text" aria-hidden="true"></div>
+            <div class="layer__copy"><h3>Text nowcast</h3><p>A domain-labeled public-text signal calibrated against future panel waves.</p></div>
+            <div class="layer__role layer__role--caution"><span>Limit</span><strong>Exploratory between-wave signal</strong></div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="global section-grid" id="global" aria-labelledby="global-title">
+        <div class="section-index" aria-hidden="true">05 / GLOBAL OBSERVATORY</div>
+        <div class="global__statement" data-reveal>
+          <p class="section-kicker">Six contrasting contexts</p>
+          <h2 id="global-title">Comparison is earned, not assumed.</h2>
+          <p>Six countries maximize substantive contrast while keeping translation, sampling mode, legal context, and measurement invariance scientifically tractable.</p>
+        </div>
+        <div class="country-field" aria-label="Proposed six-country field sites" data-reveal>
+          <svg viewBox="0 0 1000 440" role="img" aria-labelledby="country-map-title country-map-desc">
+            <title id="country-map-title">Six proposed ANX-Bench country sites</title>
+            <desc id="country-map-desc">A schematic field connecting the United States, Germany, Japan, China, India, and Nigeria through a shared measurement-invariance gate.</desc>
+            <g class="map-grid"><ellipse cx="500" cy="220" rx="460" ry="185"></ellipse><ellipse cx="500" cy="220" rx="300" ry="185"></ellipse><path d="M40 220h920M500 35v370M147 87c168 80 538 80 706 0M147 353c168-80 538-80 706 0"></path></g>
+            <g class="map-links"><path d="M170 150L484 142L820 144L284 286L520 278L714 286Z"></path><path d="M170 150L520 278M484 142L714 286M820 144L284 286"></path></g>
+            <g class="map-node" transform="translate(170 150)"><circle r="26"></circle><circle r="7"></circle><text x="0" y="-40">United States</text></g>
+            <g class="map-node" transform="translate(484 142)"><circle r="26"></circle><circle r="7"></circle><text x="0" y="-40">Germany</text></g>
+            <g class="map-node" transform="translate(820 144)"><circle r="26"></circle><circle r="7"></circle><text x="0" y="-40">Japan</text></g>
+            <g class="map-node" transform="translate(284 286)"><circle r="26"></circle><circle r="7"></circle><text x="0" y="55">China</text></g>
+            <g class="map-node" transform="translate(520 278)"><circle r="26"></circle><circle r="7"></circle><text x="0" y="55">India</text></g>
+            <g class="map-node" transform="translate(714 286)"><circle r="26"></circle><circle r="7"></circle><text x="0" y="55">Nigeria</text></g>
+          </svg>
+          <p><span aria-hidden="true"></span> Measurement invariance required</p>
+        </div>
+      </section>
+
+      <section class="roadmap section-grid" id="roadmap" aria-labelledby="roadmap-title">
+        <div class="section-index" aria-hidden="true">06 / MISSION ROADMAP</div>
+        <div class="section-heading" data-reveal>
+          <p class="section-kicker">24-month core program</p>
+          <h2 id="roadmap-title">From instrument to observatory.</h2>
+          <p>Each phase ends at a scientific gate. Failed evidence does not get polished into a claim.</p>
+        </div>
+        <div class="phase-line" aria-hidden="true"><span></span></div>
+        <div class="phases">
+          <details class="phase" data-reveal open>
+            <summary><span>0</span><div><small>Months −3–0</small><strong>Foundations</strong></div></summary>
+            <p>Freeze constructs, schemas, validators, governance, ethics, and distress protocols before recruitment.</p>
+            <dl><div><dt>Gate</dt><dd>Validators pass; IRB master drafted</dd></div><div><dt>Resources</dt><dd>PI, psychometrics, ethics law, 2 engineers / $0.4M</dd></div></dl>
+          </details>
+          <details class="phase" data-reveal>
+            <summary><span>A</span><div><small>Months 0–5</small><strong>Content validity</strong></div></summary>
+            <p>Generate items locally through interviews, expert review, translation, and cognitive testing.</p>
+            <dl><div><dt>Gate</dt><dd>Every domain × locale dossier passes</dd></div><div><dt>Resources</dt><dd>Experts, country leads, interviewers / $1.8M</dd></div></dl>
+          </details>
+          <details class="phase" data-reveal>
+            <summary><span>B</span><div><small>Months 4–11</small><strong>Calibration</strong></div></summary>
+            <p>Simulation-powered EFA, CFA, IRT, reliability, DIF, and within-person behavioral validation.</p>
+            <dl><div><dt>Gate</dt><dd>Domain dossier thresholds pass</dd></div><div><dt>Resources</dt><dd>Probability fielding + analysis / $5.2–7.2M</dd></div></dl>
+          </details>
+          <details class="phase" data-reveal>
+            <summary><span>C</span><div><small>Months 10–15</small><strong>Linking</strong></div></summary>
+            <p>Test cross-domain structure and configural, metric, and scalar invariance across countries.</p>
+            <dl><div><dt>Gate</dt><dd>Partial-scalar invariance + model fit</dd></div><div><dt>Resources</dt><dd>Bridge fielding, 2 psychometricians / $2–3M</dd></div></dl>
+          </details>
+          <details class="phase" data-reveal>
+            <summary><span>D</span><div><small>Months 8–18</small><strong>Multi-method</strong></div></summary>
+            <p>Corroborate and identify mechanisms with bounded physiology and randomized proximity studies.</p>
+            <dl><div><dt>Gate</dt><dd>Ethics clearance + preregistered MTMM tests</dd></div><div><dt>Resources</dt><dd>3 lab sites, hardware, inference / $2.2M</dd></div></dl>
+          </details>
+          <details class="phase" data-reveal>
+            <summary><span>E</span><div><small>Months 6–20</small><strong>Nowcast</strong></div></summary>
+            <p>Build an exploratory text signal and score it prospectively against not-yet-collected waves.</p>
+            <dl><div><dt>Gate</dt><dd>Out-of-sample validation only</dd></div><div><dt>Resources</dt><dd>2 ML engineers, text access / $0.9M</dd></div></dl>
+          </details>
+          <details class="phase" data-reveal>
+            <summary><span>F</span><div><small>Months 0–24</small><strong>Event operations</strong></div></summary>
+            <p>Classify shocks, lock registries pre-outcome, and trigger rapid waves with causal safeguards.</p>
+            <dl><div><dt>Gate</dt><dd>Pre-trends + controls + multiplicity pass</dd></div><div><dt>Resources</dt><dd>Standing response team / $1.5M yearly</dd></div></dl>
+          </details>
+          <details class="phase" data-reveal>
+            <summary><span>G</span><div><small>Months 18–24+</small><strong>Public release</strong></div></summary>
+            <p>Ship governed releases, open analysis, privacy reviews, and the public observatory.</p>
+            <dl><div><dt>Gate</dt><dd>Citable manifest + disclosure review</dd></div><div><dt>Resources</dt><dd>Frontend, data, legal, comms / $1.2M+</dd></div></dl>
+          </details>
+        </div>
+      </section>
+
+      <section class="refusal section-grid" aria-labelledby="refusal-title">
+        <div class="refusal__signal" aria-hidden="true" data-reveal>
+          <span class="refusal__particles"></span>
+          <span class="refusal__beam"></span>
+          <span class="refusal__gate"><i></i><b>Gate closed</b></span>
+        </div>
+        <div class="refusal__copy" data-reveal>
+          <p class="section-kicker">The scientific refusal</p>
+          <h2 id="refusal-title">If the constructs do not link, we do not publish the index.</h2>
+          <p>Refusing a false headline is a successful scientific result. Domain- and country-level series still ship where the evidence supports them.</p>
+        </div>
+      </section>
+
+      <section class="resources section-grid" id="resources" aria-labelledby="resources-title">
+        <div class="section-index" aria-hidden="true">07 / RESOURCES</div>
+        <div class="resources__intro" data-reveal>
+          <p class="section-kicker">Where unlimited resources go</p>
+          <h2 id="resources-title">The bottleneck is not compute.</h2>
+          <p>Probability sampling, psychometric expertise, cultural validity, and governance carry the real cost.</p>
+        </div>
+        <div class="resource-ledger" data-reveal role="table" aria-label="Proposed resource summary">
+          <div class="resource-row" role="row"><span role="cell">A</span><strong role="cell">Probability panels</strong><p role="cell">Calibration, bridge, quarterly, and event waves across six countries</p><b role="cell">$10–12M</b></div>
+          <div class="resource-row" role="row"><span role="cell">B</span><strong role="cell">People</strong><p role="cell">Psychometrics, country leads, domain experts, engineering, ethics, operations</p><b role="cell">$8–10M</b></div>
+          <div class="resource-row" role="row"><span role="cell">C</span><strong role="cell">Lab arm</strong><p role="cell">Three sites, devices, technicians, participant incentives</p><b role="cell">$2.2M</b></div>
+          <div class="resource-row" role="row"><span role="cell">D</span><strong role="cell">Cross-cultural + ethics</strong><p role="cell">Translation, cognitive interviews, multi-country ethics</p><b role="cell">$2M</b></div>
+          <div class="resource-row" role="row"><span role="cell">E</span><strong role="cell">Public infrastructure</strong><p role="cell">Dashboard, open-data pipeline, hosting, methods board</p><b role="cell">$1.5M+</b></div>
+          <div class="resource-row resource-row--compute" role="row"><span role="cell">F</span><strong role="cell">Compute</strong><p role="cell">Statistical cluster, demo inference, continuous classification</p><b role="cell">Low–moderate</b></div>
+        </div>
+
+        <div class="team" data-reveal>
+          <p>The team behind the measurement</p>
+          <ul>
+            <li><span>01</span>Psychometrics</li><li><span>02</span>Survey methods</li><li><span>03</span>Cultural psychology</li><li><span>04</span>Psychophysiology</li><li><span>05</span>Behavioral economics</li><li><span>06</span>ML + data</li><li><span>07</span>Research ethics</li><li><span>08</span>Capability evaluation</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="closing section-grid" id="contact" aria-labelledby="closing-title">
+        <div class="closing__signal" aria-hidden="true" data-reveal>
+          <span class="closing__trace closing__trace--cyan"></span>
+          <span class="closing__trace closing__trace--lime"></span>
+          <span class="closing__target"><i></i><i></i><i></i></span>
+        </div>
+        <div class="closing__copy" data-reveal>
+          <p class="section-kicker">The 2027 proposal</p>
+          <h2 id="closing-title">Build the missing half of the AI measurement stack.</h2>
+          <div class="closing__links">
+            <a href="new-requirements.md">Read the 2027 proposal <span aria-hidden="true">↗</span></a>
+            <a href="README.md">Explore the benchmark <span aria-hidden="true">↗</span></a>
+            <a href="docs/releases/v0.3.2_retest_benchmark_card.md">View releases <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/x-institute/ANX-Bench">Open repository <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand brand--footer" href="#top" aria-label="Back to top">ANX<i aria-hidden="true">/</i>BENCH</a>
+      <p>ANX-Bench is a research benchmark. <strong>Not a clinical diagnostic.</strong></p>
+      <p class="site-footer__status"><span aria-hidden="true"></span> Methodology first / 2027 proposal</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+  <title>ANX-Bench conceptual observatory plot</title>
+  <desc>Two distinct signal paths for AI capability and invariance-linked human response are plotted across time.</desc>
+  <defs>
+    <linearGradient id="cyanFade" x1="0" x2="1"><stop stop-color="#6ee7f2" stop-opacity=".16"/><stop offset="1" stop-color="#6ee7f2" stop-opacity=".92"/></linearGradient>
+    <linearGradient id="limeFade" x1="0" x2="1"><stop stop-color="#c9ff45" stop-opacity=".12"/><stop offset="1" stop-color="#c9ff45"/></linearGradient>
+    <filter id="cyanGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="limeGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g fill="none" stroke="#edf1e8" stroke-opacity=".08">
+    <path d="M80 55v500h770M80 455h770M80 355h770M80 255h770M80 155h770M235 55v500M390 55v500M545 55v500M700 55v500"/>
+  </g>
+  <g fill="#9aa59d" font-family="IBM Plex Mono, monospace" font-size="13">
+    <text x="49" y="560">00</text><text x="49" y="460">25</text><text x="49" y="360">50</text><text x="49" y="260">75</text><text x="42" y="160">100</text>
+    <text x="205" y="590">Q1</text><text x="360" y="590">Q2</text><text x="515" y="590">Q3</text><text x="670" y="590">Q4</text><text x="810" y="590">2027</text>
+  </g>
+  <path d="M80 55v500h770" fill="none" stroke="#edf1e8" stroke-opacity=".45"/>
+  <path id="capability-signal" d="M95 500 C165 468 206 478 260 430 S345 350 415 364 S520 260 586 280 S700 174 835 136" fill="none" stroke="url(#cyanFade)" stroke-width="3" filter="url(#cyanGlow)"/>
+  <path id="response-signal" d="M95 535 C160 528 210 500 270 506 S350 438 425 454 S510 396 585 416 S670 340 715 358 S770 272 835 238" fill="none" stroke="url(#limeFade)" stroke-width="3" filter="url(#limeGlow)"/>
+  <g fill="#6ee7f2">
+    <circle cx="95" cy="500" r="4"/><circle cx="260" cy="430" r="4"/><circle cx="415" cy="364" r="4"/><circle cx="586" cy="280" r="4"/><circle cx="835" cy="136" r="5"/>
+  </g>
+  <g fill="#c9ff45">
+    <circle cx="95" cy="535" r="4"/><circle cx="270" cy="506" r="4"/><circle cx="425" cy="454" r="4"/><circle cx="585" cy="416" r="4"/><circle cx="715" cy="358" r="4"/><circle cx="835" cy="238" r="5"/>
+  </g>
+  <g fill="#6ee7f2" opacity=".62">
+    <circle cx="138" cy="470" r="2"/><circle cx="184" cy="484" r="2"/><circle cx="222" cy="443" r="2"/><circle cx="306" cy="392" r="2"/><circle cx="346" cy="374" r="2"/><circle cx="468" cy="328" r="2"/><circle cx="520" cy="286" r="2"/><circle cx="625" cy="248" r="2"/><circle cx="672" cy="208" r="2"/><circle cx="756" cy="180" r="2"/><circle cx="805" cy="116" r="2"/>
+  </g>
+  <g fill="#c9ff45" opacity=".62">
+    <circle cx="148" cy="512" r="2"/><circle cx="196" cy="526" r="2"/><circle cx="238" cy="498" r="2"/><circle cx="312" cy="474" r="2"/><circle cx="360" cy="442" r="2"/><circle cx="480" cy="438" r="2"/><circle cx="532" cy="388" r="2"/><circle cx="628" cy="394" r="2"/><circle cx="680" cy="350" r="2"/><circle cx="768" cy="312" r="2"/><circle cx="812" cy="258" r="2"/>
+  </g>
+  <g font-family="IBM Plex Mono, monospace" font-size="14">
+    <g transform="translate(112 84)"><rect width="272" height="76" fill="#050706" fill-opacity=".9" stroke="#edf1e8" stroke-opacity=".26"/><path d="M20 25h35" stroke="#6ee7f2" stroke-width="2"/><text x="68" y="30" fill="#edf1e8">CAPABILITY / EXPOSURE</text><path d="M20 53h35" stroke="#c9ff45" stroke-width="2"/><text x="68" y="58" fill="#edf1e8">HUMAN RESPONSE</text></g>
+    <g transform="translate(624 478)"><path d="M0 0h211" stroke="#ffb45c" stroke-dasharray="5 6"/><text x="28" y="28" fill="#ffb45c">INVARIANCE GATE</text></g>
+  </g>
+</svg>
