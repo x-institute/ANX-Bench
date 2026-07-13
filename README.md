@@ -1,6 +1,45 @@
 # ANX-Bench
 
-ANX-Bench is the Anthropogenic Nervousness Benchmark: a longitudinal, domain-stratified benchmark for measuring human psychological response to AI capabilities. It is designed as a standardized, repeatable, versioned research instrument rather than an ad hoc survey. The benchmark supports psychometric validation, pre-registration, event-study analysis around AI capability shocks, and comparisons across populations and waves.
+**ANX-Bench is the Anthropogenic Nervousness Benchmark: a longitudinal, domain-stratified benchmark for measuring the human psychological response to AI capabilities.** We have hundreds of benchmarks measuring what AI can *do*. We have almost nothing rigorous measuring *how humans feel about what AI can do*, tracked over time, at domain-level granularity, and correlated against the capability benchmarks themselves. ANX-Bench closes that gap.
+
+It is built as a standardized, repeatable, versioned research instrument, not an ad hoc survey. The benchmark supports psychometric validation, pre-registration, event-study analysis around AI capability shocks, and comparisons across populations and waves.
+
+## Why this exists
+
+Models are evaluated constantly. Human responses to those changes are usually measured through scattered surveys or anecdotes: Pew here, Ipsos there, a one-off AI-anxiety scale in the psychology literature. None of it is benchmark-shaped, so none of it composes into a time series you can trust across years, populations, and model generations.
+
+What makes something a *benchmark* rather than a survey is that it is standardized, repeatable, versioned, and produces comparable scores across time and populations. So the pitch is precise:
+
+> A longitudinal, multi-modal, domain-stratified instrument that measures human psychological response to AI capabilities, and is re-administered every time a major model is released, creating a time series that can be correlated against capability benchmarks.
+
+That last clause is the point of the whole project. Imagine a single plot: MMLU / SWE-bench / frontier-capability scores on one axis, population-level anxiety by domain on the other, over five years. Nobody has that data. Building the instrument rigorous enough that this figure is *credible* is the entire engineering problem, and it is why ANX-Bench is a versioned benchmark with promotion gates rather than a survey with a codebook.
+
+This repository is the origin instrument. The forward-looking 2027 vision that this skeleton is designed to scale into is written up separately in [`new-requirements.md`](new-requirements.md).
+
+## The domain taxonomy
+
+ANX-Bench stratifies human life into seven top-level anxiety domains, each intended to grow from single-item anchor coverage into a validated multi-item construct scale:
+
+1. **Economic / vocational**: job displacement, skill obsolescence, wage pressure (stratified by occupation, so radiologists, plumbers, and poets can be compared).
+2. **Epistemic**: deepfakes, misinformation, "can I trust anything I see."
+3. **Relational**: AI companions, parasocial replacement, children bonding with chatbots.
+4. **Existential / identity**: what makes humans special, meaning, creativity.
+5. **Autonomy / surveillance**: being scored, watched, manipulated.
+6. **Safety / catastrophic**: loss of control, weapons, the x-risk cluster.
+7. **Somatic / ambient**: low-grade background unease people cannot articulate. Underexplored, and where the citable release line currently lives.
+
+## Design commitments (what keeps this rigorous)
+
+Six commitments separate ANX-Bench from a survey. Each is either already enforced in this repo or specified as a required future artifact:
+
+- **Revealed nervousness, not just stated nervousness.** Every survey item is designed to pair with a behavioral measure where money or effort is at stake (for example, willingness-to-pay for a human rather than an AI to review a medical scan). The `revealed_ai_review_allocation_v1` behavioral task and `schema/behavioral_response.schema.json`, frozen in `v0.2.3`, are the first infrastructure for this.
+- **Event-study design.** Measurement waves are timed around exogenous shocks (major model releases, AI-related layoff announcements, viral deepfake incidents). Event registries are locked *before* outcome inspection so a wave cannot be retrospectively reinterpreted as an event study.
+- **Measurement invariance across time and population.** If the scale means something different in 2026 than in 2028, the time series is garbage. Longitudinal linking plans, anchor items, and invariance gates are release-blocking, not optional.
+- **Distinct from trait anxiety.** Convergent and discriminant validity against established measures (GAD-7, technophobia scales) is required so ANX-Bench measures something specific to AI, not general dispositional worry.
+- **Panel conditioning is treated as a real threat.** Repeatedly asking people about AI anxiety may itself change their anxiety; retest and refreshment-sample design exist to detect and correct for it.
+- **Pre-registration and reproducibility everywhere.** Sampling plans, analysis plans, and event registries are frozen and checksum-bound before outcome inspection, and every citable claim is scoped by a machine-readable manifest.
+
+## Release status at a glance
 
 The current citable somatic release line includes **ANX-Bench v0.3.2** for repeatability evidence and **ANX-Bench v0.3.1** for the source scored construct definition. Version `v0.3.2` is defined by the machine-readable release manifest at `releases/v0.3.2/manifest.json`, with the human-readable retest benchmark card at `docs/releases/v0.3.2_retest_benchmark_card.md` and observed retest evidence at `validation/v0.3/somatic_ambient_retest/wave3_retest_evidence.json`. It is a citable evidence release for 14-day repeatability only. It does not create new scored items, change item wording, alter score calculation, or authorize trend, event-study, causal-shock, overall ANX, cross-domain, or clinical claims. Version `v0.3.1` remains the source scored construct definition at `releases/v0.3.1/manifest.json` and `docs/releases/v0.3.1_benchmark_card.md`; it promotes the four retained somatic and ambient AI anxiety items to `approved_scored` status for the restricted `somatic_ambient_anxiety` construct mean after observed Wave 1 validation. Overall ANX scoring remains disabled: neither `v0.3.1` nor `v0.3.2` authorizes an overall ANX-Bench score, cross-domain score, clinical interpretation, translated administration, non-online administration, or IRT theta scoring. The frozen `v0.1.0` release remains immutable at `releases/v0.1.0/manifest.json` and is not reinterpreted by v0.3.2. Only manifests with top-level `release_status: citable` may support ANX-Bench benchmark claims, and only within the claim scope stated by that manifest and benchmark card; `draft`, `frozen_candidate`, and `deprecated` manifests may document reproducible artifacts but cannot authorize item-level, construct, domain, overall, longitudinal, or event-study benchmark claims.
 
@@ -37,6 +76,7 @@ Items are not part of a benchmark-scored release until they validate against `sc
 ```text
 ANX-Bench/
   README.md
+  new-requirements.md
   doc/
     claude.md
   docs/
@@ -121,7 +161,7 @@ Directory meanings:
 - `items/`: Versioned benchmark items, grouped first by release line and then by domain.
 - `docs/`: Methodology, scoring, aggregation, psychometric validation, longitudinal comparability rules, preregistration protocols, and frozen fielding instruments.
 - `docs/instruments/`: Versioned participant-facing instrument packets and wave-specific codebooks. Every fielded wave must have a frozen instrument packet before recruitment begins, including consent language, instructions, item administration order rules, quality-control checks, debrief and distress language, non-ANX variable definitions, public-data exclusions, and mapping into `schema/wave_response.schema.json`.
-- `doc/`: Project notes and conceptual background.
+- `doc/`: Project notes and conceptual background, including the original design memo in `doc/claude.md`.
 
 Future benchmark versions must preserve this structure. New releases may add directories, but they must not move, rename, or reinterpret existing released item files.
 
@@ -303,3 +343,7 @@ items/v0.1/somatic_ambient/ambient_bodily_unease.json
 The anchor pool gives `v0.1.0` coverage across all seven top-level domains: economic/vocational, epistemic, relational, existential/identity, autonomy/surveillance, safety/catastrophic, and somatic/ambient. These anchors are concrete capability-linked development items covering deepfake evidence trust, child or companion attachment, human creativity and status, automated institutional scoring, AI-enabled physical or systemic harm, and ambient bodily unease after AI news exposure.
 
 Only the economic/vocational domain currently has a multi-item construct pool suitable for psychometric scale-development work. The six cross-domain anchors are single-item domain coverage candidates, not validated construct scales. They remain non-scored development candidates with `release_status: development_only`, `validation.scoring_eligible: false`, and no role in official ANX-Bench aggregate, domain, construct, longitudinal, or event-study scoring until future validation dossiers and preregistered release decisions approve them.
+
+## Provenance
+
+ANX-Bench began as a design memo (`doc/claude.md`) asking whether one could build a rigorous instrument for how nervous humans get about AI, publishable at Nature, Science, or NeurIPS rather than as a one-off survey. It was then pitched, in compressed form, as a research direction in a general expression of interest to METR: a simple benchmark for measuring how nervous people are about AI progress, tracked systematically across jobs, misinformation, privacy, relationships, and safety, starting from a small pilot of a short survey plus a few behavioral questions and repeated measurements around major AI releases or incidents. This repository is the executable realization of that idea. The 2027 flagship plan that this skeleton is engineered to scale into lives in [`new-requirements.md`](new-requirements.md).
